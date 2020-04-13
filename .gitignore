@@ -1,0 +1,12 @@
+straight/
+transient/
+snippets/
+elpa/
+auto-save-list/
+*.elc
+.lsp-session-v1
+recentf
+recentf~
+*.eld
+config.el
+config.org~
