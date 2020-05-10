@@ -1,34 +1,24 @@
 ;;; -*- lexical-binding: t -*-
 
-(require 'cl)
-(require 'cl-lib)
+(defvar file-name-handler-alist-old file-name-handler-alist)
 
-;; Configure package.el
-(require 'package)
-(setq package-archives '(("org" . "http://orgmode.org/elpa/")
-                         ("gnu" . "https://elpa.gnu.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")))
-(package-initialize)
+;; Make startup faster
+(setq package-enable-at-startup nil
+      file-name-handler-alist nil
+      message-log-max 16384
+      gc-cons-threshold 402653184
+      gc-cons-percentage 0.6
+      auto-window-vscroll nil
+      package--init-file-ensured t)
 
-;; (defvar file-name-handler-alist-old file-name-handler-alist)
-
-;; ;; Make startup faster
-;; (setq package-enable-at-startup nil
-;;       file-name-handler-alist nil
-;;       message-log-max 16384
-;;       gc-cons-threshold 402653184
-;;       gc-cons-percentage 0.6
-;;       auto-window-vscroll nil
-;;       package--init-file-ensured t)
-
-;; (add-hook 'after-init-hook
-;;           `(lambda ()
-;;              (setq file-name-handler-alist file-name-handler-alist-old
-;;                    ;;gc-cons-threshold 800000
-;;                    ;; gc-cons-percentage 0.1
-;; 		   )) t)
+(add-hook 'after-init-hook
+          `(lambda ()
+             (setq file-name-handler-alist file-name-handler-alist-old
+                   gc-cons-threshold 800000
+                   gc-cons-percentage 0.1)) t)
 
 ;; Straight
+(setq straight-use-package-by-default t)
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -45,31 +35,18 @@
 ;; use-package
 (straight-use-package 'use-package)
 
-;;On-demand installation of packages
-(defun require-package (package &optional min-version no-refresh)
-  "Install given PACKAGE, optionally requiring MIN-VERSION.
-If NO-REFRESH is non-nil, the available package lists will not be
-re-downloaded in order to locate PACKAGE."
-  (if (package-installed-p package min-version)
+;; Load all files from my ~/.emacs.d/config directory
+;; It doesn't support nested dirs
+(dolist
+    (file
+     (directory-files
+      (concat (expand-file-name user-emacs-directory) "config")
       t
-      (if (or (assoc package package-archive-contents) no-refresh)
-          (if (boundp 'package-selected-packages)
-              ;; Record this as a package the user installed explicitly
-              (package-install package nil)
-              (package-install package))
-          (progn
-            (package-refresh-contents)
-            (require-package package min-version t)))))
-
-;; load config settings
-(org-babel-load-file "~/.emacs.d/config.org" t)
+      "^.[^#].+el$"))
+  (load-file file))
 
 ;; Load automatically generated custom garbage
-;; add directory to load-path
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(setq custom-file
+      (concat (file-name-directory user-init-file) "custom-variables.el"))
 (when (file-exists-p custom-file)
   (load custom-file))
-
-(provide 'init)
-
-

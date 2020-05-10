@@ -1,6 +1,4 @@
--*- mode: org -*-
 * Org Mode
-
 #+BEGIN_SRC emacs-lisp
 (use-package org
     :ensure t
@@ -59,6 +57,7 @@
   :init
   (company-quickhelp-mode 1)
   (use-package pos-tip
+    :ensure t
     :commands (pos-tip-show)))
 #+END_SRC
 
@@ -150,7 +149,8 @@
    :defer t
    :hook ((markdown-mode . git-gutter-mode)
           (prog-mode . git-gutter-mode)
-          (conf-mode . git-gutter-mode))
+          (conf-mode . git-gutter-mode)
+          (org-mode . git-gutter-mode))
    :init
    :config
    (setq git-gutter:disabled-modes '(org-mode asm-mode image-mode)
@@ -246,31 +246,35 @@
 # #+END_SRC
 
 * Theme
-
 #+BEGIN_SRC emacs-lisp
+  ;; (use-package gruvbox-theme
+  ;;    :ensure t
+  ;;    :config
+  ;;    (load-theme 'gruvbox t))
 
-(use-package doom-themes
-    :ensure t
-    :config
-    ;; Global settings (defaults)
-    (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-          doom-themes-enable-italic t) ; if nil, italics is universally disabled
-    (load-theme 'doom-dark+ t)
 
-    ;; Enable flashing mode-line on errors
-    (doom-themes-visual-bell-config)
 
-    ;; Enable custom neotree theme (all-the-icons must be installed!)
-    (doom-themes-neotree-config)
-    ;; or for treemacs users
-    (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
-    (doom-themes-treemacs-config)
+  (use-package doom-themes
+      :ensure t
+      :config
+      ;; Global settings (defaults)
+      (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+            doom-themes-enable-italic t) ; if nil, italics is universally disabled
+      (load-theme 'doom-dark+ t)
 
-    ;; Corrects (and improves) org-mode's native fontification.
-    (doom-themes-org-config))
+      ;; Enable flashing mode-line on errors
+      (doom-themes-visual-bell-config)
+
+      ;; Enable custom neotree theme (all-the-icons must be installed!)
+      (doom-themes-neotree-config)
+      ;; or for treemacs users
+      (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
+      (doom-themes-treemacs-config)
+
+      ;; Corrects (and improves) org-mode's native fontification.
+      (doom-themes-org-config))
 
 #+END_SRC
-
 * Projectile
 
 #+BEGIN_SRC emacs-lisp
@@ -329,62 +333,67 @@
 #+END_SRC
 
 * LSP
-# #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
 
-# (use-package lsp-mode
-#              :ensure t
-#              :commands lsp
-#              :config
-#              ;; prefer using lsp-ui (flycheck)
-#              (setq lsp-prefer-flymake nil)
-#              ;; setup clangd
-#              (setq lsp-clients-clangd-args '("-j=2" "-background-index" "-log=error"))
-#              ;; hook languages
-#              (add-hook 'python-mode-hook 'lsp)
-#              (add-hook 'c-mode-common-hook 'lsp)
-#              (add-hook 'c++-mode-common-hook 'lsp))
+  (use-package exec-path-from-shell
+     :ensure t
+     :init
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
 
-# ;; lsp-treemacs
-# (use-package lsp-treemacs
-#              :ensure t
-#              :config
-#              (lsp-treemacs-sync-mode 1))
+  (use-package lsp-mode
+               :ensure t
+               :commands lsp
+               :config
+               ;; prefer using lsp-ui (flycheck)
+               (setq lsp-prefer-flymake nil)
+               ;; setup clangd
+               (setq lsp-clients-clangd-args '("-j=2" "-background-index" "-log=error"))
+               ;; hook languages
+               (add-hook 'python-mode-hook 'lsp)
+               (add-hook 'c-mode-common-hook 'lsp)
+               (add-hook 'c++-mode-common-hook 'lsp))
 
-# ;; lsp extras
-# (use-package lsp-ui
-#              :ensure t
-#              :requires lsp-mode flycheck
-#              :config
-# 	     ;; setup lsp-ui
-#              (setq lsp-ui-doc-enable t
-#                    lsp-ui-doc-use-childframe t
-#                    lsp-ui-doc-position 'top
-#                    lsp-ui-doc-include-signature t
-#                    lsp-ui-sideline-enable nil
-#                    lsp-ui-flycheck-enable t
-#                    lsp-ui-flycheck-list-position 'right
-#                    lsp-ui-flycheck-live-reporting t
-#                    lsp-ui-peek-enable t
-#                    lsp-ui-peek-list-width 60
-#                    lsp-ui-peek-peek-height 25)
-#              (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+  ;; lsp-treemacs
+  (use-package lsp-treemacs
+               :ensure t
+               :config
+               (lsp-treemacs-sync-mode 1))
 
-# (use-package company-lsp
-#              :ensure t
-#              :commands company-lsp
-#              :config
-#              (push 'company-lsp company-backends)
-#              ;; disable client-side cache because the LSP server does a better job.
-#              (setq company-transformers nil
-#                    company-lsp-async t
-#                    company-lsp-cache-candidates nil))
+  ;; lsp extras
+  (use-package lsp-ui
+               :ensure t
+               :requires lsp-mode flycheck
+               :config
+               ;; setup lsp-ui
+               (setq lsp-ui-doc-enable t
+                     lsp-ui-doc-use-childframe t
+                     lsp-ui-doc-position 'top
+                     lsp-ui-doc-include-signature t
+                     lsp-ui-sideline-enable nil
+                     lsp-ui-flycheck-enable t
+                     lsp-ui-flycheck-list-position 'right
+                     lsp-ui-flycheck-live-reporting t
+                     lsp-ui-peek-enable t
+                     lsp-ui-peek-list-width 60
+                     lsp-ui-peek-peek-height 25)
+               (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+
+  (use-package company-lsp
+               :ensure t
+               :commands company-lsp
+               :config
+               (push 'company-lsp company-backends)
+               ;; disable client-side cache because the LSP server does a better job.
+               (setq company-transformers nil
+                     company-lsp-async t
+                     company-lsp-cache-candidates nil))
 
 
-# #+END_SRC
+#+END_SRC
 
-
-# * Languages
-# ** Python
+* Languages
+** Python
 
 # #+BEGIN_SRC emacs-lisp
 
@@ -421,7 +430,7 @@
 
 # #+END_SRC
 
-# ** C/C++
+** C/C++
 
 # #+BEGIN_SRC emacs-lisp
 
@@ -471,7 +480,7 @@
 #              (setq clang-format-style-option "file"))
 # #+END_SRC
 
-# ** Latex
+** Latex
 
 # #+BEGIN_SRC emacs-lisp
 
@@ -489,7 +498,7 @@
 
 # #+END_SRC
 
-# ** Lisp
+** Lisp
 
 # #+BEGIN_SRC emacs-lisp
 
@@ -543,8 +552,7 @@
 # ;;   :ensure t)
 
 # #+END_SRC
-
-# ** Octave
+** Octave
 
 # #+BEGIN_SRC emacs-lisp
 
@@ -590,147 +598,159 @@
 
 #+BEGIN_SRC emacs-lisp
 
-    ;; line-number
-    (use-package hlinum
-                 :ensure t
-                 :config
-                 (setq linum-format " %d  ")
-                 (column-number-mode nil)
-                 (size-indication-mode nil)
-                 (global-linum-mode 1))
-
-    ;; highlight indent
-    (use-package highlight-indent-guides
+  ;;
+  (use-package vi-tilde-fringe
       :ensure t
-      :hook (prog-mode . highlight-indent-guides-mode)
-            (org-mode . highlight-indent-guides-mode)
-      :config
-      (setq highlight-indent-guides-method 'character))
+      :init
+      (add-hook 'prog-mode-hook 'vi-tilde-fringe-mode)
+      (add-hook 'org-mode-hook 'vi-tilde-fringe-mode))
 
-    ;; multiple cursors
-    (use-package multiple-cursors
-      :ensure t
-      :bind
-      ("C-M-," . 'mc/edit-lines))
+  ;; rainbow-delimiters
+  (use-package rainbow-delimiters
+     :ensure t
+     :init
+     (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
-    ;; ;; Briefly highlight the current line in Emacs
-    ;; (use-package nav-flash
-    ;;    :ensure t
-    ;;    )
+      ;; line-number
+      (use-package hlinum
+                   :ensure t
+                   :config
+                   (setq linum-format " %d  ")
+                   (column-number-mode nil)
+                   (size-indication-mode nil)
+                   (global-linum-mode 1))
 
-    ;; fill column indicator
-    (use-package fill-column-indicator
-                 :ensure t
-                 :config
-                 (define-globalized-minor-mode global-fci-mode fci-mode
-                   (lambda ()
-                     (when (and (not (string-match "^\*.*\*$" (buffer-name)))
-                                (not (eq major-mode 'dired-mode)))
-                       (setq fci-rule-color "darkgrey")
-                       (setq fill-column 80)
-                       (fci-mode 1))))
-                 :bind ("<f10>" . global-fci-mode))
+      ;; highlight indent
+      (use-package highlight-indent-guides
+        :ensure t
+        :hook (prog-mode . highlight-indent-guides-mode)
+        :config
+        (setq highlight-indent-guides-method 'character))
 
-    ;; 80 char mark and utility for whitespace
-    (use-package whitespace
-                 :ensure t
-                 :bind ("<f11>" . global-whitespace-mode))
+      ;; multiple cursors
+      (use-package multiple-cursors
+        :ensure t
+        :bind
+        ("C-M-," . 'mc/edit-lines))
 
-    ;; recent opened files
-    (use-package recentf
-                 :ensure t
-                 :config
-                 (recentf-mode 1)
-                 (setq recentf-max-saved-items 100
-                       recentf-exclude '("/tmp/" "/ssh:")
-                       recentf-max-menu-item 100))
+      ;; ;; Briefly highlight the current line in Emacs
+      ;; (use-package nav-flash
+      ;;    :ensure t
+      ;;    )
 
-    ;; define word
-    (use-package define-word
-                 :ensure t)
+      ;; fill column indicator
+      (use-package fill-column-indicator
+                   :ensure t
+                   :config
+                   (define-globalized-minor-mode global-fci-mode fci-mode
+                     (lambda ()
+                       (when (and (not (string-match "^\*.*\*$" (buffer-name)))
+                                  (not (eq major-mode 'dired-mode)))
+                         (setq fci-rule-color "darkgrey")
+                         (setq fill-column 80)
+                         (fci-mode 1))))
+                   :bind ("<f10>" . global-fci-mode))
 
-    ;; synonyms
-    (use-package synosaurus
-                 :ensure t)
+      ;; 80 char mark and utility for whitespace
+      (use-package whitespace
+                   :ensure t
+                   :bind ("<f11>" . global-whitespace-mode))
 
-    ;; hide and show code snippets
-    (use-package hideshow
-                 :ensure t
-                 :config
-                 (add-hook 'prog-mode-hook #'hs-minor-mode))
+      ;; recent opened files
+      (use-package recentf
+                   :ensure t
+                   :config
+                   (recentf-mode 1)
+                   (setq recentf-max-saved-items 100
+                         recentf-exclude '("/tmp/" "/ssh:")
+                         recentf-max-menu-item 100))
 
-    ;; flycheck is better than flymake
-    (use-package flycheck
-                 :ensure t
-                 :config
-                 (global-flycheck-mode))
+      ;; define word
+      (use-package define-word
+                   :ensure t)
 
-    ;; show available keybindings after you start typing
-    (use-package which-key
-                 :ensure t
-                 :config
-                 (which-key-mode t))
+      ;; synonyms
+      (use-package synosaurus
+                   :ensure t)
 
-  ;; smart parentheses
-    (use-package smartparens
-                 :ensure t
-                 :config
-                 (require 'smartparens-config)
-                  (setq sp-base-key-bindings 'paredit
-                        sp-autoskip-closing-pair 'always
-                        sp-hybrid-kill-entire-symbol nil)
-                  ;; (smartparens-global-strict-mode)
-                  (smartparens-global-mode)
-                  (sp-use-paredit-bindings)
-                  (show-smartparens-global-mode t))
+      ;; hide and show code snippets
+      (use-package hideshow
+                   :ensure t
+                   :config
+                   (add-hook 'prog-mode-hook #'hs-minor-mode))
 
-  ;; highlight toto
-     (use-package hl-todo
-         :ensure t
-         :config (setq hl-todo-keyword-faces
-           '(("TODO"   . "#FF0000")
-             ("FIXME"  . "#FF0000")
-             ("DEBUG"  . "#A020F0")
-             ("GOTCHA" . "#FF4500")
-             ("STUB"   . "#1E90FF"))))
+      ;; flycheck is better than flymake
+      (use-package flycheck
+                   :ensure t
+                   :config
+                   (global-flycheck-mode))
 
-     (use-package pdf-tools
-                  :ensure t
-                  :config
-                  (pdf-tools-install)
-                  ;; (add-to-list 'pdf-tools-enabled-modes 'pdf-view-midnight-minor-mode)
-                  ;; (setq pdf-view-midnight-colors '("#d6d6d6" . "#000000"))
-                  (defun ds/disable-cursor-blink () (blink-cursor-mode 0))
-                  (add-hook 'pdf-view-mode-hook 'ds/disable-cursor-blink))
+      ;; show available keybindings after you start typing
+      (use-package which-key
+                   :ensure t
+                   :config
+                   (which-key-mode t))
 
-     (use-package yasnippet-snippets
-                  :ensure t)
+    ;; smart parentheses
+      (use-package smartparens
+                   :ensure t
+                   :config
+                   (require 'smartparens-config)
+                    (setq sp-base-key-bindings 'paredit
+                          sp-autoskip-closing-pair 'always
+                          sp-hybrid-kill-entire-symbol nil)
+                    ;; (smartparens-global-strict-mode)
+                    (smartparens-global-mode)
+                    (sp-use-paredit-bindings)
+                    (show-smartparens-global-mode t))
 
-     (use-package yasnippet
-                  :ensure t
-                  :config
-                  (yas-global-mode 1))
+    ;; highlight toto
+       (use-package hl-todo
+           :ensure t
+           :config (setq hl-todo-keyword-faces
+             '(("TODO"   . "#FF0000")
+               ("FIXME"  . "#FF0000")
+               ("DEBUG"  . "#A020F0")
+               ("GOTCHA" . "#FF4500")
+               ("STUB"   . "#1E90FF"))))
 
-     ;; languagetool
-     (use-package langtool
-                  :ensure t
-                  :config
-                  (setq langtool-java-classpath
-                        "/usr/share/languagetool:/usr/share/java/languagetool/*")
-                  :bind ("C-c b l" . langtool-check-buffer))
+       (use-package pdf-tools
+                    :ensure t
+                    :config
+                    (pdf-tools-install)
+                    ;; (add-to-list 'pdf-tools-enabled-modes 'pdf-view-midnight-minor-mode)
+                    ;; (setq pdf-view-midnight-colors '("#d6d6d6" . "#000000"))
+                    (defun ds/disable-cursor-blink () (blink-cursor-mode 0))
+                    (add-hook 'pdf-view-mode-hook 'ds/disable-cursor-blink))
 
-     (setq global-font-lock-mode -1)
+       (use-package yasnippet-snippets
+                    :ensure t)
+
+       (use-package yasnippet
+                    :ensure t
+                    :config
+                    (yas-global-mode 1))
+
+       ;; languagetool
+       (use-package langtool
+                    :ensure t
+                    :config
+                    (setq langtool-java-classpath
+                          "/usr/share/languagetool:/usr/share/java/languagetool/*")
+                    :bind ("C-c b l" . langtool-check-buffer))
+
+       (setq global-font-lock-mode -1)
 
 
 
-     (unless (assq 'menu-bar-lines default-frame-alist)
-       ;; We do this in early-init.el too, but in case the user is on Emacs 26 we do
-       ;; it here too: disable tool and scrollbars, as Doom encourages
-       ;; keyboard-centric workflows, so these are just clutter (the scrollbar also
-       ;; impacts performance).
-       (add-to-list 'default-frame-alist '(menu-bar-lines . 0))
-       (add-to-list 'default-frame-alist '(tool-bar-lines . 0))
-       (add-to-list 'default-frame-alist '(vertical-scroll-bars)))
+       (unless (assq 'menu-bar-lines default-frame-alist)
+         ;; We do this in early-init.el too, but in case the user is on Emacs 26 we do
+         ;; it here too: disable tool and scrollbars, as Doom encourages
+         ;; keyboard-centric workflows, so these are just clutter (the scrollbar also
+         ;; impacts performance).
+         (add-to-list 'default-frame-alist '(menu-bar-lines . 0))
+         (add-to-list 'default-frame-alist '(tool-bar-lines . 0))
+         (add-to-list 'default-frame-alist '(vertical-scroll-bars)))
 
 #+END_SRC
 * UI Settings
@@ -772,8 +792,21 @@
                                    "%b"))))
 
 ;; scrolling
-(setq scroll-conservatively 10000
-      scroll-preserve-screen-position t)
+(use-package smooth-scrolling
+    :ensure t
+    :config
+    (setq smooth-scrolling-mode t))
+
+;; scroll one line at a time (less "jumpy" than defaults)
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ; one line at a time
+(setq mouse-wheel-progressive-speed nil)            ; don't accelerate scrolling
+(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+(setq scroll-conservatively 10000)
+(setq scroll-step 1)
+
+;; maximize window on startup
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
+(add-to-list 'default-frame-alist '(fullscreen . fullheight))
 
 #+END_SRC
 

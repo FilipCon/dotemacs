@@ -135,7 +135,7 @@ Can be an integer to determine the exact padding."
 					    :foreground fg)
    ;; dashboard
    (dashboard-heading :foreground green :weight 'bold)
-   
+
    ;; doom-modeline
    (doom-modeline-bar :background (if doom-dark+-blue-modeline base6 dark-violet))
    (doom-modeline-info :inherit 'mode-line-emphasis)
@@ -151,9 +151,9 @@ Can be an integer to determine the exact padding."
    (doom-modeline-lsp-success :inherit 'mode-line-emphasis :weight 'bold)
    (doom-modeline-buffer-path :inherit 'mode-line-emphasis :weight 'bold)
    (doom-modeline-buffer-project-root :inherit 'mode-line-emphasis)
-   (doom-modeline-evil-insert-state :foreground cyan)
-   (doom-modeline-evil-visual-state :foreground yellow)
-   
+;;    (doom-modeline-evil-insert-state :foreground cyan)
+;;    (doom-modeline-evil-visual-state :foreground yellow)
+
    ;; org-mode
    ((org-block &override) :background base2)
    ((org-block-background &override) :background base2)
@@ -162,7 +162,7 @@ Can be an integer to determine the exact padding."
    ;; --- plugin faces -------------------
    ;; company
    (company-tooltip-selection     :background region)
-   
+
    ;; css-mode / scss-mode
    (css-proprietary-property :foreground orange)
    (css-property             :foreground green)
