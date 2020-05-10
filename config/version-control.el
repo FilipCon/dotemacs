@@ -1,9 +1,22 @@
 ;;; -*- lexical-binding: t -*-
 
 (use-package magit
-  :init (setq magit-diff-refine-hunk t)
-  :commands (magit-status)
-  :bind (("C-x g s" . magit-status)))
+             :config
+             ;; show word by word difference
+             (setq magit-diff-refine-hunk 'all)
+             :bind (("C-c g s" . magit-status)
+                    ("C-c g i" . magit-init)
+                    ("C-c g t" . magit-stash)
+                    ("C-c g l" . magit-log)
+                    ("C-c g c" . magit-commit)
+                    ("C-c g p" . magit-push-other)
+                    ("C-c g u" . magit-pull)
+                    ("C-c g d" . magit-diff)
+                    ("C-c g o" . magit-checkout)
+                    ("C-c g m" . magit-merge)
+                    ("C-c g a" . magit-remote-add)
+                    ("C-c g r" . magit-remote-remove)
+                    ("C-c g n" . magit-clone)))
 
 ;; TODO fix it only for dired mode
 ;; (use-package diff-hl
