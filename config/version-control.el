@@ -5,12 +5,51 @@
   :commands (magit-status)
   :bind (("C-x g s" . magit-status)))
 
-(use-package diff-hl
-  :hook ((dired-mode . diff-hl-dired-mode)
-         (magit-post-refresh . diff-hl-magit-post-refresh))
-  :config
-  (global-diff-hl-mode t))
+;; TODO fix it only for dired mode
+;; (use-package diff-hl
+;;   :hook (dired-mode . diff-hl-dired-mode)
+;;   :config
+;;   (global-diff-hl-mode t))
 
-(use-package git-link
-  :commands (git-link git-link-commit git-link-open-in-browser)
-  :custom (git-link-open-in-browser t))
+  (use-package git-link
+    :commands (git-link git-link-commit git-link-open-in-browser)
+    :custom (git-link-open-in-browser t))
+
+; Git Gutter
+ ;;Git gutter is great for giving visual feedback on changes, but it doesn't play well
+ ;;with org-mode using org-indent. So I don't use it globally.
+
+(use-package git-gutter
+   :defer t
+   :hook ((markdown-mode . git-gutter-mode)
+          (prog-mode . git-gutter-mode)
+          (conf-mode . git-gutter-mode)
+          (org-mode . git-gutter-mode))
+   :config
+   (setq git-gutter:disabled-modes '(org-mode asm-mode image-mode)
+         git-gutter:update-interval 1
+         git-gutter:window-width 2
+         git-gutter:ask-p nil))
+
+ (use-package git-gutter-fringe
+    :commands git-gutter-mode
+    ;; :diminish git-gutter-mode
+    :after git-gutter
+    :demand fringe-helper
+    :init
+       (progn
+       (when (display-graphic-p)
+         (with-eval-after-load 'git-gutter
+           (require 'git-gutter-fringe)))
+       (setq git-gutter-fr:side 'left-fringe))
+    :config
+    ;; subtle diff indicators in the fringe
+    ;; places the git gutter outside the margins.
+    (setq-default fringes-outside-margins t)
+    ;; thin fringe bitmaps
+    (define-fringe-bitmap 'git-gutter-fr:added   [224]
+      nil nil '(center repeated))
+    (define-fringe-bitmap 'git-gutter-fr:modified   [224]
+      nil nil '(center repeated))
+    (define-fringe-bitmap 'git-gutter-fr:deleted   [128 192 224 240]
+      nil nil 'bottom))

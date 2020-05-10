@@ -14,8 +14,12 @@
  truncate-lines t
  truncate-partial-width-windows 50)
 
+(use-package move-text
+  :config
+  (global-set-key (kbd "M-p") 'move-text-up)
+  (global-set-key (kbd "M-n") 'move-text-down))
 
 ;; editor config
 (use-package editorconfig
-  :config
   :hook (prog-mode . editorconfig-mode))
+

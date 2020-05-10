@@ -6,12 +6,14 @@ elpa/
 eshell/
 autosave/
 backups/
+auto-save-list/
+
+.emacs.desktop*
 places
 savehist
-auto-save-list/
 .lsp-session-v1
+config.el
 recentf
 *.elc
 *.eld
-config.el
 

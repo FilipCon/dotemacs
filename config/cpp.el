@@ -23,8 +23,8 @@
 ;; make sure cmake-mode is installed for viewing CMake files
 (use-package cmake-mode)
 
-;; (use-package clang-format
-;;              :config
-;;              ;; (global-set-key (kbd "C-c i") 'clang-format-region)
-;;              ;; (global-set-key (kbd "C-c u") 'clang-format-buffer)
-;;              (setq clang-format-style-option "file"))
+(use-package clang-format
+             :config
+             ;; (global-set-key (kbd "C-c i") 'clang-format-region)
+             ;; (global-set-key (kbd "C-c u") 'clang-format-buffer)
+             (setq clang-format-style-option "file"))
