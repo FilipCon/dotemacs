@@ -32,7 +32,8 @@
                    lsp-ui-flycheck-live-reporting t
                    lsp-ui-peek-enable t
                    lsp-ui-peek-list-width 60
-                   lsp-ui-peek-peek-height 25)
+                   lsp-ui-peek-peek-height 25
+                   )
              (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 
 (use-package company-lsp

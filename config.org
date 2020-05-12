@@ -26,56 +26,8 @@
     :ensure t)
 
 #+END_SRC
-* Projectile
-
-#+BEGIN_SRC emacs-lisp
-
-(use-package projectile
-    :ensure
-    :config
-    (projectile-mode 1))
-
-#+END_SRC
-
-* Version Control
-
-#+BEGIN_SRC emacs-lisp
-(use-package vc
-    :ensure t)
-
-(use-package magit
-             :ensure t
-             :config
-             ;; show word by word difference
-             (setq magit-diff-refine-hunk 'all)
-             :bind (("C-c g s" . magit-status)
-                    ("C-c g i" . magit-init)
-                    ("C-c g t" . magit-stash)
-                    ("C-c g l" . magit-log)
-                    ("C-c g c" . magit-commit)
-                    ("C-c g p" . magit-push-other)
-                    ("C-c g u" . magit-pull)
-                    ("C-c g d" . magit-diff)
-                    ("C-c g o" . magit-checkout)
-                    ("C-c g m" . magit-merge)
-                    ("C-c g a" . magit-remote-add)
-                    ("C-c g r" . magit-remote-remove)
-                    ("C-c g n" . magit-clone)))
-
-#+END_SRC
-
-* Treemacs
-#+BEGIN_SRC emacs-lisp
-#+END_SRC
-
 * LSP
 #+BEGIN_SRC emacs-lisp
-
-  (use-package exec-path-from-shell
-     :ensure t
-     :init
-  (when (memq window-system '(mac ns x))
-    (exec-path-from-shell-initialize)))
 
   (use-package lsp-mode
                :ensure t
@@ -363,11 +315,6 @@
         :config
         (setq highlight-indent-guides-method 'character))
 
-      ;; multiple cursors
-      (use-package multiple-cursors
-        :ensure t
-        :bind
-        ("C-M-," . 'mc/edit-lines))
 
       ;; ;; Briefly highlight the current line in Emacs
       ;; (use-package nav-flash

@@ -36,8 +36,7 @@
    :defer t
    :hook ((markdown-mode . git-gutter-mode)
           (prog-mode . git-gutter-mode)
-          (conf-mode . git-gutter-mode)
-          (org-mode . git-gutter-mode))
+          (conf-mode . git-gutter-mode))
    :config
    (setq git-gutter:disabled-modes '(org-mode asm-mode image-mode)
          git-gutter:update-interval 1

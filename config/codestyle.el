@@ -14,6 +14,23 @@
  truncate-lines t
  truncate-partial-width-windows 50)
 
+
+;; remap toggle comment key 
+(defun fk/comment-or-uncomment-region-or-line ()
+    "Comments or uncomments the region or the current line if there's no active region."
+    (interactive)
+    (let (beg end)
+        (if (region-active-p)
+            (setq beg (region-beginning) end (region-end))
+            (setq beg (line-beginning-position) end (line-end-position)))
+        (comment-or-uncomment-region beg end)))
+(global-set-key (kbd "C-;") 'fk/comment-or-uncomment-region-or-line)
+
+
+;; copy line down
+(global-set-key "\C-c\C-d" "\C-a\C- \C-n\M-w\C-y")
+
+;; move line/region 
 (use-package move-text
   :config
   (global-set-key (kbd "M-p") 'move-text-up)

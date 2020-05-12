@@ -17,3 +17,5 @@ recentf
 *.elc
 *.eld
 
+/.mc-lists.el
+/amx-items
