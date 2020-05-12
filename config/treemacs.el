@@ -21,7 +21,7 @@
           treemacs-goto-tag-strategy             'refetch-index
           treemacs-indentation                   2
           treemacs-indentation-string            " "
-          treemacs-is-never-other-window         nil
+          treemacs-is-never-other-window         t
           treemacs-max-git-entries               5000
           treemacs-missing-project-action        'ask
           treemacs-move-forward-on-expand        nil
@@ -71,10 +71,6 @@
 
 (use-package treemacs-projectile
   :after treemacs projectile)
-
-(use-package treemacs-icons-dired
-  :after treemacs dired
-  :config (treemacs-icons-dired-mode))
 
 (use-package treemacs-magit
   :after treemacs magit)

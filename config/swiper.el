@@ -13,6 +13,7 @@
         ;; (t      . ivy--regex-fuzzy)
         (t . ivy--regex-ignore-order))))
 
+;; sort completions
 (use-package ivy-prescient
   :hook ((ivy-mode . ivy-prescient-mode)
          (ivy-prescient-mode . prescient-persist-mode))

@@ -286,53 +286,6 @@
 
 #+BEGIN_SRC emacs-lisp
 
-  ;;
-  (use-package vi-tilde-fringe
-      :ensure t
-      :init
-      (add-hook 'prog-mode-hook 'vi-tilde-fringe-mode)
-      (add-hook 'org-mode-hook 'vi-tilde-fringe-mode))
-
-  ;; rainbow-delimiters
-  (use-package rainbow-delimiters
-     :ensure t
-     :init
-     (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
-
-      ;; line-number
-      (use-package hlinum
-                   :ensure t
-                   :config
-                   (setq linum-format " %d  ")
-                   (column-number-mode nil)
-                   (size-indication-mode nil)
-                   (global-linum-mode 1))
-
-      ;; highlight indent
-      (use-package highlight-indent-guides
-        :ensure t
-        :hook (prog-mode . highlight-indent-guides-mode)
-        :config
-        (setq highlight-indent-guides-method 'character))
-
-
-      ;; ;; Briefly highlight the current line in Emacs
-      ;; (use-package nav-flash
-      ;;    :ensure t
-      ;;    )
-
-      ;; fill column indicator
-      (use-package fill-column-indicator
-                   :ensure t
-                   :config
-                   (define-globalized-minor-mode global-fci-mode fci-mode
-                     (lambda ()
-                       (when (and (not (string-match "^\*.*\*$" (buffer-name)))
-                                  (not (eq major-mode 'dired-mode)))
-                         (setq fci-rule-color "darkgrey")
-                         (setq fill-column 80)
-                         (fci-mode 1))))
-                   :bind ("<f10>" . global-fci-mode))
 
       ;; 80 char mark and utility for whitespace
       (use-package whitespace
@@ -367,25 +320,6 @@
                    :ensure t
                    :config
                    (global-flycheck-mode))
-
-      ;; show available keybindings after you start typing
-      (use-package which-key
-                   :ensure t
-                   :config
-                   (which-key-mode t))
-
-    ;; smart parentheses
-      (use-package smartparens
-                   :ensure t
-                   :config
-                   (require 'smartparens-config)
-                    (setq sp-base-key-bindings 'paredit
-                          sp-autoskip-closing-pair 'always
-                          sp-hybrid-kill-entire-symbol nil)
-                    ;; (smartparens-global-strict-mode)
-                    (smartparens-global-mode)
-                    (sp-use-paredit-bindings)
-                    (show-smartparens-global-mode t))
 
     ;; highlight toto
        (use-package hl-todo
@@ -424,16 +358,6 @@
 
        (setq global-font-lock-mode -1)
 
-
-
-       (unless (assq 'menu-bar-lines default-frame-alist)
-         ;; We do this in early-init.el too, but in case the user is on Emacs 26 we do
-         ;; it here too: disable tool and scrollbars, as Doom encourages
-         ;; keyboard-centric workflows, so these are just clutter (the scrollbar also
-         ;; impacts performance).
-         (add-to-list 'default-frame-alist '(menu-bar-lines . 0))
-         (add-to-list 'default-frame-alist '(tool-bar-lines . 0))
-         (add-to-list 'default-frame-alist '(vertical-scroll-bars)))
 
 #+END_SRC
 * UI Settings

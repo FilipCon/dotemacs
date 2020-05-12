@@ -13,15 +13,35 @@
 ;; (add-hook 'c-mode-common-hook 'ds/c++-hook)
 
 (use-package cmake-ide
-             :config
-             ;; (cmake-ide-setup)
-             (setq cmake-ide-make-command "make --no-print-directory -j4"
-                   compilation-skip-threshold 2 ;; show only errors
-                   compilation-auto-jump-to-first-error t) ;; go to first error
-             :bind ("C-c m c" . cmake-ide-compile))
+  :after dash
+  :config
+  (cmake-ide-setup)
+  (setq cmake-ide-make-command "make --no-print-directory"
+        compilation-skip-threshold 2 ;; show only errors
+        compilation-auto-jump-to-first-error t))
 
 ;; make sure cmake-mode is installed for viewing CMake files
 (use-package cmake-mode)
+(use-package dash) ;; dependency of cmake-ide
+
+(use-package rtags
+  :config (progn (setq rtags-autostart-diagnostics nil)
+                 (setq rtags-completions-enabled t)
+                 ;; (require 'company)
+                 (push 'company-rtags company-backends)
+                 (add-hook 'c-mode-hook 'rtags-start-process-unless-running)
+                 (add-hook 'c++-mode-hook 'rtags-start-process-unless-running)
+                 (add-hook 'objc-mode-hook 'rtags-start-process-unless-running)
+                 ;;
+                 (define-key c-mode-base-map (kbd "M-.") #'rtags-find-symbol-at-point)
+                 (define-key c-mode-base-map (kbd "M-,") #'rtags-location-stack-back)
+                 ;; (define-key c-mode-base-map (kbd "M->") #'rtags-find-references-at-point)
+                 ;; (define-key c-mode-base-map (kbd "M-;") #'rtags-find-file)
+                 ;; (define-key c-mode-base-map (kbd "C-.") #'rtags-find-symbol)
+                 ;; (define-key c-mode-base-map (kbd "C-,") #'rtags-find-references)
+                 ;; (define-key c-mode-base-map (kbd "C-<") #'rtags-find-virtuals-at-point)
+                 ;; (define-key c-mode-base-map (kbd "M-i") #'rtags-imenu)
+                 ))
 
 (use-package clang-format
              :config

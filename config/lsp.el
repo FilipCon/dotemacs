@@ -6,7 +6,7 @@
              ;; prefer using lsp-ui (flycheck)
              (setq lsp-prefer-flymake nil)
              ;; setup clangd
-             (setq lsp-clients-clangd-args '("-j=2" "-background-index" "-log=error"))
+             (setq lsp-clients-clangd-args '("-j=2" "-background-index" "-log=error" "--clang-tidy"))
              ;; hook languages
              (add-hook 'python-mode-hook 'lsp)
              (add-hook 'c-mode-common-hook 'lsp))

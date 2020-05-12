@@ -45,11 +45,12 @@
   (use-package pos-tip
     :commands (pos-tip-show)))
 
+;; sort completions
 (use-package company-prescient
   :hook (company-mode . company-prescient-mode)
   :config
   ;; NOTE prescient config duplicated with `ivy'
-  (setq prescient-save-file (concat user-emacs-directory "prescient-save.el"))
+  (setq prescient-save-file (concat user-emacs-directory ".cache/prescient-save.el"))
   (prescient-persist-mode +1))
 
 ;; (use-package company-box
