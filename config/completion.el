@@ -20,23 +20,21 @@
          ("C-n" . company-select-next)
          ("C-p" . company-select-previous))
   :hook (after-init . global-company-mode)
-  ;; :config
-  ;; ;; Enable downcase only when completing the completion.
-  ;; (defun jcs--company-complete-selection--advice-around (fn)
-  ;;   "Advice execute around `company-complete-selection' command."
-  ;;   (let ((company-dabbrev-downcase t))
-  ;;     (call-interactively fn)))
-  ;; (advice-add 'company-complete-selection :around #'jcs--company-complete-selection--advice-around)
+  :config
+  ;; Enable downcase only when completing the completion.
+  (defun jcs--company-complete-selection--advice-around (fn)
+    "Advice execute around `company-complete-selection' command."
+    (let ((company-dabbrev-downcase t))
+      (call-interactively fn)))
+  (advice-add 'company-complete-selection :around #'jcs--company-complete-selection--advice-around))
 
-  )
-
-;; ;; fuzzy auto complition
-;; (use-package company-fuzzy
-;;   :init
-;;   (setq company-fuzzy-sorting-backend 'alphabetic)
-;;   (setq company-fuzzy-prefix-ontop nil)
-;;   (with-eval-after-load 'company
-;;     (global-company-fuzzy-mode t)))
+;; fuzzy auto complition
+(use-package company-fuzzy
+  :init
+  (setq company-fuzzy-sorting-backend 'alphabetic)
+  (setq company-fuzzy-prefix-ontop nil)
+  (with-eval-after-load 'company
+    (global-company-fuzzy-mode t)))
 
 ;; quick tips
 (use-package company-quickhelp
@@ -46,6 +44,13 @@
   (company-quickhelp-mode t)
   (use-package pos-tip
     :commands (pos-tip-show)))
+
+(use-package company-prescient
+  :hook (company-mode . company-prescient-mode)
+  :config
+  ;; NOTE prescient config duplicated with `ivy'
+  (setq prescient-save-file (concat user-emacs-directory "prescient-save.el"))
+  (prescient-persist-mode +1))
 
 ;; (use-package company-box
 ;;   :after (company all-the-icons)
