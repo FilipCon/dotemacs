@@ -14,6 +14,7 @@
  truncate-lines t
  truncate-partial-width-windows 50)
 
+(global-set-key (kbd "C-x k") 'kill-this-buffer)
 
 ;; remap toggle comment key 
 (defun fk/comment-or-uncomment-region-or-line ()
