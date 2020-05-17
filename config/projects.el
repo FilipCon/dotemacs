@@ -2,7 +2,7 @@
 
 (use-package projectile
   :defer t
-  :init
+  :config
   (setq projectile-switch-project-action #'projectile-dired
         projectile-completion-system 'ivy)
   :bind-keymap ("C-c p" . projectile-command-map)
