@@ -36,7 +36,6 @@
 (setq gnutls-verify-error t
       tls-checktrust t)
 
-;; Disk space is cheap. Save lots. (c) Sacha Chua
 ;; Backups
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups"))
       delete-old-versions -1
@@ -60,32 +59,3 @@
       recentf-max-saved-items 50)
 (savehist-mode 1)
 (recentf-mode 1)
-
-;; undo-tree
-(use-package undo-tree
-  :config
-  ;;turn on everywhere
-  (global-undo-tree-mode 1)
-  (global-set-key (kbd "C-/") 'undo)
-  (global-set-key (kbd "C-S-/") 'undo-tree-redo))
-
-;; move buffers
-(use-package buffer-move
-  :bind (("C-c b P" . buf-move-up)
-         ("C-c b N" . buf-move-down)
-         ("C-c b B" . buf-move-left)
-         ("C-c b F" . buf-move-right)))
-
-;; transpose buffers horizontally
-(use-package transpose-frame
-  :bind ("C-c b t" . flop-frame))
-
-;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph
-(defun ds/unfill-paragraph (&optional region)
-  "Takes a multi-line paragraph and makes it into a single line of text."
-  (interactive (progn (barf-if-buffer-read-only) '(t)))
-  (let ((fill-column (point-max))
-        ;; This would override `fill-column' if it's an integer.
-        (emacs-lisp-docstring-fill-column t))
-    (fill-paragraph nil region)))
-(global-set-key (kbd "C-c b u") 'ds/unfill-paragraph)

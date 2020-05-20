@@ -4,12 +4,16 @@
 (global-visual-line-mode 1)
 
 ;; font size
-(global-set-key (kbd "C-=") 'text-scale-increase)
+(global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
 
-;; (global-display-line-numbers-mode 1)
-(setq linum-format " %d ")
-(add-hook 'prog-mode-hook 'linum-mode)
+;; show line number
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+
+;; lsp-treemacs
+(use-package lsp-treemacs
+             :config
+             (lsp-treemacs-sync-mode 1))
 
 ;; theme
 (use-package doom-themes
