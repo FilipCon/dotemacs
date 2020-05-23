@@ -21,7 +21,7 @@
   (setq cmake-ide-make-command "make --no-print-directory"
         compilation-skip-threshold 2 ;; show only errors
         compilation-auto-jump-to-first-error t))
-  
+
 
 (defun cmake-ide/c-c++-hook ()
     (with-eval-after-load 'projectile

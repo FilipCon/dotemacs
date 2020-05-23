@@ -3,6 +3,41 @@
 ;; restart emacs
 (use-package restart-emacs)
 
+(use-package whitespace
+  :bind ("<f11>" . global-whitespace-mode)
+  :hook (prog-mode . whitespace-mode)
+  :config
+  (setq whitespace-line-column 80)
+  (setq indent-tags-mode nil)
+  (setq whitespace-style
+        (quote
+         (face tabs spaces trailing space-before-tab newline indentation
+               lines empty space-after-tab space-mark tab-mark))))
+
+;; hack for disabling whitespaces in company
+;; https://github.com/company-mode/company-mode/pull/245
+(defvar my-prev-whitespace-mode nil)
+(make-variable-buffer-local 'my-prev-whitespace-mode)
+(defun pre-popup-draw ()
+  "Turn off whitespace mode before showing company complete tooltip"
+  (if whitespace-mode
+      (progn
+        (setq my-prev-whitespace-mode t)
+        (whitespace-mode -1)
+        (setq my-prev-whitespace-mode t))))
+(defun post-popup-draw ()
+  "Restore previous whitespace mode after showing company tooltip"
+  (if my-prev-whitespace-mode
+      (progn
+        (whitespace-mode 1)
+        (setq my-prev-whitespace-mode nil))))
+(advice-add 'company-pseudo-tooltip-unhide :before #'pre-popup-draw)
+(advice-add 'company-pseudo-tooltip-hide :after #'post-popup-draw)
+
+;; delete trailing whitespaces and untabify on save
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+(add-hook 'before-save-hook 'untabify)
+
 ;; undo-tree
 (use-package undo-tree
   :config
@@ -18,11 +53,19 @@
          ("C-c b b" . buf-move-left)
          ("C-c b f" . buf-move-right)))
 
+;; move buffers
+(use-package buffer-move
+             :ensure t
+             :bind (("C-c b p" . buf-move-up)
+                    ("C-c b n" . buf-move-down)
+                    ("C-c b b" . buf-move-left)
+                    ("C-c b f" . buf-move-right)))
+
 ;; transpose buffers horizontally
 (use-package transpose-frame
   :bind ("C-c b t" . flop-frame))
 
-;; move line/region 
+;; move line/region
 (use-package move-text
   :config
   (global-set-key (kbd "M-p") 'move-text-up)
@@ -39,7 +82,13 @@
   :config
   (global-set-key (kbd "C-=") 'er/expand-region))
 
-;; remap toggle comment key 
+;; does not jump across buffer...
+(use-package goto-last-change
+  :config
+  (global-set-key (kbd "C-M--") 'goto-last-change)
+  )
+
+;; remap toggle comment key
 (defun fk/comment-or-uncomment-region-or-line ()
   "Comments or uncomments the region or the current line if there's no active region."
   (interactive)

@@ -107,15 +107,14 @@
   (org-agenda-mode . centaur-tabs-local-mode)
   (helpful-mode . centaur-tabs-local-mode)
   :bind
-  ("M-C--" . centaur-tabs-backward)
-  ("M-C-=" . centaur-tabs-forward)
+  ("C-c C-b" . centaur-tabs-backward)
+  ("C-c C-f" . centaur-tabs-forward)
   ("C-c t s" . centaur-tabs-counsel-switch-group)
   ("C-c t p" . centaur-tabs-group-by-projectile-project)
   ("C-c t g" . centaur-tabs-group-buffer-groups))
 
 ;; tildes in EOF like vim
 (use-package vi-tilde-fringe
-  :ensure t
   :init
   (add-hook 'prog-mode-hook 'vi-tilde-fringe-mode)
   (add-hook 'org-mode-hook 'vi-tilde-fringe-mode))
