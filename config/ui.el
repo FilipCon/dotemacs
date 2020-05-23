@@ -29,7 +29,16 @@
   (doom-themes-neotree-config) ;; Enable custom neotree theme
   (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
   (doom-themes-treemacs-config)
-  (doom-themes-org-config)) ;; Corrects (and improves) org-mode's native fontification.
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config)
+  ;; Make symbol highlight and region highlights a darker version of the region.
+  (eval-after-load 'region-occurrences-highlighter
+    '(progn
+       (set-face-inverse-video 'region-occurrences-highlighter-face nil)
+       (set-face-background 'region-occurrences-highlighter-face (doom-blend (doom-color 'region) (doom-color 'bg) 0.90))))
+  (eval-after-load 'highlight-symbol
+    '(set-face-background 'highlight-symbol-face (doom-blend (doom-color 'region) (doom-color 'bg) 0.90)))
+  )
 
 ;; all the icons
 (use-package all-the-icons
@@ -126,13 +135,18 @@
   (setq highlight-indent-guides-method 'character))
 
 ;; fill column indicator
-(use-package fill-column-indicator
+(use-package hl-fill-column
+  :hook (prog-mode . hl-fill-column-mode))
+
+(use-package hl-todo
+  :hook (prog-mode . hl-todo-mode)
   :config
-  (define-globalized-minor-mode global-fci-mode fci-mode
-    (lambda ()
-      (when (and (not (string-match "^\*.*\*$" (buffer-name)))
-                 (not (eq major-mode 'dired-mode)))
-        (setq fci-rule-color "darkgrey")
-        (setq fill-column 80)
-        (fci-mode 1))))
-  :bind ("<f10>" . global-fci-mode))
+  (setq hl-todo-highlight-punctuation ":")
+  (setq hl-todo-keyword-faces
+      '(("TODO"   . "#FF0000")
+        ("FIXME"  . "#FF0000")
+        ("DEBUG"  . "#A020F0")
+        ("GOTCHA" . "#FF4500")
+        ("STUB"   . "#1E90FF")))
+  )
+
