@@ -47,6 +47,14 @@
   (global-set-key (kbd "C-/") 'undo)
   (global-set-key (kbd "C-S-/") 'undo-tree-redo))
 
+(defun restore-killed-buffer ()
+  (interactive)
+  (let ((active-files (loop for buf in (buffer-list)
+                            when (buffer-file-name buf) collect it)))
+    (loop for file in recentf-list
+          unless (member file active-files) return (find-file file))))
+(define-key global-map (kbd "C-S-t") 'restore-killed-buffer)
+
 ;; move buffers
 (use-package buffer-move
   :bind (("C-c b p" . buf-move-up)
@@ -99,6 +107,9 @@
          ("M-g z" . dumb-jump-go-prefer-external-other-window))
   :config (setq dumb-jump-selector 'ivy))
 
+;; remap key for ibuffer
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
 ;; remap toggle comment key
 (defun fk/comment-or-uncomment-region-or-line ()
   "Comments or uncomments the region or the current line if there's no active region."
@@ -108,8 +119,7 @@
         (setq beg (region-beginning) end (region-end))
       (setq beg (line-beginning-position) end (line-end-position)))
     (comment-or-uncomment-region beg end)))
-
-(global-set-key (kbd "C-c C-;") 'fk/comment-or-uncomment-region-or-line)
+(global-set-key (kbd "C-;") 'fk/comment-or-uncomment-region-or-line)
 
 ;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph
 (defun ds/unfill-paragraph (&optional region)
@@ -122,7 +132,8 @@
 (global-set-key (kbd "C-c b u") 'ds/unfill-paragraph)
 
 (defun fk/backward-kill-word ()
-  "Remove all whitespace if the character behind the cursor is whitespace, otherwise remove a word."
+  "Remove all whitespace if the character behind the cursor is whitespace,
+    otherwise remove a word."
   (interactive)
   (if (looking-back "[ \n]")
       ;; delete horizontal space before us and then check to see if we

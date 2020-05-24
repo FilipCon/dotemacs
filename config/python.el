@@ -8,10 +8,10 @@
 (defun ds/python-shell-send-snippet ()
   (interactive)
   (save-excursion
-   (search-backward "#%%")
+   (search-backward "##")
    (end-of-line)
    (set-mark-command nil)
-   (search-forward "#%%")
+   (search-forward "##")
    (call-interactively 'python-shell-send-region)
    (deactivate-mark)))
 
@@ -24,7 +24,7 @@
 (use-package py-autopep8)
 
 (use-package ein
-             :config
-             (setq ein:use-auto-complete-superpack t
-                   ein:output-type-preference '(emacs-lisp svg png jpeg html
+  :config
+  (setq ein:use-auto-complete-superpack t
+        ein:output-type-preference '(emacs-lisp svg png jpeg html
                                                 text latex javascript)))

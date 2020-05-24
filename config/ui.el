@@ -49,6 +49,10 @@
     :straight (:host github :repo "emacsmirror/font-lock-plus")
     :config (require 'font-lock+)))
 
+(use-package all-the-icons-ibuffer
+  :after all-the-icons
+  :hook (ibuffer-mode . all-the-icons-ibuffer-mode))
+
 ;; show key bind
 (use-package which-key
   :init (which-key-mode))
@@ -66,8 +70,7 @@
         centaur-tabs-height 32
         centaur-tabs-set-icons t
         centaur-tabs-set-modified-marker t
-        centaur-tabs-set-bar 'under
-        x-underline-at-descent-line t)
+        centaur-tabs-set-bar 'left)
   (centaur-tabs-headline-match)
   (setq centaur-tabs-gray-out-icons 'buffer)
   ;; (centaur-tabs-enable-buffer-reordering)
@@ -149,4 +152,3 @@
         ("GOTCHA" . "#FF4500")
         ("STUB"   . "#1E90FF")))
   )
-

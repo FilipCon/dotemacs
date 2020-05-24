@@ -107,3 +107,6 @@
 ;;; eldoc
 (use-package eldoc
   :diminish eldoc-mode)
+
+;; remove binding. i use it for centaur tabs
+(define-key c++-mode-map (kbd "C-c C-b") nil)

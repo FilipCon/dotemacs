@@ -50,10 +50,10 @@
 
 ;; languagetool
 (use-package langtool
-             :config
-             (setq langtool-java-classpath
-                   "/home/filipkon/Software/languagetool/*")
-             :bind ("C-c b l" . langtool-check-buffer))
+  :config
+  (setq langtool-java-classpath
+        "/home/filipkon/Software/languagetool/*")
+  :bind ("C-c b l" . langtool-check-buffer))
 
 ;; define word
 (use-package define-word)
@@ -82,3 +82,6 @@
                (interactive)
                (ispell-change-dictionary (pop dictionaries))))
 ;; (global-set-key [f2] 'ds/ispell-change-to-next-dictionary)
+
+;; remove binding. use it as toggle comment/uncomment region/line
+(define-key flyspell-mode-map (kbd "C-;") nil)

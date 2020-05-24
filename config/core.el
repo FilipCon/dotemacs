@@ -15,12 +15,27 @@
 (column-number-mode t)                  ; show column numbers
 
 ;; Scrolling
-(setq mouse-wheel-scroll-amount '(1)    ; scroll gentle
-      mouse-wheel-progressive-speed nil ; don't accelerate
-      scroll-conservatively 101         ; don't jump to the middle of screen
-      hscroll-margin 1                  ; don't you scroll that early!
-      hscroll-step 1                    ; but scroll just a bit
-      scroll-preserve-screen-position t) ; try to keep cursor in its position
+(setq mouse-wheel-progressive-speed nil
+      hscroll-margin 2
+      hscroll-step 1
+      ;; Emacs spends too much effort recentering the screen if you scroll the
+      ;; cursor more than N lines past window edges (where N is the settings of
+      ;; `scroll-conservatively'). This is especially slow in larger files
+      ;; during large-scale scrolling commands. If kept over 100, the window is
+      ;; never automatically recentered.
+      scroll-conservatively 101
+      scroll-margin 0
+      scroll-preserve-screen-position t
+      ;; Reduce cursor lag by a tiny bit by not auto-adjusting `window-vscroll'
+      ;; for tall lines.
+      auto-window-vscroll nil
+      ;; mouse
+      mouse-wheel-scroll-amount '(5 ((shift) . 2))
+      mouse-wheel-progressive-speed nil)  ; don't accelerate scrolling
+
+;; Remove hscroll-margin in shells, otherwise it causes jumpiness
+(add-hook 'eshell-mode-hook (lambda() (setq hscroll-margin 0)))
+(add-hook 'term-mode-hook (lambda() (setq hscroll-margin 0)))
 
 ;; retrieve closed windows/buffers
 (winner-mode t)

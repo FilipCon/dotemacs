@@ -59,8 +59,8 @@
   (add-hook 'org-mode-hook #'cpm/yas-org-mode-hook)
 
   ;; snippet directory
-  (setq yas-snippet-dirs '("~/.emacs.d/.local/snippets/cpm-snippets"
-                           yasnippet-snippets-dir))
+  ;; (setq yas-snippet-dirs '("~/.emacs.d/.local/snippets/cpm-snippets"
+  ;;                          yasnippet-snippets-dir))
   ;; the official snippet collection https://github.com/AndreaCrotti/yasnippet-snippets
   (use-package yasnippet-snippets :after yasnippet :demand t)
 
@@ -72,3 +72,9 @@
 
 (use-package yasnippet-snippets)
 (use-package yasnippet-classic-snippets)
+
+
+;; (use-package company-box
+;;   :hook (company-mode . company-box-mode)
+;;   :config 
+;; (setq company-box-icons-alist 'company-box-icons-images))
