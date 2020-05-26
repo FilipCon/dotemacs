@@ -10,7 +10,11 @@
   (setq lsp-clients-clangd-args '("-j=2" "-background-index" "-log=error" "--clang-tidy"))
   ;; hook languages
   (add-hook 'python-mode-hook 'lsp)
-  (add-hook 'c-mode-common-hook 'lsp))
+  (add-hook 'c-mode-common-hook 'lsp)
+  (add-hook 'csharp-mode-hook 'lsp)
+  (add-hook 'clojure-mode-hook 'lsp)
+  (add-hook 'latex-mode-hook 'lsp)
+  (add-hook 'cmake-mode-hook 'lsp))
 
 ;; lsp extras
 (use-package lsp-ui

@@ -9,7 +9,8 @@
   (setq whitespace-line-column nil)
   (setq whitespace-style
       '(face indentation tabs tab-mark spaces space-mark newline
-             trailing)))
+             trailing))
+  )
 
 ;; hack for disabling whitespaces in company
 ;; basically it turns it on/off when company pops up
@@ -82,7 +83,7 @@
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
 
 ;; copy line down
-(global-set-key "\C-c\C-d" "\C-a\C- \C-n\M-w\C-y")
+(global-set-key (kbd "s-n") "\C-a\C- \C-n\M-w\C-y")
 
 ;; set key for rgrep
 (global-set-key (kbd "C-c C-s") 'counsel-rg)
@@ -119,6 +120,8 @@
         (setq beg (region-beginning) end (region-end))
       (setq beg (line-beginning-position) end (line-end-position)))
     (comment-or-uncomment-region beg end)))
+(with-eval-after-load 'flyspell
+  (define-key flyspell-mode-map (kbd "C-;") nil))
 (global-set-key (kbd "C-;") 'fk/comment-or-uncomment-region-or-line)
 
 ;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph

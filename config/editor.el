@@ -14,9 +14,9 @@
  truncate-lines t
  truncate-partial-width-windows 50)
 
-;; editor config
-(use-package editorconfig
-  :hook (prog-mode . editorconfig-mode))
+;; ;; editor config
+;; (use-package editorconfig
+;;   :hook (prog-mode . editorconfig-mode))
 
 ;; fold/expand region
 (use-package origami)

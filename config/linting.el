@@ -44,6 +44,13 @@
 (use-package package-lint
   :commands (package-lint-current-buffer))
 
+(use-package flyspell-correct
+  :after flyspell
+  :bind (:map flyspell-mode-map ("C-." . flyspell-correct-wrapper)))
+
+(use-package flyspell-correct-popup
+  :after flyspell-correct)
+
 ;; (use-package flycheck-clang-analyzer
 ;;   :after flycheck
 ;;   :config (flycheck-clang-analyzer-setup))
@@ -82,6 +89,3 @@
                (interactive)
                (ispell-change-dictionary (pop dictionaries))))
 ;; (global-set-key [f2] 'ds/ispell-change-to-next-dictionary)
-
-;; remove binding. use it as toggle comment/uncomment region/line
-(define-key flyspell-mode-map (kbd "C-;") nil)
