@@ -119,8 +119,8 @@
   (org-agenda-mode . centaur-tabs-local-mode)
   (helpful-mode . centaur-tabs-local-mode)
   :bind
-  ("C-c C-b" . centaur-tabs-backward)
-  ("C-c C-f" . centaur-tabs-forward)
+  ("C-s-b" . centaur-tabs-backward)
+  ("C-s-f" . centaur-tabs-forward)
   ("C-c t s" . centaur-tabs-counsel-switch-group)
   ("C-c t p" . centaur-tabs-group-by-projectile-project)
   ("C-c t g" . centaur-tabs-group-buffer-groups))
