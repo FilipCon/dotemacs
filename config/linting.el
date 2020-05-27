@@ -21,7 +21,7 @@
         #b0000000000000000
         #b0000000000000000) nil 16)
   :custom (flycheck-indication-mode 'right-fringe)
-  :hook (prog-mode . global-flycheck-mode)
+  :hook (prog-mode . flycheck-mode)
   :config
   (flycheck-define-error-level 'error
                    :severity 2
@@ -48,7 +48,7 @@
   :after flyspell
   :bind (:map flyspell-mode-map ("C-." . flyspell-correct-wrapper)))
 
-(use-package flyspell-correct-popup
+(use-package flyspell-correct-ivy
   :after flyspell-correct)
 
 ;; (use-package flycheck-clang-analyzer
@@ -82,10 +82,10 @@
 (add-hook 'text-mode-hook 'flyspell-mode)
 (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
-;; change dictionary toggle
-(lexical-let ((dictionaries '("en" "el")))
-             (rplacd (last dictionaries) dictionaries)
-             (defun ds/ispell-change-to-next-dictionary ()
-               (interactive)
-               (ispell-change-dictionary (pop dictionaries))))
-;; (global-set-key [f2] 'ds/ispell-change-to-next-dictionary)
+;; ;; change dictionary toggle
+;; (lexical-let ((dictionaries '("en" "el")))
+;;              (rplacd (last dictionaries) dictionaries)
+;;              (defun ds/ispell-change-to-next-dictionary ()
+;;                (interactive)
+;;                (ispell-change-dictionary (pop dictionaries))))
+;; ;; (global-set-key [f2] 'ds/ispell-change-to-next-dictionary)

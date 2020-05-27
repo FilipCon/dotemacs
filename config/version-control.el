@@ -18,21 +18,11 @@
          ("C-c g r" . magit-remote-remove)
          ("C-c g n" . magit-clone)))
 
-;; TODO fix it only for dired mode
-;; (use-package diff-hl
-;;   :hook (dired-mode . diff-hl-dired-mode)
-;;   :config
-;;   (global-diff-hl-mode t))
-
 (use-package git-link
   :commands (git-link git-link-commit git-link-open-in-browser)
   :custom (git-link-open-in-browser t))
 
 (use-package gitignore-mode)
-
-                                        ; Git Gutter
-;;Git gutter is great for giving visual feedback on changes, but it doesn't play well
-;;with org-mode using org-indent. So I don't use it globally.
 
 (use-package git-gutter
   :defer t

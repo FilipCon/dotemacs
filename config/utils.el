@@ -1,44 +1,35 @@
 ;;; -*- lexical-binding: t -*-
 
+(setq-default
+ vc-follow-symlinks t
+ ;; Save clipboard contents into kill-ring before replacing them
+ save-interprogram-paste-before-kill t
+ fill-column 80
+ sentence-end-double-space nil
+ word-wrap t
+ indent-tabs-mode nil
+ require-final-newline t
+ tab-always-indent t
+ tab-width 4
+ ;; Wrapping
+ truncate-lines t
+ truncate-partial-width-windows 50)
+
+;; ;; editor config
+;; (use-package editorconfig
+;;   :hook (prog-mode . editorconfig-mode))
+
+;; fold/expand region
+(use-package origami)
+
 ;; restart emacs
 (use-package restart-emacs)
-
-(use-package whitespace
-  :hook (prog-mode . whitespace-mode)
-  :config
-  (setq whitespace-line-column nil)
-  (setq whitespace-style
-      '(face indentation tabs tab-mark spaces space-mark newline
-             trailing))
-  )
-
-;; hack for disabling whitespaces in company
-;; basically it turns it on/off when company pops up
-;; https://github.com/company-mode/company-mode/pull/245
-(defvar my-prev-whitespace-mode nil)
-(make-variable-buffer-local 'my-prev-whitespace-mode)
-(defun pre-popup-draw ()
-  "Turn off whitespace mode before showing company complete tooltip"
-  (if whitespace-mode
-      (progn
-        (setq my-prev-whitespace-mode t)
-        (whitespace-mode -1)
-        (setq my-prev-whitespace-mode t))))
-(defun post-popup-draw ()
-  "Restore previous whitespace mode after showing company tooltip"
-  (if my-prev-whitespace-mode
-      (progn
-        (whitespace-mode 1)
-        (setq my-prev-whitespace-mode nil))))
-(advice-add 'company-pseudo-tooltip-unhide :before #'pre-popup-draw)
-(advice-add 'company-pseudo-tooltip-hide :after #'post-popup-draw)
 
 (use-package ws-butler
   ;; a less intrusive `delete-trailing-whitespaces' on save
   :config (ws-butler-global-mode +1))
 
-;; delete trailing whitespaces and untabify on save
-;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
+;; untabify on save
 (add-hook 'before-save-hook 'untabify)
 
 ;; undo-tree
@@ -85,9 +76,6 @@
 ;; copy line down
 (global-set-key (kbd "s-n") "\C-a\C- \C-n\M-w\C-y")
 
-;; set key for rgrep
-(global-set-key (kbd "C-c C-s") 'counsel-rg)
-
 ;; expand region vim style
 (use-package expand-region
   :config
@@ -98,15 +86,6 @@
   :config
   (global-set-key (kbd "C-M--") 'evil-jump-backward)
   (global-set-key (kbd "C-M-=") 'evil-jump-forward))
-
-(use-package dumb-jump
-  :bind (("M-g o" . dumb-jump-go-other-window)
-         ("M-g j" . dumb-jump-go)
-         ("M-g b" . dumb-jump-back)
-         ("M-g i" . dumb-jump-go-prompt)
-         ("M-g x" . dumb-jump-go-prefer-external)
-         ("M-g z" . dumb-jump-go-prefer-external-other-window))
-  :config (setq dumb-jump-selector 'ivy))
 
 ;; remap key for ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)

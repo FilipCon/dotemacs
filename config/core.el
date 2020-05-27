@@ -47,9 +47,9 @@
 (desktop-save-mode t)
 (save-place-mode t)
 
-;; Security hype
-(setq gnutls-verify-error t
-      tls-checktrust t)
+;; ;; Security hype
+;; (setq gnutls-verify-error t
+;;       tls-checktrust t)
 
 ;; Backups
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups"))

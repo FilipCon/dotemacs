@@ -7,12 +7,15 @@
         ivy-count-format "" ;
         ivy-initial-inputs-alist nil ; remove initial ^ input.
         ivy-extra-directories nil ; remove . and .. directory.)
-        ;; projectile-completion-system 'ivy
         ivy-use-virtual-buffers t)
+  :config
+  ;; Counsel changes a lot of ivy's state at startup; to control for that, we
+  ;; need to load it as early as possible. Some packages (like `ivy-prescient')
+  ;; require this.
+  (require 'counsel nil t)
   (setq ivy-re-builders-alist
-         '((swiper . ivy--regex-plus) ;; use fuzzy completion except swiper
-           ;; (t      . ivy--regex-fuzzy)
-           (t . ivy--regex-ignore-order)))
+        '((swiper . ivy--regex-plus)
+          (t . ivy--regex-ignore-order)))
   :hook (after-init . ivy-mode))
 
 ;; sort completions
@@ -31,8 +34,7 @@
 
 ;; remember last commands
 (use-package amx
-  ;; :hook (ivy-mode . amx-mode)
-:defer t
+  :defer t
   :config
   (setq amx-save-file (concat user-emacs-directory ".cache/amx-items")))
 
@@ -44,8 +46,9 @@
 
 (use-package counsel
   :after swiper
+  :hook (ivy-mode . counsel-mode)
   :config
   (setq-default counsel-mode-override-describe-bindings t)
   (global-set-key (kbd "M-x") 'counsel-M-x)
-  :hook (ivy-mode . counsel-mode))
+  (global-set-key (kbd "C-s-s") 'counsel-rg))
 

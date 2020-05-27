@@ -10,11 +10,6 @@
 ;; show line number
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
-;; lsp-treemacs
-(use-package lsp-treemacs
-             :config
-             (lsp-treemacs-sync-mode 1))
-
 ;; theme
 (use-package doom-themes
   :custom
@@ -22,23 +17,13 @@
   (doom-themes-enable-bold t)    ; if nil, bold is universally disabled
   (doom-themes-enable-italic t) ; if nil, italics is universally disabled
   :init
-  ;; (load-theme 'doom-dark+ t) ;; load theme
   (load-theme 'doom-one t) ;; load theme
   :config
   (doom-themes-visual-bell-config) ;; Enable flashing mode-line on errors
-  (doom-themes-neotree-config) ;; Enable custom neotree theme
   (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
   (doom-themes-treemacs-config)
   ;; Corrects (and improves) org-mode's native fontification.
-  (doom-themes-org-config)
-  ;; Make symbol highlight and region highlights a darker version of the region.
-  (eval-after-load 'region-occurrences-highlighter
-    '(progn
-       (set-face-inverse-video 'region-occurrences-highlighter-face nil)
-       (set-face-background 'region-occurrences-highlighter-face (doom-blend (doom-color 'region) (doom-color 'bg) 0.90))))
-  (eval-after-load 'highlight-symbol
-    '(set-face-background 'highlight-symbol-face (doom-blend (doom-color 'region) (doom-color 'bg) 0.90)))
-  )
+  (doom-themes-org-config))
 
 ;; all the icons
 (use-package all-the-icons
@@ -73,8 +58,6 @@
         centaur-tabs-set-bar 'left)
   (centaur-tabs-headline-match)
   (setq centaur-tabs-gray-out-icons 'buffer)
-  ;; (centaur-tabs-enable-buffer-reordering)
-  ;; (setq centaur-tabs-adjust-buffer-order t)
   (setq uniquify-separator "/")
   (setq uniquify-buffer-name-style 'forward)
   (defun centaur-tabs-buffer-groups ()
@@ -152,3 +135,32 @@
         ("GOTCHA" . "#FF4500")
         ("STUB"   . "#1E90FF")))
   )
+
+(use-package whitespace
+  :hook (prog-mode . whitespace-mode)
+  :config
+  (setq whitespace-line-column nil)
+  (setq whitespace-style
+      '(face indentation tabs tab-mark spaces space-mark newline
+             trailing)))
+
+;; hack for disabling whitespaces in company
+;; basically it turns it on/off when company pops up
+;; https://github.com/company-mode/company-mode/pull/245
+(defvar my-prev-whitespace-mode nil)
+(make-variable-buffer-local 'my-prev-whitespace-mode)
+(defun pre-popup-draw ()
+  "Turn off whitespace mode before showing company complete tooltip"
+  (if whitespace-mode
+      (progn
+        (setq my-prev-whitespace-mode t)
+        (whitespace-mode -1)
+        (setq my-prev-whitespace-mode t))))
+(defun post-popup-draw ()
+  "Restore previous whitespace mode after showing company tooltip"
+  (if my-prev-whitespace-mode
+      (progn
+        (whitespace-mode 1)
+        (setq my-prev-whitespace-mode nil))))
+(advice-add 'company-pseudo-tooltip-unhide :before #'pre-popup-draw)
+(advice-add 'company-pseudo-tooltip-hide :after #'post-popup-draw)
