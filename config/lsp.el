@@ -1,11 +1,22 @@
 ;;; -*- lexical-binding: t -*-
 
 (use-package lsp-mode
-  :commands lsp
+  :commands (lsp-install-server lsp)
+  :hook ((python-mode . lsp)
+          (c-mode-common . lsp)
+          (csharp-mode . lsp)
+          (clojure-mode . lsp)
+          (latex-mode . lsp)
+          (cmake-mode lsp)
+          (lsp-mode . lsp-enable-which-key-integration))
   :config
   (setq lsp-prefer-capf t) ;; prefer company-capf than company-lsp
   ;; prefer using lsp-ui (flycheck)
   (setq lsp-prefer-flymake nil)
+    ;; Auto-kill LSP server after last workspace buffer is killed.
+  (setq lsp-keep-workspace-alive nil)
+  ;; Let `flycheck-check-syntax-automatically' determine this.
+  (setq lsp-flycheck-live-reporting nil)
   ;; setup clangd
   (setq lsp-clients-clangd-args '("-j=2" "-background-index" "-log=error" "--clang-tidy"))
   ;; Disable LSP's superfluous, expensive and/or debatably unnecessary features.
@@ -23,17 +34,11 @@
         lsp-enable-semantic-highlighting nil
         ;; Don't modify our code without our permission
         lsp-enable-indentation nil
-        lsp-enable-on-type-formatting nil)
-  ;; hook languages
-  (add-hook 'python-mode-hook 'lsp)
-  (add-hook 'c-mode-common-hook 'lsp)
-  (add-hook 'csharp-mode-hook 'lsp)
-  (add-hook 'clojure-mode-hook 'lsp)
-  (add-hook 'latex-mode-hook 'lsp)
-  (add-hook 'cmake-mode-hook 'lsp))
+        lsp-enable-on-type-formatting nil))
 
 ;; lsp extras
 (use-package lsp-ui
+  :commands lsp-ui-mode
   :requires lsp-mode flycheck
   :config
   ;; setup lsp-ui
@@ -50,22 +55,10 @@
         lsp-ui-peek-peek-height 25)
   (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 
-;; ;; lsp-treemacs
-;; (use-package lsp-treemacs 
-;;   :config
-;;   (lsp-treemacs-sync-mode 1))
+(use-package lsp-ivy
+  :commands lsp-ivy-workspace-symbol)
 
-(use-package lsp-ivy)
-
-;; (use-package company-lsp
-;;   :defer t
-;;   :after (company)
-;;   :commands company-lsp
-;;   :hook (prog-mode . company-lsp-mode)
-;;   :config
-;;   (setq company-lsp-cache-candidates 'auto)
-;;   (push 'company-lsp company-backends)
-;;   ;; disable client-side cache because the LSP server does a better job.
-;;   (setq company-transformers nil
-;;         company-lsp-async t
-;;         company-lsp-cache-candidates nil))
+;; lsp-treemacs
+(use-package lsp-treemacs
+  :config
+  (lsp-treemacs-sync-mode 1))

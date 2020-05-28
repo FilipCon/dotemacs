@@ -102,8 +102,8 @@
   (org-agenda-mode . centaur-tabs-local-mode)
   (helpful-mode . centaur-tabs-local-mode)
   :bind
-  ("C-s-b" . centaur-tabs-backward)
-  ("C-s-f" . centaur-tabs-forward)
+  ("C-s--" . centaur-tabs-backward)
+  ("C-s-=" . centaur-tabs-forward)
   ("C-c t s" . centaur-tabs-counsel-switch-group)
   ("C-c t p" . centaur-tabs-group-by-projectile-project)
   ("C-c t g" . centaur-tabs-group-buffer-groups))
@@ -114,11 +114,11 @@
   (add-hook 'prog-mode-hook 'vi-tilde-fringe-mode)
   (add-hook 'org-mode-hook 'vi-tilde-fringe-mode))
 
-;; highlight indent
-(use-package highlight-indent-guides
-  :hook (prog-mode . highlight-indent-guides-mode)
-  :config
-  (setq highlight-indent-guides-method 'character))
+;; ;; highlight indent
+;; (use-package highlight-indent-guides
+;;   :hook (prog-mode . highlight-indent-guides-mode)
+;;   :config
+;;   (setq highlight-indent-guides-method 'character))
 
 ;; fill column indicator
 (use-package hl-fill-column
@@ -133,8 +133,7 @@
         ("FIXME"  . "#FF0000")
         ("DEBUG"  . "#A020F0")
         ("GOTCHA" . "#FF4500")
-        ("STUB"   . "#1E90FF")))
-  )
+        ("STUB"   . "#1E90FF"))))
 
 (use-package whitespace
   :hook (prog-mode . whitespace-mode)

@@ -7,8 +7,8 @@
         ivy-count-format "" ;
         ivy-initial-inputs-alist nil ; remove initial ^ input.
         ivy-extra-directories nil ; remove . and .. directory.)
-        ivy-use-virtual-buffers t)
-  :config
+        ivy-use-virtual-buffers t
+        ivy-case-fold-search-default t)
   ;; Counsel changes a lot of ivy's state at startup; to control for that, we
   ;; need to load it as early as possible. Some packages (like `ivy-prescient')
   ;; require this.
@@ -38,7 +38,6 @@
   :config
   (setq amx-save-file (concat user-emacs-directory ".cache/amx-items")))
 
-
 (use-package swiper
   :after ivy
   :config
@@ -52,3 +51,4 @@
   (global-set-key (kbd "M-x") 'counsel-M-x)
   (global-set-key (kbd "C-s-s") 'counsel-rg))
 
+(use-package flx)
