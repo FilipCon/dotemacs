@@ -51,8 +51,7 @@
   :after company
   :hook (company-mode . company-prescient-mode))
 
-(if (not (eq system-type 'windows-nt))
-    (use-package company-box
-      :hook (company-mode . company-box-mode)
-      :config
-      (setq company-box-icons-alist 'company-box-icons-images)))
+(use-package company-box
+  :hook (company-mode . company-box-mode)
+  :config
+  (setq company-box-icons-alist 'company-box-icons-images))
