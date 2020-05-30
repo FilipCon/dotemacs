@@ -13,6 +13,7 @@
 (blink-cursor-mode 0)                   ; stop blinking on me!
 (show-paren-mode t)                     ; highlight matching parens
 (column-number-mode t)                  ; show column numbers
+(global-auto-revert-mode t)
 
 ;; Scrolling
 (setq mouse-wheel-progressive-speed nil

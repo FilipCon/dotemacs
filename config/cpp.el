@@ -17,22 +17,34 @@
 (add-hook 'c-mode-common-hook 'ds/c++-hook)
 
 (use-package cmake-ide
-  :after dash
+  :after dash projectile flycheck
+  :hook (c++-mode . my/cmake-ide-find-project)
+  :preface
+  (defun my/cmake-ide-find-project ()
+    "Finds the directory of the project for cmake-ide."
+    (with-eval-after-load 'projectile
+      (setq cmake-ide-project-dir (projectile-project-root))
+      (setq cmake-ide-build-dir (concat cmake-ide-project-dir "build")))
+    (cmake-ide-load-db))
   :config
   (use-package dash) ;; dependency of cmake-ide
-  ;; (cmake-ide-setup)
+  (use-package semantic)
+  ;; If cmake-ide cannot find correct build dir, provide function to solve issue
+  (defun set-cmake-ide-project-dir()
+    "Set build dir with CompileCommands.json"
+    (interactive)
+    (let ((dir (read-directory-name "Project dir:")))
+      (setq cmake-ide-project-dir dir)
+      (setq cmake-ide-build-dir (concat cmake-ide-project-dir "build")))
+    (cmake-ide-run-cmake))
   (setq cmake-ide-make-command "make --no-print-directory -j6"
         compilation-skip-threshold 2 ;; show only errors
         compilation-auto-jump-to-first-error t)
-  :bind ("C-c m" . cmake-ide-compile))
+  (put 'cmake-ide-build-dir 'safe-local-variable #'stringp)
+  :bind ("C-c m" . cmake-ide-compile)
+  :init
+  (cmake-ide-setup))
 
-
-;; (defun cmake-ide/c-c++-hook ()
-;;     (with-eval-after-load 'projectile
-;;       (setq cmake-ide-project-dir (projectile-project-root))
-;;       (setq cmake-ide-build-dir (concat cmake-ide-project-dir "build")))
-;;     (cmake-ide-load-db))
-;; (add-hook 'c-mode-common-hook #'cmake-ide/c-c++-hook)
 
 (use-package cmake-mode
   :mode ("CMakeLists\\.txt\\'" "\\.cmake\\'"))
@@ -57,7 +69,7 @@
   (define-key c-mode-base-map (kbd "C-c C-f") (function clang-format-auto)))
 
 ;; switch between header/source
-(use-package  cff
+(use-package cff
   :config
   (add-hook 'c-mode-common-hook
             '(lambda ()
