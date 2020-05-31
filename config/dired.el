@@ -4,7 +4,8 @@
 
 ;; Not spawn endless amount of dired buffers
 (with-eval-after-load 'dired
-  (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
+  (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
+  (setq dired-listing-switches "-aBhl  --group-directories-first"))
 
 (use-package all-the-icons-dired
   :after all-the-icons

@@ -2,11 +2,10 @@
 
 (require 'cc-mode)
 
+;; c++ hook settings
 (defun ds/c++-hook ()
-  ;; (linum-mode)
   (c-set-offset 'substatement-open 0) ;; close statement
   (c-set-offset 'arglist-intro '+)    ;; long argument names
-  ;; (modify-syntax-entry ?_ "w")  ; Treat underscore as a word char in C.
   (setq c++-tab-always-indent t
         c-basic-offset 4
         c-indent-level 4
@@ -16,8 +15,13 @@
   (flyspell-prog-mode))
 (add-hook 'c-mode-common-hook 'ds/c++-hook)
 
+;; font-lock for modern c++
+(use-package modern-cpp-font-lock
+  :config
+  (add-hook 'c++-mode-hook #'modern-c++-font-lock-mode))
+
+;; cmake project
 (use-package cmake-ide
-  :after dash projectile flycheck
   :hook (c++-mode . my/cmake-ide-find-project)
   :preface
   (defun my/cmake-ide-find-project ()
@@ -27,11 +31,8 @@
       (setq cmake-ide-build-dir (concat cmake-ide-project-dir "build")))
     (cmake-ide-load-db))
   :config
-  (use-package dash) ;; dependency of cmake-ide
-  (use-package semantic)
   ;; If cmake-ide cannot find correct build dir, provide function to solve issue
   (defun set-cmake-ide-project-dir()
-    "Set build dir with CompileCommands.json"
     (interactive)
     (let ((dir (read-directory-name "Project dir:")))
       (setq cmake-ide-project-dir dir)
@@ -41,20 +42,16 @@
         compilation-skip-threshold 2 ;; show only errors
         compilation-auto-jump-to-first-error t)
   (put 'cmake-ide-build-dir 'safe-local-variable #'stringp)
-  :bind ("C-c m" . cmake-ide-compile)
-  :init
-  (cmake-ide-setup))
+  :bind ("C-c m" . cmake-ide-compile))
 
-
+;; cmake files
 (use-package cmake-mode
   :mode ("CMakeLists\\.txt\\'" "\\.cmake\\'"))
 
+;; cmake font-lock
 (use-package cmake-font-lock
   :after (cmake-mode)
   :hook (cmake-mode . cmake-font-lock-activate))
-
-;; (use-package modern-cpp-font-lock
-;;   :config (add-hook 'c++-mode-hook #'modern-c++-font-lock-mode))
 
 ;; clang-format
 (use-package clang-format
@@ -76,12 +73,8 @@
                (define-key c-mode-base-map (kbd "M-o") 'cff-find-other-file))))
 
 ;; assembly code
-;; (use-package rmsbolt)
+(use-package rmsbolt)
 ;; (use-package disaster)
 
 ;; ;; debugger front-end
 ;; (use-package realgud)
-
-;; ;;; eldoc
-;; (use-package eldoc
-;;   :diminish eldoc-mode)

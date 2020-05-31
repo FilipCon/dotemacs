@@ -2,7 +2,6 @@
 
 ;; company
 (use-package company
-  :commands company-complete-common company-manual-begin company-grab-line
   :init
   (setq company-idle-delay 0.2
         company-minimum-prefix-length 1
@@ -17,15 +16,7 @@
          ("C-n" . company-select-next)
          ("C-p" . company-select-previous)
          ([tab] . company-complete-selection))
-  :hook (after-init . global-company-mode)
-;;   :config
-;; ;; Enable downcase only when completing the completion.
-;;   (defun jcs--company-complete-selection--advice-around (fn)
-;;     "Advice execute around `company-complete-selection' command."
-;;     (let ((company-dabbrev-downcase t))
-;;       (call-interactively fn)))
-;;   (advice-add 'company-complete-selection :around #'jcs--company-complete-selection--advice-around))
-  )
+  :hook (after-init . global-company-mode))
 
 ;; fuzzy auto completion
 (use-package company-fuzzy

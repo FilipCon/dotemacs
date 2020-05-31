@@ -7,6 +7,19 @@
       confirm-kill-processes nil        ; just kill the process
       disabled-command-function nil)    ; enable all commands
 
+(setq-default
+ vc-follow-symlinks t
+ save-interprogram-paste-before-kill t
+ fill-column 80
+ sentence-end-double-space nil
+ word-wrap t
+ indent-tabs-mode nil
+ require-final-newline t
+ tab-always-indent t
+ tab-width 4
+ truncate-lines t
+ truncate-partial-width-windows 50)
+
 (menu-bar-mode -1)                      ; menu-bar is gone
 (tool-bar-mode -1)                      ; tool-bar is gone
 (scroll-bar-mode -1)                    ; scroll-bar is gone
@@ -19,20 +32,12 @@
 (setq mouse-wheel-progressive-speed nil
       hscroll-margin 2
       hscroll-step 1
-      ;; Emacs spends too much effort recentering the screen if you scroll the
-      ;; cursor more than N lines past window edges (where N is the settings of
-      ;; `scroll-conservatively'). This is especially slow in larger files
-      ;; during large-scale scrolling commands. If kept over 100, the window is
-      ;; never automatically recentered.
       scroll-conservatively 101
       scroll-margin 0
       scroll-preserve-screen-position t
-      ;; Reduce cursor lag by a tiny bit by not auto-adjusting `window-vscroll'
-      ;; for tall lines.
       auto-window-vscroll nil
-      ;; mouse
       mouse-wheel-scroll-amount '(5 ((shift) . 2))
-      mouse-wheel-progressive-speed nil)  ; don't accelerate scrolling
+      mouse-wheel-progressive-speed nil)
 
 ;; Remove hscroll-margin in shells, otherwise it causes jumpiness
 (add-hook 'eshell-mode-hook (lambda() (setq hscroll-margin 0)))
@@ -47,6 +52,11 @@
 ;; save desktop
 (desktop-save-mode t)
 (save-place-mode t)
+
+;; more useful frame title
+(setq frame-title-format '((:eval (if (buffer-file-name)
+                                 (abbreviate-file-name (buffer-file-name))
+                               "%b"))))
 
 ;; ;; Security hype
 ;; (setq gnutls-verify-error t
