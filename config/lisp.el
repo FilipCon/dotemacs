@@ -5,4 +5,5 @@
 (use-package cider)
 
 (use-package clojure-mode)
+
 (use-package inf-clojure)

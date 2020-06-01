@@ -8,10 +8,11 @@
         company-tooltip-limit 14
         company-dabbrev-downcase nil
         company-tooltip-align-annotations t
-        company-eclim-auto-save nil
         company-require-match nil
-        company-search-regexp-function 'company-search-flex-regexp)
-  :bind (
+        company-global-modes
+        '(not erc-mode message-mode help-mode gud-mode eshell-mode)
+        )
+        :bind (
          :map company-active-map
          ("C-n" . company-select-next)
          ("C-p" . company-select-previous)

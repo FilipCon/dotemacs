@@ -25,7 +25,6 @@
   :hook (c++-mode . my/cmake-ide-find-project)
   :preface
   (defun my/cmake-ide-find-project ()
-    "Finds the directory of the project for cmake-ide."
     (with-eval-after-load 'projectile
       (setq cmake-ide-project-dir (projectile-project-root))
       (setq cmake-ide-build-dir (concat cmake-ide-project-dir "build")))
