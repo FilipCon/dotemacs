@@ -2,7 +2,6 @@
 
 (use-package lsp-mode
   :after flycheck company
-  ;; :commands lsp
   :hook ((python-mode . lsp)
          (c-mode-common . lsp)
          (csharp-mode . lsp)
@@ -11,7 +10,6 @@
          (cmake-mode lsp)
          (lsp-mode . lsp-enable-which-key-integration))
   :config
-  ;; (setq lsp-prefer-capf t) ;; prefer company-capf than company-lsp
   ;; prefer using lsp-ui (flycheck)
   (setq lsp-prefer-flymake nil)
   ;; setup clangd

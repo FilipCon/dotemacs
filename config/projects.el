@@ -3,7 +3,7 @@
 (use-package projectile
   :config
   (setq projectile-completion-system 'ivy)
-  :commands (projectile-project-root)
+  ;; :commands (projectile-project-root)
   :bind-keymap ("C-c p" . projectile-command-map)
   :init
   (setq projectile-globally-ignored-files '(".DS_Store" "Icon" "TAGS")

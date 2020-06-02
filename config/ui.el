@@ -13,7 +13,6 @@
 
 ;; all the icons
 (use-package all-the-icons)
-
 (use-package all-the-icons-ibuffer
   :after all-the-icons
   :hook (ibuffer-mode . all-the-icons-ibuffer-mode))
@@ -50,10 +49,10 @@
         ("STUB"   . "#1E90FF"))))
 
 (use-package whitespace
+  :commands whitespace-mode
   :bind ("<f11>" . global-whitespace-mode)
   :config
   (setq whitespace-line-column nil)
   (setq whitespace-style
-      '(face indentation tabs tab-mark spaces space-mark newline
-             trailing))
-  (whitespace-mode -1))
+        '(face indentation tabs tab-mark spaces space-mark
+               newline trailing)))
