@@ -1,8 +1,8 @@
 ;;; -*- lexical-binding: t -*-
 
 (use-package lsp-mode
-  :after flycheck
-  :commands lsp
+  :after flycheck company
+  ;; :commands lsp
   :hook ((python-mode . lsp)
          (c-mode-common . lsp)
          (csharp-mode . lsp)
@@ -11,7 +11,7 @@
          (cmake-mode lsp)
          (lsp-mode . lsp-enable-which-key-integration))
   :config
-  (setq lsp-prefer-capf t) ;; prefer company-capf than company-lsp
+  ;; (setq lsp-prefer-capf t) ;; prefer company-capf than company-lsp
   ;; prefer using lsp-ui (flycheck)
   (setq lsp-prefer-flymake nil)
   ;; setup clangd
@@ -36,6 +36,7 @@
         lsp-ui-peek-list-width 60
         lsp-ui-peek-peek-height 25))
 
+;; ivy support
 (use-package lsp-ivy
   :after lsp-mode ivy
   :commands lsp-ivy-workspace-symbol)
@@ -45,3 +46,14 @@
   :after lsp treemacs
   :config
   (lsp-treemacs-sync-mode 1))
+
+;; company support
+(use-package company-lsp
+  :after company lsp
+  :commands company-lsp
+  :config
+  (push 'company-lsp company-backends)
+  ;; disable client-side cache because the LSP server does a better job.
+  (setq company-transformers nil
+        company-lsp-async t
+        company-lsp-cache-candidates nil))
