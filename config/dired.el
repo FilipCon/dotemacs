@@ -13,3 +13,9 @@
   (advice-add 'dired-do-create-files :around #'all-the-icons-dired--refresh-advice)
   (advice-add 'dired-create-directory :around #'all-the-icons-dired--refresh-advice)
   :hook (dired-mode . all-the-icons-dired-mode))
+
+(use-package dired-ranger
+  :bind (:map dired-mode-map
+              ("W" . dired-ranger-copy)
+              ("X" . dired-ranger-move)
+              ("Y" . dired-ranger-paste)))

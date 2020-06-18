@@ -4,8 +4,11 @@
 (global-hl-line-mode t)
 (global-visual-line-mode 1)
 
-;; show line number
+;; show line number in selected modes
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
+(add-hook 'text-mode-hook 'display-line-numbers-mode)
+(add-hook 'LaTeX-mode-hook 'display-line-numbers-mode)
+(add-hook 'conf-mode-hook 'display-line-numbers-mode)
 
 ;; font size
 (global-set-key (kbd "C-+") 'text-scale-increase)

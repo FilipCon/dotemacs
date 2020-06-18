@@ -25,19 +25,14 @@
 (use-package gitignore-mode)
 
 (use-package git-gutter
-  :defer t
-  :hook ((markdown-mode . git-gutter-mode)
-         (prog-mode . git-gutter-mode)
-         (conf-mode . git-gutter-mode))
+  :hook (after-init . global-git-gutter-mode)
   :config
-  (setq git-gutter:disabled-modes '(org-mode asm-mode image-mode)
+  (setq git-gutter:disabled-modes '(image-mode)
         git-gutter:update-interval 1
         git-gutter:window-width 2
         git-gutter:ask-p nil))
 
 (use-package git-gutter-fringe
-  :commands git-gutter-mode
-  ;; :diminish git-gutter-mode
   :after git-gutter
   :demand fringe-helper
   :init

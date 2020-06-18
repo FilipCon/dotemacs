@@ -7,7 +7,7 @@ eshell/
 autosave/
 backups/
 auto-save-list/
-
+auto/
 .emacs.desktop*
 places
 savehist

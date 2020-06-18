@@ -86,3 +86,8 @@
       recentf-max-saved-items 50)
 (savehist-mode 1)
 (recentf-mode 1)
+
+;; Treats the `_' as a word constituent
+(add-hook 'after-change-major-mode-hook
+          (lambda ()
+            (modify-syntax-entry ?_ "w")))

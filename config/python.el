@@ -16,13 +16,16 @@
    (deactivate-mark)))
 
 (defun ds/python-hook ()
-  ;; (linum-mode)
   (flyspell-prog-mode)
   (local-set-key (kbd "C-c C-g") 'ds/python-shell-send-snippet))
 (add-hook 'python-mode-hook 'ds/python-hook)
 
-(use-package py-autopep8)
+;; support for company
+(use-package company-jedi
+  :after company
+  :hook (python-mode . jedi-mode))
 
+;; jupyter
 (use-package ein
   :config
   (setq ein:use-auto-complete-superpack t

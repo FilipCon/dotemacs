@@ -17,5 +17,9 @@
 
 ;; rainbow-delimiters
 (use-package rainbow-delimiters
-    :init
-    (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+  :init (rainbow-delimiters-mode t)
+  :hook((prog-mode
+         markdown-mode
+         text-mode
+         conf-mode
+         LaTeX-mode) . rainbow-delimiters-mode))
