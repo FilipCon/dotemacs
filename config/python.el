@@ -20,11 +20,6 @@
   (local-set-key (kbd "C-c C-g") 'ds/python-shell-send-snippet))
 (add-hook 'python-mode-hook 'ds/python-hook)
 
-;; support for company
-(use-package company-jedi
-  :after company
-  :hook (python-mode . jedi-mode))
-
 ;; jupyter
 (use-package ein
   :config

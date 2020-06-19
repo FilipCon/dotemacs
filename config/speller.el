@@ -51,10 +51,6 @@
 (use-package flyspell-correct-ivy
   :after flyspell-correct)
 
-;; (use-package flycheck-clang-analyzer
-;;   :after flycheck
-;;   :config (flycheck-clang-analyzer-setup))
-
 ;; languagetool
 (use-package langtool
   :config

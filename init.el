@@ -6,10 +6,11 @@
 (setq package-enable-at-startup nil
       file-name-handler-alist nil
       message-log-max 16384
-      gc-cons-threshold 402653184
+      gc-cons-threshold most-positive-fixnum
       gc-cons-percentage 0.6
       auto-window-vscroll nil
       package--init-file-ensured t)
+(setq read-process-output-max (* 1024 1024)) ;; 1mb
 
 (add-hook 'after-init-hook
           `(lambda ()

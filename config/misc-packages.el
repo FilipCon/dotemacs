@@ -145,9 +145,9 @@
      ))
   )
 
-;; Keep ~/.emacs.d clean
-(use-package no-littering
-  :demand t)
+;; ;; Keep ~/.emacs.d clean
+;; (use-package no-littering
+;;   :demand t)
 
 ;; Recently opened files
 (use-package recentf

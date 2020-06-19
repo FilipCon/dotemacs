@@ -60,9 +60,6 @@
             '(lambda ()
                (define-key c-mode-base-map (kbd "M-o") 'cff-find-other-file))))
 
-;; completion for include header files
-(use-package company-c-headers)
-
 ;; assembly code
 (use-package rmsbolt)
 ;; (use-package disaster)

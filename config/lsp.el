@@ -11,15 +11,16 @@
          (lsp-mode . lsp-enable-which-key-integration)
   :config
   (advice-add #'lsp--auto-configure :override #'ignore)
+  (setq lsp-print-performance t)
   (setq-default lsp-prefer-capf t
                 ;; lsp-auto-guess-root t
                 lsp-enable-semantic-highlighting t
                 lsp-prefer-flymake nil
-                ;; lsp-diagnostic-package :flycheck
                 lsp-restart 'auto-restart)
-  (setq-default lsp-clients-clangd-args '("-compile-commands-dir=build"
+  (setq-default lsp-clients-clangd-args '("--compile-commands-dir=build"
                                           "--clang-tidy" "--suggest-missing-includes"
-                                          "-j=2" "-background-index" "-log=error")))
+                                          "--all-scopes-completion=true"
+                                          "-j=2" "--background-index" "--log=error")))
 
 ;; lsp ui
 (use-package lsp-ui
@@ -36,6 +37,7 @@
                 lsp-ui-doc-use-childframe t
                 lsp-ui-doc-position 'top
                 lsp-ui-doc-include-signature t
+                lsp-ui-sideline-ignore-duplicate t
                 ;; lsp-ui-sideline-enable nil
                 lsp-ui-flycheck-enable t
                 lsp-ui-flycheck-list-position 'right
