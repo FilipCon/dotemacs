@@ -28,7 +28,7 @@
   :hook (after-init . global-git-gutter-mode)
   :config
   (setq git-gutter:disabled-modes '(image-mode)
-        git-gutter:update-interval 1
+        git-gutter:update-interval 0.5
         git-gutter:window-width 2
         git-gutter:ask-p nil))
 

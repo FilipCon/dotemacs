@@ -34,14 +34,16 @@
 (use-package swiper
   :after ivy
   :config
-  (define-key ivy-mode-map (kbd "C-s") 'swiper))
+  (define-key ivy-mode-map (kbd "C-s") 'swiper)
+  (define-key ivy-mode-map (kbd "C-S-s") 'swiper-all)
+  (define-key ivy-mode-map (kbd "C-M-s") 'swiper-thing-at-point)
+  (define-key ivy-mode-map (kbd "C-M-S-s") 'swiper-all-thing-at-point))
 
 (use-package counsel
   :after swiper
   :hook (ivy-mode . counsel-mode)
   :config
   (setq-default counsel-mode-override-describe-bindings t)
-  (global-set-key (kbd "M-x") 'counsel-M-x)
-  (global-set-key (kbd "C-s-s") 'counsel-rg))
+  (global-set-key (kbd "M-x") 'counsel-M-x))
 
 (use-package flx)

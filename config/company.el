@@ -21,7 +21,7 @@
                 company-tooltip-limit 14
                 company-tooltip-align-annotations t
                 company-require-match nil
-                ;; company-dabbrev-downcase nil
+                company-dabbrev-downcase nil
                 company-dabbrev-code-other-buffers nil
                 ;; company-dabbrev-other-buffers nil
                 company-dabbrev-code-ignore-case t
@@ -54,6 +54,12 @@
          ("C-n" . company-select-next)
          ("C-p" . company-select-previous)
          ([tab] . company-complete-selection)))
+
+;; sort candidates
+(use-package company-prescient
+  :hook (company-mode . company-prescient-mode)
+  :custom
+  (prescient-filter-method '(literal regexp initialism fuzzy)))
 
 ;; for icons and quickhelp
 (use-package company-box

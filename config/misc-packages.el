@@ -1,5 +1,10 @@
 ;;; -*- lexical-binding: t -*-
 
+(use-package wgrep)
+;; (use-package iedit)
+;; (use-package aggressive-indent
+;;   :config (global-aggressive-indent-mode))
+
 ;; Workaround with minified source files
 (use-package so-long
   :when (>= emacs-major-version 27)

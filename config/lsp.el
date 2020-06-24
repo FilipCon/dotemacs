@@ -5,10 +5,12 @@
   :hook ((python-mode
           c-mode-common
           clojure-mode
+          clojurec-mode
+          clojurescript-mode
           latex-mode
           LaTeX-mode
           cmake-mode) . lsp)
-         (lsp-mode . lsp-enable-which-key-integration)
+  (lsp-mode . lsp-enable-which-key-integration)
   :config
   (advice-add #'lsp--auto-configure :override #'ignore)
   (setq lsp-print-performance t)
@@ -17,6 +19,9 @@
                 lsp-enable-semantic-highlighting t
                 lsp-prefer-flymake nil
                 lsp-restart 'auto-restart)
+  (global-set-key (kbd "C-<return>") 'lsp-execute-code-action)
+  (setq lsp-enable-indentation nil
+        lsp-clojure-server-command '("bash" "-c" "clojure-lsp"))
   (setq-default lsp-clients-clangd-args '("--compile-commands-dir=build"
                                           "--clang-tidy" "--suggest-missing-includes"
                                           "--all-scopes-completion=true"

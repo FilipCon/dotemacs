@@ -45,7 +45,6 @@
 
 ;; cmake files
 (use-package cmake-mode
-  :straight (cmake-mode :type git :flavor melpa :host github :repo "Kitware/CMake")
   :mode ("CMakeLists\\.txt\\'" "\\.cmake\\'"))
 
 ;; cmake font-lock

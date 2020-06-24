@@ -1,5 +1,9 @@
 ;;; -*- lexical-binding: t -*-
 
+;; preview org files
+(use-package org-preview-html
+  :hook (org-mode . org-preview-html-mode))
+
 ;; The markdown mode is awesome! unbeatable
 (use-package markdown-mode
   :ensure t
