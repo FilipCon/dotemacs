@@ -21,6 +21,7 @@
                 company-tooltip-limit 14
                 company-tooltip-align-annotations t
                 company-require-match nil
+                company-selection-wrap-around t
                 company-dabbrev-downcase nil
                 company-dabbrev-code-other-buffers nil
                 ;; company-dabbrev-other-buffers nil
@@ -57,9 +58,7 @@
 
 ;; sort candidates
 (use-package company-prescient
-  :hook (company-mode . company-prescient-mode)
-  :custom
-  (prescient-filter-method '(literal regexp initialism fuzzy)))
+  :hook (company-mode . company-prescient-mode))
 
 ;; for icons and quickhelp
 (use-package company-box

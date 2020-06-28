@@ -20,8 +20,8 @@
  truncate-lines t
  truncate-partial-width-windows 50)
 
-;; auto save before complilation
-(setq compilation-ask-about-save nil)
+(setq compilation-ask-about-save nil) ; auto save before complilation
+(setq compilation-scroll-output t) ; follow Output in compilation buffer
 
 (menu-bar-mode -1)                      ; menu-bar is gone
 (tool-bar-mode -1)                      ; tool-bar is gone

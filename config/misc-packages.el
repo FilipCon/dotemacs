@@ -1,9 +1,16 @@
 ;;; -*- lexical-binding: t -*-
 
+;; move like a ninja! swoosh!
+(use-package avy
+  :config
+  (global-set-key (kbd "M-g e") 'avy-goto-word-0)
+  (global-set-key (kbd "M-g w") 'avy-goto-word-1)
+  (global-set-key (kbd "M-g f") 'avy-goto-line)
+  (global-set-key (kbd "C-'") 'avy-goto-char-2)
+  (global-set-key (kbd "C-\"") 'avy-goto-char))
+
+;; writable grep
 (use-package wgrep)
-;; (use-package iedit)
-;; (use-package aggressive-indent
-;;   :config (global-aggressive-indent-mode))
 
 ;; Workaround with minified source files
 (use-package so-long
@@ -149,10 +156,6 @@
                   (name . "\\*info\\*"))))
      ))
   )
-
-;; ;; Keep ~/.emacs.d clean
-;; (use-package no-littering
-;;   :demand t)
 
 ;; Recently opened files
 (use-package recentf
