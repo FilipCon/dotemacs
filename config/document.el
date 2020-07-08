@@ -1,5 +1,15 @@
 ;;; -*- lexical-binding: t -*-
 
+;; PDF tools
+(use-package pdf-tools
+  :straight t
+  :init
+  (pdf-tools-install)
+  :config
+  (defun ds/disable-cursor-blink () (blink-cursor-mode 0))
+  (add-hook 'pdf-view-mode-hook 'ds/disable-cursor-blink)
+  (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
+
 ;; preview org files
 (use-package org-preview-html
   :hook (org-mode . org-preview-html-mode))
@@ -28,35 +38,25 @@
   :bind (:map markdown-mode-command-map
               ("r" . markdown-toc-generate-or-refresh-toc)))
 
+;; latex
 (use-package tex-site
   :straight auctex
   :ensure auctex)
 
 (use-package tex
   :straight auctex
-  :after tex-site
+  :after tex-site pdf-tools
   :hook ((TeX-mode . TeX-PDF-mode)
          (TeX-mode . TeX-source-correlate-mode))
   :config
   (setf (default-value 'TeX-master) nil
-        (default-value 'TeX-engine) 'luatex
         TeX-parse-self t
         TeX-auto-save t)
   (setf TeX-electric-sub-and-superscript t)
   (setf TeX-source-correlate-start-server nil
         TeX-source-correlate-method 'synctex)
   (setf TeX-clean-confirm nil)
-  (setf TeX-command-list
-        '(("View" "%V" TeX-run-discard-or-function t t :help "Run Viewer")
-          ("TeXcount" "texcount -unicode -inc %t" TeX-run-shell nil
-           (latex-mode) :help "Run TeXcount")
-          ("ChkTeX" "chktex -v6 %s" TeX-run-compile nil (latex-mode)
-           :help "Check LaTeX file for common mistakes")
-          ("Clean" "TeX-clean" TeX-run-function nil t
-           :help "Delete generated intermediate files")
-          ("Clean All" "(TeX-clean t)" TeX-run-function nil t
-           :help "Delete generated intermediate and output files")
-          ("Other" "" TeX-run-command t t :help "Run an arbitrary command"))))
+  (add-to-list 'TeX-view-program-selection '(output-pdf "PDF Tools")))
 
 (use-package tex-buf
   :straight auctex
@@ -143,13 +143,3 @@ This is a replacement for `reftex--query-search-regexps'."
         bibtex-autokey-titlewords 1
         bibtex-autokey-titleword-length 10)
   (unbind-key "C-c $" bibtex-mode-map))
-
-;; PDF tools
-(use-package pdf-tools
-  :straight t
-  :init
-  (pdf-tools-install)
-  :config
-  (defun ds/disable-cursor-blink () (blink-cursor-mode 0))
-  (add-hook 'pdf-view-mode-hook 'ds/disable-cursor-blink)
-  (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))

@@ -51,6 +51,13 @@
                 lsp-ui-peek-list-width 60
                 lsp-ui-peek-peek-height 25))
 
+;; ;; use jedi-language-server
+;; (use-package lsp-jedi
+;;   :config
+;;   (with-eval-after-load "lsp-mode"
+;;     ;; (add-to-list 'lsp-disabled-clients 'pyls)
+;;     (add-to-list 'lsp-enabled-clients 'pyls)))
+
 ;; ivy support
 (use-package lsp-ivy
   :after lsp-mode ivy

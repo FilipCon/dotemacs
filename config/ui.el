@@ -49,6 +49,8 @@
         ("FIXME"  . "#FF0000")
         ("DEBUG"  . "#A020F0")
         ("GOTCHA" . "#FF4500")
+        ("WARNING". "#FFE600")
+        ("NOTE"   . "#66CD00")
         ("STUB"   . "#1E90FF"))))
 
 (use-package whitespace

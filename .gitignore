@@ -1,4 +1,5 @@
 .cache/
+workspace/
 straight/
 transient/
 snippets/
@@ -16,6 +17,6 @@ config.el
 recentf
 *.elc
 *.eld
-
+custom-variables.el
 /.mc-lists.el
 /amx-items
