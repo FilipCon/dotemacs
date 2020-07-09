@@ -3,10 +3,14 @@
 ;; language server
 (use-package lsp-mode
   :hook ((python-mode
-          c-mode-common
+          c-mode
+          c++-mode
+          csharp-mode
           clojure-mode
           clojurec-mode
           clojurescript-mode
+          sh-mode
+          nxml-mode
           latex-mode
           LaTeX-mode
           cmake-mode) . lsp)
@@ -16,6 +20,8 @@
   (setq lsp-print-performance t)
   (setq-default lsp-prefer-capf t
                 ;; lsp-auto-guess-root t
+                lsp-xml-jar-file (expand-file-name ".cache/lsp/lemminx/org.eclipse.lemminx/target/org.eclipse.lemminx-uber.jar"
+                                  user-emacs-directory)
                 lsp-enable-semantic-highlighting t
                 lsp-prefer-flymake nil
                 lsp-restart 'auto-restart)
