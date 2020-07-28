@@ -25,8 +25,9 @@
                 company-dabbrev-downcase nil
                 company-dabbrev-code-other-buffers nil
                 ;; company-dabbrev-other-buffers nil
-                company-dabbrev-code-ignore-case t
-                company-dabbrev-ignore-case t)
+                ;; company-dabbrev-code-ignore-case t
+                ;; company-dabbrev-ignore-case t
+                )
   ;; ignore candidates from other buffers depending on their major mode
   (setq-default company-dabbrev-ignore-buffers
                 (lambda (buffer)

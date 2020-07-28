@@ -30,7 +30,11 @@
   (setq git-gutter:disabled-modes '(image-mode)
         git-gutter:update-interval 0.5
         git-gutter:window-width 2
-        git-gutter:ask-p nil))
+        git-gutter:ask-p nil)
+  (global-set-key (kbd "C-c g h r") 'git-gutter:revert-hunk)
+  (global-set-key (kbd "C-c g h n") 'git-gutter:next-hunk)
+  (global-set-key (kbd "C-c g h p") 'git-gutter:previous-hunk)
+  (global-set-key (kbd "C-c g h s") 'git-gutter:popup-hunk))
 
 (use-package git-gutter-fringe
   :after git-gutter

@@ -81,12 +81,7 @@
   :after tex-site
   :hook (LaTeX-mode . LaTeX-math-mode)
   :config
-  (setf LaTeX-babel-hyphen nil)
-
-  (defun my-setup-LaTeX-mode ()
-    (make-local-variable 'TeX-electric-math)
-    (setf TeX-electric-math '("\\(" . "\\)")))
-  (add-hook 'LaTeX-mode-hook #'my-setup-LaTeX-mode))
+  (setf LaTeX-babel-hyphen nil))
 
 (use-package preview
   :straight auctex

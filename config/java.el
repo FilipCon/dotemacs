@@ -12,4 +12,3 @@
 ;; groovy
 (use-package groovy-mode
   :mode "\\.g\\(?:radle\\|roovy\\)$")
-

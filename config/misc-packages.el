@@ -1,5 +1,8 @@
 ;;; -*- lexical-binding: t -*-
 
+;; vdiff
+(use-package vdiff)
+
 ;; move like a ninja! swoosh!
 (use-package avy
   :config
