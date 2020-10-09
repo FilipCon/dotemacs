@@ -1,5 +1,6 @@
 ;;; -*- lexical-binding: t -*-
 
+(use-package ag)
 ;; vdiff
 (use-package vdiff)
 

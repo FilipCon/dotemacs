@@ -16,7 +16,7 @@
           cmake-mode) . lsp)
   (lsp-mode . lsp-enable-which-key-integration)
   :config
-  (advice-add #'lsp--auto-configure :override #'ignore)
+  ;; (advice-add #'lsp--auto-configure :override #'ignore)
   (setq lsp-print-performance t)
   (setq-default lsp-prefer-capf t
                 ;; lsp-auto-guess-root t

@@ -5,6 +5,7 @@
   :hook ((prog-mode
           text-mode
           latex-mode
+          inferior-python-mode
           conf-mode) . my-enable-company)
   :init
   (setq-default company-frontends '(company-pseudo-tooltip-unless-just-one-frontend
@@ -14,7 +15,8 @@
                                    company-files
                                    company-yasnippet
                                    company-dabbrev-code
-                                   company-dabbrev))
+                                   company-dabbrev)
+                )
   :config
   (setq-default company-idle-delay 0.2
                 company-minimum-prefix-length 1

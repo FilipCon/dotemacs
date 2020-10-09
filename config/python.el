@@ -2,8 +2,9 @@
 
 (setq python-indent-offset 4
       python-shell-interpreter "ipython3"
-      python-shell-interpreter-args "--simple-prompt --pprint --matplotlib"
-      elpy-rpc-python-command "python3")
+      python-shell-interpreter-args "-i --simple-prompt --pprint"
+      elpy-rpc-python-command "python3"
+      python-shell-prompt-detect-failure-warning nil)
 
 (defun ds/python-shell-send-snippet ()
   (interactive)
