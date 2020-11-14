@@ -18,7 +18,7 @@
   :config
   ;; (advice-add #'lsp--auto-configure :override #'ignore)
   (setq lsp-print-performance t)
-  (setq-default lsp-prefer-capf t
+  (setq-default lsp-prefer-capf -1
                 ;; lsp-auto-guess-root t
                 lsp-xml-jar-file (expand-file-name ".cache/lsp/lemminx/org.eclipse.lemminx/target/org.eclipse.lemminx-uber.jar"
                                   user-emacs-directory)
@@ -26,6 +26,11 @@
                 lsp-prefer-flymake nil
                 lsp-restart 'auto-restart)
   (global-set-key (kbd "C-<return>") 'lsp-execute-code-action)
+  (dolist (m '(clojure-mode
+               clojurec-mode
+               clojurescript-mode
+               clojurex-mode))
+    (add-to-list 'lsp-language-id-configuration `(,m . "clojure")))
   (setq lsp-enable-indentation nil
         lsp-clojure-server-command '("bash" "-c" "clojure-lsp"))
   (setq-default lsp-clients-clangd-args '("--compile-commands-dir=build"

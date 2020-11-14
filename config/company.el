@@ -5,6 +5,7 @@
   :hook ((prog-mode
           text-mode
           latex-mode
+          cider-repl-mode
           inferior-python-mode
           conf-mode) . my-enable-company)
   :init
@@ -26,9 +27,9 @@
                 company-selection-wrap-around t
                 company-dabbrev-downcase nil
                 company-dabbrev-code-other-buffers nil
-                ;; company-dabbrev-other-buffers nil
-                ;; company-dabbrev-code-ignore-case t
-                ;; company-dabbrev-ignore-case t
+                company-dabbrev-other-buffers nil
+                company-dabbrev-code-ignore-case t
+                company-dabbrev-ignore-case t
                 )
   ;; ignore candidates from other buffers depending on their major mode
   (setq-default company-dabbrev-ignore-buffers
@@ -42,6 +43,8 @@
     (make-local-variable 'company-backends)
     (when-let* ((backends (cond ((derived-mode-p 'cmake-mode)
                                  '(company-cmake))
+                                ((derived-mode-p 'cider-mode)
+                                 '(company-capf))
                                 ((derived-mode-p 'latex-mode)
                                  '(company-auctex-macros
                                    company-auctex-symbols

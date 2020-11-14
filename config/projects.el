@@ -15,4 +15,4 @@
 (use-package counsel-projectile
   :after (counsel projectile)
   :config
-  (counsel-projectile-mode +1))
+  (counsel-projectile-mode -1))
