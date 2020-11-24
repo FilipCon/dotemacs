@@ -24,35 +24,39 @@
 
 (use-package gitignore-mode)
 
-(use-package git-gutter
-  :hook (after-init . global-git-gutter-mode)
-  :config
-  (setq git-gutter:disabled-modes '(image-mode)
-        git-gutter:update-interval 0.5
-        git-gutter:window-width 2
-        git-gutter:ask-p nil)
-  (global-set-key (kbd "C-c g h r") 'git-gutter:revert-hunk)
-  (global-set-key (kbd "C-c g h n") 'git-gutter:next-hunk)
-  (global-set-key (kbd "C-c g h p") 'git-gutter:previous-hunk)
-  (global-set-key (kbd "C-c g h s") 'git-gutter:popup-hunk))
+(use-package git-messenger
+  :config (setq git-messenger:show-detail t)
+  :bind ("C-x v m" . git-messenger:popup-message))
 
-(use-package git-gutter-fringe
-  :after git-gutter
-  :demand fringe-helper
-  :init
-  (progn
-    (when (display-graphic-p)
-      (with-eval-after-load 'git-gutter
-        (require 'git-gutter-fringe)))
-    (setq git-gutter-fr:side 'left-fringe))
+(use-package git-timemachine
+  :commands git-timemachine)
+
+(use-package diff-hl
+  :custom-face
+  (diff-hl-change ((t (:foreground ,(face-background 'highlight) :background nil))))
+  (diff-hl-insert ((t (:background nil))))
+  (diff-hl-delete ((t (:background nil))))
+  :hook ((after-init . global-diff-hl-mode)
+         (after-init . diff-hl-flydiff-mode)
+         (dired-mode . diff-hl-dired-mode))
+  :init (setq diff-hl-draw-borders nil)
   :config
-  ;; subtle diff indicators in the fringe
-  ;; places the git gutter outside the margins.
+  (setq diff-hl-ask-before-revert-hunk nil)
   (setq-default fringes-outside-margins t)
-  ;; thin fringe bitmaps
-  (define-fringe-bitmap 'git-gutter-fr:added   [224]
-    nil nil '(center repeated))
-  (define-fringe-bitmap 'git-gutter-fr:modified   [224]
-    nil nil '(center repeated))
-  (define-fringe-bitmap 'git-gutter-fr:deleted   [128 192 224 240]
-    nil nil 'bottom))
+  (defun my-diff-hl-fringe-bmp-function (_type _pos)
+    "Fringe bitmap function for use as `diff-hl-fringe-bmp-function'."
+    (define-fringe-bitmap 'my-diff-hl-bmp [224] 1 8 '(center t)))
+  (setq diff-hl-fringe-bmp-function #'my-diff-hl-fringe-bmp-function)
+
+  (unless (display-graphic-p)
+    (setq diff-hl-margin-symbols-alist
+          '((insert . " ") (delete . " ") (change . " ")
+            (unknown . " ") (ignored . " "))))
+
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+  (add-hook 'dired-mode-hook 'diff-hl-dired-mode)
+
+  (bind-key "C-x v n" 'diff-hl-next-hunk diff-hl-mode-map)
+  (bind-key "C-x v p" 'diff-hl-previous-hunk diff-hl-mode-map)
+  (bind-key "C-x v u" 'diff-hl-revert-hunk diff-hl-mode-map)
+  (bind-key "C-x v =" 'diff-hl-diff-goto-hunk diff-hl-mode-map))
