@@ -52,7 +52,7 @@
                                    company-auctex-environments
                                    company-reftex-citations
                                    company-reftex-labels)))))
-      (dolist (backend (nreverse backends))
+      (dolist (backend (reverse backends))
         (push backend company-backends)))
     (setq company-backends (cons company-backends '())); merge backends for combinded completions
     (company-mode))
