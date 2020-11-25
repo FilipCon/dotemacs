@@ -41,7 +41,7 @@
   :hook (prog-mode . hl-fill-column-mode))
 
 (use-package hl-todo
-  :hook (prog-mode . hl-todo-mode)
+  :hook ((prog-mode text-mode) . hl-todo-mode)
   :config
   (setq hl-todo-highlight-punctuation ":")
   (setq hl-todo-keyword-faces
@@ -50,6 +50,7 @@
         ("DEBUG"  . "#A020F0")
         ("GOTCHA" . "#FF4500")
         ("WARNING". "#FFE600")
+        ("CITE". "#FFE600")
         ("NOTE"   . "#66CD00")
         ("STUB"   . "#1E90FF"))))
 
