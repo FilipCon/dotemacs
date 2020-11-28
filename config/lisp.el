@@ -1,7 +1,7 @@
 ;;; -*- lexical-binding: t -*-
 
 (use-package cider
-  :straight (:host github :repo "clojure-emacs/cider" :branch "v0.24.0")
+  :straight (:host github :repo "FilipCon/cider" :branch "v0_24")
   :bind (:map cider-mode-map
               ("C-c C-b" . cider-eval-buffer)
               ("C-c C-c" . cider-eval-defun-at-point))
