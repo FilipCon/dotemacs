@@ -2,48 +2,39 @@
 
 ;; ivy
 (use-package ivy
+  :bind
+  ("C-r" . 'ivy-resume)
   :config
   (setq ivy-display-style 'fancy
-        ivy-count-format ""
-        ivy-initial-inputs-alist nil
         ivy-extra-directories nil
         ivy-use-virtual-buffers t
-        ivy-case-fold-search-default t)
-  (require 'counsel nil t)
-  (setq ivy-re-builders-alist
-        '((swiper . ivy--regex-plus)
-          (t . ivy--regex-ignore-order)))
+        ivy-wrap t)
   :hook (after-init . ivy-mode))
+
+(use-package ivy-rich
+  :after ivy
+  :custom
+  (ivy-virtual-abbreviate 'full)
+  (ivy-rich-switch-buffer-align-virtual-buffer nil)
+  (ivy-rich-path-style 'full)
+  :config
+  (ivy-rich-mode))
 
 ;; sort completions
 (use-package ivy-prescient
+  :after (ivy prescient)
+  :config (setq ivy-prescient-retain-classic-highlighting t)
   :hook ((ivy-mode . ivy-prescient-mode)
-         (ivy-prescient-mode . prescient-persist-mode))
-  :config
-  (setq prescient-filter-method
-        '(literal regexp initialis))
-  (setq ivy-prescient-retain-classic-highlighting t)
-  (setq prescient-save-file (concat user-emacs-directory ".cache/prescient-save.el")))
+         (ivy-prescient-mode . prescient-persist-mode)))
 
-;; remember last commands
-(use-package amx
-  :defer t
-  :config
-  (setq amx-save-file (concat user-emacs-directory ".cache/amx-items")))
-
+;; search tool
 (use-package swiper
   :after ivy
   :config
   (define-key ivy-mode-map (kbd "C-s") 'swiper)
-  (define-key ivy-mode-map (kbd "C-S-s") 'swiper-all)
-  (define-key ivy-mode-map (kbd "C-M-s") 'swiper-thing-at-point)
-  (define-key ivy-mode-map (kbd "C-M-S-s") 'swiper-all-thing-at-point))
+  (define-key ivy-mode-map (kbd "C-M-s") 'swiper-thing-at-point))
 
 (use-package counsel
-  :after swiper
   :hook (ivy-mode . counsel-mode)
   :config
-  (setq-default counsel-mode-override-describe-bindings t)
   (global-set-key (kbd "M-x") 'counsel-M-x))
-
-(use-package flx)

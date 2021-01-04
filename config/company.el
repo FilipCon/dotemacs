@@ -9,19 +9,15 @@
           inferior-python-mode
           conf-mode) . my-enable-company)
   :init
-  (setq-default company-frontends '(company-pseudo-tooltip-unless-just-one-frontend
-                                    company-preview-if-just-one-frontend)
-                company-backends '(company-capf
+  (setq-default company-backends '(company-capf
                                    company-keywords
                                    company-files
                                    company-yasnippet
                                    company-dabbrev-code
-                                   company-dabbrev)
-                )
+                                   company-dabbrev))
   :config
-  (setq-default company-idle-delay 0.2
+  (setq-default company-idle-delay 0
                 company-minimum-prefix-length 1
-                company-tooltip-limit 14
                 company-tooltip-align-annotations t
                 company-require-match nil
                 company-selection-wrap-around t
@@ -30,7 +26,8 @@
                 company-dabbrev-other-buffers nil
                 company-dabbrev-code-ignore-case t
                 company-dabbrev-ignore-case t
-                )
+                company-tooltip-idle-delay 0)
+
   ;; ignore candidates from other buffers depending on their major mode
   (setq-default company-dabbrev-ignore-buffers
                 (lambda (buffer)
@@ -38,15 +35,14 @@
                             '(image-mode doc-view-mode dired-mode)) ; files in major modes
                       (string-match-p "\\` \\*" (buffer-name buffer)))))
 
-  ;; enable company-backends per major-mode ;TODO: create separate function and lists per mode
+  ;; enable company-backends per major-mode
   (defun my-enable-company ()
     (make-local-variable 'company-backends)
     (when-let* ((backends (cond ((derived-mode-p 'cmake-mode)
                                  '(company-cmake))
-                                ((derived-mode-p 'cider-mode)
-                                 '(company-capf))
                                 ((derived-mode-p 'latex-mode)
-                                 '(company-auctex-macros
+                                 '(company-math
+                                   company-auctex-macros
                                    company-auctex-symbols
                                    company-auctex-bibs
                                    company-auctex-environments
@@ -64,6 +60,7 @@
 
 ;; sort candidates
 (use-package company-prescient
+  :after (company prescient)
   :hook (company-mode . company-prescient-mode))
 
 ;; for icons and quickhelp
@@ -71,6 +68,6 @@
   :after company all-the-icons
   :hook (company-mode . company-box-mode)
   :config
-  (setq company-box-doc-delay 0.1
-        company-box-backends-colors nil)
-  (setq company-box-icons-alist 'company-box-icons-images))
+  (setq company-box-doc-delay 0
+        company-box-backends-colors nil
+        company-box-icons-alist 'company-box-icons-images))

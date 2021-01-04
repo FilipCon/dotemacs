@@ -14,6 +14,9 @@
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
 
+(use-package doom-modeline
+  :hook (after-init . doom-modeline-init))
+
 ;; all the icons
 (use-package all-the-icons)
 (use-package all-the-icons-ibuffer
@@ -29,12 +32,6 @@
   :init
   (add-hook 'prog-mode-hook 'vi-tilde-fringe-mode)
   (add-hook 'org-mode-hook 'vi-tilde-fringe-mode))
-
-;; highlight indent
-(use-package highlight-indent-guides
-  :bind ("<f12>" . highlight-indent-guides-mode)
-  :config
-  (setq highlight-indent-guides-method 'character))
 
 ;; fill column indicator
 (use-package hl-fill-column

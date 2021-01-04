@@ -50,6 +50,9 @@
 ;; retrieve closed windows/buffers
 (winner-mode t)
 
+;; Save place in files
+(save-place-mode 1)
+
 ;; alias yes.no
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -61,10 +64,6 @@
 (setq frame-title-format '((:eval (if (buffer-file-name)
                                  (abbreviate-file-name (buffer-file-name))
                                "%b"))))
-
-;; ;; Security hype
-;; (setq gnutls-verify-error t
-;;       tls-checktrust t)
 
 ;; Backups
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups"))

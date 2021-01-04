@@ -46,6 +46,9 @@
       "^.[^#].+el$"))
   (load-file file))
 
+;; start server once
+(unless (server-running-p) (server-start))
+
 ;; Load automatically generated custom garbage
 (setq custom-file
       (concat (file-name-directory user-init-file) "custom-variables.el"))

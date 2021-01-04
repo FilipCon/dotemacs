@@ -1,6 +1,6 @@
 ;;; -*- lexical-binding: t -*-
 
-(setq dired-dwim-target t)
+(setq-default dired-dwim-target t)
 
 ;; Not spawn endless amount of dired buffers
 (with-eval-after-load 'dired
@@ -14,8 +14,7 @@
   (advice-add 'dired-create-directory :around #'all-the-icons-dired--refresh-advice)
   :hook (dired-mode . all-the-icons-dired-mode))
 
-(use-package dired-ranger
-  :bind (:map dired-mode-map
-              ("W" . dired-ranger-copy)
-              ("X" . dired-ranger-move)
-              ("Y" . dired-ranger-paste)))
+(use-package dired-atool
+  :config
+  (define-key dired-mode-map "z" #'dired-atool-do-unpack)
+  (define-key dired-mode-map "Z" #'dired-atool-do-pack))

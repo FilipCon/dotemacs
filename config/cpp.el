@@ -41,7 +41,8 @@
                 compilation-skip-threshold 2 ;; show only errors
                 compilation-auto-jump-to-first-error t)
   (put 'cmake-ide-build-dir 'safe-local-variable #'stringp)
-  :bind ("C-c m" . cmake-ide-compile))
+  :bind (("C-c m" . cmake-ide-compile)
+         ("C-c r" . cmake-ide-run-cmake)))
 
 ;; cmake files
 (use-package cmake-mode
@@ -61,7 +62,6 @@
 
 ;; assembly code
 (use-package rmsbolt)
-;; (use-package disaster)
 
-;; ;; debugger front-end
-;; (use-package realgud)
+;; doxygen comments
+(use-package doxygen)

@@ -40,16 +40,21 @@
                    :fringe-bitmap 'flycheck-fringe-indicator
                    :fringe-face 'flycheck-fringe-info))
 
-;; linter for the metadata in Emacs Lisp files which are intended to be packages.
-(use-package package-lint
-  :commands (package-lint-current-buffer))
+;; speller
+(use-package flyspell
+  :config
+  (setq flyspell-sort-corrections t)
+  (global-set-key (kbd "C-c b s") 'flyspell-buffer))
 
+;; show correction options
 (use-package flyspell-correct
   :after flyspell
-  :bind (:map flyspell-mode-map ("C-." . flyspell-correct-wrapper)))
-
-(use-package flyspell-correct-ivy
-  :after flyspell-correct)
+  :hook ((text-mode . flyspell-mode)
+         (prog-mode . flyspell-prog-mode))
+  :bind (:map flyspell-mode-map ("C-." . flyspell-correct-wrapper))
+  :init
+  (use-package flyspell-correct-popup)
+  (unbind-key "C-;" flyspell-mode-map))
 
 ;; languagetool
 (use-package langtool
@@ -58,30 +63,9 @@
         "/home/filipkon/Software/languagetool/*")
   :bind ("C-c b l" . langtool-check-buffer))
 
-;; define word
+;; word definition
 (use-package define-word)
 
 ;;synonyms
-(use-package synosaurus)
-
-;; save word to dictionary
-(defun ds/save-to-dictionary ()
-  (interactive)
-  (let ((current-location (point))
-        (word (flyspell-get-word)))
-    (when (consp word)
-      (flyspell-do-correct 'save nil (car word)
-                           current-location (cadr word) (caddr word)
-                           current-location))))
-;; (global-set-key [f1] 'ds/save-to-dictionary)
-(global-set-key (kbd "C-c b s") 'flyspell-buffer)
-(add-hook 'text-mode-hook 'flyspell-mode)
-(add-hook 'prog-mode-hook 'flyspell-prog-mode)
-
-;; ;; change dictionary toggle
-;; (lexical-let ((dictionaries '("en" "el")))
-;;              (rplacd (last dictionaries) dictionaries)
-;;              (defun ds/ispell-change-to-next-dictionary ()
-;;                (interactive)
-;;                (ispell-change-dictionary (pop dictionaries))))
-;; ;; (global-set-key [f2] 'ds/ispell-change-to-next-dictionary)
+(use-package synosaurus
+  :config (synosaurus-mode 1))

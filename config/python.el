@@ -1,25 +1,22 @@
 ;;; -*- lexical-binding: t -*-
 
-(setq python-indent-offset 4
-      python-shell-interpreter "ipython3"
-      python-shell-interpreter-args "-i --simple-prompt --pprint"
-      elpy-rpc-python-command "python3"
-      python-shell-prompt-detect-failure-warning nil)
+;; elpy
+(use-package elpy
+  :bind ("C-c C-g" . elpy-shell-send-codecell)
+  :init
+  (elpy-enable)
+  :config
+  (unbind-key "C-<return>" elpy-mode-map)
+  (setq elpy-modules nil
+        elpy-shell-starting-directory (quote current-directory)
+        python-shell-interpreter "ipython3"
+        python-shell-interpreter-args "-i --simple-prompt --pprint"
+        elpy-rpc-python-command "python3"
+        python-shell-prompt-detect-failure-warning nil))
 
-(defun ds/python-shell-send-snippet ()
-  (interactive)
-  (save-excursion
-   (search-backward "##")
-   (end-of-line)
-   (set-mark-command nil)
-   (search-forward "##")
-   (call-interactively 'python-shell-send-region)
-   (deactivate-mark)))
-
-(defun ds/python-hook ()
-  (flyspell-prog-mode)
-  (local-set-key (kbd "C-c C-g") 'ds/python-shell-send-snippet))
-(add-hook 'python-mode-hook 'ds/python-hook)
+;; code documentation
+(use-package sphinx-doc
+  :hook (python-mode . sphinx-doc-mode))
 
 ;; jupyter
 (use-package ein

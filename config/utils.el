@@ -1,5 +1,9 @@
 ;;; -*- lexical-binding: t -*-
 
+;; move between recently visited
+(global-set-key (kbd "C-M-,") 'previous-buffer)
+(global-set-key (kbd "C-M-.") 'next-buffer)
+
 ;; move cursor to other buffers
 (global-set-key (kbd "C-c c p") 'windmove-up)
 (global-set-key (kbd "C-c c n") 'windmove-down)
@@ -12,145 +16,128 @@
 ;; remap key for ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
-(defun restore-killed-buffer ()
-  (interactive)
-  (let ((active-files (loop for buf in (buffer-list)
-                            when (buffer-file-name buf) collect it)))
-    (loop for file in recentf-list
-          unless (member file active-files) return (find-file file))))
-(define-key global-map (kbd "C-S-t") 'restore-killed-buffer)
+;; restore most recently killed buffer
+(global-set-key (kbd "C-S-t") 'recentf-open-most-recent-file)
 
-;; remap toggle comment active-region/line key
-(defun fk/comment-or-uncomment-region-or-line ()
-  "Comments or uncomments the region or the current line if there's no active region."
-  (interactive)
-  (let (beg end)
-    (if (region-active-p)
-        (setq beg (region-beginning) end (region-end))
-      (setq beg (line-beginning-position) end (line-end-position)))
-    (comment-or-uncomment-region beg end)))
-(with-eval-after-load 'flyspell
-  (define-key flyspell-mode-map (kbd "C-;") nil))
-(global-set-key (kbd "C-;") 'fk/comment-or-uncomment-region-or-line)
+;; kill word or space
+(global-set-key (kbd "C-<backspace>") 'backward-kill-word)
 
-;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph
-(defun ds/unfill-paragraph (&optional region)
-  "Takes a multi-line paragraph and makes it into a single line of text."
-  (interactive (progn (barf-if-buffer-read-only) '(t)))
-  (let ((fill-column (point-max))
-        ;; This would override `fill-column' if it's an integer.
-        (emacs-lisp-docstring-fill-column t))
-    (fill-paragraph nil region)))
-(global-set-key (kbd "C-c b u") 'ds/unfill-paragraph)
+;; unfill paragraph, etc
+(use-package unfill)
 
-;; C-<backspace> as vscode, almost...
-(defun fk/backward-kill-word ()
-  "Remove all whitespace if the character behind the cursor is whitespace,
-    otherwise remove a word."
-  (interactive)
-  (if (looking-back "[ \n]")
-      ;; delete horizontal space before us and then check to see if we
-      ;; are looking at a newline
-      (progn (delete-horizontal-space 't)
-             (while (looking-back "[ \n]")
-               (backward-delete-char 1)))
-    ;; otherwise, just do the normal kill word.
-    (backward-kill-word 1)))
-(global-set-key (kbd "C-<backspace>") 'fk/backward-kill-word)
+;; collection of utilities
+(use-package crux
+  :bind (("C-x 4 t". crux-transpose-windows)
+         ("C-c d" . crux-duplicate-current-line-or-region)))
 
-;; copy line down
-(defun duplicate-line-or-region (&optional n)
-  "Duplicate current line, or region if active.
-    With argument N, make N copies.
-    With negative N, comment out original line and use the absolute value."
-  (interactive "*p")
-  (let ((use-region (use-region-p)))
-    (save-excursion
-      (let ((text (if use-region        ;Get region if active, otherwise line
-                      (buffer-substring (region-beginning) (region-end))
-                    (prog1 (thing-at-point 'line)
-                      (end-of-line)
-                      (if (< 0 (forward-line 1)) ;Go to beginning of next line, or make a new one
-                          (newline))))))
-        (dotimes (i (abs (or n 1)))     ;Insert N times, or once if not specified
-          (insert text))))
-    (if use-region nil                  ;Only if we're working with a line (not a region)
-      (let ((pos (- (point) (line-beginning-position)))) ;Save column
-        (if (> 0 n)                             ;Comment out original with negative arg
-            (comment-region (line-beginning-position) (line-end-position)))
-        (forward-line 1)
-        (forward-char pos)))))
-(global-set-key (kbd "s-n") 'duplicate-line-or-region)
+;; easy comment/uncomment
+(use-package evil-nerd-commenter
+  :bind ("C-;" . evilnc-comment-or-uncomment-lines))
 
-;; copy line
-(defun fk/copy-line (arg)
-  "Copy lines (as many as prefix argument) in the kill ring.
-      Ease of use features:
-      - Move to start of next line.
-      - Appends the copy on sequential calls.
-      - Use newline as last char even on the last line of the buffer.
-      - If region is active, copy its lines."
-  (interactive "p")
-  (let ((beg (line-beginning-position))
-        (end (line-end-position arg)))
-    (when mark-active
-      (if (> (point) (mark))
-          (setq beg (save-excursion (goto-char (mark)) (line-beginning-position)))
-        (setq end (save-excursion (goto-char (mark)) (line-end-position)))))
-    (if (eq last-command 'copy-line)
-        (kill-append (buffer-substring beg end) (< end beg))
-      (kill-ring-save beg end)))
-  (kill-append "\n" nil)
-  (beginning-of-line (or (and arg (1+ arg)) 2))
-  (if (and arg (not (= 1 arg))) (message "%d lines copied" arg)))
-(global-set-key (kbd "C-c u c") 'fk/copy-line)
+;; global search tool
+(use-package ag)
 
-;; cut line
-(defun fk/quick-cut-line ()
-  "Cut the whole line that point is on.  Consecutive calls to this command
-   append each line to the kill-ring."
-  (interactive)
-  (let ((beg (line-beginning-position 1))
-        (end (line-beginning-position 2)))
-    (if (eq last-command 'quick-cut-line)
-        (kill-append (buffer-substring beg end) (< end beg))
-      (kill-new (buffer-substring beg end)))
-    (delete-region beg end))
-  (beginning-of-line 1)
-  (setq this-command 'quick-cut-line))
-(global-set-key (kbd "C-c u x") 'fk/quick-cut-line)
+;; diff files
+(use-package vdiff)
 
-;; delete no kill line
-(defun ds/delete-line-no-kill ()
-  (interactive)
-  (delete-region
-   (point)
-   (save-excursion (move-end-of-line 1) (point)))
-  (delete-char 1))
-(global-set-key (kbd "C-c u d") 'ds/delete-line-no-kill)
+;; move like a ninja! swoosh!
+(use-package avy
+  :config
+  (global-set-key (kbd "C-x g l") 'avy-goto-line)
+  (global-set-key (kbd "C-'") 'avy-goto-char-2)
+  (global-set-key (kbd "C-\"") 'avy-goto-char))
 
-;; Delete the current file
-(defun delete-this-file ()
-  "Delete the current file, and kill the buffer."
-  (interactive)
-  (or (buffer-file-name) (error "No file is currently being edited"))
-  (when (yes-or-no-p (format "Really delete '%s'?"
-                             (file-name-nondirectory buffer-file-name)))
-    (delete-file (buffer-file-name))
-    (kill-this-buffer)))
+;; writable grep
+(use-package wgrep)
 
-;; Rename the current file
-(defun rename-this-file-and-buffer (new-name)
-  "Renames both current buffer and file it's visiting to NEW-NAME."
-  (interactive "sNew name: ")
-  (let ((name (buffer-name))
-        (filename (buffer-file-name)))
-    (unless filename
-      (error "Buffer '%s' is not visiting a file!" name))
-    (if (get-buffer new-name)
-        (message "A buffer named '%s' already exists!" new-name)
-      (progn
-        (when (file-exists-p filename)
-         (rename-file filename new-name 1))
-        (rename-buffer new-name)
-        (set-visited-file-name new-name)))))
+;; Workaround with minified source files
+(use-package so-long
+  :hook (after-init . global-so-long-mode))
+
+;; Update buffer whenever file changes
+(use-package autorevert
+  :custom
+  (auto-revert-interval 3)
+  (auto-revert-verbose nil)
+  (auto-revert-remote-files t)
+  (auto-revert-check-vc-info t)
+  (global-auto-revert-non-file-buffers t)
+  :hook (after-init . global-auto-revert-mode))
+
+;; hippie expand
+(use-package hippie-expand
+  :straight (:type built-in)
+  :bind ("M-/" . hippie-expand))
+
+;; fold/expand region
+(use-package origami
+  :hook (prog-mode . origami-mode)
+    :bind (:map origami-mode-map
+              ("C-: :" . origami-recursively-toggle-node)
+              ("C-: a" . origami-toggle-all-nodes)
+              ("C-: t" . origami-toggle-node)
+              ("C-: o" . origami-show-only-node)
+              ("C-: C-r" . origami-reset)))
+
+;; restart emacs
+(use-package restart-emacs)
+
+;; show key bind
+(use-package which-key
+  :init (which-key-mode))
+
+;; delete trailing whitespace and untabify in edited regions only
+(use-package ws-butler
+  :hook (after-init . ws-butler-global-mode)
+  :config
+  (setq ws-butler-convert-leading-tabs-or-spaces t))
+
+;; undo-tree
+(use-package undo-tree
+  :config
+  (global-undo-tree-mode 1)
+  (global-set-key (kbd "C-/") 'undo)
+  (global-set-key (kbd "C-S-/") 'undo-tree-redo))
+
+;; move buffers
+(use-package buffer-move
+  :bind (("C-c b p" . buf-move-up)
+         ("C-c b n" . buf-move-down)
+         ("C-c b b" . buf-move-left)
+         ("C-c b f" . buf-move-right)))
+
+;; move line/region
+(use-package move-text
+  :config
+  (global-set-key (kbd "M-p") 'move-text-up)
+  (global-set-key (kbd "M-n") 'move-text-down))
+
+;; expand region vim style
+(use-package expand-region
+  :config
+  (global-set-key (kbd "C-=") 'er/expand-region))
+
+;; Free hands
+(use-package auto-package-update
+  :custom
+  (auto-package-update-delete-old-versions t))
+
+;; Write documentation comment in an easy way
+(use-package separedit
+  :custom
+  (separedit-remove-trailing-spaces-in-comment t)
+  (separedit-continue-fill-column t)
+  (separedit-buffer-creation-hook #'auto-fill-mode)
+  :bind (:map prog-mode-map
+         ("C-c '" . separedit)))
+
+;; multiple cursors
+(use-package multiple-cursors
+  :config
+  (setq mc/always-run-for-all t
+        mc/always-repeat-command t)
+  (global-set-key (kbd "M-C->") 'mc/edit-lines)
+  (global-set-key (kbd "C-|") 'mc/mark-pop)
+  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+  (global-set-key (kbd "M-C-l") 'mc/mark-all-like-this))

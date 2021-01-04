@@ -17,7 +17,6 @@
 
 ;; The markdown mode is awesome! unbeatable
 (use-package markdown-mode
-  :ensure t
   :mode ("README\\(?:\\.md\\)?\\'" . gfm-mode)
   :hook (markdown-mode . auto-fill-mode)
   :init
@@ -33,7 +32,6 @@
 
 ;; Generate table of contents for markdown-mode
 (use-package markdown-toc
-  :ensure t
   :after markdown-mode
   :bind (:map markdown-mode-command-map
               ("r" . markdown-toc-generate-or-refresh-toc)))
@@ -114,7 +112,7 @@ This is a replacement for `reftex--query-search-regexps'."
         #'my-query-reftex-citation-search-regexps))
 
 (use-package company-auctex)
-
+(use-package company-math)
 (use-package company-reftex)
 
 (use-package bibtex
