@@ -3,7 +3,8 @@
 (use-package magit
   :config
   ;; show word by word difference
-  (setq magit-diff-refine-hunk 'all)
+  (setq magit-diff-refine-hunk 'all
+        magit-diff-expansion-threshold 20)
   :bind (("C-c g s" . magit-status)
          ("C-c g i" . magit-init)
          ("C-c g t" . magit-stash)

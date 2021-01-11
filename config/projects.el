@@ -8,8 +8,3 @@
         projectile-globally-ignored-file-suffixes '(".elc" ".pyc" ".o")
         projectile-ignored-projects '("~/" "/tmp"))
   :config (projectile-mode 1))
-
-(use-package counsel-projectile
-  :after (counsel projectile)
-  :config
-  (counsel-projectile-mode 1))

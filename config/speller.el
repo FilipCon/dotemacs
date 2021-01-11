@@ -20,7 +20,6 @@
         #b0000000000000000
         #b0000000000000000
         #b0000000000000000) nil 16)
-  :hook (prog-mode . flycheck-mode)
   :custom (flycheck-indication-mode 'right-fringe)
   :config
   (flycheck-define-error-level 'error

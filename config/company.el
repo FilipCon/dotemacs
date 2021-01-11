@@ -40,6 +40,8 @@
     (make-local-variable 'company-backends)
     (when-let* ((backends (cond ((derived-mode-p 'cmake-mode)
                                  '(company-cmake))
+                                ((derived-mode-p 'c++-mode)
+                                 '(company-c-headers))
                                 ((derived-mode-p 'latex-mode)
                                  '(company-math
                                    company-auctex-macros

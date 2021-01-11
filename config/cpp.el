@@ -1,7 +1,5 @@
 ;;; -*- lexical-binding: t -*-
 
-(require 'cc-mode)
-
 ;; c++ hook settings
 (defun ds/c++-hook ()
   (c-set-offset 'substatement-open 0) ;; close statement
@@ -11,14 +9,12 @@
         c-indent-level 4
         tab-width 4
         indent-tabs-mode nil
-        hide-ifdef-mode t)
-  (flyspell-prog-mode))
+        hide-ifdef-mode t))
 (add-hook 'c-mode-common-hook 'ds/c++-hook)
 
 ;; font-lock for modern c++
 (use-package modern-cpp-font-lock
-  :config
-  (add-hook 'c++-mode-hook #'modern-c++-font-lock-mode))
+  :hook (c++-mode . modern-c++-font-lock-mode))
 
 ;; cmake project
 (use-package cmake-ide
@@ -37,9 +33,9 @@
       (setq cmake-ide-project-dir dir)
       (setq cmake-ide-build-dir (concat cmake-ide-project-dir "build")))
     (cmake-ide-run-cmake))
-  (setq-default cmake-ide-make-command "make --no-print-directory -j6"
-                compilation-skip-threshold 2 ;; show only errors
-                compilation-auto-jump-to-first-error t)
+  (setq cmake-ide-make-command "make --no-print-directory -j6"
+        compilation-skip-threshold 1 ;; warnings and errors
+        compilation-auto-jump-to-first-error t)
   (put 'cmake-ide-build-dir 'safe-local-variable #'stringp)
   :bind (("C-c m" . cmake-ide-compile)
          ("C-c r" . cmake-ide-run-cmake)))
@@ -47,11 +43,6 @@
 ;; cmake files
 (use-package cmake-mode
   :mode ("CMakeLists\\.txt\\'" "\\.cmake\\'"))
-
-;; cmake font-lock
-(use-package cmake-font-lock
-  :after (cmake-mode)
-  :hook (cmake-mode . cmake-font-lock-activate))
 
 ;; switch between header/source
 (use-package cff
@@ -65,3 +56,5 @@
 
 ;; doxygen comments
 (use-package doxygen)
+
+(use-package company-c-headers)

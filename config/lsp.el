@@ -16,13 +16,15 @@
           cmake-mode) . lsp)
   (lsp-mode . lsp-enable-which-key-integration)
   :config
-  (setq lsp-print-performance t)
-  (setq-default lsp-prefer-capf -1
-                lsp-xml-jar-file (expand-file-name ".cache/lsp/lemminx/org.eclipse.lemminx/target/org.eclipse.lemminx-uber.jar"
+  (setq lsp-print-performance t
+        lsp-completion-provider :none)
+  (setq-default lsp-xml-jar-file (expand-file-name ".cache/lsp/lemminx/org.eclipse.lemminx/target/org.eclipse.lemminx-uber.jar"
                                   user-emacs-directory)
                 lsp-enable-semantic-highlighting t
                 lsp-prefer-flymake nil
-                lsp-restart 'auto-restart)
+                lsp-restart 'auto-restart
+                lsp-pyls-plugins-yapf-enabled t
+                lsp-pyls-plugins-autopep8-enabled nil)
   (global-set-key (kbd "C-<return>") 'lsp-execute-code-action)
   (dolist (m '(clojure-mode
                clojurec-mode

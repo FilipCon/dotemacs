@@ -20,3 +20,6 @@ sudo npm i -g bash-language-server
 git clone https://github.com/eclipse/lemminx.git
 cd lemminx/
 ./mvnw clean verify
+
+# nvm
+curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
