@@ -6,15 +6,13 @@
           text-mode
           latex-mode
           cider-repl-mode
+          jupyter-repl-mode
           inferior-python-mode
           conf-mode) . my-enable-company)
   :init
   (setq-default company-backends '(company-capf
-                                   company-keywords
                                    company-files
-                                   company-yasnippet
-                                   company-dabbrev-code
-                                   company-dabbrev))
+                                   company-yasnippet))
   :config
   (setq-default company-idle-delay 0
                 company-minimum-prefix-length 1
@@ -42,6 +40,8 @@
                                  '(company-cmake))
                                 ((derived-mode-p 'c++-mode)
                                  '(company-c-headers))
+                                ((derived-mode-p 'csharp-mode)
+                                 '(company-omnisharp))
                                 ((derived-mode-p 'latex-mode)
                                  '(company-math
                                    company-auctex-macros
@@ -53,6 +53,7 @@
       (dolist (backend (reverse backends))
         (push backend company-backends)))
     (setq company-backends (cons company-backends '())); merge backends for combinded completions
+    (add-to-list 'company-backends '(company-dabbrev company-dabbrev-code company-keywords) t)
     (company-mode))
   :bind (
          :map company-active-map
@@ -72,4 +73,5 @@
   :config
   (setq company-box-doc-delay 0
         company-box-backends-colors nil
+        company-box-color-icon nil
         company-box-icons-alist 'company-box-icons-images))

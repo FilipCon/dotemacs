@@ -31,6 +31,8 @@
 (column-number-mode t)                  ; show column numbers
 (global-auto-revert-mode t)
 (global-subword-mode t)
+(normal-erase-is-backspace-mode 2)
+(delete-selection-mode 1)
 
 ;; Scrolling
 (setq mouse-wheel-progressive-speed nil
@@ -93,3 +95,6 @@
 (add-hook 'after-change-major-mode-hook
           (lambda ()
             (modify-syntax-entry ?_ "w")))
+
+;; increase font size
+(set-face-attribute 'default nil :height 110)

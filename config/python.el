@@ -11,18 +11,25 @@
   (elpy-enable)
   :config
   (unbind-key "C-<return>" elpy-mode-map)
+  (unbind-key "C-c C-f" elpy-mode-map)
+  (unbind-key "C-c C-r" elpy-mode-map)
+  ;; (unbind-key "C-c C-c" elpy-mode-map)
   (setq elpy-modules nil
+        elpy-shell-echo-input nil
         elpy-shell-starting-directory (quote current-directory)
         python-shell-interpreter "ipython3"
         python-shell-interpreter-args "-i --simple-prompt --pprint"
         elpy-rpc-python-command "python3"
-        python-shell-prompt-detect-failure-warning nil))
+        elpy-shell-echo-output nil))
 
-;; code documentation
+;; write code documentation
 (use-package sphinx-doc
   :hook (python-mode . sphinx-doc-mode))
 
-;; jupyter
+;; jupyter kernel
+(use-package jupyter)
+
+;; jupyter notebooks
 (use-package ein
   :config
   (setq ein:use-auto-complete-superpack t
@@ -31,21 +38,16 @@
 ;; (use-package lsp-jedi
 ;;   :init
 ;;   (setq lsp-jedi-trace-server "off")
-;;   (setq lsp-jedi-diagnostics-enable nil
-;;         lsp-jedi-completion-disable-snippets t)
+;;   (setq lsp-jedi-diagnostics-enable nil)
 ;;   :config
 ;;   (with-eval-after-load "lsp-mode"
 ;;     (add-to-list 'lsp-disabled-clients 'pyls)
 ;;     (add-to-list 'lsp-enabled-clients 'jedi)))
 
-;;(use-package lsp-pyright)
 
-;; (use-package lsp-python-ms
-;;   :init (setq lsp-python-ms-auto-install-server t)
-;;     :config
-;;   (with-eval-after-load "lsp-mode"
-;;     (add-to-list 'lsp-disabled-clients 'pyls)
-;;     (add-to-list 'lsp-enabled-clients 'mspyls)))
+(use-package lsp-python-ms)
+
+(use-package py-isort)
 
 (use-package poetry)
 

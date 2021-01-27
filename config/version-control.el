@@ -24,6 +24,8 @@
   :custom (git-link-open-in-browser t))
 
 (use-package gitignore-mode)
+(use-package gitconfig-mode)
+(use-package gitattributes-mode)
 
 (use-package git-messenger
   :config (setq git-messenger:show-detail t)

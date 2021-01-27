@@ -9,14 +9,8 @@
       gc-cons-threshold most-positive-fixnum
       gc-cons-percentage 0.6
       auto-window-vscroll nil
-      package--init-file-ensured t)
-(setq read-process-output-max (* 1024 1024)) ;; 1mb
-
-(add-hook 'after-init-hook
-          `(lambda ()
-             (setq file-name-handler-alist file-name-handler-alist-old
-                   gc-cons-threshold 800000
-                   gc-cons-percentage 0.1)) t)
+      package--init-file-ensured t
+      read-process-output-max (* 1024 1024))
 
 ;; Straight
 (setq straight-use-package-by-default t)
@@ -46,8 +40,8 @@
       "^.[^#].+el$"))
   (load-file file))
 
-;; start server once
-(unless (server-running-p) (server-start))
+;; ;; start server once
+(server-start)
 
 ;; Load automatically generated custom garbage
 (setq custom-file

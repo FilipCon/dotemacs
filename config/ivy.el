@@ -11,15 +11,6 @@
         ivy-wrap t)
   :hook (after-init . ivy-mode))
 
-(use-package ivy-rich
-  :after ivy
-  :custom
-  (ivy-virtual-abbreviate 'full)
-  (ivy-rich-switch-buffer-align-virtual-buffer nil)
-  (ivy-rich-path-style 'full)
-  :config
-  (ivy-rich-mode))
-
 ;; sort completions
 (use-package ivy-prescient
   :after (ivy prescient)
@@ -27,14 +18,21 @@
   :hook ((ivy-mode . ivy-prescient-mode)
          (ivy-prescient-mode . prescient-persist-mode)))
 
+(use-package ivy-rich
+  :after ivy counsel
+  :custom
+  (ivy-virtual-abbreviate 'full)
+  (ivy-rich-switch-buffer-align-virtual-buffer nil)
+  (ivy-rich-path-style 'full)
+  :config
+  (ivy-rich-mode 1))
+
 ;; search tool
 (use-package swiper
-  :after ivy
   :config
-  (define-key ivy-mode-map (kbd "C-s") 'swiper)
-  (define-key ivy-mode-map (kbd "C-M-s") 'swiper-thing-at-point))
+  (define-key ivy-mode-map (kbd "C-s") 'swiper-isearch)
+  (define-key ivy-mode-map (kbd "C-M-s") 'swiper-isearch-thing-at-point))
 
 (use-package counsel
-  :hook (ivy-mode . counsel-mode)
   :config
   (global-set-key (kbd "M-x") 'counsel-M-x))

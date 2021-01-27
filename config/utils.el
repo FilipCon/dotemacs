@@ -19,8 +19,28 @@
 ;; restore most recently killed buffer
 (global-set-key (kbd "C-S-t") 'recentf-open-most-recent-file)
 
-;; kill word or space
-(global-set-key (kbd "C-<backspace>") 'backward-kill-word)
+;; show in-buffer previous candidates
+(use-package browse-kill-ring
+  :config
+  (browse-kill-ring-default-keybindings))
+
+;; describe functionalities in major modes
+(use-package discover-my-major)
+
+;; replacement for kill-ring-save
+(use-package easy-kill
+  :config
+  (global-set-key [remap kill-ring-save] 'easy-kill))
+
+;; ;; editorconfig plugin for code format style
+;; (use-package editorconfig
+;;   :config
+;;   (editorconfig-mode 1)
+;;   (setq editorconfig-trim-whitespaces-mode
+;;       'ws-butler-mode))
+
+;; visualize regexp
+(use-package visual-regexp)
 
 ;; unfill paragraph, etc
 (use-package unfill)
@@ -88,16 +108,14 @@
 
 ;; delete trailing whitespace and untabify in edited regions only
 (use-package ws-butler
-  :hook (after-init . ws-butler-global-mode)
   :config
+  (ws-butler-global-mode 1)
   (setq ws-butler-convert-leading-tabs-or-spaces t))
 
-;; undo-tree
-(use-package undo-tree
+(use-package undo-fu
   :config
-  (global-undo-tree-mode 1)
-  (global-set-key (kbd "C-/") 'undo)
-  (global-set-key (kbd "C-S-/") 'undo-tree-redo))
+  (global-set-key (kbd "C-/") 'undo-fu-only-undo)
+  (global-set-key (kbd "C-?")  'undo-fu-only-redo))
 
 ;; move buffers
 (use-package buffer-move

@@ -3,11 +3,13 @@
 ;; centaur tabs
 (use-package centaur-tabs
   :config
-  (setq centaur-tabs-style "bar"
-        centaur-tabs-height 32
+  (setq centaur-tabs-style "rounded"
+        centaur-tabs-height 38
         centaur-tabs-set-icons t
         centaur-tabs-set-modified-marker t
-        centaur-tabs-set-bar 'left)
+        centaur-tabs-modified-marker "●"
+        centaur-tabs-set-bar 'under)
+  (setq x-underline-at-descent-line t)
   (centaur-tabs-headline-match)
   (setq centaur-tabs-gray-out-icons 'buffer
         uniquify-separator "/"

@@ -50,7 +50,8 @@
   (setf (default-value 'TeX-master) nil
         TeX-parse-self t
         TeX-auto-save t)
-  (setf TeX-electric-sub-and-superscript t)
+  (setf TeX-electric-sub-and-superscript t
+        TeX-electric-math (cons "$" "$"))
   (setf TeX-source-correlate-start-server nil
         TeX-source-correlate-method 'synctex)
   (setf TeX-clean-confirm nil)
@@ -136,3 +137,5 @@ This is a replacement for `reftex--query-search-regexps'."
         bibtex-autokey-titlewords 1
         bibtex-autokey-titleword-length 10)
   (unbind-key "C-c $" bibtex-mode-map))
+
+(use-package ivy-bibtex)

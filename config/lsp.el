@@ -17,7 +17,10 @@
   (lsp-mode . lsp-enable-which-key-integration)
   :config
   (setq lsp-print-performance t
-        lsp-completion-provider :none)
+        lsp-completion-provider :none
+        lsp-enable-indentation nil)
+  (setq lsp-enable-file-watchers nil)
+  (setq lsp-headerline-breadcrumb-enable-diagnostics nil)
   (setq-default lsp-xml-jar-file (expand-file-name ".cache/lsp/lemminx/org.eclipse.lemminx/target/org.eclipse.lemminx-uber.jar"
                                   user-emacs-directory)
                 lsp-enable-semantic-highlighting t
@@ -31,7 +34,6 @@
                clojurescript-mode
                clojurex-mode))
     (add-to-list 'lsp-language-id-configuration `(,m . "clojure")))
-  (setq lsp-enable-indentation nil)
   (setq-default lsp-clients-clangd-args '("--compile-commands-dir=build"
                                           "--clang-tidy" "--suggest-missing-includes"
                                           "--all-scopes-completion=true"
@@ -44,7 +46,7 @@
   :hook (lsp-mode . lsp-ui-mode)
   :bind (:map lsp-mode-map
               ("M-." . lsp-ui-peek-find-definitions)
-              ("M-?" . lsp-ui-peek-find-references)
+              ("M-," . lsp-ui-peek-find-references)
               ("C-c C-f" . lsp-format-buffer)
               ("C-c C-r" . lsp-format-region))
   :config
@@ -64,3 +66,10 @@
 (use-package lsp-treemacs
   :after lsp treemacs
   :hook (lsp-mode . lsp-treemacs-sync-mode))
+
+(use-package tree-sitter
+  :config
+  (global-tree-sitter-mode 1)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
+(use-package tree-sitter-langs)

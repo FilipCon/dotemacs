@@ -1,8 +1,8 @@
 ;;; -*- lexical-binding: t -*-
 
 (use-package smartparens
-  :hook (after-init . smartparens-global-mode)
   :config
+  (smartparens-global-mode 1)
   (setq sp-highlight-pair-overlay nil
         sp-cancel-autoskip-on-backward-movement nil
         sp-show-pair-delay 0

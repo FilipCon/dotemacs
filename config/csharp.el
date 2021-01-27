@@ -2,4 +2,6 @@
 
 (use-package csharp-mode)
 
-(use-package omnisharp)
+(use-package omnisharp
+  :config
+  (push 'csharp-omnisharp-codecheck flycheck-checkers))
