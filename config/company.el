@@ -12,7 +12,10 @@
   :init
   (setq-default company-backends '(company-capf
                                    company-files
-                                   company-yasnippet))
+                                   company-yasnippet
+                                   company-dabbrev
+                                   company-dabbrev-code
+                                   company-keywords))
   :config
   (setq-default company-idle-delay 0
                 company-minimum-prefix-length 1
@@ -53,7 +56,7 @@
       (dolist (backend (reverse backends))
         (push backend company-backends)))
     (setq company-backends (cons company-backends '())); merge backends for combinded completions
-    (add-to-list 'company-backends '(company-dabbrev company-dabbrev-code company-keywords) t)
+    ;; (add-to-list 'company-backends '(company-dabbrev company-dabbrev-code company-keywords) t)
     (company-mode))
   :bind (
          :map company-active-map

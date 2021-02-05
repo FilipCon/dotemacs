@@ -23,10 +23,6 @@
   :after all-the-icons
   :hook (ibuffer-mode . all-the-icons-ibuffer-mode))
 
-;; org bullets
-(use-package org-bullets
-  :hook (org-mode . org-bullets-mode))
-
 ;; tildes in EOF like vim
 (use-package vi-tilde-fringe
   :init

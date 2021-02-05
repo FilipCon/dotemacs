@@ -6,15 +6,11 @@
   (setq magit-diff-refine-hunk 'all
         magit-diff-expansion-threshold 20)
   :bind (("C-c g s" . magit-status)
-         ("C-c g i" . magit-init)
-         ("C-c g t" . magit-stash)
          ("C-c g l" . magit-log)
-         ("C-c g c" . magit-commit)
          ("C-c g p" . magit-push-other)
          ("C-c g u" . magit-pull)
          ("C-c g d" . magit-diff)
          ("C-c g o" . magit-checkout)
-         ("C-c g m" . magit-merge)
          ("C-c g a" . magit-remote-add)
          ("C-c g r" . magit-remote-remove)
          ("C-c g n" . magit-clone)))
@@ -27,12 +23,8 @@
 (use-package gitconfig-mode)
 (use-package gitattributes-mode)
 
-(use-package git-messenger
-  :config (setq git-messenger:show-detail t)
-  :bind ("C-x v m" . git-messenger:popup-message))
-
-(use-package git-timemachine
-  :commands git-timemachine)
+;; (use-package git-timemachine
+;;   :commands git-timemachine)
 
 (use-package diff-hl
   :custom-face

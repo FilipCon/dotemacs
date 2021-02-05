@@ -22,19 +22,22 @@
         elpy-rpc-python-command "python3"
         elpy-shell-echo-output nil))
 
+;; use microsoft lsp
+(use-package lsp-python-ms)
+
 ;; write code documentation
 (use-package sphinx-doc
   :hook (python-mode . sphinx-doc-mode))
 
-;; jupyter kernel
-(use-package jupyter)
+;; ;; jupyter kernel
+;; (use-package jupyter)
 
-;; jupyter notebooks
-(use-package ein
-  :config
-  (setq ein:use-auto-complete-superpack t
-        ein:output-type-preference '(emacs-lisp svg png jpeg html
-                                                text latex javascript)))
+;; ;; jupyter notebooks
+;; (use-package ein
+;;   :config
+;;   (setq ein:use-auto-complete-superpack t
+;;         ein:output-type-preference '(emacs-lisp svg png jpeg html
+;;                                                 text latex javascript)))
 ;; (use-package lsp-jedi
 ;;   :init
 ;;   (setq lsp-jedi-trace-server "off")
@@ -45,10 +48,9 @@
 ;;     (add-to-list 'lsp-enabled-clients 'jedi)))
 
 
-(use-package lsp-python-ms)
 
-(use-package py-isort)
+;; (use-package py-isort)
 
-(use-package poetry)
+;; (use-package poetry)
 
-(use-package pyvenv)
+;; (use-package pyvenv)

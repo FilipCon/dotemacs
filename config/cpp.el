@@ -1,5 +1,14 @@
 ;;; -*- lexical-binding: t -*-
 
+;; cmake files
+(use-package cmake-mode
+  :straight (:host github :repo "emacsmirror/cmake-mode"
+                   :files (:defaults "*"))
+  :mode (("CMakeLists\\.txt\\'" . cmake-mode)
+         ("\\.cmake\\'" . cmake-mode)))
+
+(use-package cmake-font-lock)
+
 ;; c++ hook settings
 (defun ds/c++-hook ()
   (c-set-offset 'substatement-open 0) ;; close statement
@@ -40,10 +49,6 @@
   :bind (("C-c m" . cmake-ide-compile)
          ("C-c r" . cmake-ide-run-cmake)))
 
-;; cmake files
-(use-package cmake-mode
-  :mode ("CMakeLists\\.txt\\'" "\\.cmake\\'"))
-
 ;; switch between header/source
 (use-package cff
   :config
@@ -51,10 +56,7 @@
             '(lambda ()
                (define-key c-mode-base-map (kbd "M-o") 'cff-find-other-file))))
 
-;; assembly code
-(use-package rmsbolt)
-
-;; doxygen comments
-(use-package doxygen)
+;; ;; assembly code
+;; (use-package rmsbolt)
 
 (use-package company-c-headers)

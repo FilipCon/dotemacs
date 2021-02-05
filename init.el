@@ -1,5 +1,10 @@
 ;;; -*- lexical-binding: t -*-
 
+;; configure packages
+(setq package-archives '(("org" . "http://orgmode.org/elpa/")
+                         ("gnu" . "https://elpa.gnu.org/packages/")
+                         ("melpa" . "https://melpa.org/packages/")))
+
 (defvar file-name-handler-alist-old file-name-handler-alist)
 
 ;; Make startup faster

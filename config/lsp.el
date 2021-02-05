@@ -13,6 +13,9 @@
           nxml-mode
           latex-mode
           LaTeX-mode
+          tex-mode
+          yatex-mode
+          bibtex-mode
           cmake-mode) . lsp)
   (lsp-mode . lsp-enable-which-key-integration)
   :config
