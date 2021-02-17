@@ -42,7 +42,7 @@
       (setq cmake-ide-project-dir dir)
       (setq cmake-ide-build-dir (concat cmake-ide-project-dir "build")))
     (cmake-ide-run-cmake))
-  (setq cmake-ide-make-command "make --no-print-directory -j8"
+  (setq cmake-ide-make-command "make --no-print-directory -j4"
         compilation-skip-threshold 1 ;; warnings and errors
         compilation-auto-jump-to-first-error t)
   (put 'cmake-ide-build-dir 'safe-local-variable #'stringp)

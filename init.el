@@ -45,8 +45,8 @@
       "^.[^#].+el$"))
   (load-file file))
 
-;; ;; start server once
-(server-start)
+;; start server once
+(unless (server-running-p) (server-start))
 
 ;; Load automatically generated custom garbage
 (setq custom-file

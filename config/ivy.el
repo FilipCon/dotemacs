@@ -10,8 +10,10 @@
         ivy-initial-inputs-alist nil
         ivy-use-virtual-buffers t
         enable-recursive-minibuffers t
-        ivy-wrap t
-        ivy-re-builders-alist '((t . orderless-ivy-re-builder)))
+        ivy-wrap t)
+  (setq ivy-re-builders-alist
+        '((swiper . ivy--regex-plus)
+          (t . ivy--regex-ignore-order)))
   :hook (after-init . ivy-mode))
 
 ;; sort completions
@@ -50,13 +52,13 @@
   :config
   (counsel-mode 1))
 
-;; orderless completions for minibuffer and company
-(use-package orderless
-  :custom
-  (completion-styles (list 'orderless))
-  :config
-  (setq orderless-component-separator "[ &]")
-  (defun just-one-face (fn &rest args)
-  (let ((orderless-match-faces [completions-common-part]))
-    (apply fn args)))
-  (advice-add 'company-capf--candidates :around #'just-one-face))
+;; ;; orderless completions for minibuffer and company
+;; (use-package orderless
+;;   :custom
+;;   (completion-styles (list 'orderless))
+;;   :config
+;;   (setq orderless-component-separator "[ &]")
+;;   (defun just-one-face (fn &rest args)
+;;   (let ((orderless-match-faces [completions-common-part]))
+;;     (apply fn args)))
+;;   (advice-add 'company-capf--candidates :around #'just-one-face))
