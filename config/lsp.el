@@ -2,21 +2,7 @@
 
 ;; language server
 (use-package lsp-mode
-  :hook ((python-mode
-          c-mode
-          c++-mode
-          csharp-mode
-          clojure-mode
-          clojurec-mode
-          clojurescript-mode
-          sh-mode
-          nxml-mode
-          latex-mode
-          LaTeX-mode
-          tex-mode
-          yatex-mode
-          bibtex-mode
-          cmake-mode) . lsp)
+  :command lsp
   (lsp-mode . lsp-enable-which-key-integration)
   :config
   (setq lsp-print-performance t

@@ -188,3 +188,8 @@
 (use-package embark-consult
   :after (consult embark)
   :hook (embark-collect . embark-consult-preview-minor-mode))
+
+;; insert file name
+(global-set-key [f7]
+  (lambda () (interactive)
+     (insert (buffer-name (window-buffer (minibuffer-selected-window))))))

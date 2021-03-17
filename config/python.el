@@ -22,8 +22,8 @@
         elpy-rpc-python-command "python3"
         elpy-shell-echo-output nil))
 
-;; use microsoft lsp
-(use-package lsp-python-ms)
+;; ;; use microsoft lsp
+;; (use-package lsp-python-ms)
 
 ;; write code documentation
 (use-package sphinx-doc

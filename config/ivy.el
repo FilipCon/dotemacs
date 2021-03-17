@@ -5,6 +5,7 @@
   :bind
   ("C-r" . 'ivy-resume)
   :config
+  (ivy-mode 1)
   (setq ivy-display-style 'fancy
         ivy-extra-directories nil
         ivy-initial-inputs-alist nil
@@ -13,8 +14,7 @@
         ivy-wrap t)
   (setq ivy-re-builders-alist
         '((swiper . ivy--regex-plus)
-          (t . ivy--regex-ignore-order)))
-  :hook (after-init . ivy-mode))
+          (t . ivy--regex-ignore-order))))
 
 ;; sort completions
 (use-package prescient

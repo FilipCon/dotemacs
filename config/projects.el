@@ -3,6 +3,7 @@
 (use-package projectile
   :config
   :bind-keymap ("C-c p" . projectile-command-map)
+  :custom ((projectile-completion-sythem 'ivy))
   :init
   (setq projectile-globally-ignored-files '(".DS_Store" "Icon" "TAGS")
         projectile-globally-ignored-file-suffixes '(".elc" ".pyc" ".o")

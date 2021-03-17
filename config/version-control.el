@@ -15,6 +15,10 @@
          ("C-c g r" . magit-remote-remove)
          ("C-c g n" . magit-clone)))
 
+;; (setq ediff-diff-options "-w")
+(setq ediff-split-window-function (quote split-window-horizontally))
+(setq ediff-window-setup-function (quote ediff-setup-windows-plain))
+
 (use-package git-link
   :commands (git-link git-link-commit git-link-open-in-browser)
   :custom (git-link-open-in-browser t))
@@ -22,6 +26,11 @@
 (use-package gitignore-mode)
 (use-package gitconfig-mode)
 (use-package gitattributes-mode)
+
+(use-package forge
+  :after magit
+  :config
+  (setq auth-sources '("~/.authinfo.gpg")))
 
 ;; (use-package git-timemachine
 ;;   :commands git-timemachine)

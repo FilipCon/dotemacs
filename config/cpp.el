@@ -42,7 +42,17 @@
       (setq cmake-ide-project-dir dir)
       (setq cmake-ide-build-dir (concat cmake-ide-project-dir "build")))
     (cmake-ide-run-cmake))
-  (setq cmake-ide-make-command "make --no-print-directory -j4"
+
+  (defun cmake-ide-delete-build-dir ()
+  "Delete build directory in a cmake-ide project."
+  (interactive)
+  (let ((dir-name (cide--build-dir)))
+    (when (yes-or-no-p (format "Delete directory %s ?" dir-name))
+      (delete-directory dir-name t)
+      (message (format "DELETED %s" dir-name)))))
+
+
+  (setq cmake-ide-make-command "make --no-print-directory -j6"
         compilation-skip-threshold 1 ;; warnings and errors
         compilation-auto-jump-to-first-error t)
   (put 'cmake-ide-build-dir 'safe-local-variable #'stringp)

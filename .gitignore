@@ -20,3 +20,6 @@ recentf
 custom-variables.el
 /.mc-lists.el
 /amx-items
+*.sqlite
+.dap-breakpoints
+*.cache
