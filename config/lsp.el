@@ -2,36 +2,27 @@
 
 ;; language server
 (use-package lsp-mode
-  :command lsp
-  (lsp-mode . lsp-enable-which-key-integration)
+  :hook (lsp-mode . lsp-enable-which-key-integration)
   :config
-  (setq lsp-print-performance t
-        lsp-completion-provider :none
+  (setq lsp-completion-provider :none
         lsp-enable-indentation nil)
   (setq lsp-enable-file-watchers nil)
   (setq lsp-headerline-breadcrumb-enable-diagnostics nil)
-  (setq-default lsp-xml-jar-file (expand-file-name ".cache/lsp/lemminx/org.eclipse.lemminx/target/org.eclipse.lemminx-uber.jar"
-                                  user-emacs-directory)
-                lsp-enable-semantic-highlighting t
+  (setq-default lsp-enable-semantic-highlighting t
                 lsp-prefer-flymake nil
                 lsp-restart 'auto-restart
                 lsp-pyls-plugins-yapf-enabled t
                 lsp-pyls-plugins-autopep8-enabled nil)
   (global-set-key (kbd "C-<return>") 'lsp-execute-code-action)
-  (dolist (m '(clojure-mode
-               clojurec-mode
-               clojurescript-mode
-               clojurex-mode))
-    (add-to-list 'lsp-language-id-configuration `(,m . "clojure")))
   (setq-default lsp-clients-clangd-args '("--compile-commands-dir=build"
                                           "--clang-tidy" "--suggest-missing-includes"
+                                          "--header-insertion=never"
                                           "--all-scopes-completion=true"
                                           "-j=2" "--background-index" "--log=error")))
 
 ;; lsp ui
 (use-package lsp-ui
   :after lsp-mode
-  :commands lsp-ui-mode
   :hook (lsp-mode . lsp-ui-mode)
   :bind (:map lsp-mode-map
               ("M-." . lsp-ui-peek-find-definitions)

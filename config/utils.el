@@ -1,5 +1,10 @@
 ;;; -*- lexical-binding: t -*-
 
+;; insert file name
+(global-set-key [f7]
+  (lambda () (interactive)
+     (insert (buffer-name (window-buffer (minibuffer-selected-window))))))
+
 ;; move between recently visited
 (global-set-key (kbd "C-M-,") 'previous-buffer)
 (global-set-key (kbd "C-M-.") 'next-buffer)
@@ -19,25 +24,10 @@
 ;; restore most recently killed buffer
 (global-set-key (kbd "C-S-t") 'recentf-open-most-recent-file)
 
-;; show in-buffer previous candidates
-(use-package browse-kill-ring
-  :config
-  (browse-kill-ring-default-keybindings))
-
-;; describe functionalities in major modes
-(use-package discover-my-major)
-
 ;; replacement for kill-ring-save
 (use-package easy-kill
   :config
   (global-set-key [remap kill-ring-save] 'easy-kill))
-
-;; ;; editorconfig plugin for code format style
-;; (use-package editorconfig
-;;   :config
-;;   (editorconfig-mode 1)
-;;   (setq editorconfig-trim-whitespaces-mode
-;;       'ws-butler-mode))
 
 ;; visualize regexp
 (use-package visual-regexp)
@@ -57,9 +47,6 @@
 ;; global search tool
 (use-package ag)
 
-;; diff files
-(use-package vdiff)
-
 ;; move like a ninja! swoosh!
 (use-package avy
   :config
@@ -75,13 +62,14 @@
 
 ;; Update buffer whenever file changes
 (use-package autorevert
+  :config
+  (global-auto-revert-mode)
   :custom
   (auto-revert-interval 3)
   (auto-revert-verbose nil)
   (auto-revert-remote-files t)
   (auto-revert-check-vc-info t)
-  (global-auto-revert-non-file-buffers t)
-  :hook (after-init . global-auto-revert-mode))
+  (global-auto-revert-non-file-buffers t))
 
 ;; hippie expand
 (use-package hippie-expand
@@ -134,19 +122,14 @@
   :config
   (global-set-key (kbd "C-=") 'er/expand-region))
 
-;; Free hands
-(use-package auto-package-update
+;; Write documentation comment in separate buffer
+(use-package separedit
   :custom
-  (auto-package-update-delete-old-versions t))
-
-;; ;; Write documentation comment in an easy way
-;; (use-package separedit
-;;   :custom
-;;   (separedit-remove-trailing-spaces-in-comment t)
-;;   (separedit-continue-fill-column t)
-;;   (separedit-buffer-creation-hook #'auto-fill-mode)
-;;   :bind (:map prog-mode-map
-;;          ("C-c '" . separedit)))
+  (separedit-remove-trailing-spaces-in-comment t)
+  (separedit-continue-fill-column t)
+  (separedit-buffer-creation-hook #'auto-fill-mode)
+  :bind (:map prog-mode-map
+         ("C-c '" . separedit)))
 
 ;; multiple cursors
 (use-package multiple-cursors
@@ -169,27 +152,3 @@
   ([remap describe-command] . helpful-command)
   ([remap describe-variable] . counsel-describe-variable)
   ([remap describe-key] . helpful-key))
-
-;; Mini-Buffer Actions
-(use-package embark)
-
-(use-package consult
-  :after (projectile)
-  :bind  (("C-h a" . consult-apropos)
-          ("C-x b" . consult-buffer)
-          ("C-x 4 b" . consult-buffer-other-window)
-          ("C-x 5 b" . consult-buffer-other-frame)
-          ("M-g M-g" . consult-goto-line))
-  :config
-  (setq-default consult-project-root-function #'projectile-project-root)
-    ;; Replace functions (consult-multi-occur is a drop-in replacement)
-  (fset 'multi-occur #'consult-multi-occur))
-
-(use-package embark-consult
-  :after (consult embark)
-  :hook (embark-collect . embark-consult-preview-minor-mode))
-
-;; insert file name
-(global-set-key [f7]
-  (lambda () (interactive)
-     (insert (buffer-name (window-buffer (minibuffer-selected-window))))))

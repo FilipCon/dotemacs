@@ -51,10 +51,9 @@
       (delete-directory dir-name t)
       (message (format "DELETED %s" dir-name)))))
 
-
   (setq cmake-ide-make-command "make --no-print-directory -j6"
         compilation-skip-threshold 1 ;; warnings and errors
-        compilation-auto-jump-to-first-error t)
+        compilation-auto-jump-to-first-error nil)
   (put 'cmake-ide-build-dir 'safe-local-variable #'stringp)
   :bind (("C-c m" . cmake-ide-compile)
          ("C-c r" . cmake-ide-run-cmake)))

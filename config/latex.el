@@ -101,5 +101,3 @@ This is a replacement for `reftex--query-search-regexps'."
         bibtex-autokey-titlewords 1
         bibtex-autokey-titleword-length 10)
   (unbind-key "C-c $" bibtex-mode-map))
-
-(use-package ivy-bibtex)
