@@ -2,6 +2,17 @@
 
 ;; language server
 (use-package lsp-mode
+  :hook ((python-mode
+          c-mode
+          c++-mode
+          csharp-mode
+          clojure-mode
+          clojurec-mode
+          latex-mode
+          LaTeX-mode
+          tex-mode
+          yatex-mode
+          bibtex-mode) . lsp)
   :hook (lsp-mode . lsp-enable-which-key-integration)
   :config
   (setq lsp-completion-provider :none

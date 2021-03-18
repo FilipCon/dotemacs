@@ -13,8 +13,7 @@
 (use-package selectrum
   :config
   (selectrum-mode)
-  (setq selectrum-extend-current-candidate-highlight t
-        selectrum-fix-minibuffer-height t))
+  (setq selectrum-fix-minibuffer-height t))
 
 ;; selectrum support
 (use-package selectrum-prescient

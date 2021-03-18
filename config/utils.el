@@ -49,9 +49,8 @@
 
 ;; move like a ninja! swoosh!
 (use-package avy
-  :config
-  (global-set-key (kbd "C-'") 'avy-goto-char)
-  (global-set-key (kbd "C-\"") 'avy-goto-char-2))
+  :bind (("C-'" . avy-goto-char)
+         ("C-\"" . avy-goto-char-2)))
 
 ;; writable grep
 (use-package wgrep)
@@ -100,9 +99,8 @@
   (setq ws-butler-convert-leading-tabs-or-spaces t))
 
 (use-package undo-fu
-  :config
-  (global-set-key (kbd "C-/") 'undo-fu-only-undo)
-  (global-set-key (kbd "C-?")  'undo-fu-only-redo))
+  :bind (("C-/". undo-fu-only-undo)
+         ("C-?" . undo-fu-only-redo)))
 
 ;; move buffers
 (use-package buffer-move
@@ -113,23 +111,12 @@
 
 ;; move line/region
 (use-package move-text
-  :config
-  (global-set-key (kbd "M-p") 'move-text-up)
-  (global-set-key (kbd "M-n") 'move-text-down))
+  :bind(("M-p" .  'move-text-up)
+        ("M-n" .  'move-text-down)))
 
 ;; expand region vim style
 (use-package expand-region
-  :config
-  (global-set-key (kbd "C-=") 'er/expand-region))
-
-;; Write documentation comment in separate buffer
-(use-package separedit
-  :custom
-  (separedit-remove-trailing-spaces-in-comment t)
-  (separedit-continue-fill-column t)
-  (separedit-buffer-creation-hook #'auto-fill-mode)
-  :bind (:map prog-mode-map
-         ("C-c '" . separedit)))
+  :bind ("C-=" . 'er/expand-region))
 
 ;; multiple cursors
 (use-package multiple-cursors
@@ -141,14 +128,3 @@
   (global-set-key (kbd "C->") 'mc/mark-next-like-this)
   (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
   (global-set-key (kbd "M-C-l") 'mc/mark-all-like-this))
-
-;; documentation
-(use-package helpful
-  :custom
-  (counsel-describe-function-function #'helpful-callable)
-  (counsel-describe-variable-function #'helpful-variable)
-  :bind
-  ([remap describe-function] . counsel-describe-function)
-  ([remap describe-command] . helpful-command)
-  ([remap describe-variable] . counsel-describe-variable)
-  ([remap describe-key] . helpful-key))
