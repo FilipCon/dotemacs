@@ -15,7 +15,9 @@
 (global-set-key (kbd "C--") 'text-scale-decrease)
 
 (use-package doom-modeline
-  :hook (after-init . doom-modeline-init))
+  :hook (after-init . doom-modeline-init)
+  :config
+  (setq doom-modeline-icon t))
 
 ;; all the icons
 (use-package all-the-icons)

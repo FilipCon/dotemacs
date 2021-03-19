@@ -45,8 +45,14 @@
       "^.[^#].+el$"))
   (load-file file))
 
-;; start server once
-(unless (server-running-p) (server-start))
+(require 'server)
+;; `server-running-p' doesn't work.
+;; (unless (server-running-p) (server-start))
+(defun server-started-p ()
+    "Return non-nil if this Emacs has a server started."
+    (bound-and-true-p server-process))
+(unless (server-started-p)
+  (server-start))
 
 ;; Load automatically generated custom garbage
 (setq custom-file

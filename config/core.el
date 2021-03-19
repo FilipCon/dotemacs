@@ -95,6 +95,3 @@
 (add-hook 'after-change-major-mode-hook
           (lambda ()
             (modify-syntax-entry ?_ "w")))
-
-;; increase font size
-(set-face-attribute 'default nil :height 120)
