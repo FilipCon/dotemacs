@@ -66,7 +66,6 @@
   (global-set-key [remap switch-to-buffer-other-window] 'consult-buffer-other-window)
   (global-set-key [remap switch-to-buffer-other-frame] 'consult-buffer-other-frame)
   (global-set-key [remap man] 'consult-man)
-  (global-set-key [remap yank] 'consult-yank)
   (global-set-key [remap yank-pop] 'consult-yank-pop)
   (global-set-key [remap locate] 'consult-locate)
   (global-set-key [remap recentf-open-files] 'consult-recent-file))
