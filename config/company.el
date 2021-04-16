@@ -13,9 +13,10 @@
   (setq-default company-backends '(company-capf
                                    company-files
                                    company-yasnippet
-                                   company-dabbrev
-                                   company-dabbrev-code
-                                   company-keywords))
+                                   ;; company-dabbrev
+                                   ;; company-dabbrev-code
+                                   company-keywords
+                                   ))
   :config
   (setq-default company-idle-delay 0
                 company-minimum-prefix-length 1

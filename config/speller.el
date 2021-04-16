@@ -43,6 +43,7 @@
 (use-package flyspell
   :config
   (setq flyspell-sort-corrections t)
+  (setq ispell-program-name "aspell")
   (global-set-key (kbd "C-c b s") 'flyspell-buffer))
 
 ;; show correction options

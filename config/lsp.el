@@ -2,7 +2,8 @@
 
 ;; language server
 (use-package lsp-mode
-  :hook ((python-mode
+  :hook ((
+          ;; python-mode
           c-mode
           c++-mode
           csharp-mode
@@ -13,8 +14,12 @@
           tex-mode
           yatex-mode
           bibtex-mode) . lsp)
-  :hook (lsp-mode . lsp-enable-which-key-integration)
+  :hook
+  (lsp-mode . (lambda ()
+                       (let ((lsp-keymap-prefix "C-c l"))
+                         (lsp-enable-which-key-integration))))
   :config
+  (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
   (setq lsp-completion-provider :none
         lsp-enable-indentation nil)
   (setq lsp-enable-file-watchers nil)
@@ -38,8 +43,8 @@
   :bind (:map lsp-mode-map
               ("M-." . lsp-ui-peek-find-definitions)
               ("M-," . lsp-ui-peek-find-references)
-              ("C-c C-f" . lsp-format-buffer)
-              ("C-c C-r" . lsp-format-region))
+              ("C-c l f f". lsp-format-buffer)
+              ("C-c l f r". lsp-format-region))
   :config
   (setq-default lsp-ui-doc-enable t
                 lsp-ui-doc-use-childframe t

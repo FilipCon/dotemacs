@@ -1,6 +1,3 @@
-(straight-override-recipe
- '(org :type git :host github :repo "emacsmirror/org" :no-build t))
-
 (use-package org
   :hook(org-mode . org-indent-mode)
   :config
@@ -29,6 +26,6 @@
 ;; task timer
 (use-package org-pomodoro)
 
-;; ;; calendar
-;; (use-package calfw)
-;; (use-package calfw-org)
+;; calendar
+(use-package calfw)
+(use-package calfw-org)
