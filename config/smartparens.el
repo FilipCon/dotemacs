@@ -1,8 +1,15 @@
 ;;; -*- lexical-binding: t -*-
 
 (use-package smartparens
+  :bind (("C-c r" . sp-rewrap-sexp)
+         ("C-c u" . sp-unwrap-sexp)
+         ("M-(" . sp-wrap-round)
+         ("M-[" . sp-wrap-square)
+         ("M-{" . sp-wrap-curly))
   :config
   (smartparens-global-mode 1)
+  (show-smartparens-global-mode)
+  (require 'smartparens-config)
   (setq sp-highlight-pair-overlay nil
         sp-cancel-autoskip-on-backward-movement nil
         sp-show-pair-delay 0

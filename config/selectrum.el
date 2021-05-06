@@ -28,6 +28,7 @@
   (setq completion-styles '(orderless))
   (setq selectrum-refine-candidates-function #'orderless-filter)
   (setq selectrum-highlight-candidates-function #'orderless-highlight-matches)
+  (setq orderless-component-separator "[ -]")
   (defun just-one-face (fn &rest args)
   (let ((orderless-match-faces [completions-common-part]))
     (apply fn args)))

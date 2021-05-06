@@ -18,6 +18,3 @@
   :straight t
   :init (web-mode-defaults)
   :mode (("\\.html?\\'" . web-mode )))
-
-(use-package emmet-mode
-  :defer t)

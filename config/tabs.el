@@ -21,6 +21,6 @@
   (helpful-mode . centaur-tabs-local-mode)
   (after-init . centaur-tabs-mode)
   :bind
-  ("M-[" . centaur-tabs-backward)
-  ("M-]" . centaur-tabs-forward)
+  ("C-M-[" . centaur-tabs-backward)
+  ("C-M-]" . centaur-tabs-forward)
   ("C-c t p" . centaur-tabs-group-by-projectile-project))

@@ -15,7 +15,7 @@
                                    company-yasnippet
                                    ;; company-dabbrev
                                    ;; company-dabbrev-code
-                                   company-keywords
+                                   ;; company-keywords
                                    ))
   :config
   (setq-default company-idle-delay 0

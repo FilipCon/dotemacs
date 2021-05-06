@@ -10,10 +10,6 @@
 ;; font lock for cmake
 (use-package cmake-font-lock)
 
-;; font-lock for modern c++
-(use-package modern-cpp-font-lock
-  :hook (c++-mode . modern-c++-font-lock-mode))
-
 ;; switch between header/source
 (use-package cff
   :config
