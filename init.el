@@ -35,6 +35,9 @@
 ;; use-package
 (straight-use-package 'use-package)
 
+;; doom vars and functions for autoconfiguring company backends
+(load (concat (expand-file-name user-emacs-directory) "company-backends.el"))
+
 ;; Load all files from my ~/.emacs.d/config directory
 ;; It doesn't support nested dirs
 (dolist

@@ -5,7 +5,11 @@
          ("C-c u" . sp-unwrap-sexp)
          ("M-(" . sp-wrap-round)
          ("M-[" . sp-wrap-square)
-         ("M-{" . sp-wrap-curly))
+         ("M-{" . sp-wrap-curly)
+         ("C-0" . sp-forward-slurp-sexp)
+         ("C-9" . sp-forward-barf-sexp)
+         ("C-M-9" . sp-backward-slurp-sexp)
+         ("C-M-0" . sp-backward-barf-sexp))
   :config
   (smartparens-global-mode 1)
   (show-smartparens-global-mode)

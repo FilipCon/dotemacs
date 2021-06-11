@@ -5,7 +5,10 @@
   :straight (:host github :repo "emacsmirror/cmake-mode"
                    :files (:defaults "*"))
   :mode (("CMakeLists\\.txt\\'" . cmake-mode)
-         ("\\.cmake\\'" . cmake-mode)))
+         ("\\.cmake\\'" . cmake-mode))
+  :config
+  (set-company-backend! 'cmake-mode
+    '(company-cmake company-capf company-yasnippet)))
 
 ;; font lock for cmake
 (use-package cmake-font-lock)
@@ -17,8 +20,5 @@
             '(lambda ()
                (define-key c-mode-base-map (kbd "M-o") 'cff-find-other-file))))
 
-;; ;; assembly code
-;; (use-package rmsbolt)
-
-;; company headers
-(use-package company-c-headers)
+;; assembly code
+(use-package rmsbolt)

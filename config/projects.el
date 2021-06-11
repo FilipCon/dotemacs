@@ -3,7 +3,6 @@
 (use-package projectile
   :config
   :bind-keymap ("C-c p" . projectile-command-map)
-  :custom ((projectile-completion-sythem 'selectrum))
   :config
   (projectile-mode 1)
   (setq projectile-globally-ignored-files '(".DS_Store" "Icon" "TAGS")

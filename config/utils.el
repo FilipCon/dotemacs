@@ -1,5 +1,69 @@
 ;;; -*- lexical-binding: t -*-
 
+;; highlight current line
+(global-hl-line-mode t)
+(global-visual-line-mode 1)
+
+;; show line number in selected modes
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+(add-hook 'text-mode-hook 'display-line-numbers-mode)
+(add-hook 'LaTeX-mode-hook 'display-line-numbers-mode)
+(add-hook 'conf-mode-hook 'display-line-numbers-mode)
+
+;; font size
+(global-set-key (kbd "C-+") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
+
+(use-package doom-modeline
+  :hook (after-init . doom-modeline-init)
+  :config
+  (setq doom-modeline-icon t))
+
+;; all the icons
+(use-package all-the-icons)
+(use-package all-the-icons-ibuffer
+  :after all-the-icons
+  :hook (ibuffer-mode . all-the-icons-ibuffer-mode))
+
+;; tildes in EOF like vim
+(use-package vi-tilde-fringe
+  :init
+  (add-hook 'prog-mode-hook 'vi-tilde-fringe-mode)
+  (add-hook 'org-mode-hook 'vi-tilde-fringe-mode))
+
+;; fill column indicator
+(use-package hl-fill-column
+  :hook (prog-mode . hl-fill-column-mode))
+
+(global-set-key (kbd "<f12>") 'display-fill-column-indicator-mode)
+
+(use-package hl-todo
+  :hook ((prog-mode text-mode) . hl-todo-mode)
+  :config
+  (setq hl-todo-highlight-punctuation ":")
+  (setq hl-todo-keyword-faces
+      '(("TODO"   . "#FF0000")
+        ("FIXME"  . "#FF0000")
+        ("DEBUG"  . "#A020F0")
+        ("GOTCHA" . "#FF4500")
+        ("WARNING". "#FFE600")
+        ("CITE"   . "#FFE600")
+        ("NOTE"   . "#66CD00")
+        ("STUB"   . "#1E90FF"))))
+
+(use-package whitespace
+  :commands whitespace-mode
+  :bind ("<f11>" . global-whitespace-mode)
+  :config
+  (setq whitespace-line-column nil)
+  (setq whitespace-style
+        '(face indentation tabs tab-mark spaces space-mark
+               newline trailing)))
+
+;; elisp
+(use-package package-lint
+  :bind ("C-c C-c" . eval-buffer))
+
 ;; insert file name
 (global-set-key [f7]
   (lambda () (interactive)
@@ -15,19 +79,24 @@
 (global-set-key (kbd "C-c c b") 'windmove-left)
 (global-set-key (kbd "C-c c f") 'windmove-right)
 
+;; move buffers
+(use-package buffer-move
+  :bind (("C-c b p" . buf-move-up)
+         ("C-c b n" . buf-move-down)
+         ("C-c b b" . buf-move-left)
+         ("C-c b f" . buf-move-right)))
+
 ;; remap kill buffer
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
 
 ;; remap key for ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
-;; restore most recently killed buffer
-(global-set-key (kbd "C-S-t") 'recentf-open-most-recent-file)
-
 ;; replacement for kill-ring-save
 (use-package easy-kill
   :config
-  (global-set-key [remap kill-ring-save] 'easy-kill))
+  (global-set-key [remap kill-ring-save] 'easy-kill)
+  (global-set-key [remap mark-sexp] 'easy-mark))
 
 ;; visualize regexp
 (use-package visual-regexp)
@@ -100,7 +169,23 @@
 
 (use-package undo-fu
   :bind (("C-/". undo-fu-only-undo)
-         ("C-?" . undo-fu-only-redo)))
+         ("C-?" . undo-fu-only-redo))
+  :config
+  (setq undo-limit 400000
+        undo-strong-limit 3000000
+        undo-outer-limit 3000000))
+
+;; (use-package undo-tree
+;;   :bind (("C-/". undo-tree-undo)
+;;          ("C-?" . undo-tree-redo))
+;;   :config
+;;   (global-undo-tree-mode)
+;;   (setq undo-tree-visualizer-diff t
+;;         undo-tree-auto-save-history t
+;;         undo-tree-enable-undo-in-region t
+;;         undo-limit 800000
+;;         undo-strong-limit 12000000
+;;         undo-outer-limit 120000000))
 
 ;; move buffers
 (use-package buffer-move

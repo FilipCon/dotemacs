@@ -38,34 +38,3 @@
                    :overlay-category 'flycheck-info-overlay
                    :fringe-bitmap 'flycheck-fringe-indicator
                    :fringe-face 'flycheck-fringe-info))
-
-;; speller
-(use-package flyspell
-  :config
-  (setq flyspell-sort-corrections t)
-  (setq ispell-program-name "aspell")
-  (global-set-key (kbd "C-c b s") 'flyspell-buffer))
-
-;; show correction options
-(use-package flyspell-correct
-  :after flyspell
-  :hook ((text-mode . flyspell-mode)
-         (prog-mode . flyspell-prog-mode))
-  :bind (:map flyspell-mode-map ("C-." . flyspell-correct-wrapper))
-  :init
-  (use-package flyspell-correct-popup)
-  (unbind-key "C-;" flyspell-mode-map))
-
-;; languagetool
-(use-package langtool
-  :config
-  (setq langtool-java-classpath
-        "/home/filipkon/Software/languagetool/*")
-  :bind ("C-c b l" . langtool-check-buffer))
-
-;; word definition
-(use-package define-word)
-
-;;synonyms
-(use-package synosaurus
-  :config (synosaurus-mode 1))

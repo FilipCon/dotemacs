@@ -13,6 +13,7 @@
 (use-package selectrum
   :config
   (selectrum-mode)
+  (global-set-key (kbd "C-x M-r") 'selectrum-repeat)
   (setq selectrum-fix-minibuffer-height t))
 
 ;; selectrum support
@@ -54,22 +55,14 @@
 
 ;; enhanced commands on mini-buffer
 (use-package consult
-  :after (projectile)
-  :bind (("C-s" . consult-line))
+  :bind (("C-s" . consult-line)
+         ("C-x C-r" . consult-recent-file)
+         ([remap yank-pop] . consult-yank-pop)
+         ([remap goto-line] . consult-goto-line)
+         ([remap imenu] . consult-imenu))
   :config
   (setq-default consult-project-root-function #'projectile-project-root)
-  (fset 'multi-occur #'consult-multi-occur)
-  ;; remap bindings
-  (global-set-key [remap apropos] 'consult-apropos)
-  (global-set-key [remap goto-line] 'consult-goto-line)
-  (global-set-key [remap imenu] 'consult-imenu)
-  (global-set-key [remap switch-to-buffer] 'consult-buffer)
-  (global-set-key [remap switch-to-buffer-other-window] 'consult-buffer-other-window)
-  (global-set-key [remap switch-to-buffer-other-frame] 'consult-buffer-other-frame)
-  (global-set-key [remap man] 'consult-man)
-  (global-set-key [remap yank-pop] 'consult-yank-pop)
-  (global-set-key [remap locate] 'consult-locate)
-  (global-set-key [remap recentf-open-files] 'consult-recent-file))
+  (fset 'multi-occur #'consult-multi-occur))
 
 (use-package consult-flycheck
   :after (consult flycheck))

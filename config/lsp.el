@@ -3,39 +3,31 @@
 ;; language server
 (use-package lsp-mode
   :hook ((
-          ;; python-mode
-          c-mode
-          c++-mode
-          csharp-mode
-          clojure-mode
-          clojurec-mode
-          clojurescript-mode
-          latex-mode
-          LaTeX-mode
-          tex-mode
-          yatex-mode
-          bibtex-mode) . lsp)
-  :hook
-  (lsp-mode . (lambda ()
-                       (let ((lsp-keymap-prefix "C-c l"))
-                         (lsp-enable-which-key-integration))))
+         ;; python-mode
+         c-mode c++-mode
+         csharp-mode
+         clojure-mode clojurec-mode clojurescript-mode
+         latex-mode LaTeX-mode tex-mode yatex-mode bibtex-mode) . lsp)
+  :hook (lsp-mode . (lambda () (let ((lsp-keymap-prefix "C-c l"))
+                                 (lsp-enable-which-key-integration))))
   :config
   (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
-  (setq lsp-completion-provider :none
-        lsp-enable-indentation nil)
-  (setq lsp-enable-file-watchers nil)
-  (setq lsp-headerline-breadcrumb-enable-diagnostics nil)
-  (setq-default lsp-enable-semantic-highlighting t
-                lsp-prefer-flymake nil
-                lsp-restart 'auto-restart
-                lsp-pyls-plugins-yapf-enabled t
-                lsp-pyls-plugins-autopep8-enabled nil)
   (global-set-key (kbd "C-<return>") 'lsp-execute-code-action)
-  (setq-default lsp-clients-clangd-args '("--compile-commands-dir=build"
-                                          "--clang-tidy" "--suggest-missing-includes"
-                                          "--header-insertion=never"
-                                          "--all-scopes-completion=true"
-                                          "-j=2" "--background-index" "--log=error")))
+  (setq lsp-completion-provider :none
+        lsp-enable-indentation nil
+        lsp-enable-file-watchers nil
+        lsp-headerline-breadcrumb-enable-diagnostics nil
+        ;; lsp-file-watch-threshold 10000
+        lsp-enable-semantic-highlighting t
+        lsp-prefer-flymake nil
+        lsp-restart 'auto-restart
+        lsp-pyls-plugins-yapf-enabled t
+        lsp-pyls-plugins-autopep8-enabled nil
+        lsp-clients-clangd-args '("--compile-commands-dir=build"
+                                  "--clang-tidy" "--suggest-missing-includes"
+                                  "--header-insertion=never"
+                                  "--all-scopes-completion=true"
+                                  "-j=2" "--background-index" "--log=error")))
 
 ;; lsp ui
 (use-package lsp-ui

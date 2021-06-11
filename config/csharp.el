@@ -4,4 +4,6 @@
 
 (use-package omnisharp
   :config
-  (push 'csharp-omnisharp-codecheck flycheck-checkers))
+  (push 'csharp-omnisharp-codecheck flycheck-checkers)
+  (set-company-backend! 'csharp-mode
+    '(company-omnisharp company-capf company-yasnippet)))

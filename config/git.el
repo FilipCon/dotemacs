@@ -42,7 +42,8 @@
   (diff-hl-delete ((t (:background nil))))
   :hook ((after-init . global-diff-hl-mode)
          (after-init . diff-hl-flydiff-mode)
-         (dired-mode . diff-hl-dired-mode))
+         (dired-mode . diff-hl-dired-mode-unless-remote))
+  :hook (magit-post-refresh . diff-hl-magit-post-refresh)
   :init (setq diff-hl-draw-borders nil)
   :config
   (setq diff-hl-ask-before-revert-hunk nil)

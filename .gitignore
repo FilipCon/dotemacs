@@ -23,3 +23,10 @@ custom-variables.el
 *.sqlite
 .dap-breakpoints
 *.cache
+org-gcal/
+persist/
+oauth2.plstore
+gcal.el
+bookmarks
+.org-generic-id-locations
+.org-id-locations
