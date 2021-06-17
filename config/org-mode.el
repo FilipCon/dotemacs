@@ -33,7 +33,7 @@
         ;; org-hide-block-startup nil
         ;; org-cycle-separator-lines 2
         org-startup-folded 'showall)
-  (set-company-backend! '(org-mode org-journal-mode) 'company-capf 'company-dabbrev)
+  (set-company-backend! '(org-journal-mode) 'company-capf 'company-dabbrev)
   ;; keys
   (global-set-key (kbd "C-c o c") 'org-capture)
   (global-set-key (kbd "C-c o a") 'org-agenda)

@@ -2,9 +2,9 @@
 
 ;; company
 (use-package company
+  :hook (company-mode . +company-init-backends-h)
   :config
   (global-company-mode)
-  (add-hook 'company-mode-hook #'+company-init-backends-h)
   (setq company-backends '())
   (setq-default company-idle-delay 0
                 company-minimum-prefix-length 1
