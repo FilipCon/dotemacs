@@ -8,7 +8,7 @@
   (setq org-ellipsis " ▾"
         org-directory "~/notes"
         ;; org-agenda-start-with-log-mode t
-        org-agenda-span 5
+        org-agenda-span 10
         org-agenda-start-on-weekday nil
         org-agenda-start-day "0d"
         org-log-done 'time
@@ -63,7 +63,6 @@
   (setq org-agenda-files '("~/notes/org/todos.org"
                           "~/notes/org/gcal.org"
                           "~/notes/org/notes.org"
-                          "~/notes/org/inbox.org"
                           "~/notes/org/links.org"
                           "~/notes/org/projects.org")))
 
@@ -78,7 +77,8 @@
   :config
   (setq org-gcal-client-id my/org-gcal-client-id
         org-gcal-client-secret my/org-gcal-client-secret
-        org-gcal-fetch-file-alist '(("filipconstantinos@gmail.com" .  "~/notes/org/gcal.org"))))
+        org-gcal-fetch-file-alist '(("filipconstantinos@gmail.com" .  "~/notes/org/gcal.org")
+                                    ("konstantinos.fil@pixelated-noise.com" .  "~/notes/org/gcal.org"))))
 
 (setq org-capture-templates
       '(("a" "Appointment" entry (file  "~/notes/org/gcal.org" )

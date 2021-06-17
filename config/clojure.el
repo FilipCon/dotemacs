@@ -1,6 +1,6 @@
 ;;; -*- lexical-binding: t -*-
 
-;; clojure
+;; cider
 (use-package cider
   :hook (cider-mode . lsp)
   :config
@@ -29,13 +29,17 @@
                 cider-stacktrace-default-filters '(tooling dup))
   (unbind-key "M-," cider-mode-map))
 
+;; clojure mode
 (use-package clojure-mode)
 
+;; refactor
 (use-package clj-refactor
   :hook (clojure-mode . clj-refactor-mode)
   :config
   (cljr-add-keybindings-with-prefix "C-r"))
 
+;; kondo
 (use-package flycheck-clj-kondo)
 
+;; snippets
 (use-package clojure-snippets)

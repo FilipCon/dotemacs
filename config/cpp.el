@@ -18,7 +18,7 @@
   :config
   (add-hook 'c-mode-common-hook
             '(lambda ()
-               (define-key c-mode-base-map (kbd "M-o") 'cff-find-other-file))))
+               (define-key c-mode-base-map (kbd "C-x o") 'cff-find-other-file))))
 
 ;; assembly code
 (use-package rmsbolt)

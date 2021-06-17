@@ -86,10 +86,9 @@
          ("C-c b b" . buf-move-left)
          ("C-c b f" . buf-move-right)))
 
-;; remap kill buffer
+;; remap default keys
+(global-set-key (kbd "M-o") 'other-window)
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
-
-;; remap key for ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;; replacement for kill-ring-save
@@ -107,7 +106,8 @@
 ;; collection of utilities
 (use-package crux
   :bind (("C-x 4 t". crux-transpose-windows)
-         ("C-c d" . crux-duplicate-current-line-or-region)))
+         ("C-c d" . crux-duplicate-current-line-or-region)
+         ("C-c b r" . crux-rename-file-and-buffer)))
 
 ;; easy comment/uncomment
 (use-package evil-nerd-commenter

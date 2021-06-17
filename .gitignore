@@ -25,6 +25,8 @@ custom-variables.el
 *.cache
 org-gcal/
 persist/
+eln-cache/
+projects
 oauth2.plstore
 gcal.el
 bookmarks
