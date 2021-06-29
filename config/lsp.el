@@ -7,6 +7,7 @@
          c-mode c++-mode
          csharp-mode
          clojure-mode clojurec-mode clojurescript-mode
+         sql-mode web-mode
          latex-mode LaTeX-mode tex-mode yatex-mode bibtex-mode) . lsp)
   :hook (lsp-mode . (lambda () (let ((lsp-keymap-prefix "C-c l"))
                                  (lsp-enable-which-key-integration))))
@@ -17,6 +18,7 @@
         lsp-enable-indentation nil
         lsp-enable-file-watchers nil
         lsp-headerline-breadcrumb-enable-diagnostics nil
+        lsp-ui-sideline-show-code-actions nil
         ;; lsp-file-watch-threshold 10000
         lsp-enable-semantic-highlighting t
         lsp-prefer-flymake nil

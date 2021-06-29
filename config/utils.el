@@ -2,7 +2,7 @@
 
 ;; highlight current line
 (global-hl-line-mode t)
-(global-visual-line-mode 1)
+(global-visual-line-mode t)
 
 ;; show line number in selected modes
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
@@ -35,8 +35,10 @@
 (use-package hl-fill-column
   :hook (prog-mode . hl-fill-column-mode))
 
+;; column indicator
 (global-set-key (kbd "<f12>") 'display-fill-column-indicator-mode)
 
+;; highlight specific words
 (use-package hl-todo
   :hook ((prog-mode text-mode) . hl-todo-mode)
   :config
@@ -45,12 +47,11 @@
       '(("TODO"   . "#FF0000")
         ("FIXME"  . "#FF0000")
         ("DEBUG"  . "#A020F0")
-        ("GOTCHA" . "#FF4500")
         ("WARNING". "#FFE600")
         ("CITE"   . "#FFE600")
-        ("NOTE"   . "#66CD00")
-        ("STUB"   . "#1E90FF"))))
+        ("NOTE"   . "#66CD00"))))
 
+;; show whitspaces
 (use-package whitespace
   :commands whitespace-mode
   :bind ("<f11>" . global-whitespace-mode)
@@ -60,9 +61,8 @@
         '(face indentation tabs tab-mark spaces space-mark
                newline trailing)))
 
-;; elisp
-(use-package package-lint
-  :bind ("C-c C-c" . eval-buffer))
+;; eval elisp buffer
+(define-key emacs-lisp-mode-map (kbd "C-c C-c") 'eval-buffer)
 
 ;; insert file name
 (global-set-key [f7]
@@ -131,13 +131,13 @@
 ;; Update buffer whenever file changes
 (use-package autorevert
   :config
-  (global-auto-revert-mode)
+  (global-auto-revert-mode t)
   :custom
-  (auto-revert-interval 3)
+  (auto-revert-interval 2)
   (auto-revert-verbose nil)
   (auto-revert-remote-files t)
   (auto-revert-check-vc-info t)
-  (global-auto-revert-non-file-buffers t))
+  (global-auto-revert-non-file-buffers nil))
 
 ;; hippie expand
 (use-package hippie-expand
@@ -169,11 +169,7 @@
 
 (use-package undo-fu
   :bind (("C-/". undo-fu-only-undo)
-         ("C-?" . undo-fu-only-redo))
-  :config
-  (setq undo-limit 400000
-        undo-strong-limit 3000000
-        undo-outer-limit 3000000))
+         ("C-?" . undo-fu-only-redo)))
 
 ;; (use-package undo-tree
 ;;   :bind (("C-/". undo-tree-undo)
@@ -182,17 +178,7 @@
 ;;   (global-undo-tree-mode)
 ;;   (setq undo-tree-visualizer-diff t
 ;;         undo-tree-auto-save-history t
-;;         undo-tree-enable-undo-in-region t
-;;         undo-limit 800000
-;;         undo-strong-limit 12000000
-;;         undo-outer-limit 120000000))
-
-;; move buffers
-(use-package buffer-move
-  :bind (("C-c b p" . buf-move-up)
-         ("C-c b n" . buf-move-down)
-         ("C-c b b" . buf-move-left)
-         ("C-c b f" . buf-move-right)))
+;;         undo-tree-enable-undo-in-region t))
 
 ;; move line/region
 (use-package move-text

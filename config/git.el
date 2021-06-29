@@ -2,39 +2,31 @@
 
 (use-package magit
   :config
-  ;; show word by word difference
   (setq magit-diff-refine-hunk 'all
         magit-diff-expansion-threshold 20)
-  :bind (("C-c g s" . magit-status)
-         ("C-c g l" . magit-log)
-         ("C-c g p" . magit-push-other)
-         ("C-c g u" . magit-pull)
-         ("C-c g d" . magit-diff)
-         ("C-c g o" . magit-checkout)
-         ("C-c g a" . magit-remote-add)
-         ("C-c g r" . magit-remote-remove)
-         ("C-c g n" . magit-clone)))
+  :bind (("C-c g s" . magit-status)))
 
 ;; (setq ediff-diff-options "-w")
 (setq ediff-split-window-function (quote split-window-horizontally))
 (setq ediff-window-setup-function (quote ediff-setup-windows-plain))
 
-(use-package git-link
-  :commands (git-link git-link-commit git-link-open-in-browser)
-  :custom (git-link-open-in-browser t))
+;; (use-package git-link
+;;   :commands (git-link git-link-commit git-link-open-in-browser)
+;;   :custom (git-link-open-in-browser t))
 
-(use-package gitignore-mode)
-(use-package gitconfig-mode)
-(use-package gitattributes-mode)
+;; (use-package gitignore-mode)
+;; (use-package gitconfig-mode)
+;; (use-package gitattributes-mode)
 
-(use-package forge
-  :after magit
-  :config
-  (setq auth-sources '("~/.authinfo.gpg")))
+;; (use-package forge
+;;   :after magit
+;;   :config
+;;   (setq auth-sources '("~/.authinfo.gpg")))
 
 ;; (use-package git-timemachine
 ;;   :commands git-timemachine)
 
+;; fringe highlight diffs
 (use-package diff-hl
   :custom-face
   (diff-hl-change ((t (:foreground ,(face-background 'highlight) :background nil))))
@@ -63,5 +55,4 @@
 
   (bind-key "C-x v n" 'diff-hl-next-hunk diff-hl-mode-map)
   (bind-key "C-x v p" 'diff-hl-previous-hunk diff-hl-mode-map)
-  (bind-key "C-x v u" 'diff-hl-revert-hunk diff-hl-mode-map)
-  (bind-key "C-x v =" 'diff-hl-diff-goto-hunk diff-hl-mode-map))
+  (bind-key "C-x v u" 'diff-hl-revert-hunk diff-hl-mode-map))

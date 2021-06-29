@@ -17,7 +17,7 @@
 (use-package web-mode
   :straight t
   :init (web-mode-defaults)
-  :mode (("\\.html?\\'" . web-mode )))
+  :mode (("\\.html?\\'" . web-mode)))
 
 (use-package emmet-mode)
 
@@ -49,9 +49,17 @@
   :config
   (set-company-backend! 'sass-mode '(company-capf company-yasnippet
                                                   company-css))
-  (set-company-backend! '(company-capf company-yasnippet
-                                       web-mode company-css company-web-html))
-  (set-company-backend! '(company-capf company-yasnippet
-                                       pug-mode company-web-jade))
-  (set-company-backend! '(company-capf company-yasnippet
-                                       slim-mode company-web-slim)))
+  (set-company-backend! 'web-mode '(company-capf company-yasnippet
+                                                 company-css company-web-html)))
+
+(use-package sql
+  :config
+  ;; (add-to-list 'sql-postgres-options "--no-psqlrc")
+  (defun sanityinc/fix-postgres-prompt-regexp ()
+    "Work around https://debbugs.gnu.org/cgi/bugreport.cgi?bug=22596.
+Fix for the above hasn't been released as of Emacs 25.2."
+    (when (eq sql-product 'postgres)
+      (setq-local sql-prompt-regexp "^[[:alnum:](-|_)]*=[#>] ")
+      (setq-local sql-prompt-cont-regexp "^[[:alnum:](-|_)]*[-(][#>] ")))
+
+  (add-hook 'sql-interactive-mode-hook 'sanityinc/fix-postgres-prompt-regexp))

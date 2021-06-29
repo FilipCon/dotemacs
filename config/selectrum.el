@@ -64,9 +64,6 @@
   (setq-default consult-project-root-function #'projectile-project-root)
   (fset 'multi-occur #'consult-multi-occur))
 
-(use-package consult-flycheck
-  :after (consult flycheck))
-
 (use-package embark-consult
   :after (consult embark)
   :hook (embark-collect . embark-consult-preview-minor-mode))

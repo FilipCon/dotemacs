@@ -59,30 +59,28 @@
   (push (org-projectile-project-todo-entry) org-capture-templates)
   ;; org files
   (setq org-agenda-files '("~/notes/org/todos.org"
-                          "~/notes/org/gcal.org"
+                          ;; "~/notes/org/gcal.org"
                           "~/notes/org/notes.org"
-                          "~/notes/org/pixelated-cal.org"
+                          ;; "~/notes/org/pixelated-cal.org"
                           "~/notes/org/projects.org")))
 
-;; google calendar
-(use-package org-gcal
-  :straight
-  (:type git :host github :repo "kidd/org-gcal.el")
-  :init(require 'json)
-  (defun get-secrets-config-value (key)
-    "Return the value of the json file secrets for key"
-    (cdr (assoc key (json-read-file (concat (file-name-directory user-init-file) "secrets.json")))))
-  :hook ((org-agenda-mode . org-gcal-sync)
-         (org-capture-after-finalize . org-gcal-sync))
-  :config
-  (setq org-gcal-client-id (get-secrets-config-value 'org-gcal-client-id)
-        org-gcal-client-secret (get-secrets-config-value 'org-gcal-client-secret)
-        org-gcal-fetch-file-alist
-        `(
-          ;; TODO does not seem to work with two mails/tokens
-          ;; (,(get-secrets-config-value 'calendar-user) . "~/notes/org/personal-cal.org")
-          (,(get-secrets-config-value 'calendar-company) . "~/notes/org/pixelated-cal.org")
-          )))
+;; ;; google calendar
+;; (use-package org-gcal
+;;   :init
+;;   (defun get-secrets-config-value (key)
+;;     "Return the value of the json file secrets for key"
+;;     (cdr (assoc key (json-read-file (concat (file-name-directory user-init-file) "secrets.json")))))
+;;   :hook ((org-agenda-mode . org-gcal-sync)
+;;          (org-capture-after-finalize . org-gcal-sync))
+;;   :config
+;;   (setq org-gcal-client-id (get-secrets-config-value 'org-gcal-client-id)
+;;         org-gcal-client-secret (get-secrets-config-value 'org-gcal-client-secret)
+;;         org-gcal-fetch-file-alist
+;;         `(
+;;           ;; TODO does not seem to work with two mails/tokens
+;;           ;; (,(get-secrets-config-value 'calendar-user) . "~/notes/org/personal-cal.org")
+;;           (,(get-secrets-config-value 'calendar-company) . "~/notes/org/pixelated-cal.org")
+;;           )))
 
 (setq org-capture-templates
       '(("a" "Appointment" entry (file  "~/notes/org/gcal.org" )

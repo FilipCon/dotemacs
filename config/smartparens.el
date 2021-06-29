@@ -6,13 +6,17 @@
          ("M-(" . sp-wrap-round)
          ("M-[" . sp-wrap-square)
          ("M-{" . sp-wrap-curly)
+         ("M-\"" . paredit-meta-doublequote)
          ("C-0" . sp-forward-slurp-sexp)
          ("C-9" . sp-forward-barf-sexp)
          ("C-M-9" . sp-backward-slurp-sexp)
-         ("C-M-0" . sp-backward-barf-sexp))
+         ("C-M-0" . sp-backward-barf-sexp)
+         ("C-M-<backspace>" . backward-kill-sexp)
+         ("M-DEL" . sp-backward-kill-word)
+         ("M-d" . sp-kill-word))
   :config
-  (smartparens-global-mode 1)
-  (show-smartparens-global-mode)
+  (smartparens-global-mode t)
+  (show-smartparens-global-mode t)
   (require 'smartparens-config)
   (setq sp-highlight-pair-overlay nil
         sp-cancel-autoskip-on-backward-movement nil

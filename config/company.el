@@ -32,7 +32,10 @@
   :after company all-the-icons
   :hook (company-mode . company-box-mode)
   :config
+  (setq x-gtk-resize-child-frames 'resize-mode)
+  (add-to-list 'company-box-frame-parameters '(tab-bar-lines . 0))
   (setq company-box-doc-delay 0
+        company-box-show-single-candidate t
         company-box-backends-colors nil
         company-box-color-icon nil
         company-box-icons-alist 'company-box-icons-images))
