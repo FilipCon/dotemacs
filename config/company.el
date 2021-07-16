@@ -5,6 +5,7 @@
   :hook (company-mode . +company-init-backends-h)
   :config
   (global-company-mode)
+  (add-to-list 'company-begin-commands 'cljr-slash)
   (setq company-backends '())
   (setq-default company-idle-delay 0
                 company-minimum-prefix-length 1

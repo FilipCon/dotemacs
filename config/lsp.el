@@ -7,7 +7,7 @@
          c-mode c++-mode
          csharp-mode
          clojure-mode clojurec-mode clojurescript-mode
-         sql-mode web-mode
+         sql-mode
          latex-mode LaTeX-mode tex-mode yatex-mode bibtex-mode) . lsp)
   :hook (lsp-mode . (lambda () (let ((lsp-keymap-prefix "C-c l"))
                                  (lsp-enable-which-key-integration))))
@@ -44,6 +44,7 @@
   (setq-default lsp-ui-doc-enable t
                 lsp-ui-doc-use-childframe t
                 lsp-ui-doc-position 'top
+                lsp-ui-doc-max-height 80
                 lsp-ui-doc-include-signature t
                 lsp-ui-sideline-ignore-duplicate t
                 lsp-ui-flycheck-enable t

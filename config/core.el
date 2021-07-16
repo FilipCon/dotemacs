@@ -22,6 +22,7 @@
 
 (setq compilation-ask-about-save nil) ; auto save before complilation
 (setq compilation-scroll-output t) ; follow Output in compilation buffer
+(setq reb-re-syntax 'string)
 
 (menu-bar-mode -1)                      ; menu-bar is gone
 (tool-bar-mode -1)                      ; tool-bar is gone
@@ -94,3 +95,6 @@
 (add-hook 'after-change-major-mode-hook
           (lambda ()
             (modify-syntax-entry ?_ "w")))
+
+;; stop minimizing, its annoying
+(global-unset-key [?\C-z])
