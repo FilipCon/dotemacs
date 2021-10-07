@@ -1,8 +1,8 @@
 ;;; -*- lexical-binding: t -*-
 
 (use-package org
+  :hook (org-mode . org-indent-mode)
   :config
-  (add-hook 'org-mode 'org-indent-mode)
   (setq org-ellipsis " ▾"
         org-directory "~/notes"
         ;; org-agenda-start-with-log-mode t

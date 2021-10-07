@@ -4,7 +4,8 @@
   :config
   (setq magit-diff-refine-hunk 'all
         magit-diff-expansion-threshold 20)
-  :bind (("C-c g s" . magit-status)))
+  :bind (("C-c g s" . magit-status)
+         ("C-c g d" . magit-diff)))
 
 ;; (setq ediff-diff-options "-w")
 (setq ediff-split-window-function (quote split-window-horizontally))
@@ -29,9 +30,9 @@
 ;; fringe highlight diffs
 (use-package diff-hl
   :custom-face
-  (diff-hl-change ((t (:foreground ,(face-background 'highlight) :background nil))))
-  (diff-hl-insert ((t (:background nil))))
-  (diff-hl-delete ((t (:background nil))))
+  (diff-hl-change ((t (:foreground "DeepSkyBlue" :background nil))))
+  (diff-hl-insert ((t (:foreground "YellowGreen" :background nil))))
+  (diff-hl-delete ((t (:foreground "OrangeRed" :background nil))))
   :hook ((after-init . global-diff-hl-mode)
          (after-init . diff-hl-flydiff-mode)
          (dired-mode . diff-hl-dired-mode-unless-remote))

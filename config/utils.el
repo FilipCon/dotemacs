@@ -47,22 +47,44 @@
       '(("TODO"   . "#FF0000")
         ("FIXME"  . "#FF0000")
         ("DEBUG"  . "#A020F0")
-        ("WARNING". "#FFE600")
-        ("CITE"   . "#FFE600")
-        ("NOTE"   . "#66CD00"))))
+        ("OPTIMIZE"  . "#A020F0")
+        ("WARNING". "#ff00ff")
+        ("HACK"   . "#FF4500")
+        ("CITE"   . "#1E90FF")
+        ("STUB"   . "#1E90FF")
+        ("NOTE"   . "#66CD00")
+        ("REVIEW"   . "#66CD00"))))
 
 ;; show whitspaces
 (use-package whitespace
   :commands whitespace-mode
   :bind ("<f11>" . global-whitespace-mode)
   :config
-  (setq whitespace-line-column nil)
-  (setq whitespace-style
-        '(face indentation tabs tab-mark spaces space-mark
-               newline trailing)))
+  (setq whitespace-line-column nil))
 
 ;; eval elisp buffer
 (define-key emacs-lisp-mode-map (kbd "C-c C-c") 'eval-buffer)
+
+(defun copy-file-path (&optional @dir-path-only-p)
+  (interactive "P")
+  (let (($fpath
+         (if (string-equal major-mode 'dired-mode)
+             (progn
+               (let (($result (mapconcat 'identity (dired-get-marked-files) "\n")))
+                 (if (equal (length $result) 0)
+                     (progn default-directory )
+                   (progn $result))))
+           (if (buffer-file-name)
+               (buffer-file-name)
+             (expand-file-name default-directory)))))
+    (kill-new
+     (if @dir-path-only-p
+         (progn
+           (message "Directory path copied: 「%s」" (file-name-directory $fpath))
+           (file-name-directory $fpath))
+       (progn
+         (message "File path copied: 「%s」" $fpath)
+         $fpath )))))
 
 ;; insert file name
 (global-set-key [f7]
@@ -116,10 +138,10 @@
 ;; global search tool
 (use-package ag)
 
-;; move like a ninja! swoosh!
-(use-package avy
-  :bind (("C-'" . avy-goto-char)
-         ("C-\"" . avy-goto-char-2)))
+;; ;; move like a ninja! swoosh!
+;; (use-package avy
+;;   :bind (("C-'" . avy-goto-char)
+;;          ("C-\"" . avy-goto-char-2)))
 
 ;; writable grep
 (use-package wgrep)
@@ -147,7 +169,7 @@
 ;; fold/expand region
 (use-package origami
   :hook (prog-mode . origami-mode)
-    :bind (:map origami-mode-map
+  :bind (:map origami-mode-map
               ("C-: :" . origami-recursively-toggle-node)
               ("C-: a" . origami-toggle-all-nodes)
               ("C-: t" . origami-toggle-node)
@@ -199,3 +221,11 @@
   (global-set-key (kbd "C->") 'mc/mark-next-like-this)
   (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
   (global-set-key (kbd "M-C-l") 'mc/mark-all-like-this))
+
+(defun fill-to-end ()
+  (interactive)
+  (save-excursion
+    (end-of-line)
+    (while (< (current-column) 80)
+      (insert-char ?-))))
+(global-set-key (kbd "<f8>") 'fill-to-end)

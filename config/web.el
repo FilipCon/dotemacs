@@ -47,12 +47,16 @@
 
 (use-package company-web
   :config
-  (set-company-backend! 'sass-mode '(company-capf company-yasnippet
-                                                  company-css))
-  (set-company-backend! 'web-mode '(company-capf company-yasnippet
-                                                 company-css company-web-html)))
+  (set-company-backend! 'sass-mode '(company-capf
+                                     company-yasnippet
+                                     company-css))
+  (set-company-backend! 'web-mode '(company-capf
+                                    company-yasnippet
+                                    company-css
+                                    company-web-html)))
 
 (use-package sql
+  :mode (("\\.sql?\\'" . sql-mode))
   :config
   ;; (add-to-list 'sql-postgres-options "--no-psqlrc")
   (defun sanityinc/fix-postgres-prompt-regexp ()

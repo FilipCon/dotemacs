@@ -98,3 +98,5 @@
 
 ;; stop minimizing, its annoying
 (global-unset-key [?\C-z])
+
+(set-face-attribute 'default nil :height 140)

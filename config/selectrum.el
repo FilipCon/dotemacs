@@ -4,9 +4,7 @@
 (use-package prescient
   :config
   (prescient-persist-mode 1)
-  (setq-default prescient-filter-method
-                '(literal regexp initialism)
-                prescient-save-file
+  (setq-default prescient-save-file
                 (concat user-emacs-directory ".cache/prescient-save.el")))
 
 ;; ivy alternative

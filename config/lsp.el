@@ -7,7 +7,7 @@
          c-mode c++-mode
          csharp-mode
          clojure-mode clojurec-mode clojurescript-mode
-         sql-mode
+         sql-mode css-mode
          latex-mode LaTeX-mode tex-mode yatex-mode bibtex-mode) . lsp)
   :hook (lsp-mode . (lambda () (let ((lsp-keymap-prefix "C-c l"))
                                  (lsp-enable-which-key-integration))))
@@ -16,10 +16,7 @@
   (global-set-key (kbd "C-<return>") 'lsp-execute-code-action)
   (setq lsp-completion-provider :none
         lsp-enable-indentation nil
-        lsp-enable-file-watchers nil
         lsp-headerline-breadcrumb-enable-diagnostics nil
-        lsp-ui-sideline-show-code-actions nil
-        ;; lsp-file-watch-threshold 10000
         lsp-enable-semantic-highlighting t
         lsp-prefer-flymake nil
         lsp-restart 'auto-restart
@@ -50,6 +47,7 @@
                 lsp-ui-flycheck-enable t
                 lsp-ui-flycheck-list-position 'right
                 lsp-ui-flycheck-live-reporting t
+                lsp-ui-sideline-show-code-actions nil
                 lsp-ui-peek-enable t
                 lsp-ui-peek-list-width 60
                 lsp-ui-peek-peek-height 25))

@@ -1,0 +1,3 @@
+* My Emacs Configuration
+
+- =dependencies.sh= file requires update...

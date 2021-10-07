@@ -17,11 +17,11 @@
   (use-package flyspell-correct-popup)
   (unbind-key "C-;" flyspell-mode-map))
 
-(use-package writegood-mode
-;; :config
-;; (global-set-key "\C-c\C-gg" 'writegood-grade-level)
-;; (global-set-key "\C-c\C-ge" 'writegood-reading-ease)
-  )
+;; (use-package writegood-mode
+;; ;; :config
+;; ;; (global-set-key "\C-c\C-gg" 'writegood-grade-level)
+;; ;; (global-set-key "\C-c\C-ge" 'writegood-reading-ease)
+;;   )
 
 ;; ;; languagetool
 ;; (use-package langtool
