@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 ;; debug interface
 (use-package dap-mode
   :config

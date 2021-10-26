@@ -1,18 +1,34 @@
 ;;; -*- lexical-binding: t -*-
 
-;; highlight current line
-(global-hl-line-mode t)
-(global-visual-line-mode t)
-
-;; show line number in selected modes
-(add-hook 'prog-mode-hook 'display-line-numbers-mode)
-(add-hook 'text-mode-hook 'display-line-numbers-mode)
-(add-hook 'LaTeX-mode-hook 'display-line-numbers-mode)
-(add-hook 'conf-mode-hook 'display-line-numbers-mode)
-
 ;; font size
-(global-set-key (kbd "C-+") 'text-scale-increase)
+(global-set-key (kbd "C-=") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
+
+;; column indicator
+(global-set-key (kbd "<f12>") 'display-fill-column-indicator-mode)
+
+;; eval elisp buffer
+(define-key emacs-lisp-mode-map (kbd "C-c C-c") 'eval-buffer)
+
+;; move between recently visited
+(global-set-key (kbd "C-M-,") 'previous-buffer)
+(global-set-key (kbd "C-M-.") 'next-buffer)
+
+;; remap default keys
+(global-set-key (kbd "M-o") 'other-window)
+(global-set-key (kbd "C-x k") 'kill-this-buffer)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
+;; hippie expand, instead of dabbrev
+(global-set-key (kbd "M-/") 'hippie-expand)
+
+(defun fill-to-end ()
+  (interactive)
+  (save-excursion
+    (end-of-line)
+    (while (< (current-column) 80)
+      (insert-char ?-))))
+(global-set-key (kbd "<f8>") 'fill-to-end)
 
 (use-package doom-modeline
   :hook (after-init . doom-modeline-init)
@@ -27,22 +43,18 @@
 
 ;; tildes in EOF like vim
 (use-package vi-tilde-fringe
-  :init
-  (add-hook 'prog-mode-hook 'vi-tilde-fringe-mode)
-  (add-hook 'org-mode-hook 'vi-tilde-fringe-mode))
+  :hook
+  ((prog-mode . vi-tilde-fringe-mode)
+   (org-mode . vi-tilde-fringe-mode)))
 
 ;; fill column indicator
 (use-package hl-fill-column
   :hook (prog-mode . hl-fill-column-mode))
 
-;; column indicator
-(global-set-key (kbd "<f12>") 'display-fill-column-indicator-mode)
-
 ;; highlight specific words
 (use-package hl-todo
   :hook ((prog-mode text-mode) . hl-todo-mode)
   :config
-  (setq hl-todo-highlight-punctuation ":")
   (setq hl-todo-keyword-faces
       '(("TODO"   . "#FF0000")
         ("FIXME"  . "#FF0000")
@@ -55,45 +67,11 @@
         ("NOTE"   . "#66CD00")
         ("REVIEW"   . "#66CD00"))))
 
-;; show whitspaces
+;; show whitespaces
 (use-package whitespace
-  :commands whitespace-mode
   :bind ("<f11>" . global-whitespace-mode)
   :config
   (setq whitespace-line-column nil))
-
-;; eval elisp buffer
-(define-key emacs-lisp-mode-map (kbd "C-c C-c") 'eval-buffer)
-
-(defun copy-file-path (&optional @dir-path-only-p)
-  (interactive "P")
-  (let (($fpath
-         (if (string-equal major-mode 'dired-mode)
-             (progn
-               (let (($result (mapconcat 'identity (dired-get-marked-files) "\n")))
-                 (if (equal (length $result) 0)
-                     (progn default-directory )
-                   (progn $result))))
-           (if (buffer-file-name)
-               (buffer-file-name)
-             (expand-file-name default-directory)))))
-    (kill-new
-     (if @dir-path-only-p
-         (progn
-           (message "Directory path copied: 「%s」" (file-name-directory $fpath))
-           (file-name-directory $fpath))
-       (progn
-         (message "File path copied: 「%s」" $fpath)
-         $fpath )))))
-
-;; insert file name
-(global-set-key [f7]
-  (lambda () (interactive)
-     (insert (buffer-name (window-buffer (minibuffer-selected-window))))))
-
-;; move between recently visited
-(global-set-key (kbd "C-M-,") 'previous-buffer)
-(global-set-key (kbd "C-M-.") 'next-buffer)
 
 ;; move cursor to other buffers
 (global-set-key (kbd "C-c c p") 'windmove-up)
@@ -108,22 +86,11 @@
          ("C-c b b" . buf-move-left)
          ("C-c b f" . buf-move-right)))
 
-;; remap default keys
-(global-set-key (kbd "M-o") 'other-window)
-(global-set-key (kbd "C-x k") 'kill-this-buffer)
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-
 ;; replacement for kill-ring-save
 (use-package easy-kill
   :config
   (global-set-key [remap kill-ring-save] 'easy-kill)
   (global-set-key [remap mark-sexp] 'easy-mark))
-
-;; visualize regexp
-(use-package visual-regexp)
-
-;; unfill paragraph, etc
-(use-package unfill)
 
 ;; collection of utilities
 (use-package crux
@@ -136,45 +103,13 @@
   :bind ("C-;" . evilnc-comment-or-uncomment-lines))
 
 ;; global search tool
-(use-package ag)
-
-;; ;; move like a ninja! swoosh!
-;; (use-package avy
-;;   :bind (("C-'" . avy-goto-char)
-;;          ("C-\"" . avy-goto-char-2)))
+(use-package ag
+  :bind (("C-x p g" . ag-project-regexp))
+  :config
+  (setq-default ag-highlight-search t))
 
 ;; writable grep
-(use-package wgrep)
-
-;; Workaround with minified source files
-(use-package so-long
-  :hook (after-init . global-so-long-mode))
-
-;; Update buffer whenever file changes
-(use-package autorevert
-  :config
-  (global-auto-revert-mode t)
-  :custom
-  (auto-revert-interval 2)
-  (auto-revert-verbose nil)
-  (auto-revert-remote-files t)
-  (auto-revert-check-vc-info t)
-  (global-auto-revert-non-file-buffers nil))
-
-;; hippie expand
-(use-package hippie-expand
-  :straight (:type built-in)
-  :bind ("M-/" . hippie-expand))
-
-;; fold/expand region
-(use-package origami
-  :hook (prog-mode . origami-mode)
-  :bind (:map origami-mode-map
-              ("C-: :" . origami-recursively-toggle-node)
-              ("C-: a" . origami-toggle-all-nodes)
-              ("C-: t" . origami-toggle-node)
-              ("C-: o" . origami-show-only-node)
-              ("C-: C-r" . origami-reset)))
+(use-package wgrep-ag)
 
 ;; restart emacs
 (use-package restart-emacs)
@@ -193,39 +128,18 @@
   :bind (("C-/". undo-fu-only-undo)
          ("C-?" . undo-fu-only-redo)))
 
-;; (use-package undo-tree
-;;   :bind (("C-/". undo-tree-undo)
-;;          ("C-?" . undo-tree-redo))
-;;   :config
-;;   (global-undo-tree-mode)
-;;   (setq undo-tree-visualizer-diff t
-;;         undo-tree-auto-save-history t
-;;         undo-tree-enable-undo-in-region t))
-
 ;; move line/region
 (use-package move-text
   :bind(("M-p" .  'move-text-up)
         ("M-n" .  'move-text-down)))
 
-;; expand region vim style
-(use-package expand-region
-  :bind ("C-=" . 'er/expand-region))
-
 ;; multiple cursors
 (use-package multiple-cursors
+  :bind (("M-C->" . mc/edit-lines)
+         ("C-|" . mc/mark-pop)
+         ("C->" . mc/mark-next-like-this)
+         ("C-<" . mc/mark-previous-like-this)
+         ("M-C-l" . mc/mark-all-like-this))
   :config
   (setq mc/always-run-for-all t
-        mc/always-repeat-command t)
-  (global-set-key (kbd "M-C->") 'mc/edit-lines)
-  (global-set-key (kbd "C-|") 'mc/mark-pop)
-  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
-  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-  (global-set-key (kbd "M-C-l") 'mc/mark-all-like-this))
-
-(defun fill-to-end ()
-  (interactive)
-  (save-excursion
-    (end-of-line)
-    (while (< (current-column) 80)
-      (insert-char ?-))))
-(global-set-key (kbd "<f8>") 'fill-to-end)
+        mc/always-repeat-command t))

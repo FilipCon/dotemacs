@@ -20,8 +20,11 @@
  truncate-lines t
  truncate-partial-width-windows 50)
 
-(setq compilation-ask-about-save nil) ; auto save before complilation
-(setq compilation-scroll-output t) ; follow Output in compilation buffer
+(require 'esh-module)
+(add-to-list 'eshell-modules-list 'eshell-tramp)
+
+(setq compilation-ask-about-save nil)   ; auto save before compilation
+(setq compilation-scroll-output t)      ; follow Output in compilation buffer
 (setq reb-re-syntax 'string)
 
 (menu-bar-mode -1)                      ; menu-bar is gone
@@ -33,6 +36,26 @@
 (global-subword-mode t)
 (normal-erase-is-backspace-mode 2)
 (delete-selection-mode 1)
+(winner-mode t)                         ; retrieve closed windows/buffers
+(save-place-mode t)                     ; Save place in files
+(desktop-save-mode t)                   ; save desktop
+(global-so-long-mode t)                 ; long lines make emacs slow
+(global-hl-line-mode t)                 ; highlight current line
+(global-visual-line-mode t)
+
+;; auto-revert mode
+(global-auto-revert-mode t)
+(setq auto-revert-interval 2
+      auto-revert-verbose nil
+      auto-revert-remote-files t
+      auto-revert-check-vc-info t
+      global-auto-revert-non-file-buffers nil)
+
+;; show line number in selected modes
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+(add-hook 'text-mode-hook 'display-line-numbers-mode)
+(add-hook 'LaTeX-mode-hook 'display-line-numbers-mode)
+(add-hook 'conf-mode-hook 'display-line-numbers-mode)
 
 ;; Scrolling
 (setq mouse-wheel-progressive-speed nil
@@ -49,18 +72,8 @@
 (add-hook 'eshell-mode-hook (lambda() (setq hscroll-margin 0)))
 (add-hook 'term-mode-hook (lambda() (setq hscroll-margin 0)))
 
-;; retrieve closed windows/buffers
-(winner-mode t)
-
-;; Save place in files
-(save-place-mode 1)
-
 ;; alias yes.no
 (defalias 'yes-or-no-p 'y-or-n-p)
-
-;; save desktop
-(desktop-save-mode t)
-(save-place-mode t)
 
 ;; more useful frame title
 (setq frame-title-format '((:eval (if (buffer-file-name)
@@ -69,7 +82,7 @@
 
 ;; Backups
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups"))
-      delete-old-versions -1
+      delete-old-versions t
       version-control t
       vc-make-backup-files t
       auto-save-list-file-prefix "~/.emacs.d/autosave/"
@@ -84,19 +97,13 @@
       history-delete-duplicates t
       savehist-save-minibuffer-history 1
       savehist-additional-variables
-      '(kill-ring
-        search-ring
-        regexp-search-ring)
+      '(kill-ring search-ring regexp-search-ring)
       recentf-max-saved-items 50)
 (savehist-mode 1)
 (recentf-mode 1)
 
-;; Treats the `_' as a word constituent
-(add-hook 'after-change-major-mode-hook
-          (lambda ()
-            (modify-syntax-entry ?_ "w")))
-
 ;; stop minimizing, its annoying
 (global-unset-key [?\C-z])
 
+;; default font size
 (set-face-attribute 'default nil :height 140)

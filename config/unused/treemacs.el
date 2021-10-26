@@ -27,8 +27,5 @@
         ("C-x t t"   . treemacs)
         ("C-x t B"   . treemacs-bookmark)))
 
-(use-package treemacs-projectile
-  :after treemacs projectile)
-
 (use-package treemacs-magit
   :after treemacs magit)

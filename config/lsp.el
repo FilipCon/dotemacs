@@ -2,12 +2,12 @@
 
 ;; language server
 (use-package lsp-mode
-  :hook ((
-         ;; python-mode
-         c-mode c++-mode
-         csharp-mode
+  :hook ((c-mode
+	  c++-mode
+	 ;; python-mode
+	 csharp-mode
          clojure-mode clojurec-mode clojurescript-mode
-         sql-mode css-mode
+	 sql-mode css-mode html-mode
          latex-mode LaTeX-mode tex-mode yatex-mode bibtex-mode) . lsp)
   :hook (lsp-mode . (lambda () (let ((lsp-keymap-prefix "C-c l"))
                                  (lsp-enable-which-key-integration))))
@@ -15,18 +15,12 @@
   (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
   (global-set-key (kbd "C-<return>") 'lsp-execute-code-action)
   (setq lsp-completion-provider :none
+	lsp-enable-file-watchers nil
         lsp-enable-indentation nil
         lsp-headerline-breadcrumb-enable-diagnostics nil
         lsp-enable-semantic-highlighting t
         lsp-prefer-flymake nil
-        lsp-restart 'auto-restart
-        lsp-pyls-plugins-yapf-enabled t
-        lsp-pyls-plugins-autopep8-enabled nil
-        lsp-clients-clangd-args '("--compile-commands-dir=build"
-                                  "--clang-tidy" "--suggest-missing-includes"
-                                  "--header-insertion=never"
-                                  "--all-scopes-completion=true"
-                                  "-j=2" "--background-index" "--log=error")))
+	lsp-restart 'auto-restart))
 
 ;; lsp ui
 (use-package lsp-ui
@@ -51,8 +45,3 @@
                 lsp-ui-peek-enable t
                 lsp-ui-peek-list-width 60
                 lsp-ui-peek-peek-height 25))
-
-;; lsp-treemacs
-(use-package lsp-treemacs
-  :after lsp treemacs
-  :hook (lsp-mode . lsp-treemacs-sync-mode))

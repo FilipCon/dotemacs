@@ -19,11 +19,6 @@
 
 ;; clojure mode
 (use-package clojure-mode
+  ;; :custom (fill-column 80)
   :config
   :bind ("C-c C-<SPC>" . clojure-align))
-
-;; refactor
-(use-package clj-refactor
-  :hook (clojure-mode . clj-refactor-mode)
-  :config
-  (cljr-add-keybindings-with-prefix "C-r"))

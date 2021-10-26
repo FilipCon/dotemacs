@@ -19,7 +19,8 @@
   :init (web-mode-defaults)
   :mode (("\\.html?\\'" . web-mode)))
 
-(use-package emmet-mode)
+(use-package emmet-mode
+  :hook (html-mode . emmet-mode))
 
 (use-package json-mode
   :mode ("\\.json?\\'" . json-mode))
@@ -65,5 +66,4 @@ Fix for the above hasn't been released as of Emacs 25.2."
     (when (eq sql-product 'postgres)
       (setq-local sql-prompt-regexp "^[[:alnum:](-|_)]*=[#>] ")
       (setq-local sql-prompt-cont-regexp "^[[:alnum:](-|_)]*[-(][#>] ")))
-
   (add-hook 'sql-interactive-mode-hook 'sanityinc/fix-postgres-prompt-regexp))

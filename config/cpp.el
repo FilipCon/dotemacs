@@ -20,5 +20,13 @@
             '(lambda ()
                (define-key c-mode-base-map (kbd "C-x o") 'cff-find-other-file))))
 
-;; assembly code
-(use-package rmsbolt)
+(with-eval-after-load 'lsp
+  (setq lsp-clients-clangd-args
+	'("--compile-commands-dir=build"
+	  "--clang-tidy" "--suggest-missing-includes"
+	  "--header-insertion=never"
+	  "--all-scopes-completion=true"
+	  "-j=2" "--background-index" "--log=error")))
+
+;; ;; assembly code
+;; (use-package rmsbolt)

@@ -55,11 +55,16 @@
 (use-package consult
   :bind (("C-s" . consult-line)
          ("C-x C-r" . consult-recent-file)
+         ("C-x r g" . consult-ripgrep)
          ([remap yank-pop] . consult-yank-pop)
          ([remap goto-line] . consult-goto-line)
          ([remap imenu] . consult-imenu))
   :config
-  (setq-default consult-project-root-function #'projectile-project-root)
+  (setq consult-line-start-from-top t
+        consult-project-root-function
+        (lambda ()
+          (when-let (project (project-current))
+            (car (project-roots project)))))
   (fset 'multi-occur #'consult-multi-occur))
 
 (use-package embark-consult

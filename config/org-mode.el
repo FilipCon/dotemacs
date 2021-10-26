@@ -34,53 +34,7 @@
   (set-company-backend! '(org-journal-mode) 'company-capf 'company-dabbrev)
   ;; keys
   (global-set-key (kbd "C-c o c") 'org-capture)
-  (global-set-key (kbd "C-c o a") 'org-agenda)
-  (global-set-key (kbd "C-c o p") 'org-projectile-project-todo-completing-read))
-
-(use-package org-super-agenda
-  :config
-  (org-super-agenda-mode))
-
-;; org bullets
-(use-package org-bullets
-  :hook (org-mode . org-bullets-mode))
-
-;; task timer
-(use-package org-pomodoro)
-
-;; jira
-(use-package ox-jira)
-
-;; projectile todos
-(use-package org-projectile
-  :after (org projectile)
-  :config
-  (setq org-projectile-projects-file "~/notes/org/projects.org")
-  (push (org-projectile-project-todo-entry) org-capture-templates)
-  ;; org files
-  (setq org-agenda-files '("~/notes/org/todos.org"
-                          ;; "~/notes/org/gcal.org"
-                          "~/notes/org/notes.org"
-                          ;; "~/notes/org/pixelated-cal.org"
-                          "~/notes/org/projects.org")))
-
-;; ;; google calendar
-;; (use-package org-gcal
-;;   :init
-;;   (defun get-secrets-config-value (key)
-;;     "Return the value of the json file secrets for key"
-;;     (cdr (assoc key (json-read-file (concat (file-name-directory user-init-file) "secrets.json")))))
-;;   :hook ((org-agenda-mode . org-gcal-sync)
-;;          (org-capture-after-finalize . org-gcal-sync))
-;;   :config
-;;   (setq org-gcal-client-id (get-secrets-config-value 'org-gcal-client-id)
-;;         org-gcal-client-secret (get-secrets-config-value 'org-gcal-client-secret)
-;;         org-gcal-fetch-file-alist
-;;         `(
-;;           ;; TODO does not seem to work with two mails/tokens
-;;           ;; (,(get-secrets-config-value 'calendar-user) . "~/notes/org/personal-cal.org")
-;;           (,(get-secrets-config-value 'calendar-company) . "~/notes/org/pixelated-cal.org")
-;;           )))
+  (global-set-key (kbd "C-c o a") 'org-agenda))
 
 (setq org-capture-templates
       '(("a" "Appointment" entry (file  "~/notes/org/gcal.org" )
@@ -91,3 +45,17 @@
          "* TODO %?\n%u" :prepend t)
         ("n" "Note" entry (file+headline "~/notes/org/todos.org" "Note space")
          "* %?\n%u" :prepend t)))
+
+;; org bullets
+(use-package org-bullets
+  :hook (org-mode . org-bullets-mode))
+
+;; (use-package org-super-agenda
+;;   :config
+;;   (org-super-agenda-mode))
+
+;; ;; task timer
+;; (use-package org-pomodoro)
+
+;; ;; jira
+;; (use-package ox-jira)

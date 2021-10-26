@@ -29,7 +29,7 @@
 (use-package diredfl
   :hook (dired-mode . diredfl-mode))
 
-(use-package dired-git-info)
+;; (use-package dired-git-info)
 
-(use-package dired-rsync
-  :bind ("C-c C-r" . dired-rsync))
+;; (use-package dired-rsync
+;;   :bind ("C-c C-r" . dired-rsync))

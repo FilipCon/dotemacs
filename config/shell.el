@@ -8,5 +8,3 @@
         (exec-path-from-shell-initialize))
       :config
       (setq exec-path-from-shell-check-startup-files nil)))
-
-;; (use-package vterm)
