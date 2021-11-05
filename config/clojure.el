@@ -14,6 +14,8 @@
                 cider-ns-refresh-show-log-buffer t
                 cider-font-lock-dynamically nil ; use lsp semantic tokens
                 cider-eldoc-display-for-symbol-at-point nil)
+  (setq clojure-align-forms-automatically t)   ; align s-expressions
+  ;; (setq clojure-indent-style 'align-arguments) ; align function arguments
   (unbind-key "M-," cider-mode-map)
   (unbind-key "M-." cider-mode-map))
 
