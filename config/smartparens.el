@@ -30,9 +30,9 @@
 ;; rainbow-delimiters
 (use-package rainbow-delimiters
   :init (rainbow-delimiters-mode t)
-  :hook((prog-mode
-         markdown-mode
-         text-mode
-         conf-mode
-         cider-repl-mode
-         LaTeX-mode) . rainbow-delimiters-mode))
+  :hook ((prog-mode
+          markdown-mode
+          text-mode
+          conf-mode
+          cider-repl-mode
+          LaTeX-mode) . rainbow-delimiters-mode))

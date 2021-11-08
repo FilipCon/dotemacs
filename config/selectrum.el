@@ -17,16 +17,36 @@
 ;; selectrum support
 (use-package selectrum-prescient
   :after (selectrum prescient)
-  :config
-  (selectrum-prescient-mode 1)
-  (prescient-persist-mode 1))
+  :hook ((selectrum-mode . prescient-persist-mode)
+         (selectrum-mode . selectrum-prescient-mode)))
 
 ;; completion style
 (use-package orderless
   :config
+  (defun orderless-highlight-matches+ (input cands)
+    (let ((cands (if (eq 'file (completion-metadata-get
+                                (completion-metadata
+                                 input
+                                 minibuffer-completion-table
+                                 minibuffer-completion-predicate)
+                                'category))
+                     (cl-loop for cand in cands
+                              for len = (length cand)
+                              if (and (> len 0)
+                                      (eq (aref cand (1- len)) ?/))
+                              collect (progn (add-face-text-property
+                                              0 (length cand)
+                                              'dired-directory
+                                              'append cand)
+                                             cand)
+                              else
+                              collect cand)
+                   cands)))
+      (selectrum-prescient--highlight input cands)
+      (orderless-highlight-matches input cands)))
   (setq completion-styles '(orderless))
   (setq selectrum-refine-candidates-function #'orderless-filter)
-  (setq selectrum-highlight-candidates-function #'orderless-highlight-matches)
+  (setq selectrum-highlight-candidates-function #'orderless-highlight-matches+)
   (setq orderless-component-separator "[ -]")
   (defun just-one-face (fn &rest args)
   (let ((orderless-match-faces [completions-common-part]))
@@ -70,4 +90,3 @@
 (use-package embark-consult
   :after (consult embark)
   :hook (embark-collect . embark-consult-preview-minor-mode))
-

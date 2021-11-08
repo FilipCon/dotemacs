@@ -4,9 +4,6 @@
 (global-set-key (kbd "C-=") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
 
-;; column indicator
-(global-set-key (kbd "<f12>") 'display-fill-column-indicator-mode)
-
 ;; eval elisp buffer
 (define-key emacs-lisp-mode-map (kbd "C-c C-c") 'eval-buffer)
 
@@ -49,6 +46,7 @@
 
 ;; fill column indicator
 (use-package hl-fill-column
+  :bind ("<f12>" . display-fill-column-indicator-mode)
   :hook (prog-mode . hl-fill-column-mode))
 
 ;; highlight specific words
@@ -61,10 +59,12 @@
         ("DEBUG"  . "#A020F0")
         ("OPTIMIZE"  . "#A020F0")
         ("WARNING". "#ff00ff")
+        ("NEXT". "#ff00ff")
         ("HACK"   . "#FF4500")
         ("CITE"   . "#1E90FF")
         ("STUB"   . "#1E90FF")
         ("NOTE"   . "#66CD00")
+        ("DONE"   . "#66CD00")
         ("REVIEW"   . "#66CD00"))))
 
 ;; show whitespaces
