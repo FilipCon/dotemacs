@@ -11,14 +11,15 @@
 (use-package selectrum
   :config
   (selectrum-mode)
-  (global-set-key (kbd "C-x M-r") 'selectrum-repeat)
+  (global-set-key (kbd "C-x M-r") 'selectrum-repeat) ; bug: don't use bind for some reason
   (setq selectrum-fix-minibuffer-height t))
 
 ;; selectrum support
 (use-package selectrum-prescient
   :after (selectrum prescient)
-  :hook ((selectrum-mode . prescient-persist-mode)
-         (selectrum-mode . selectrum-prescient-mode)))
+  :config
+  (selectrum-prescient-mode 1)          ; bug: don't use hooks
+  (prescient-persist-mode 1))
 
 ;; completion style
 (use-package orderless
@@ -62,8 +63,7 @@
 
 ;; mini-buffer actions
 (use-package embark
-  :bind
-  ("C-c a" . embark-act)
+  :bind ("C-c a" . embark-act)
   :config
   (setq embark-action-indicator
       (lambda (map _target)
