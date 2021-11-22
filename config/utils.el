@@ -1,8 +1,8 @@
 ;;; -*- lexical-binding: t -*-
 
 ;; font size
-(global-set-key (kbd "C-=") 'text-scale-increase)
-(global-set-key (kbd "C--") 'text-scale-decrease)
+(global-set-key (kbd "C-=") (lambda () (interactive) (text-scale-increase 0.5)))
+(global-set-key (kbd "C--") (lambda () (interactive) (text-scale-decrease 0.5)))
 
 ;; eval elisp buffer
 (define-key emacs-lisp-mode-map (kbd "C-c C-c") 'eval-buffer)
@@ -26,6 +26,15 @@
     (while (< (current-column) 80)
       (insert-char ?-))))
 (global-set-key (kbd "<f8>") 'fill-to-end)
+
+(use-package scroll-on-jump
+  :config
+  (scroll-on-jump-advice-add set-mark-command)
+  (scroll-on-jump-advice-add previous-buffer)
+  (scroll-on-jump-advice-add next-buffer)
+  (scroll-on-jump-advice-add diff-hl-previous-hunk)
+  (scroll-on-jump-advice-add diff-hl-next-hunk)
+  (setq scroll-on-jump-duration 0))
 
 (use-package doom-modeline
   :hook (after-init . doom-modeline-init)
@@ -140,6 +149,6 @@
          ("C->" . mc/mark-next-like-this)
          ("C-<" . mc/mark-previous-like-this)
          ("M-C-l" . mc/mark-all-like-this))
-  :config
-  (setq mc/always-run-for-all t
-        mc/always-repeat-command t))
+  :custom
+  (mc/always-run-for-all t)
+  (mc/always-repeat-command t))

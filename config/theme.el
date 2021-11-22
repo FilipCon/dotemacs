@@ -2,19 +2,28 @@
 
 ;; theme
 (use-package doom-themes
+  :custom-face
+  (ediff-fine-diff-Ancestor                 ((t (:background "#74140f"))))
+  (ediff-fine-diff-A                        ((t (:background "#74140f"))))
+  (ediff-fine-diff-B                        ((t (:background "#4b5332"))))
+  (ediff-fine-diff-C                        ((t (:background "#525252"))))
+  (ediff-current-diff-Ancestor              ((t (:background "#551b1e"))))
+  (ediff-current-diff-A                     ((t (:background "#551b1e"))))
+  (ediff-current-diff-B                     ((t (:background "#39422a"))))
+  (ediff-current-diff-C                     ((t (:background "#3D3D48"))))
+
+  (ediff-even-diff-Ancestor                 ((t (:background "#333333"))))
+  (ediff-even-diff-A                        ((t (:background "#333333"))))
+  (ediff-even-diff-B                        ((t (:background "#333333"))))
+  (ediff-even-diff-C                        ((t (:background "#333333"))))
+  (ediff-odd-diff-Ancestor                  ((t (:background "#333333"))))
+  (ediff-odd-diff-A                         ((t (:background "#333333"))))
+  (ediff-odd-diff-B                         ((t (:background "#333333"))))
+  (ediff-odd-diff-C                         ((t (:background "#333333"))))
+
   :config
   (doom-themes-visual-bell-config)      ; Enable flashing mode-line on errors
-  (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
   (doom-themes-treemacs-config)
-  ;; Corrects (and improves) org-mode's native fontification.
-  (doom-themes-org-config))
-
-;; switch between dark & light themes
-(use-package heaven-and-hell
-  :config
-  (setq heaven-and-hell-theme-type 'light)
-  (setq heaven-and-hell-themes '((light . doom-solarized-light)
-                                 (dark . doom-vibrant)))
-  (setq heaven-and-hell-load-theme-no-confirm t)
-  :hook (after-init . heaven-and-hell-init-hook)
-  :bind ("<f6>" . heaven-and-hell-toggle-theme))
+  (doom-themes-org-config)
+  ;; (load-theme 'doom-solarized-light t)
+  (load-theme 'doom-vibrant t))

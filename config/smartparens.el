@@ -1,5 +1,9 @@
 ;;; -*- lexical-binding: t -*-
 
+(use-package paredit
+  :config
+  (paredit-mode -1))
+
 (use-package smartparens
   :bind (("C-c r" . sp-rewrap-sexp)
          ("C-c u" . sp-unwrap-sexp)

@@ -6,7 +6,7 @@
   (setq project-vc-ignores
         '("tmp" ".shadow-cljs" "node_modules"
           ".lsp" ".cpcache" ".clj-kondo"
-          "*.elc" "*.pyc" "*.o" "*.so")))
+          "*.elc" "*.pyc" "*.o" "*.so" "*.ipynb")))
 
 (use-package projectile
   :config
@@ -15,7 +15,7 @@
   :config
   (projectile-mode 1)
   (setq projectile-globally-ignored-files '(".DS_Store" "Icon" "TAGS" "package-lock.json")
-        projectile-globally-ignored-file-suffixes '(".elc" ".pyc" ".o" ".so")
+        projectile-globally-ignored-file-suffixes '(".elc" ".pyc" ".o" ".so" "*.ipynb")
         projectile-ignored-projects '("~/" "/tmp"))
   (setq projectile-globally-ignored-directories
         (append projectile-globally-ignored-directories

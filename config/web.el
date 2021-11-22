@@ -25,6 +25,13 @@
 (use-package json-mode
   :mode ("\\.json?\\'" . json-mode))
 
+(use-package sgml-mode
+  :config
+  :bind (:map sgml-mode-map
+         ("<f1> SPC" . sgml-mark-tag))
+  :mode (("\\.html$" . sgml-mode)
+         ("\\.xml$" . sgml-mode)))
+
 (use-package tagedit
   :hook (html-mode . tagedit-mode)
   :config
@@ -57,9 +64,17 @@
                                     company-web-html)))
 
 (use-package sql
-  :mode (("\\.sql?\\'" . sql-mode))
+  :hook (sql-interactive-mode . (lambda ()
+                                  (toggle-truncate-lines t)))
   :config
-  ;; (add-to-list 'sql-postgres-options "--no-psqlrc")
+  (setq sql-postgres-login-params
+      '((user :default "postgres")
+        (database :default "postgres")
+        (server :default "localhost")
+        (port :default 5432)))
+
+  ;; bug fix
+  (add-to-list 'sql-postgres-options "--no-psqlrc")
   (defun sanityinc/fix-postgres-prompt-regexp ()
     "Work around https://debbugs.gnu.org/cgi/bugreport.cgi?bug=22596.
 Fix for the above hasn't been released as of Emacs 25.2."
@@ -67,3 +82,17 @@ Fix for the above hasn't been released as of Emacs 25.2."
       (setq-local sql-prompt-regexp "^[[:alnum:](-|_)]*=[#>] ")
       (setq-local sql-prompt-cont-regexp "^[[:alnum:](-|_)]*[-(][#>] ")))
   (add-hook 'sql-interactive-mode-hook 'sanityinc/fix-postgres-prompt-regexp))
+
+(use-package sqlformat
+  :config
+  ;; (setq sqlformat-command 'pgformatter)
+  ;; (setq sqlformat-args '("-s2" "-g"))
+  (define-key sql-mode-map (kbd "C-c C-f") 'sqlformat))
+
+(use-package log4j-mode
+  :disabled t
+  :hook
+  ((log4j-mode .view-mode)
+   (log4j-mode .read-only-mode)))
+
+(use-package terraform-mode)

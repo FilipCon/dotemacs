@@ -2,32 +2,33 @@
 
 ;; language server
 (use-package lsp-mode
-  :hook ((c-mode
-	  c++-mode
-	 ;; python-mode
-	 csharp-mode
-         clojure-mode clojurec-mode clojurescript-mode
-	 sql-mode css-mode html-mode
+  :hook ((c-mode c++-mode
+          ;; python-mode
+          csharp-mode
+          clojure-mode clojurec-mode clojurescript-mode
+          sql-mode css-mode html-mode
          latex-mode LaTeX-mode tex-mode yatex-mode bibtex-mode) . lsp)
   :hook (lsp-mode . (lambda () (let ((lsp-keymap-prefix "C-c l"))
                                  (lsp-enable-which-key-integration))))
   :config
   (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
   (global-set-key (kbd "C-<return>") 'lsp-execute-code-action)
+  ;; (lsp-signature-mode)
+  (setq lsp-lens-enable nil)
+  (setq lsp-sqls-workspace-config-path nil)
   (setq lsp-completion-provider :none
-	lsp-enable-file-watchers nil
+        lsp-enable-file-watchers nil
         lsp-enable-indentation nil
         lsp-headerline-breadcrumb-enable-diagnostics nil
-        lsp-enable-semantic-highlighting t
-        lsp-prefer-flymake nil
-	lsp-restart 'auto-restart))
+        lsp-semantic-tokens-enable t))
 
 ;; lsp ui
 (use-package lsp-ui
   :after lsp-mode
   :hook (lsp-mode . lsp-ui-mode)
   :bind (:map lsp-mode-map
-              ("M-." . lsp-ui-peek-find-definitions)
+              ("C-c l g g" . lsp-ui-peek-find-definitions)
+              ("C-c l g r" . lsp-ui-peek-find-references)
               ("M-," . lsp-ui-peek-find-references)
               ("C-c l f f". lsp-format-buffer)
               ("C-c l f r". lsp-format-region))

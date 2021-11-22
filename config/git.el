@@ -5,11 +5,11 @@
   (setq magit-diff-refine-hunk 'all
         magit-diff-expansion-threshold 20)
   :bind (("C-c g s" . magit-status)
-         ("C-c g d" . magit-diff)))
+         ("C-c g d" . magit-diff-dwim)
+         ("C-c g b" . magit-blame-addition)))
 
-;; (setq ediff-diff-options "-w")
-(setq ediff-split-window-function (quote split-window-horizontally))
-(setq ediff-window-setup-function (quote ediff-setup-windows-plain))
+(setq ediff-split-window-function 'split-window-horizontally)
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
 
 ;; (use-package git-link
 ;;   :commands (git-link git-link-commit git-link-open-in-browser)

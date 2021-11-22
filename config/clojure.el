@@ -2,6 +2,9 @@
 
 ;; cider
 (use-package cider
+  :mode (("\\.edn$" . clojure-mode)
+         ("\\.repl$" . clojure-mode)
+         ("\\.bb$" . clojure-mode))
   :hook (cider-mode . (lambda ()
                         (remove-hook 'completion-at-point-functions
                                      #'cider-complete-at-point)))
@@ -14,10 +17,8 @@
                 cider-ns-refresh-show-log-buffer t
                 cider-font-lock-dynamically nil ; use lsp semantic tokens
                 cider-eldoc-display-for-symbol-at-point nil)
-  (setq clojure-align-forms-automatically t)   ; align s-expressions
   ;; (setq clojure-indent-style 'align-arguments) ; align function arguments
-  (unbind-key "M-," cider-mode-map)
-  (unbind-key "M-." cider-mode-map))
+  (setq clojure-align-forms-automatically t))   ; align s-expressions
 
 ;; clojure mode
 (use-package clojure-mode

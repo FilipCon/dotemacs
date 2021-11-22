@@ -41,8 +41,9 @@
         )
   (set-company-backend! '(org-journal-mode) 'company-capf 'company-dabbrev)
   ;; keys
-  ;; (global-set-key (kbd "C-c o c") 'org-capture)
-  ;; (global-set-key (kbd "C-c o a") 'org-agenda)
+  (global-set-key (kbd "C-c C-x C-k") 'org-clock-remove-overlays)
+  (global-set-key (kbd "C-c o c") 'org-capture)
+  (global-set-key (kbd "C-c o a") 'org-agenda)
   )
 
 ;; (setq org-capture-templates
@@ -68,8 +69,8 @@
         org-clock-export-data-format
         '("Name" "Konstantinos Filip"
           "Email" "konstantinos.fil@pixelated-noise.com"
-          "Client" (or (org-entry-get (point) "CLIENT") "")
-          "Project" (or (org-entry-get (point) "PROJECT") "")
+          "Client" (or (org-entry-get (point) "CLIENT") "Vittle")
+          "Project" (or (org-entry-get (point) "PROJECT") "FY21 - Backend Development")
           "Task" (or (org-entry-get (point) "TASK") "")
           "Description" (org-entry-get (point) "ITEM")
           "Billable" (or (org-entry-get (point) "BILLABLE") "")

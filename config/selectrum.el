@@ -73,6 +73,7 @@
 
 ;; enhanced commands on mini-buffer
 (use-package consult
+  :commands (consult-customize)
   :bind (("C-s" . consult-line)
          ("C-x C-r" . consult-recent-file)
          ("C-x r g" . consult-ripgrep)
@@ -80,6 +81,12 @@
          ([remap goto-line] . consult-goto-line)
          ([remap imenu] . consult-imenu))
   :config
+  (consult-customize
+   consult-ripgrep consult-git-grep consult-grep
+   consult-bookmark consult-recent-file consult-xref
+   consult--source-file consult--source-project-file consult--source-bookmark
+   :preview-key (kbd "M-."))
+  ;; (setq consult-preview-key (kbd "M-."))
   (setq consult-line-start-from-top t
         consult-project-root-function
         (lambda ()

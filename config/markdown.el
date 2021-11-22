@@ -1,6 +1,8 @@
 ;; The markdown mode is awesome! unbeatable
 (use-package markdown-mode
-  :mode ("README\\(?:\\.md\\)?\\'" . gfm-mode)
+  :mode (("README\\(?:\\.md\\)?\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
   :hook (markdown-mode . auto-fill-mode)
   :init
   (advice-add #'markdown--command-map-prompt :override #'ignore)
