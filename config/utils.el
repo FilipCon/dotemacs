@@ -27,15 +27,6 @@
       (insert-char ?-))))
 (global-set-key (kbd "<f8>") 'fill-to-end)
 
-(use-package scroll-on-jump
-  :config
-  (scroll-on-jump-advice-add set-mark-command)
-  (scroll-on-jump-advice-add previous-buffer)
-  (scroll-on-jump-advice-add next-buffer)
-  (scroll-on-jump-advice-add diff-hl-previous-hunk)
-  (scroll-on-jump-advice-add diff-hl-next-hunk)
-  (setq scroll-on-jump-duration 0))
-
 (use-package doom-modeline
   :hook (after-init . doom-modeline-init)
   :config

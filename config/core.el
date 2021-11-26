@@ -44,8 +44,8 @@
 (global-visual-line-mode t)
 
 ;; auto-revert mode
-(global-auto-revert-mode t)
-(setq auto-revert-interval 2
+(global-auto-revert-mode nil)
+(setq auto-revert-interval 5
       auto-revert-verbose nil
       auto-revert-remote-files t
       auto-revert-check-vc-info t
@@ -77,8 +77,8 @@
 
 ;; more useful frame title
 (setq frame-title-format '((:eval (if (buffer-file-name)
-                                 (abbreviate-file-name (buffer-file-name))
-                               "%b"))))
+                                      (abbreviate-file-name (buffer-file-name))
+                                    "%b"))))
 
 ;; Backups
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups"))
@@ -93,9 +93,9 @@
 
 ;; History
 (setq savehist-file "~/.emacs.d/savehist"
-      history-length t
+      history-length 1000
       history-delete-duplicates t
-      savehist-save-minibuffer-history 1
+      savehist-save-minibuffer-history t
       savehist-additional-variables
       '(kill-ring search-ring regexp-search-ring)
       recentf-max-saved-items 50)

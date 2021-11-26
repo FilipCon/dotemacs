@@ -5,8 +5,6 @@
                          ("gnu" . "https://elpa.gnu.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")))
 
-(defvar file-name-handler-alist-old file-name-handler-alist)
-
 ;; Make startup faster
 (setq package-enable-at-startup nil
       file-name-handler-alist nil
