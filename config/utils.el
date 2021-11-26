@@ -143,3 +143,10 @@
   :custom
   (mc/always-run-for-all t)
   (mc/always-repeat-command t))
+
+;; sneaky garbage collector
+(use-package gcmh-mode
+  :commands (gcmh-mode)
+  :straight (:host github :repo "emacsmirror/gcmh")
+  :config
+  (gcmh-mode 1))

@@ -2,6 +2,8 @@
 
 ;; cider
 (use-package cider
+  :bind (:map cider-mode-map
+              ("C-c ." . xref-find-definitions))
   :mode (("\\.edn$" . clojure-mode)
          ("\\.repl$" . clojure-mode)
          ("\\.bb$" . clojure-mode))

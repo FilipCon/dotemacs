@@ -18,7 +18,10 @@
  tab-always-indent t
  tab-width 4
  truncate-lines t
- truncate-partial-width-windows 50)
+ truncate-partial-width-windows 50
+ message-log-max 16384
+ gc-cons-percentage 0.1
+ read-process-output-max (* 64 1024))
 
 (require 'esh-module)
 (add-to-list 'eshell-modules-list 'eshell-tramp)
@@ -44,7 +47,7 @@
 (global-visual-line-mode t)
 
 ;; auto-revert mode
-(global-auto-revert-mode nil)
+(global-auto-revert-mode t)
 (setq auto-revert-interval 5
       auto-revert-verbose nil
       auto-revert-remote-files t

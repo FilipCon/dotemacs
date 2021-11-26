@@ -1,22 +1,6 @@
 ;;; -*- lexical-binding: t -*-
 
-;; configure packages
-(setq package-archives '(("org" . "http://orgmode.org/elpa/")
-                         ("gnu" . "https://elpa.gnu.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")))
-
-;; Make startup faster
-(setq package-enable-at-startup nil
-      file-name-handler-alist nil
-      message-log-max 16384
-      gc-cons-threshold most-positive-fixnum
-      gc-cons-percentage 0.6
-      auto-window-vscroll nil
-      package--init-file-ensured t
-      read-process-output-max (* 1024 1024))
-
-;; Straight
-(setq straight-use-package-by-default t)
+;; Straight bootstrap
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -32,6 +16,7 @@
 
 ;; use-package
 (straight-use-package 'use-package)
+(setq straight-use-package-by-default t)
 
 ;; doom vars and functions for autoconfiguring company backends
 (load (concat (expand-file-name user-emacs-directory) "company-backends.el"))
@@ -46,6 +31,7 @@
       "^.[^#].+el$"))
   (load-file file))
 
+;; init emacs server
 (require 'server)
 ;; `server-running-p' doesn't work.
 ;; (unless (server-running-p) (server-start))

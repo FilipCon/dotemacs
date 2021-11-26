@@ -13,7 +13,6 @@
   :config
   (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
   (global-set-key (kbd "C-<return>") 'lsp-execute-code-action)
-  ;; (lsp-signature-mode)
   (setq lsp-lens-enable nil)
   (setq lsp-sqls-workspace-config-path nil)
   (setq lsp-completion-provider :none
@@ -30,6 +29,7 @@
               ("C-c l g g" . lsp-ui-peek-find-definitions)
               ("C-c l g r" . lsp-ui-peek-find-references)
               ("M-," . lsp-ui-peek-find-references)
+              ("M-." . lsp-ui-peek-find-definitions)
               ("C-c l f f". lsp-format-buffer)
               ("C-c l f r". lsp-format-region))
   :config
@@ -46,3 +46,9 @@
                 lsp-ui-peek-enable t
                 lsp-ui-peek-list-width 60
                 lsp-ui-peek-peek-height 25))
+
+(defun +lsp-init-optimizations-h ()
+  (when (bound-and-true-p lsp-mode)
+    (setq-local read-process-output-max (* 1024 1024))
+    (setq-local gcmh-high-cons-threshold (* 2 (default-value 'gcmh-high-cons-threshold)))))
+(add-hook 'lsp-mode-hook #'+lsp-init-optimizations-h)
