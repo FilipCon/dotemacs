@@ -148,5 +148,5 @@
 (use-package gcmh-mode
   :commands (gcmh-mode)
   :straight (:host github :repo "emacsmirror/gcmh")
-  :config
+  :init
   (gcmh-mode 1))

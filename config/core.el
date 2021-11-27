@@ -45,14 +45,6 @@
 (global-hl-line-mode t)                 ; highlight current line
 (global-visual-line-mode t)
 
-;; auto-revert mode
-(global-auto-revert-mode t)
-(setq auto-revert-interval 5
-      auto-revert-verbose nil
-      auto-revert-remote-files t
-      auto-revert-check-vc-info t
-      global-auto-revert-non-file-buffers nil)
-
 ;; show line number in selected modes
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (add-hook 'text-mode-hook 'display-line-numbers-mode)
