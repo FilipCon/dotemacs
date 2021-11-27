@@ -20,7 +20,6 @@
  truncate-lines t
  truncate-partial-width-windows 50
  message-log-max 16384
- gc-cons-percentage 0.1
  read-process-output-max (* 64 1024))
 
 (require 'esh-module)

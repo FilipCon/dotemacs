@@ -1,5 +1,9 @@
 ;;; -*- lexical-binding: t -*-
 
+;; Reset after early-init
+(setq gc-cons-threshold 100000000       ; for safety, gcmh will correct it
+      gc-cons-percentage 0.1)
+
 ;; Straight bootstrap
 (defvar bootstrap-version)
 (let ((bootstrap-file

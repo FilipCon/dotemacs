@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 
 ;; PDF tools
 (use-package pdf-tools

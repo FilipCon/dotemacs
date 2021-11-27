@@ -2,8 +2,7 @@
 
 ;; cider
 (use-package cider
-  :bind (:map cider-mode-map
-              ("C-c ." . xref-find-definitions))
+  :bind (:map cider-mode-map ("C-c ." . cider-find-var))
   :mode (("\\.edn$" . clojure-mode)
          ("\\.repl$" . clojure-mode)
          ("\\.bb$" . clojure-mode))
@@ -18,12 +17,12 @@
                 cider-repl-pop-to-buffer-on-connect 'display-only
                 cider-ns-refresh-show-log-buffer t
                 cider-font-lock-dynamically nil ; use lsp semantic tokens
-                cider-eldoc-display-for-symbol-at-point nil)
-  ;; (setq clojure-indent-style 'align-arguments) ; align function arguments
-  (setq clojure-align-forms-automatically t))   ; align s-expressions
+                cider-eldoc-display-for-symbol-at-point nil))
 
 ;; clojure mode
 (use-package clojure-mode
-  ;; :custom (fill-column 80)
   :config
+  (setq clojure-align-reader-conditionals t)
+  (setq clojure-indent-style 'align-arguments) ; align function arguments
+  (setq clojure-align-forms-automatically t) ; align s-expressions
   :bind ("C-c C-<SPC>" . clojure-align))

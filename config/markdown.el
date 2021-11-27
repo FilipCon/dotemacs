@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 ;; The markdown mode is awesome! unbeatable
 (use-package markdown-mode
   :mode (("README\\(?:\\.md\\)?\\'" . gfm-mode)
