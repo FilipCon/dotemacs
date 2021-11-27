@@ -4,8 +4,8 @@
 (use-package prescient
   :config
   (prescient-persist-mode 1)
-  (setq-default prescient-save-file
-                (concat user-emacs-directory ".cache/prescient-save.el")))
+  (setq prescient-save-file
+        (concat user-emacs-directory ".cache/prescient-save.el")))
 
 ;; ivy alternative
 (use-package selectrum
@@ -45,10 +45,10 @@
                    cands)))
       (selectrum-prescient--highlight input cands)
       (orderless-highlight-matches input cands)))
-  (setq completion-styles '(orderless))
-  (setq selectrum-refine-candidates-function #'orderless-filter)
-  (setq selectrum-highlight-candidates-function #'orderless-highlight-matches+)
-  (setq orderless-component-separator "[ -]")
+  (setq completion-styles '(orderless)
+        selectrum-refine-candidates-function #'orderless-filter
+        selectrum-highlight-candidates-function #'orderless-highlight-matches+
+        orderless-component-separator "[ -]")
   (defun just-one-face (fn &rest args)
   (let ((orderless-match-faces [completions-common-part]))
     (apply fn args)))
@@ -77,6 +77,15 @@
   :bind (("C-s" . consult-line)
          ("C-x C-r" . consult-recent-file)
          ("C-x r g" . consult-ripgrep)
+         ("M-g e" . consult-compile-error)
+         ("M-g f" . consult-flycheck)
+         ("M-g o" . consult-outline)
+         ("M-g m" . consult-mark)
+         ("M-g k" . consult-global-mark)
+         ("M-g i" . consult-imenu)
+         ("M-g I" . consult-imenu-multi)
+         ([remap switch-to-buffer] . consult-buffer)
+         ([remap switch-to-buffer-other-window] . consult-buffer-other-window)
          ([remap yank-pop] . consult-yank-pop)
          ([remap goto-line] . consult-goto-line)
          ([remap imenu] . consult-imenu))
@@ -86,7 +95,6 @@
    consult-bookmark consult-recent-file consult-xref
    consult--source-file consult--source-project-file consult--source-bookmark
    :preview-key (kbd "M-."))
-  ;; (setq consult-preview-key (kbd "M-."))
   (setq consult-line-start-from-top t
         consult-project-root-function
         (lambda ()

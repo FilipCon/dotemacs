@@ -11,9 +11,7 @@
 (use-package projectile
   :config
   :bind-keymap ("C-c p" . projectile-command-map)
-  :bind (("C-`" . projectile-run-eshell))
   :config
-  (projectile-mode 1)
   (setq projectile-globally-ignored-files '(".DS_Store" "Icon" "TAGS" "package-lock.json")
         projectile-globally-ignored-file-suffixes '(".elc" ".pyc" ".o" ".so" "*.ipynb")
         projectile-ignored-projects '("~/" "/tmp"))

@@ -1,19 +1,21 @@
 ;;; -*- lexical-binding: t -*-
 
-(setq-default dired-dwim-target t)
-
-;; Not spawn endless amount of dired buffers
-(with-eval-after-load 'dired
-  (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
-  (define-key dired-mode-map (kbd "C-c C-e") 'wdired-change-to-wdired-mode)
-  (define-key dired-mode-map (kbd "f") 'dired-create-empty-file)
-  (setq dired-listing-switches "-aBhl  --group-directories-first")
-  (setq dired-recursive-copies 'always
+;; dired
+(use-package dired
+  :straight (:type built-in)
+  :bind (:map dired-mode-map
+              ("RET" . dired-find-alternate-file)
+              ("C-c C-e" . wdired-change-to-wdired-mode)
+              ("f" . dired-create-empty-file))
+  :config
+  (setq dired-listing-switches "-aBhl  --group-directories-first"
+        dired-recursive-copies 'always
         dired-recursive-deletes 'top
         dired-auto-revert-buffer t
         dired-dwim-target t
         dired-create-destination-dirs 'ask))
 
+;; dired /w all icons
 (use-package all-the-icons-dired
   :after all-the-icons
   :config
@@ -21,6 +23,7 @@
   (advice-add 'dired-create-directory :around #'all-the-icons-dired--refresh-advice)
   :hook (dired-mode . all-the-icons-dired-mode))
 
+;; pack/unpack zip files
 (use-package dired-atool
   :config
   (define-key dired-mode-map "z" #'dired-atool-do-unpack)

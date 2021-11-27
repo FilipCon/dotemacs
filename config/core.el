@@ -1,49 +1,51 @@
 ;;; -*- lexical-binding: t -*-
 
+;; core settings
 (setq ring-bell-function 'ignore        ; don't beep
       x-gtk-use-system-tooltips nil     ; no gui popups
       use-dialog-box nil                ; no gui popups dammit!
       echo-keystrokes 0.5               ; echo keystrokes faster
       confirm-kill-processes nil        ; just kill the process
-      disabled-command-function nil)    ; enable all commands
+      disabled-command-function nil     ; enable all commands
+      vc-follow-symlinks t              ; follow link in vc files
+      compilation-ask-about-save nil    ; auto save before compilation
+      compilation-scroll-output t       ; follow Output in compilation buffer
+      reb-re-syntax 'string             ; emacs regex syntax
+      save-interprogram-paste-before-kill t ; save existing clipboard to kill ring
+      sentence-end-double-space nil         ; single space ends sentence
+      tab-always-indent t                   ; TAB only indents
+      message-log-max 16384                 ; max message log lines
+      read-process-output-max (* 64 1024))  ; read bigger chunks from subprocesses
 
+;; global defaults
 (setq-default
- vc-follow-symlinks t
- save-interprogram-paste-before-kill t
- fill-column 80
- sentence-end-double-space nil
- word-wrap t
- indent-tabs-mode nil
- require-final-newline t
- tab-always-indent t
- tab-width 4
- truncate-lines t
- truncate-partial-width-windows 50
- message-log-max 16384
- read-process-output-max (* 64 1024))
+ fill-column 80                         ; 80 char rule
+ word-wrap t                            ; wrap words
+ indent-tabs-mode nil                   ; no tabs, only spaces
+ require-final-newline t                ; always end with empty line
+ tab-width 4                            ; tab = 4 spaces
+ truncate-lines t)                      ; don't display continuation lines
 
+
+;; tramp + eshell
 (require 'esh-module)
 (add-to-list 'eshell-modules-list 'eshell-tramp)
 
-(setq compilation-ask-about-save nil)   ; auto save before compilation
-(setq compilation-scroll-output t)      ; follow Output in compilation buffer
-(setq reb-re-syntax 'string)
-
+;; core modes
 (menu-bar-mode -1)                      ; menu-bar is gone
 (tool-bar-mode -1)                      ; tool-bar is gone
 (scroll-bar-mode -1)                    ; scroll-bar is gone
 (blink-cursor-mode 0)                   ; stop blinking on me!
-(show-paren-mode t)                     ; highlight matching parens
+;; (show-paren-mode t)                     ; highlight matching parens
 (column-number-mode t)                  ; show column numbers
-(global-subword-mode t)
-(normal-erase-is-backspace-mode 2)
-(delete-selection-mode 1)
+(global-subword-mode t)                 ; move cursor within subwords
+(normal-erase-is-backspace-mode t)      ; delete like a normal f**ing person
+(delete-selection-mode 1)               ; typing erases selection
 (winner-mode t)                         ; retrieve closed windows/buffers
-(save-place-mode t)                     ; Save place in files
+(save-place-mode t)                     ; save place in files
 (desktop-save-mode t)                   ; save desktop
 (global-so-long-mode t)                 ; long lines make emacs slow
 (global-hl-line-mode t)                 ; highlight current line
-(global-visual-line-mode t)
 
 ;; show line number in selected modes
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
@@ -55,16 +57,16 @@
 (setq mouse-wheel-progressive-speed nil
       hscroll-margin 2
       hscroll-step 1
-      scroll-conservatively 101
+      scroll-conservatively 101         ; don't recenter cursor
       scroll-margin 0
       scroll-preserve-screen-position t
       auto-window-vscroll nil
-      mouse-wheel-scroll-amount '(5 ((shift) . 2))
-      mouse-wheel-progressive-speed nil)
+      mouse-wheel-scroll-amount '(2 ((shift) . hscroll))
+      mouse-wheel-scroll-amount-horizontal 2)
 
-;; Remove hscroll-margin in shells, otherwise it causes jumpiness
-(add-hook 'eshell-mode-hook (lambda() (setq hscroll-margin 0)))
-(add-hook 'term-mode-hook (lambda() (setq hscroll-margin 0)))
+;; remove hscroll-margin in shells, otherwise it causes jumpiness
+(add-hook 'eshell-mode-hook (lambda () (setq hscroll-margin 0)))
+(add-hook 'term-mode-hook (lambda () (setq hscroll-margin 0)))
 
 ;; alias yes.no
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -86,8 +88,7 @@
 (setq create-lockfiles nil)
 
 ;; History
-(setq savehist-file "~/.emacs.d/savehist"
-      history-length 1000
+(setq history-length 1000
       history-delete-duplicates t
       savehist-save-minibuffer-history t
       savehist-additional-variables
@@ -97,7 +98,7 @@
 (recentf-mode 1)
 
 ;; stop minimizing, its annoying
-(global-unset-key [?\C-z])
+(global-unset-key (kbd "C-z"))
 
 ;; default font size
 (set-face-attribute 'default nil :height 140)

@@ -19,6 +19,7 @@
 ;; hippie expand, instead of dabbrev
 (global-set-key (kbd "M-/") 'hippie-expand)
 
+;; fill with `-' until fill column
 (defun fill-to-end ()
   (interactive)
   (save-excursion
@@ -27,6 +28,7 @@
       (insert-char ?-))))
 (global-set-key (kbd "<f8>") 'fill-to-end)
 
+;; make modeline pretty
 (use-package doom-modeline
   :hook (after-init . doom-modeline-init)
   :config
@@ -40,9 +42,7 @@
 
 ;; tildes in EOF like vim
 (use-package vi-tilde-fringe
-  :hook
-  ((prog-mode . vi-tilde-fringe-mode)
-   (org-mode . vi-tilde-fringe-mode)))
+  :hook ((prog-mode org-mode) . vi-tilde-fringe-mode))
 
 ;; fill column indicator
 (use-package hl-fill-column
@@ -106,7 +106,7 @@
 (use-package ag
   :bind (("C-x p g" . ag-project-regexp))
   :config
-  (setq-default ag-highlight-search t))
+  (setq ag-highlight-search t))
 
 ;; writable grep
 (use-package wgrep-ag)
@@ -116,7 +116,7 @@
 
 ;; show key bind
 (use-package which-key
-  :init (which-key-mode))
+  :init (which-key-mode 1))
 
 ;; delete trailing whitespace and untabify in edited regions only
 (use-package ws-butler
@@ -124,6 +124,7 @@
   (ws-butler-global-mode 1)
   (setq ws-butler-convert-leading-tabs-or-spaces t))
 
+;; undo/redo
 (use-package undo-fu
   :bind (("C-/". undo-fu-only-undo)
          ("C-?" . undo-fu-only-redo)))
@@ -141,6 +142,7 @@
          ("C-<" . mc/mark-previous-like-this)
          ("M-C-l" . mc/mark-all-like-this))
   :custom
+  (smartparens-global-mode 1)
   (mc/always-run-for-all t)
   (mc/always-repeat-command t))
 

@@ -7,17 +7,17 @@
   (global-company-mode)
   (add-to-list 'company-begin-commands 'cljr-slash)
   (setq company-backends '())
-  (setq-default company-idle-delay 0
-                company-minimum-prefix-length 1
-                company-tooltip-align-annotations t
-                company-require-match nil
-                company-selection-wrap-around t
-                company-dabbrev-downcase nil
-                company-dabbrev-code-other-buffers nil
-                company-dabbrev-other-buffers nil
-                company-dabbrev-code-ignore-case t
-                company-dabbrev-ignore-case t
-                company-tooltip-idle-delay 0)
+  (setq company-idle-delay 0
+        company-minimum-prefix-length 1
+        company-tooltip-align-annotations t
+        company-require-match nil
+        company-selection-wrap-around t
+        company-dabbrev-downcase nil
+        company-dabbrev-code-other-buffers nil
+        company-dabbrev-other-buffers nil
+        company-dabbrev-code-ignore-case t
+        company-dabbrev-ignore-case t
+        company-tooltip-idle-delay 0)
   :bind (:map company-active-map
           ("C-n" . company-select-next)
           ("C-p" . company-select-previous)

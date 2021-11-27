@@ -12,6 +12,7 @@ auto/
 .emacs.desktop*
 places
 savehist
+history
 .lsp-session-v1
 config.el
 recentf

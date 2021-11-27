@@ -15,10 +15,7 @@
 
 ;; switch between header/source
 (use-package cff
-  :config
-  (add-hook 'c-mode-common-hook
-            '(lambda ()
-               (define-key c-mode-base-map (kbd "C-x o") 'cff-find-other-file))))
+  :bind (:map c-mode-base-map ("C-x o" . cff-find-other-file)))
 
 (with-eval-after-load 'lsp
   (setq lsp-clients-clangd-args

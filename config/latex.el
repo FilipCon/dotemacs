@@ -21,4 +21,4 @@
 (use-package auctex-latexmk
   :init (auctex-latexmk-setup)
   :config
-  (setq-default TeX-master nil))
+  (setq TeX-master nil))

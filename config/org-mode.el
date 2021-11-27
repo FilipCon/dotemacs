@@ -3,7 +3,11 @@
 (use-package org
   :hook ((org-mode . org-indent-mode)
          (org-mode . rainbow-delimiters-mode-disable))
+  :bind (("C-c C-x C-k" . org-clock-remove-overlays)
+         ("C-c o c" . org-capture)
+         ("C-c o a" . org-agenda))
   :config
+  (set-company-backend! '(org-journal-mode) 'company-capf 'company-dabbrev)
   (require 'ob-clojure)
   (require 'ob-python)
   (setq org-ellipsis " ▾"
@@ -21,37 +25,8 @@
         org-babel-clojure-backend 'cider
         org-hide-leading-stars t
         org-hide-emphasis-markers t
-        org-startup-with-inline-images t
         org-image-actual-width nil      ; use #+ATTR.* or fallback to original width
-
-        ;; org-support-shift-select t
-        ;; org-outline-path-complete-in-steps nil
-        ;; org-src-tab-acts-natively nil
-        ;; org-babel-hash-show-time t
-        ;; org-src-preserve-indentation nil
-        ;; org-clock-display-default-range 'untilnow
-        ;; org-export-babel-evaluate nil
-        ;; org-html-htmlize-output-type 'css
-        ;; org-table-convert-region-max-lines 999
-        ;; org-edit-src-content-indentation 2
-        ;; org-hide-block-startup nil
-        ;; org-cycle-separator-lines 2
-
-        )
-  (set-company-backend! '(org-journal-mode) 'company-capf 'company-dabbrev)
-  ;; keys
-  (global-set-key (kbd "C-c C-x C-k") 'org-clock-remove-overlays)
-  (global-set-key (kbd "C-c o c") 'org-capture)
-  (global-set-key (kbd "C-c o a") 'org-agenda)
-  )
-
-;; (setq org-capture-templates
-;;       '(("l" "Link" entry (file+headline "~/notes/org/links.org" "Links")
-;;          "* %? %^L %^g" :prepend t :kill-buffer t)
-;;         ("t" "To Do Item" entry (file+headline "~/notes/org/todos.org" "ToDos")
-;;          "* TODO %?\n%u" :prepend t :kill-buffer t)
-;;         ("n" "Note" entry (file+headline "~/notes/org/todos.org" "Note space")
-;;          "* %?\n%u" :prepend t :kill-buffer t)))
+        org-startup-with-inline-images t))
 
 ;; org bullets
 (use-package org-bullets
@@ -59,6 +34,7 @@
   :custom
   (org-bullets-bullet-list '("●" "◉" "•" )))
 
+;; timesheets
 (use-package org-ql)
 (use-package org-clock-export
   :straight (:host github :repo "legalnonsense/org-clock-export")

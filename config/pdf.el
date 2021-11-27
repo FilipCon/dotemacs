@@ -6,6 +6,5 @@
   :init
   (pdf-tools-install)
   :config
-  (defun ds/disable-cursor-blink () (blink-cursor-mode 0))
-  (add-hook 'pdf-view-mode-hook 'ds/disable-cursor-blink)
+  (add-hook 'pdf-view-mode-hook (lambda () (blink-cursor-mode 0)))
   (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))

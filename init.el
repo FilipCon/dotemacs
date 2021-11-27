@@ -22,10 +22,10 @@
 (straight-use-package 'use-package)
 (setq straight-use-package-by-default t)
 
-;; doom vars and functions for autoconfiguring company backends
+;; configure company backends the Doom way!
 (load (concat (expand-file-name user-emacs-directory) "company-backends.el"))
 
-;; Load all files from my ~/.emacs.d/config directory
+;; Load all files from my `~/.emacs.d/config' directory
 ;; It doesn't support nested dirs
 (dolist
     (file
@@ -37,8 +37,6 @@
 
 ;; init emacs server
 (require 'server)
-;; `server-running-p' doesn't work.
-;; (unless (server-running-p) (server-start))
 (defun server-started-p ()
     "Return non-nil if this Emacs has a server started."
     (bound-and-true-p server-process))

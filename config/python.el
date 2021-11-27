@@ -11,9 +11,6 @@
   (elpy-enable)
   :config
   (unbind-key "C-<return>" elpy-mode-map)
-  (unbind-key "C-c C-f" elpy-mode-map)
-  (unbind-key "C-c C-r" elpy-mode-map)
-  ;; (unbind-key "C-c C-c" elpy-mode-map)
   (setq elpy-modules nil
         elpy-shell-echo-input nil
         elpy-shell-starting-directory (quote current-directory)
@@ -25,10 +22,6 @@
 ;; write code documentation
 (use-package sphinx-doc
   :hook (python-mode . sphinx-doc-mode))
-
-(with-eval-after-load 'lsp
-  (setq lsp-pyls-plugins-yapf-enabled t
-	lsp-pyls-plugins-autopep8-enabled nil))
 
 ;; ;; jupyter kernel
 ;; (use-package jupyter)

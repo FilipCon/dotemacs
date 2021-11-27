@@ -19,16 +19,15 @@
          ("M-DEL" . sp-backward-kill-word)
          ("M-d" . sp-kill-word))
   :config
-  (smartparens-global-mode t)
-  (show-smartparens-global-mode t)
   (require 'smartparens-config)
+  (smartparens-global-mode 1)
+  (show-smartparens-global-mode 1)
+  (setq-default sp-autoskip-closing-pair 'always)
   (setq sp-highlight-pair-overlay nil
         sp-cancel-autoskip-on-backward-movement nil
         sp-show-pair-delay 0
         sp-show-pair-from-inside t
-        sp-escape-quotes-after-insert nil
-        sp-escape-wrapped-region nil
-        sp-autoskip-closing-pair 'always)
+        sp-escape-wrapped-region nil)
   (sp-use-paredit-bindings))
 
 ;; rainbow-delimiters

@@ -2,17 +2,19 @@
 
 ;; speller
 (use-package flyspell
+  :bind (:map flyspell-mode-map
+              ("C-c b s" . flyspell-buffer))
   :config
-  (setq flyspell-sort-corrections t)
-  (setq ispell-program-name "aspell")
-  (global-set-key (kbd "C-c b s") 'flyspell-buffer))
+  (setq flyspell-sort-corrections t
+        ispell-program-name "aspell"))
 
 ;; show correction options
 (use-package flyspell-correct
   :after flyspell
   :hook ((text-mode . flyspell-mode)
          (prog-mode . flyspell-prog-mode))
-  :bind (:map flyspell-mode-map ("C-." . flyspell-correct-wrapper))
+  :bind (:map flyspell-mode-map
+              ("C-." . flyspell-correct-wrapper))
   :init
   (use-package flyspell-correct-popup)
   (unbind-key "C-;" flyspell-mode-map))
