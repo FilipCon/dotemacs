@@ -1,6 +1,6 @@
 ;;; -*- lexical-binding: t -*-
 
-;; increase emacs startup time
+;; improve emacs startup time
 (setq gc-cons-threshold most-positive-fixnum ; turn off gc
       gc-cons-percentage 0.6            ; increase heap portion for allocation
       native-comp-deferred-compilation nil ; prevent runtime compilation
