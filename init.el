@@ -37,10 +37,7 @@
 
 ;; init emacs server
 (require 'server)
-(defun server-started-p ()
-    "Return non-nil if this Emacs has a server started."
-    (bound-and-true-p server-process))
-(unless (server-started-p)
+(unless (bound-and-true-p server-process)
   (server-start))
 
 ;; Load automatically generated custom garbage
