@@ -24,12 +24,8 @@
   :after lsp-mode
   :hook (lsp-mode . lsp-ui-mode)
   :bind (:map lsp-mode-map
-              ("C-c l g g" . lsp-ui-peek-find-definitions)
-              ("C-c l g r" . lsp-ui-peek-find-references)
               ("M-," . lsp-ui-peek-find-references)
-              ("M-." . lsp-ui-peek-find-definitions)
-              ("C-c l f f". lsp-format-buffer)
-              ("C-c l f r". lsp-format-region))
+              ("M-." . lsp-ui-peek-find-definitions))
   :config
   (setq lsp-ui-doc-enable t
         lsp-ui-doc-use-childframe t

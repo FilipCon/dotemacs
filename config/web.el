@@ -39,6 +39,8 @@
 (use-package csv-mode
   :hook (csv-mode . csv-align-mode))
 
+(use-package logview)
+
 (use-package yaml-mode
   :hook (yaml-mode . lsp-mode))
 

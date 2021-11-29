@@ -16,6 +16,7 @@
         nrepl-hide-special-buffers t
         cider-repl-pop-to-buffer-on-connect 'display-only
         cider-ns-refresh-show-log-buffer t
+        cider-use-fringe-indicators nil
         cider-font-lock-dynamically nil ; use lsp semantic tokens
         cider-eldoc-display-for-symbol-at-point nil))
 
