@@ -29,6 +29,7 @@
   (define-key dired-mode-map "z" #'dired-atool-do-unpack)
   (define-key dired-mode-map "Z" #'dired-atool-do-pack))
 
+;; oh! colors!
 (use-package diredfl
   :hook (dired-mode . diredfl-mode))
 

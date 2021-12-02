@@ -5,7 +5,7 @@
   :bind (:map cider-mode-map ("C-c ." . cider-find-var))
   :mode (("\\.edn$" . clojure-mode)
          ("\\.repl$" . clojure-mode)
-         ("\\.bb$" . clojure-mode) )
+         ("\\.bb$" . clojure-mode))
   :hook (cider-mode . (lambda ()
                         (remove-hook 'completion-at-point-functions
                                      #'cider-complete-at-point)))
