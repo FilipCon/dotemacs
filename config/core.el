@@ -53,13 +53,11 @@
 (add-hook 'conf-mode-hook 'display-line-numbers-mode)
 
 ;; Scrolling
-(setq mouse-wheel-progressive-speed nil
-      hscroll-margin 2
-      hscroll-step 1
-      scroll-conservatively 101         ; don't recenter cursor
-      scroll-margin 0
-      scroll-preserve-screen-position t
+(setq scroll-conservatively 101         ; don't recenter cursor
+      scroll-margin 1
+      scroll-preserve-screen-position 1
       auto-window-vscroll nil
+      mouse-wheel-progressive-speed nil
       mouse-wheel-scroll-amount '(2 ((shift) . hscroll))
       mouse-wheel-scroll-amount-horizontal 2)
 
