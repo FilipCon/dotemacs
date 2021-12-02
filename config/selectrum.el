@@ -91,7 +91,7 @@
          ([remap imenu] . consult-imenu))
   :config
   (consult-customize
-   consult-ripgrep consult-git-grep consult-grep
+   consult-ripgrep consult-git-grep consult-grep consult-buffer
    consult-bookmark consult-recent-file consult-xref
    consult--source-file consult--source-project-file consult--source-bookmark
    :preview-key (kbd "M-."))

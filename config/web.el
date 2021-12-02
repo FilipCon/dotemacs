@@ -1,59 +1,28 @@
 ;;; -*- lexical-binding: t -*-
 
+;; basic web mode settings
 (use-package web-mode
   :straight t
   :mode (("\\.html?\\'" . web-mode))
   :config
-  (setq-default
-   web-mode-block-padding 2
-   web-mode-code-indent-offset 2
-   web-mode-comment-style 2
-   web-mode-css-indent-offset 2
-   web-mode-enable-auto-closing t
-   web-mode-auto-close-style 2
-   web-mode-enable-auto-pairing t
-   web-mode-enable-comment-keywords t
-   web-mode-enable-html-entities-fontification t
-   web-mode-enable-css-colorization t
-   web-mode-enable-current-element-highlight t
-   web-mode-markup-indent-offset 2))
+  (setq web-mode-block-padding 2
+        web-mode-code-indent-offset 2
+        web-mode-markup-indent-offset 2
+        web-mode-css-indent-offset 2
+        web-mode-comment-style 2
+        web-mode-enable-auto-quoting nil
+        web-mode-enable-html-entities-fontification t))
 
+;; emmet expansion
 (use-package emmet-mode
-  :hook (html-mode . emmet-mode))
-
-(use-package json-mode
-  :mode ("\\.json?\\'" . json-mode))
-
-(use-package sgml-mode
+  :hook (html-mode web-mode css-mode)
   :config
-  :bind (:map sgml-mode-map
-         ("<f1> SPC" . sgml-mark-tag))
-  :mode (("\\.html$" . sgml-mode)
-         ("\\.xml$" . sgml-mode)))
+  (setq emmet-move-cursor-between-quotes t))
 
-(use-package tagedit
-  :hook (html-mode . tagedit-mode)
-  :config
-  (tagedit-add-paredit-like-keybindings))
-
-(use-package csv-mode
-  :hook (csv-mode . csv-align-mode))
-
-(use-package logview)
-
-(use-package yaml-mode
-  :hook (yaml-mode . lsp-mode))
-
-(use-package restclient
-  :mode (("\\.http$" . restclient-mode)))
-
-(use-package company-restclient
-  :after restclient
-  :config
-  (set-company-backend! 'restclient-mode 'company-restclient))
-
+;; sass
 (use-package sass-mode)
 
+;; company backends for web-mode/sass
 (use-package company-web
   :config
   (set-company-backend! 'sass-mode '(company-capf
@@ -64,6 +33,7 @@
                                     company-css
                                     company-web-html)))
 
+;; sql
 (use-package sql
   :config
   (setq sql-postgres-login-params
@@ -81,16 +51,32 @@ Fix for the above hasn't been released as of Emacs 25.2."
       (setq-local sql-prompt-cont-regexp "^[[:alnum:](-|_)]*[-(][#>] ")))
   (add-hook 'sql-interactive-mode-hook 'sanityinc/fix-postgres-prompt-regexp))
 
+;; format sql
 (use-package sqlformat
   :config
   ;; (setq sqlformat-command 'pgformatter)
   ;; (setq sqlformat-args '("-s2" "-g"))
   (define-key sql-mode-map (kbd "C-c C-f") 'sqlformat))
 
-(use-package log4j-mode
-  :disabled t
-  :hook
-  ((log4j-mode .view-mode)
-   (log4j-mode .read-only-mode)))
+;; json
+(use-package json-mode
+  :mode ("\\.json?\\'" . json-mode))
 
+;; csv
+(use-package csv-mode
+  :hook (csv-mode . csv-align-mode))
+
+;; yaml
+(use-package yaml-mode)
+
+;; tf
 (use-package terraform-mode)
+
+;; view log files
+(use-package logview)
+
+;; (use-package log4j-mode
+;;   :disabled t
+;;   :hook
+;;   ((log4j-mode . view-mode)
+;;    (log4j-mode . read-only-mode)))
