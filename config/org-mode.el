@@ -32,7 +32,7 @@
 (use-package org-bullets
   :hook (org-mode . org-bullets-mode)
   :custom
-  (org-bullets-bullet-list '("●" "◉" "•" )))
+  (org-bullets-bullet-list '("●" "◉" "•" "*")))
 
 ;; timesheets
 (use-package org-ql)

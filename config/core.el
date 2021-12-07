@@ -107,8 +107,8 @@
 (define-key emacs-lisp-mode-map (kbd "C-c C-c") 'eval-buffer)
 
 ;; move between recently visited
-(global-set-key (kbd "C-M-,") 'previous-buffer)
-(global-set-key (kbd "C-M-.") 'next-buffer)
+(global-set-key (kbd "C-M--") 'previous-buffer)
+(global-set-key (kbd "C-M-=") 'next-buffer)
 
 ;; remap default keys
 (global-set-key (kbd "M-o") 'other-window)

@@ -3,6 +3,7 @@
 ;; cider
 (use-package cider
   :bind (:map cider-mode-map ("C-c ." . cider-find-var))
+  :bind (:map cider-repl-mode-map ("C-c C-o" . cider-repl-clear-buffer))
   :mode (("\\.edn$" . clojure-mode)
          ("\\.repl$" . clojure-mode)
          ("\\.bb$" . clojure-mode))
@@ -14,6 +15,8 @@
   (setq cider-auto-select-error-buffer nil
         cider-repl-display-help-banner nil
         nrepl-hide-special-buffers t
+        cider-repl-history-file "~/.emacs.d/cider-history"
+        cider-repl-history-size 3000
         cider-repl-pop-to-buffer-on-connect 'display-only
         cider-ns-refresh-show-log-buffer t
         cider-use-fringe-indicators nil

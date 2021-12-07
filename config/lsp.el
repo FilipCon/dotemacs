@@ -3,7 +3,7 @@
 ;; language server
 (use-package lsp-mode
   :hook ((c-mode c++-mode
-          ;; python-mode
+          python-mode
           csharp-mode
           clojure-mode clojurec-mode clojurescript-mode
           sql-mode css-mode html-mode
