@@ -39,8 +39,8 @@
 (use-package org-clock-export
   :straight (:host github :repo "legalnonsense/org-clock-export")
   :config
-  (setq org-clock-export-files '("~/notes/org/baresquare/timesheet.org")
-        org-clock-export-export-file-name "~/notes/org/baresquare/timesheet.csv"
+  (setq org-clock-export-files '("~/notes/org/bsq/timesheets/timesheet.org")
+        org-clock-export-export-file-name "~/notes/org/bsq/timesheets/timesheet.csv"
         org-clock-export-data-format
         '("Name" "Konstantinos Filip"
           "Email" "konstantinos.fil@pixelated-noise.com"

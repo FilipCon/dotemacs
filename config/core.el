@@ -17,6 +17,8 @@
       message-log-max 16384                 ; max message log lines
       read-process-output-max (* 64 1024))  ; read bigger chunks from subprocesses
 
+(setq enable-local-variables :all)      ; WARNING don't ask me about .dir-locals - risky
+
 ;; global defaults
 (setq-default
  fill-column 80                         ; 80 char rule

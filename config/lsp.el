@@ -9,7 +9,8 @@
           sql-mode css-mode html-mode
           latex-mode LaTeX-mode tex-mode yatex-mode bibtex-mode) . lsp)
   :bind-keymap ("C-c l" . lsp-command-map)
-  :bind (("C-<return>" . lsp-execute-code-action))
+  :bind (("C-<return>" . lsp-execute-code-action)
+         ("<f5>" . lsp-mode))
   :config
   (setq lsp-lens-enable nil
         lsp-sqls-workspace-config-path nil
@@ -32,6 +33,7 @@
         lsp-ui-doc-position 'top
         lsp-ui-doc-max-height 80
         lsp-ui-doc-include-signature t
+        lsp-ui-doc-show-with-cursor t
         lsp-ui-sideline-ignore-duplicate t
         lsp-ui-flycheck-enable t
         lsp-ui-flycheck-list-position 'right

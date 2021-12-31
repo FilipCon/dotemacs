@@ -85,8 +85,8 @@
 
 ;; global search tool
 (use-package ag
-  :bind (("C-x p g" . ag-project-regexp))
   :config
+  (advice-add 'project-find-regexp :override #'ag-project-regexp)
   (setq ag-highlight-search t))
 
 ;; writable grep

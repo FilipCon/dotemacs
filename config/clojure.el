@@ -21,7 +21,14 @@
         cider-ns-refresh-show-log-buffer t
         cider-use-fringe-indicators nil
         cider-font-lock-dynamically nil ; use lsp semantic tokens
-        cider-eldoc-display-for-symbol-at-point nil))
+        cider-eldoc-display-for-symbol-at-point nil)
+  (defun +kill-company-doc-buffer (orig-fun &rest args)
+    ;; HACK *company-documentation* buffer opens when selecting snippet
+    ;; candidates with company. The buffer is in REPL mode which confuses cider
+    ;; so no other repl can be created
+    (kill-buffer (company-doc-buffer))
+    (apply orig-fun args))
+  (advice-add 'cider--gather-connect-params :around #'+kill-company-doc-buffer))
 
 ;; clojure mode
 (use-package clojure-mode

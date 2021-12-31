@@ -6,6 +6,7 @@
   :config
   (global-company-mode)
   (add-to-list 'company-begin-commands 'cljr-slash)
+  (setq company-frontends '(company-pseudo-tooltip-frontend))
   (setq company-backends '())
   (setq company-idle-delay 0
         company-minimum-prefix-length 1
@@ -15,8 +16,8 @@
         company-dabbrev-downcase nil
         company-dabbrev-code-other-buffers nil
         company-dabbrev-other-buffers nil
-        company-dabbrev-code-ignore-case t
-        company-dabbrev-ignore-case t
+        company-dabbrev-code-ignore-case nil
+        company-dabbrev-ignore-case nil
         company-tooltip-idle-delay 0)
   :bind (:map company-active-map
           ("C-n" . company-select-next)
@@ -34,17 +35,13 @@
   :hook (company-mode . company-box-mode)
   :config
   (setq x-gtk-resize-child-frames 'resize-mode)
-  (add-to-list 'company-box-frame-parameters '(tab-bar-lines . 0))
   (setq company-box-doc-delay 0
-        company-box-show-single-candidate t
-        company-box-backends-colors nil
-        company-box-color-icon nil
-        company-box-icons-alist 'company-box-icons-images))
+        company-box-backends-colors nil))
 
 ;;snippets
 (use-package yasnippet
   :config
-  (yas-reload-all)
+  (setq yas-verbosity 0)
   (yas-global-mode))
 
 (use-package yasnippet-snippets

@@ -15,6 +15,7 @@
          (prog-mode . flyspell-prog-mode))
   :bind (:map flyspell-mode-map
               ("C-." . flyspell-correct-wrapper))
+  :bind ("<f6>" . flyspell-mode)
   :init
   (use-package flyspell-correct-popup)
   (unbind-key "C-;" flyspell-mode-map))
