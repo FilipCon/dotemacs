@@ -2,11 +2,11 @@
 
 ;; cider
 (use-package cider
-  :bind (:map cider-mode-map ("C-c ." . cider-find-var))
-  :bind (:map cider-repl-mode-map ("C-c C-o" . cider-repl-clear-buffer))
-  :mode (("\\.edn$" . clojure-mode)
-         ("\\.repl$" . clojure-mode)
-         ("\\.bb$" . clojure-mode))
+  :bind (:map cider-mode-map
+              ("C-c ." . cider-find-var)
+              ("C-c M-." . cider-find-dwim-other-window))
+  :bind (:map cider-repl-mode-map
+              ("C-c C-o" . cider-repl-clear-buffer))
   :hook (cider-mode . (lambda ()
                         (remove-hook 'completion-at-point-functions
                                      #'cider-complete-at-point)))
@@ -32,6 +32,9 @@
 
 ;; clojure mode
 (use-package clojure-mode
+  :mode (("\\.edn$" . clojure-mode)
+         ("\\.repl$" . clojure-mode)
+         ("\\.bb$" . clojure-mode))
   :config
   ;; (setq clojure-align-reader-conditionals t)
   ;; (setq clojure-indent-style 'align-arguments) ; align function arguments

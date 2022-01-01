@@ -6,19 +6,18 @@
   :config
   (global-company-mode)
   (add-to-list 'company-begin-commands 'cljr-slash)
-  (setq company-frontends '(company-pseudo-tooltip-frontend))
-  (setq company-backends '())
-  (setq company-idle-delay 0
+  (setq company-backends '()
+        company-idle-delay 0
         company-minimum-prefix-length 1
+        company-tooltip-idle-delay 0
         company-tooltip-align-annotations t
         company-require-match nil
         company-selection-wrap-around t
-        company-dabbrev-downcase nil
         company-dabbrev-code-other-buffers nil
         company-dabbrev-other-buffers nil
         company-dabbrev-code-ignore-case nil
         company-dabbrev-ignore-case nil
-        company-tooltip-idle-delay 0)
+        company-dabbrev-downcase nil)
   :bind (:map company-active-map
           ("C-n" . company-select-next)
           ("C-p" . company-select-previous)
@@ -34,8 +33,8 @@
   :after company all-the-icons
   :hook (company-mode . company-box-mode)
   :config
-  (setq x-gtk-resize-child-frames 'resize-mode)
-  (setq company-box-doc-delay 0
+  (setq x-gtk-resize-child-frames 'resize-mode
+        company-box-doc-delay 0
         company-box-backends-colors nil))
 
 ;;snippets
