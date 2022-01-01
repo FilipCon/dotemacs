@@ -12,6 +12,7 @@
                                      #'cider-complete-at-point)))
   :config
   (set-company-backend! '(cider-repl-mode) '(company-capf company-yasnippet))
+  (add-to-list 'company-begin-commands 'cljr-slash)
   (setq cider-auto-select-error-buffer nil
         cider-repl-display-help-banner nil
         nrepl-hide-special-buffers t

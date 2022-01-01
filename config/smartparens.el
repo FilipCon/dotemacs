@@ -1,18 +1,12 @@
 ;;; -*- lexical-binding: t -*-
 
-;; paredit
-(use-package paredit
-  :config
-  (paredit-mode -1))
-
-;; sp
+;; paredit but for all languages
 (use-package smartparens
   :bind (("C-c r" . sp-rewrap-sexp)
-         ("C-c u" . sp-unwrap-sexp)
          ("M-(" . sp-wrap-round)
          ("M-[" . sp-wrap-square)
          ("M-{" . sp-wrap-curly)
-         ("M-\"" . paredit-meta-doublequote)
+         ("M-\"" . sp-wrap-doublequote)
          ("C-0" . sp-forward-slurp-sexp)
          ("C-9" . sp-forward-barf-sexp)
          ("C-M-9" . sp-backward-slurp-sexp)
@@ -26,15 +20,17 @@
   (show-smartparens-global-mode 1)
   (setq-default sp-autoskip-closing-pair 'always)
   (setq sp-highlight-pair-overlay nil
-        sp-cancel-autoskip-on-backward-movement nil
         sp-show-pair-delay 0
-        sp-show-pair-from-inside t
-        sp-escape-wrapped-region nil)
+        sp-show-pair-from-inside t)
   (sp-use-paredit-bindings))
+
+(defun sp-wrap-doublequote (&optional arg)
+  (interactive "P")
+  (sp-wrap-with-pair "\""))
 
 ;; rainbow-delimiters
 (use-package rainbow-delimiters
-  :init (rainbow-delimiters-mode t)
+  :config (rainbow-delimiters-mode t)
   :hook ((prog-mode
           markdown-mode
           text-mode
