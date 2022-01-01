@@ -3,7 +3,6 @@
 ;; paredit but for all languages
 (use-package smartparens
   :bind (("C-c r" . sp-rewrap-sexp)
-         ("M-(" . sp-wrap-round)
          ("M-[" . sp-wrap-square)
          ("M-{" . sp-wrap-curly)
          ("M-\"" . sp-wrap-doublequote)
