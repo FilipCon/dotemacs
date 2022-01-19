@@ -50,11 +50,11 @@
 (use-package git-gutter-fringe
   :after git-gutter
   :custom-face
-  (git-gutter-fr:mod ((t (:foreground "DeepSkyBlue" :background nil))))
-  (git-gutter-fr:add ((t (:foreground "YellowGreen" :background nil))))
-  (git-gutter-fr:del ((t (:foreground "OrangeRed" :background nil))))
+  (git-gutter-fr:modified ((t (:foreground "DeepSkyBlue" :background nil))))
+  (git-gutter-fr:added ((t (:foreground "YellowGreen" :background nil))))
+  (git-gutter-fr:deleleted ((t (:foreground "OrangeRed" :background nil))))
   :config
   (setq-default fringes-outside-margins t)
-  (define-fringe-bitmap 'git-gutter-fr:add [224] nil nil '(center repeated))
-  (define-fringe-bitmap 'git-gutter-fr:mod [224] nil nil '(center repeated))
-  (define-fringe-bitmap 'git-gutter-fr:del [224] nil nil '(center repeated)))
+  (define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:deleted [224] nil nil '(center repeated)))
