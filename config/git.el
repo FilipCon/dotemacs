@@ -40,8 +40,9 @@
   :config
   (global-git-gutter-mode t)
   (setq git-gutter:disabled-modes '(fundamental-mode image-mode pdf-view-mode)
-        git-gutter:ask-p nil)
-  (add-hook 'focus-in-hook #'git-gutter:update-all-windows)
+        git-gutter:ask-p nil
+        git-gutter:update-interval 0.2)
+  (add-to-list 'git-gutter:update-hooks 'focus-in-hook)
   (global-set-key (kbd "C-c h u") 'git-gutter:revert-hunk)
   (global-set-key (kbd "C-c h o") 'git-gutter:popup-hunk)
   (global-set-key (kbd "C-c h n") 'git-gutter:next-hunk)
