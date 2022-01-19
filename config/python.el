@@ -13,7 +13,7 @@
   (unbind-key "C-<return>" elpy-mode-map)
   (setq elpy-modules nil
         elpy-shell-echo-input nil
-        elpy-shell-starting-directory (quote current-directory)
+        elpy-shell-starting-directory 'current-directory
         python-shell-interpreter "ipython3"
         python-shell-interpreter-args "-i --simple-prompt --pprint"
         elpy-rpc-python-command "python3"

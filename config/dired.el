@@ -15,19 +15,11 @@
         dired-dwim-target t
         dired-create-destination-dirs 'ask))
 
-;; dired /w all icons
-(use-package all-the-icons-dired
-  :after all-the-icons
-  :config
-  (advice-add 'dired-do-create-files :around #'all-the-icons-dired--refresh-advice)
-  (advice-add 'dired-create-directory :around #'all-the-icons-dired--refresh-advice)
-  :hook (dired-mode . all-the-icons-dired-mode))
-
 ;; pack/unpack zip files
 (use-package dired-atool
   :config
-  (define-key dired-mode-map "z" #'dired-atool-do-unpack)
-  (define-key dired-mode-map "Z" #'dired-atool-do-pack))
+  (define-key dired-mode-map "Z" #'dired-atool-do-unpack)
+  (define-key dired-mode-map "z" #'dired-atool-do-pack))
 
 ;; oh! colors!
 (use-package diredfl

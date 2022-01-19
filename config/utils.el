@@ -87,7 +87,10 @@
 (use-package ag
   :config
   (advice-add 'project-find-regexp :override #'ag-project-regexp)
-  (setq ag-highlight-search t))
+  (setq ag-highlight-search t)
+  (setq-default ag-ignore-list '("build/*" "*.ipynb" "target/*" ".git"
+                                 "*.elc" "*.pyc" "*.o" "*.so" ".clj-kondo"
+                                 "log" "node_modules" "*.svg")))
 
 ;; writable grep
 (use-package wgrep-ag)

@@ -36,25 +36,25 @@
 ;;   :config
 ;;   (setq auth-sources '("~/.authinfo.gpg")))
 
-;; fringe highlight diffs
-(use-package diff-hl
-  :custom-face
-  (diff-hl-change ((t (:foreground "DeepSkyBlue" :background nil))))
-  (diff-hl-insert ((t (:foreground "YellowGreen" :background nil))))
-  (diff-hl-delete ((t (:foreground "OrangeRed" :background nil))))
-  :bind (:map diff-hl-mode-map
-              ("C-x v n" . diff-hl-next-hunk)
-              ("C-x v p" . diff-hl-previous-hunk)
-              ("C-x v u" . diff-hl-revert-hunk))
-  :hook ((magit-post-refresh . diff-hl-magit-post-refresh)
-         (magit-pre-refresh . diff-hl-magit-pre-refresh)
-         (dired-mode . diff-hl-dired-mode-unless-remote))
-  :init (setq diff-hl-draw-borders nil)
+(use-package git-gutter
   :config
-  (global-diff-hl-mode 1)
-  (diff-hl-flydiff-mode 1)
+  (global-git-gutter-mode t)
+  (setq git-gutter:disabled-modes '(fundamental-mode image-mode pdf-view-mode)
+        git-gutter:ask-p nil)
+  (add-hook 'focus-in-hook #'git-gutter:update-all-windows)
+  (global-set-key (kbd "C-c h u") 'git-gutter:revert-hunk)
+  (global-set-key (kbd "C-c h o") 'git-gutter:popup-hunk)
+  (global-set-key (kbd "C-c h n") 'git-gutter:next-hunk)
+  (global-set-key (kbd "C-c h p") 'git-gutter:previous-hunk))
+
+(use-package git-gutter-fringe
+  :after git-gutter
+  :custom-face
+  (git-gutter-fr:mod ((t (:foreground "DeepSkyBlue" :background nil))))
+  (git-gutter-fr:add ((t (:foreground "YellowGreen" :background nil))))
+  (git-gutter-fr:del ((t (:foreground "OrangeRed" :background nil))))
+  :config
   (setq-default fringes-outside-margins t)
-  (setq diff-hl-ask-before-revert-hunk nil
-        diff-hl-fringe-bmp-function
-        (lambda (_type _pos)
-          (define-fringe-bitmap 'my-diff-hl-bmp [224] 1 8 '(center t)))))
+  (define-fringe-bitmap 'git-gutter-fr:add [224] nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:mod [224] nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:del [224] nil nil '(center repeated)))

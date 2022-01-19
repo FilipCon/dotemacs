@@ -11,7 +11,7 @@
   (require 'ob-clojure)
   (require 'ob-python)
   (setq org-ellipsis " ▾"
-        org-directory "~/notes"
+        org-directory "~/Nextcloud/Notes"
         org-agenda-span 10
         org-agenda-start-on-weekday nil
         org-agenda-start-day "0d"
@@ -39,8 +39,8 @@
 (use-package org-clock-export
   :straight (:host github :repo "legalnonsense/org-clock-export")
   :config
-  (setq org-clock-export-files '("~/notes/org/bsq/timesheets/timesheet.org")
-        org-clock-export-export-file-name "~/notes/org/bsq/timesheets/timesheet.csv"
+  (setq org-clock-export-files '("~/Nextcloud/Notes/bsq/timesheets/timesheet.org")
+        org-clock-export-export-file-name "~/Nextcloud/Notes/bsq/timesheets/timesheet.csv"
         org-clock-export-data-format
         '("Name" "Konstantinos Filip"
           "Email" "konstantinos.fil@pixelated-noise.com"
