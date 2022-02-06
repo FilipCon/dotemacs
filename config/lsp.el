@@ -34,7 +34,7 @@
         lsp-ui-doc-include-signature t
         lsp-ui-doc-show-with-mouse nil
         lsp-ui-sideline-ignore-duplicate t
-        lsp-ui-sideline-show-code-actions t
+        lsp-ui-sideline-show-code-actions nil
         lsp-ui-flycheck-list-position 'right))
 
 ;; lsp optimizations

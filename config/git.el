@@ -28,6 +28,9 @@
   :config
   (setq git-link-open-in-browser t))
 
+;; browse selection at remote
+(use-package browse-at-remote)
+
 ;; git-modes
 (use-package git-modes)
 
@@ -43,7 +46,7 @@
         git-gutter:ask-p nil
         git-gutter:update-interval 0.2)
   (add-to-list 'git-gutter:update-hooks 'focus-in-hook)
-  (global-set-key (kbd "C-c h u") 'git-gutter:revert-hunk)
+  (global-set-key (kbd "C-c h v") 'git-gutter:revert-hunk)
   (global-set-key (kbd "C-c h o") 'git-gutter:popup-hunk)
   (global-set-key (kbd "C-c h n") 'git-gutter:next-hunk)
   (global-set-key (kbd "C-c h p") 'git-gutter:previous-hunk))
