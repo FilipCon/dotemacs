@@ -43,10 +43,3 @@
     (setq-local read-process-output-max (* 1024 1024))
     (setq-local gcmh-high-cons-threshold (* 2 (default-value 'gcmh-high-cons-threshold)))))
 (add-hook 'lsp-mode-hook #'+lsp-init-optimizations-h)
-
-(define-minor-mode lsp-ui-doc-show-mode
-  "Toggle lsp-ui-doc frame."
-  :global t
-  (if lsp-ui-doc-show-mode
-      (lsp-ui-doc-show)
-    (lsp-ui-doc-hide)))
