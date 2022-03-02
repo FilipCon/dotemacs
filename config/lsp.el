@@ -26,13 +26,13 @@
   :bind (:map lsp-mode-map
               ("M-," . lsp-ui-peek-find-references)
               ("M-." . lsp-ui-peek-find-definitions)
-              ("<f1>" . lsp-ui-doc-show-mode)
-              ("<f5>" . lsp-ui-mode))
+              ("<f1>" . lsp-ui-doc-mode))
   :config
   (setq lsp-ui-doc-max-height 80
-        lsp-ui-doc-max-width 200
+        lsp-ui-doc-max-width 100
         lsp-ui-doc-include-signature t
         lsp-ui-doc-show-with-mouse nil
+        lsp-ui-doc-show-with-cursor t
         lsp-ui-sideline-ignore-duplicate t
         lsp-ui-sideline-show-code-actions nil
         lsp-ui-flycheck-list-position 'right))
