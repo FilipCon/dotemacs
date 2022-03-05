@@ -34,10 +34,9 @@
 ;; git-modes
 (use-package git-modes)
 
-;; (use-package forge
-;;   :after magit
-;;   :config
-;;   (setq auth-sources '("~/.authinfo.gpg")))
+(use-package forge
+  :config
+  (setq auth-sources '("~/.authinfo")))
 
 (use-package git-gutter
   :config

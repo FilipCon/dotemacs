@@ -58,3 +58,11 @@
           "Tags" (or (org-entry-get (point) "TAGS") "")
           "Amount" (or (org-entry-get (point) "AMOUNT") "")
           "Month" (concat start-month))))
+
+(use-package org-jira
+  :custom
+  (jiralib-url "https://bare-square.atlassian.net")
+  (org-jira-working-dir "~/.org-jira")
+  ;;override request backend (curl) to fix [error] request--curl-sync: semaphore never called
+  (request-backend 'url-retrieve)
+  :bind ("C-c j s" . org-jira-get-summary))
