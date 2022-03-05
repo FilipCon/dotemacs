@@ -20,11 +20,11 @@
                 '(".shadow-cljs" "node_modules" ".lsp" ".cpcache" ".clj-kondo")))
   (projectile-register-project-type 'cmake '("CMakeLists.txt")
                                     :project-file "CMakeLists.txt"
-                                    :compilation-dir "build"
-                                    :configure "cmake %s -B %s"
-                                    :compile "cmake --build . -j6"
                                     :test "ctest"
-                                    :install "cmake --build . --target install"
+                                    :compilation-dir "build"
+                                    :configure "cmake %s -B %s -DCMAKE_INSTALL_PREFIX=../install"
+                                    :compile "cmake --build . -j6"
+                                    :install "cmake --install ."
                                     :package "cmake --build . --target package")
   (projectile-register-project-type 'clojure-cli '("deps.edn")
                                     :test-suffix "_test"

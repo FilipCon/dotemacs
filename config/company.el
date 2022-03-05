@@ -23,6 +23,12 @@
           ([tab] . company-complete-selection)))
 
 ;; sort candidates
+(use-package prescient
+  :config
+  (prescient-persist-mode 1)
+  (setq prescient-save-file
+        (concat user-emacs-directory ".cache/prescient-save.el")))
+
 (use-package company-prescient
   :after (company prescient)
   :hook (company-mode . company-prescient-mode))
