@@ -21,38 +21,32 @@
   :after all-the-icons
   :hook (ibuffer-mode . all-the-icons-ibuffer-mode))
 
-;; tildes in EOF like vim
-(use-package vi-tilde-fringe
-  :hook ((prog-mode org-mode) . vi-tilde-fringe-mode))
-
-;; fill column indicator
-(use-package hl-fill-column
-  :bind ("<f12>" . display-fill-column-indicator-mode)
-  :hook (prog-mode . hl-fill-column-mode))
-
 ;; highlight specific words
 (use-package hl-todo
   :hook ((prog-mode text-mode) . hl-todo-mode)
   :config
   (setq hl-todo-keyword-faces
-      '(("TODO"   . "#FF0000")
-        ("FIXME"  . "#FF0000")
-        ("DEBUG"  . "#A020F0")
-        ("OPTIMIZE"  . "#A020F0")
+      '(("TODO" . "#FF0000")
+        ("FIXME" . "#FF0000")
+        ("DEBUG" . "#A020F0")
+        ("OPTIMIZE" . "#A020F0")
         ("WARNING" . "#ff00ff")
         ("NEXT" . "#ff00ff")
-        ("HACK"   . "#FF4500")
-        ("CITE"   . "#1E90FF")
-        ("STUB"   . "#1E90FF")
-        ("NOTE"   . "#66CD00")
-        ("DONE"   . "#66CD00")
-        ("REVIEW"   . "#66CD00"))))
+        ("HACK" . "#FF4500")
+        ("CITE" . "#1E90FF")
+        ("STUB" . "#1E90FF")
+        ("NOTE" . "#66CD00")
+        ("DONE" . "#66CD00")
+        ("REVIEW" . "#66CD00"))))
 
 ;; show whitespaces
 (use-package whitespace
   :bind ("<f11>" . global-whitespace-mode)
   :config
   (setq whitespace-line-column nil))
+
+;; show column indicator
+(global-set-key (kbd "<f12>") 'display-fill-column-indicator-mode)
 
 ;; move cursor to other buffers
 (global-set-key (kbd "C-c c p") 'windmove-up)
@@ -98,10 +92,6 @@
 ;; restart emacs
 (use-package restart-emacs)
 
-;; show key bind
-(use-package which-key
-  :init (which-key-mode 1))
-
 ;; delete trailing whitespace and untabify in edited regions only
 (use-package ws-butler
   :config
@@ -110,13 +100,13 @@
 
 ;; undo/redo
 (use-package undo-fu
-  :bind (("C-/". undo-fu-only-undo)
+  :bind (("C-/" . undo-fu-only-undo)
          ("C-?" . undo-fu-only-redo)))
 
 ;; move line/region
 (use-package move-text
-  :bind(("M-p" .  'move-text-up)
-        ("M-n" .  'move-text-down)))
+  :bind(("M-p" . 'move-text-up)
+        ("M-n" . 'move-text-down)))
 
 ;; multiple cursors
 (use-package multiple-cursors
@@ -126,7 +116,7 @@
          ("C-<" . mc/mark-previous-like-this)
          ("M-C-l" . mc/mark-all-like-this))
   :custom
-  (smartparens-global-mode 1)
+  (multiple-cursors-mode 1)
   (mc/always-run-for-all t)
   (mc/always-repeat-command t))
 

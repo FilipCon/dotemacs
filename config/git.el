@@ -5,7 +5,6 @@
   (setq magit-diff-refine-hunk 'all
         magit-diff-expansion-threshold 10)
   :bind (("C-c g s" . magit-status)
-         ("C-c g o" . magit-checkout)
          ("C-c g d" . magit-diff)
          ("C-c g b" . magit-blame-addition)))
 

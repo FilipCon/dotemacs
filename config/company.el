@@ -35,7 +35,7 @@
 
 ;; company box
 (use-package company-box
-  :after company all-the-icons
+  :after (company all-the-icons)
   :hook (company-mode . company-box-mode)
   :config
   (setq x-gtk-resize-child-frames 'resize-mode

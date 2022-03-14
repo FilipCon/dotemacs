@@ -26,13 +26,4 @@
                                     :compile "cmake --build . -j6"
                                     :install "cmake --install ."
                                     :package "cmake --build . --target package")
-  (projectile-register-project-type 'clojure-cli '("deps.edn")
-                                    :test-suffix "_test"
-                                    :compile "clojure -M:"
-                                    :test "clojure -M:"
-                                    :run "clojure -X:")
-  (projectile-register-project-type 'shadow-cljs '("shadow-cljs.edn")
-                                    :test-suffix "_test"
-                                    :compile "clojure -M:"
-                                    :test "clojure -M:"
-                                    :run "clojure -X:"))
+ )

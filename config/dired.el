@@ -21,11 +21,9 @@
   (define-key dired-mode-map "Z" #'dired-atool-do-unpack)
   (define-key dired-mode-map "z" #'dired-atool-do-pack))
 
-;; oh! colors!
+;; awww! colors!
 (use-package diredfl
   :hook (dired-mode . diredfl-mode))
-
-;; (use-package dired-git-info)
 
 ;; (use-package dired-rsync
 ;;   :bind ("C-c C-r" . dired-rsync))
