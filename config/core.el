@@ -46,7 +46,7 @@
 (desktop-save-mode t)                   ; save desktop
 (global-so-long-mode t)                 ; long lines make emacs slow
 (global-hl-line-mode t)                 ; highlight current line
-(global-visual-line-mode t)             ; enable visual line editting
+(global-visual-line-mode nil)           ; disable visual line editting
 
 ;; show line number in selected modes
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
