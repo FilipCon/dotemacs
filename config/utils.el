@@ -53,7 +53,7 @@
   :config
   (advice-add 'project-find-regexp :override #'ag-project-regexp)
   (setq ag-highlight-search t)
-  (setq-default ag-ignore-list (append ignored-files ignored-directoriess)))
+  (setq-default ag-ignore-list (append ignored-files ignored-directories)))
 
 ;; writable grep
 (use-package wgrep-ag)

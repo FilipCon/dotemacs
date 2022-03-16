@@ -10,7 +10,7 @@
       default-input-method nil)
 
 ;; globally ignored files and directories
-(defvar ignored-directoriess
+(defvar ignored-directories
   '("node_modules" ".shadow-cljs" ".lsp" ".cpcache" ".clj-kondo" "tmp" "build"
     "target" ".git" "log"))
 

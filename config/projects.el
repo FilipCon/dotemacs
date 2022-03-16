@@ -3,12 +3,12 @@
 (use-package project
   :bind ("C-`" . project-eshell)
   :config
-  (setq project-vc-ignores (append ignored-files ignored-directoriess)))
+  (setq project-vc-ignores (append ignored-files ignored-directories)))
 
 (use-package projectile
   :bind-keymap ("C-c p" . projectile-command-map)
   :config
-  (add-to-list 'projectile-globally-ignored-directories ignored-directoriess)
+  (add-to-list 'projectile-globally-ignored-directories ignored-directories)
   (projectile-register-project-type 'cmake '("CMakeLists.txt")
                                     :project-file "CMakeLists.txt"
                                     :test "ctest"
