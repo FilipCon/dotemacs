@@ -9,18 +9,6 @@
       (insert-char ?-))))
 (global-set-key (kbd "<f8>") 'fill-to-end)
 
-;; make modeline pretty
-(use-package doom-modeline
-  :hook (after-init . doom-modeline-init)
-  :config
-  (setq doom-modeline-icon t))
-
-;; all the icons
-(use-package all-the-icons)
-(use-package all-the-icons-ibuffer
-  :after all-the-icons
-  :hook (ibuffer-mode . all-the-icons-ibuffer-mode))
-
 ;; highlight specific words
 (use-package hl-todo
   :hook ((prog-mode text-mode) . hl-todo-mode)

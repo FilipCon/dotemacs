@@ -27,3 +27,13 @@
   (doom-themes-org-config)
   ;; (load-theme 'doom-solarized-light t)
   (load-theme 'doom-vibrant t))
+
+;; make modeline pretty
+(use-package doom-modeline
+  :hook (after-init . doom-modeline-init))
+
+;; all the icons
+(use-package all-the-icons)
+(use-package all-the-icons-ibuffer
+  :after all-the-icons
+  :hook (ibuffer-mode . all-the-icons-ibuffer-mode))
