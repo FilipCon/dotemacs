@@ -39,21 +39,6 @@
         ("DONE" . "#66CD00")
         ("REVIEW" . "#66CD00"))))
 
-;; show whitespaces
-(use-package whitespace
-  :bind ("<f11>" . global-whitespace-mode)
-  :config
-  (setq whitespace-line-column nil))
-
-;; show column indicator
-(global-set-key (kbd "<f12>") 'display-fill-column-indicator-mode)
-
-;; move cursor to other buffers
-(global-set-key (kbd "C-c c p") 'windmove-up)
-(global-set-key (kbd "C-c c n") 'windmove-down)
-(global-set-key (kbd "C-c c b") 'windmove-left)
-(global-set-key (kbd "C-c c f") 'windmove-right)
-
 ;; move buffers
 (use-package buffer-move
   :bind (("C-c b p" . buf-move-up)
@@ -69,9 +54,7 @@
 
 ;; collection of utilities
 (use-package crux
-  :bind (("C-x 4 t". crux-transpose-windows)
-         ("C-c d" . crux-duplicate-current-line-or-region)
-         ("C-c b r" . crux-rename-file-and-buffer)))
+  :bind (("C-c d" . crux-duplicate-current-line-or-region)))
 
 ;; easy comment/uncomment
 (use-package evil-nerd-commenter
@@ -82,15 +65,17 @@
   :config
   (advice-add 'project-find-regexp :override #'ag-project-regexp)
   (setq ag-highlight-search t)
-  (setq-default ag-ignore-list '("build/*" "*.ipynb" "target/*" ".git"
-                                 "*.elc" "*.pyc" "*.o" "*.so" ".clj-kondo"
-                                 "log" "node_modules" "*.svg")))
+  (setq-default ag-ignore-list (append ignored-files ignored-directoriess)))
 
 ;; writable grep
 (use-package wgrep-ag)
 
 ;; restart emacs
 (use-package restart-emacs)
+
+;; show available keybindings
+(use-package which-key
+  :init (which-key-mode 1))
 
 ;; delete trailing whitespace and untabify in edited regions only
 (use-package ws-butler
@@ -116,7 +101,6 @@
          ("C-<" . mc/mark-previous-like-this)
          ("M-C-l" . mc/mark-all-like-this))
   :custom
-  (multiple-cursors-mode 1)
   (mc/always-run-for-all t)
   (mc/always-repeat-command t))
 

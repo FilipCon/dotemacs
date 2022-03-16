@@ -98,27 +98,3 @@
 
 ;; default font size
 (set-face-attribute 'default nil :height 140)
-
-;;; keybindings
-
-;; font size
-(global-set-key (kbd "C-=") (lambda () (interactive) (text-scale-increase 0.5)))
-(global-set-key (kbd "C--") (lambda () (interactive) (text-scale-decrease 0.5)))
-
-;; eval elisp buffer
-(define-key emacs-lisp-mode-map (kbd "C-c C-c") 'eval-buffer)
-
-;; move between recently visited
-(global-set-key (kbd "C-M--") 'previous-buffer)
-(global-set-key (kbd "C-M-=") 'next-buffer)
-
-;; remap default keys
-(global-set-key (kbd "M-o") 'other-window)
-(global-set-key (kbd "C-x k") 'kill-this-buffer)
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-
-;; hippie expand, instead of dabbrev
-(global-set-key (kbd "M-/") 'hippie-expand)
-
-;; stop minimizing, its annoying
-(global-unset-key (kbd "C-z"))

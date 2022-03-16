@@ -3,16 +3,12 @@
 (use-package project
   :bind ("C-`" . project-eshell)
   :config
-  (setq project-vc-ignores
-        '("tmp" ".shadow-cljs" "node_modules"
-          ".lsp" ".cpcache" ".clj-kondo"
-          "*.elc" "*.pyc" "*.o" "*.so" "*.ipynb")))
+  (setq project-vc-ignores (append ignored-files ignored-directoriess)))
 
 (use-package projectile
   :bind-keymap ("C-c p" . projectile-command-map)
   :config
-  (add-to-list 'projectile-globally-ignored-directories
-               '(".shadow-cljs" "node_modules" ".lsp" ".cpcache" ".clj-kondo"))
+  (add-to-list 'projectile-globally-ignored-directories ignored-directoriess)
   (projectile-register-project-type 'cmake '("CMakeLists.txt")
                                     :project-file "CMakeLists.txt"
                                     :test "ctest"

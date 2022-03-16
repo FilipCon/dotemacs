@@ -33,9 +33,9 @@
 ;; git-modes
 (use-package git-modes)
 
-(use-package forge
-  :config
-  (setq auth-sources '("~/.authinfo")))
+;; (use-package forge
+;;   :config
+;;   (setq auth-sources '("~/.authinfo")))
 
 (use-package git-gutter
   :config
