@@ -16,6 +16,10 @@
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
+;; undo/redo
+(global-set-key (kbd "C-/") 'undo)
+(global-set-key (kbd "C-?") 'undo-redo)
+
 ;; show whitespaces
 (global-set-key (kbd "<f11>") 'global-whitespace-mode)
 

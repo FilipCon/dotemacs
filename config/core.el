@@ -15,6 +15,7 @@
       sentence-end-double-space nil         ; single space ends sentence
       tab-always-indent t                   ; TAB only indents
       message-log-max 16384                 ; max message log lines
+      undo-no-redo t                        ; don't go through redo retries
       read-process-output-max (* 64 1024))  ; read bigger chunks from subprocesses
 
 (setq enable-local-variables :all)      ; WARNING don't ask me about .dir-locals - risky

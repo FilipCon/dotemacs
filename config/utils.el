@@ -1,13 +1,30 @@
 ;;; -*- lexical-binding: t -*-
 
-;; fill with `-' until fill column
 (defun fill-to-end ()
+  "Fill with `-' until fill column."
   (interactive)
   (save-excursion
     (end-of-line)
     (while (< (current-column) 80)
       (insert-char ?-))))
 (global-set-key (kbd "<f8>") 'fill-to-end)
+
+(defun crux-duplicate-current-line-or-region (arg)
+  "Duplicates the current line or region ARG times.
+If there's no region, the current line will be duplicated.  However, if
+there's a region, all lines that region covers will be duplicated."
+  (interactive "p")
+  (pcase-let* ((origin (point))
+               (`(,beg . ,end) (crux-get-positions-of-line-or-region))
+               (region (buffer-substring-no-properties beg end)))
+    (dotimes (_i arg)
+      (goto-char end)
+      (unless (use-region-p)
+        (newline))
+      (insert region)
+      (setq end (point)))
+    (goto-char (+ origin (* (length region) arg) arg))))
+(global-set-key (kbd "C-c d") 'crux-duplicate-current-line-or-region)
 
 ;; highlight specific words
 (use-package hl-todo
@@ -16,16 +33,10 @@
   (setq hl-todo-keyword-faces
       '(("TODO" . "#FF0000")
         ("FIXME" . "#FF0000")
-        ("DEBUG" . "#A020F0")
-        ("OPTIMIZE" . "#A020F0")
         ("WARNING" . "#ff00ff")
         ("NEXT" . "#ff00ff")
-        ("HACK" . "#FF4500")
-        ("CITE" . "#1E90FF")
-        ("STUB" . "#1E90FF")
         ("NOTE" . "#66CD00")
-        ("DONE" . "#66CD00")
-        ("REVIEW" . "#66CD00"))))
+        ("DONE" . "#66CD00"))))
 
 ;; move buffers
 (use-package buffer-move
@@ -39,10 +50,6 @@
   :config
   (global-set-key [remap kill-ring-save] 'easy-kill)
   (global-set-key [remap mark-sexp] 'easy-mark))
-
-;; collection of utilities
-(use-package crux
-  :bind (("C-c d" . crux-duplicate-current-line-or-region)))
 
 ;; easy comment/uncomment
 (use-package evil-nerd-commenter
@@ -70,11 +77,6 @@
   :config
   (ws-butler-global-mode 1)
   (setq ws-butler-convert-leading-tabs-or-spaces t))
-
-;; undo/redo
-(use-package undo-fu
-  :bind (("C-/" . undo-fu-only-undo)
-         ("C-?" . undo-fu-only-redo)))
 
 ;; move line/region
 (use-package move-text
