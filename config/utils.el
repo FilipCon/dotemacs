@@ -9,23 +9,6 @@
       (insert-char ?-))))
 (global-set-key (kbd "<f8>") 'fill-to-end)
 
-(defun crux-duplicate-current-line-or-region (arg)
-  "Duplicates the current line or region ARG times.
-If there's no region, the current line will be duplicated.  However, if
-there's a region, all lines that region covers will be duplicated."
-  (interactive "p")
-  (pcase-let* ((origin (point))
-               (`(,beg . ,end) (crux-get-positions-of-line-or-region))
-               (region (buffer-substring-no-properties beg end)))
-    (dotimes (_i arg)
-      (goto-char end)
-      (unless (use-region-p)
-        (newline))
-      (insert region)
-      (setq end (point)))
-    (goto-char (+ origin (* (length region) arg) arg))))
-(global-set-key (kbd "C-c d") 'crux-duplicate-current-line-or-region)
-
 ;; highlight specific words
 (use-package hl-todo
   :hook ((prog-mode text-mode) . hl-todo-mode)
@@ -54,6 +37,14 @@ there's a region, all lines that region covers will be duplicated."
 ;; easy comment/uncomment
 (use-package evil-nerd-commenter
   :bind ("C-;" . evilnc-comment-or-uncomment-lines))
+
+;; collection of utilities
+(use-package crux
+  :bind (("C-c d" . crux-duplicate-current-line-or-region)))
+
+;; unfill paragraph
+(use-package unfill
+  :bind ("C-M-q" . unfill-paragraph))
 
 ;; global search tool
 (use-package ag

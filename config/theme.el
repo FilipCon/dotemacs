@@ -25,8 +25,9 @@
   (doom-themes-visual-bell-config)      ; Enable flashing mode-line on errors
   (doom-themes-treemacs-config)
   (doom-themes-org-config)
-  ;; (load-theme 'doom-solarized-light t)
-  (load-theme 'doom-vibrant t))
+  (load-theme 'doom-solarized-light t)
+  ;; (load-theme 'doom-vibrant t)
+  )
 
 ;; make modeline pretty
 (use-package doom-modeline
