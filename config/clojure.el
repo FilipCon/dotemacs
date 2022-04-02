@@ -40,4 +40,5 @@
   ;; (setq clojure-align-reader-conditionals t)
   ;; (setq clojure-indent-style 'align-arguments) ; align function arguments
   (setq clojure-align-forms-automatically t) ; align s-expressions
-  :bind ("C-c C-<SPC>" . clojure-align))
+  :bind (:map clojure-mode-map
+              ("C-c C-<SPC>" . clojure-align)))

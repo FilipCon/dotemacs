@@ -7,6 +7,7 @@
           csharp-mode
           clojure-mode clojurec-mode clojurescript-mode
           sql-mode css-mode html-mode
+          racket-mode
           latex-mode LaTeX-mode tex-mode yatex-mode bibtex-mode) . lsp)
   :bind-keymap ("C-c l" . lsp-command-map)
   :bind ("C-<return>" . lsp-execute-code-action)
