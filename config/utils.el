@@ -74,6 +74,10 @@
   :bind(("M-p" . 'move-text-up)
         ("M-n" . 'move-text-down)))
 
+;; github emojis
+(use-package emojify
+  :hook (after-init . global-emojify-mode))
+
 ;; multiple cursors
 (use-package multiple-cursors
   :bind (("M-C->" . mc/edit-lines)

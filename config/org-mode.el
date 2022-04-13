@@ -10,6 +10,7 @@
   (set-company-backend! '(org-journal-mode) 'company-capf 'company-dabbrev)
   (require 'ob-clojure)
   (require 'ob-python)
+  (require 'org-tempo)
   (setq org-ellipsis " ▾"
         org-directory "~/Nextcloud/Notes"
         org-agenda-span 10
@@ -22,6 +23,8 @@
         org-startup-folded 'showall
         org-todo-keywords '("TODO" "NEXT" "DONE")
         org-src-fontify-natively t
+        org-src-tab-acts-natively t
+        org-edit-src-content-indentation 0
         org-confirm-babel-evaluate nil
         org-babel-clojure-backend 'cider
         org-hide-leading-stars t
@@ -34,6 +37,10 @@
   :hook (org-mode . org-bullets-mode)
   :custom
   (org-bullets-bullet-list '("◉" "◉" "•" "•")))
+
+;; toc
+(use-package toc-org
+  :hook (org-mode . toc-org-enable))
 
 ;; timesheets
 (use-package org-ql)
