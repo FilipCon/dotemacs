@@ -48,6 +48,7 @@
 (global-so-long-mode t)                 ; long lines make emacs slow
 (global-hl-line-mode t)                 ; highlight current line
 (global-visual-line-mode nil)           ; disable visual line editting
+(global-auto-revert-mode t)             ; auto refresh buffers
 
 ;; show line number in selected modes
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
@@ -97,5 +98,13 @@
 (savehist-mode 1)
 (recentf-mode 1)
 
-;; default font size
+;; font
+(set-face-attribute 'default nil :font "UbuntuMono")
+(set-frame-font "UbuntuMono" nil t)
 (set-face-attribute 'default nil :height 160)
+;; (set-face-attribute 'default nil :font "DejaVuSansMono")
+;; (set-frame-font "DejaVuSansMono" nil t)
+;; (set-face-attribute 'default nil :height 140)
+;; (set-face-attribute 'default nil :font "OpenDyslexicMono")
+;; (set-frame-font "OpenDyslexicMono" nil t)
+;; (set-face-attribute 'default nil :height 120)

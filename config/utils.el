@@ -75,8 +75,7 @@
         ("M-n" . 'move-text-down)))
 
 ;; github emojis
-(use-package emojify
-  :hook (after-init . global-emojify-mode))
+(use-package emojify)
 
 ;; multiple cursors
 (use-package multiple-cursors
