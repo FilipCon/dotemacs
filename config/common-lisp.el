@@ -3,9 +3,17 @@
 (use-package slime
   :hook ((lisp-mode . slime-mode)
          (inferior-lisp-mode . inferior-slime-mode))
+  :bind (:map slime-mode-map
+              ("C-c M-j" . slime)
+              ("C-c C-e" . slime-eval-last-expression)
+              ("C-c C-q" . slime-repl-quit))
+  :bind (:map slime-repl-mode-map
+              ("C-c C-q" . slime-repl-quit))
   :config
   (defalias 'equalp 'cl-equalp)
   (autoload 'slime "slime" "Superior Lisp Interaction Mode for Emacs" t)
+  (unbind-key "M-n" slime-mode-map)
+  (unbind-key "M-p" slime-mode-map)
   (slime-setup
    '(slime-asdf slime-banner slime-clipboard
                 slime-compiler-notes-tree slime-fancy
@@ -18,7 +26,6 @@
   (setq common-lisp-style 'modern
         slime-header-line-p nil
         slime-startup-animation nil
-        ;; slime-enable-evaluate-in-emacs t
         slime-net-coding-system 'utf-8-unix
         ;; lisp-indent-function 'common-lisp-indent-function
         inferior-lisp-program "sbcl --dynamic-space-size 4096"

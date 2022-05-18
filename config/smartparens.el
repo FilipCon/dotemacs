@@ -21,7 +21,8 @@
   (setq sp-highlight-pair-overlay nil
         sp-show-pair-delay 0
         sp-show-pair-from-inside t)
-  (sp-use-paredit-bindings))
+  (sp-use-paredit-bindings)
+  (unbind-key "M-?" smartparens-mode-map))
 
 (defun sp-wrap-doublequote (&optional arg)
   (interactive "P")

@@ -17,6 +17,8 @@
         company-dabbrev-code-ignore-case nil
         company-dabbrev-ignore-case nil
         company-dabbrev-downcase nil)
+  :bind (:map company-mode-map
+              ("M-<return>" . company-complete))
   :bind (:map company-active-map
           ("C-n" . company-select-next)
           ("C-p" . company-select-previous)

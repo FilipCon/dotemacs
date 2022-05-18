@@ -77,6 +77,16 @@
 ;; github emojis
 (use-package emojify)
 
+(use-package vundo
+  :straight (:host github :repo "casouri/vundo")
+  :bind (:map vundo-mode-map
+              ("C-f" . vundo-forward)
+              ("C-b" . vundo-backward)
+              ("C-n" . vundo-next)
+              ("C-p" . vundo-previous)
+              ("C-a" . vundo-stem-root)
+              ("C-e" . vundo-stem-end)))
+
 ;; multiple cursors
 (use-package multiple-cursors
   :bind (("M-C->" . mc/edit-lines)
@@ -93,4 +103,8 @@
   :commands (gcmh-mode)
   :straight (:host github :repo "emacsmirror/gcmh")
   :init
-  (gcmh-mode 1))
+  (gcmh-mode 1)
+  :config
+  ;; lsp optimizations
+  (setq-default read-process-output-max (* 1024 1024))
+  (setq-default gcmh-high-cons-threshold (* 2 (default-value 'gcmh-high-cons-threshold))))

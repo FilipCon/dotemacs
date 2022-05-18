@@ -17,11 +17,11 @@
   :hook ((LaTeX-mode . turn-on-cdlatex)
          (latex-mode . turn-on-cdlatex)))
 
-;; latexmk
-(use-package auctex-latexmk
-  :init (auctex-latexmk-setup)
-  :config
-  (setq auctex-latexmk-inherit-TeX-PDF-mode t))
+;; ;; latexmk
+;; (use-package auctex-latexmk
+;;   :init (auctex-latexmk-setup)
+;;   :config
+;;   (setq auctex-latexmk-inherit-TeX-PDF-mode t))
 
 ;; completion backends
 (use-package company-math

@@ -35,12 +35,19 @@
         lsp-ui-doc-show-with-mouse nil
         lsp-ui-doc-show-with-cursor t
         lsp-ui-sideline-ignore-duplicate t
-        lsp-ui-sideline-show-code-actions nil
-        lsp-ui-flycheck-list-position 'right))
+        lsp-ui-sideline-show-code-actions nil))
 
-;; lsp optimizations
-(defun +lsp-init-optimizations-h ()
-  (when (bound-and-true-p lsp-mode)
-    (setq-local read-process-output-max (* 1024 1024))
-    (setq-local gcmh-high-cons-threshold (* 2 (default-value 'gcmh-high-cons-threshold)))))
-(add-hook 'lsp-mode-hook #'+lsp-init-optimizations-h)
+;; ;; experimental
+;; (use-package eglot
+;;   :custom-face
+;;   (eglot-highlight-symbol-face ((t (:inherit bold :background "DodgerBlue"))))
+;;   (eglot-diagnostic-tag-unnecessary-face ((t (:inherit (flymake-warning shadow)))))
+;;   :bind-keymap ("C-c l" . eglot-mode-map)
+;;   :bind (("<f6>" . eglot))
+;;   :bind (:map eglot-mode-map
+;;               ("C-c l r" . eglot-rename)
+;;               ("C-c l f" . eglot-format)
+;;               ("C-<return>" . eglot-actions))
+;;   :config
+;;   (setq eglot-sync-connect 1
+;;         eglot-stay-out-of '(eldoc)))

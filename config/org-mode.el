@@ -20,7 +20,7 @@
         org-log-done 'time
         org-log-into-drawer t
         org-special-ctrl-a/e t
-        org-startup-folded 'showall
+        ;; org-startup-folded 'showall ; FIXME broke in recent update
         org-todo-keywords '("TODO" "NEXT" "DONE")
         org-src-fontify-natively t
         org-src-tab-acts-natively t

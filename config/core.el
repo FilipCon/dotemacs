@@ -16,6 +16,7 @@
       tab-always-indent t                   ; TAB only indents
       message-log-max 16384                 ; max message log lines
       undo-no-redo t                        ; don't go through redo retries
+      global-auto-revert-non-file-buffers t ; revert other buffers
       read-process-output-max (* 64 1024))  ; read bigger chunks from subprocesses
 
 (setq enable-local-variables :all)      ; WARNING don't ask me about .dir-locals - risky
@@ -99,12 +100,9 @@
 (recentf-mode 1)
 
 ;; font
-(set-face-attribute 'default nil :font "UbuntuMono")
+(set-face-attribute 'default nil :font "UbuntuMono" :height 160)
 (set-frame-font "UbuntuMono" nil t)
-(set-face-attribute 'default nil :height 160)
-;; (set-face-attribute 'default nil :font "DejaVuSansMono")
+;; (set-face-attribute 'default nil :font "DejaVuSansMono" :height 135)
 ;; (set-frame-font "DejaVuSansMono" nil t)
-;; (set-face-attribute 'default nil :height 140)
-;; (set-face-attribute 'default nil :font "OpenDyslexicMono")
+;; (set-face-attribute 'default nil :font "OpenDyslexicMono" :height 120)
 ;; (set-frame-font "OpenDyslexicMono" nil t)
-;; (set-face-attribute 'default nil :height 120)
