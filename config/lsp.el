@@ -17,8 +17,12 @@
         lsp-completion-provider :none
         lsp-enable-file-watchers nil
         lsp-enable-indentation nil
-        lsp-headerline-breadcrumb-enable-diagnostics nil
-        lsp-semantic-tokens-enable t))
+        lsp-enable-links nil
+        lsp-enable-folding nil
+        lsp-modeline-diagnostics-enable nil
+        lsp-headerline-breadcrumb-enable nil
+        ;; lsp-semantic-tokens-enable nil
+        ))
 
 ;; lsp ui
 (use-package lsp-ui
@@ -34,6 +38,7 @@
         lsp-ui-doc-include-signature t
         lsp-ui-doc-show-with-mouse nil
         lsp-ui-doc-show-with-cursor t
+        lsp-ui-imenu-enable nil
         lsp-ui-sideline-ignore-duplicate t
         lsp-ui-sideline-show-code-actions nil))
 
