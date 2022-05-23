@@ -14,7 +14,6 @@
         company-selection-wrap-around t
         company-dabbrev-code-other-buffers nil
         company-dabbrev-other-buffers nil
-        company-dabbrev-code-ignore-case nil
         company-dabbrev-ignore-case nil
         company-dabbrev-downcase nil)
   :bind (:map company-mode-map

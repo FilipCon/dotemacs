@@ -37,6 +37,13 @@
         lsp-ui-sideline-ignore-duplicate t
         lsp-ui-sideline-show-code-actions nil))
 
+;; lsp optimizations
+(defun +lsp-init-optimizations-h ()
+  (when (bound-and-true-p lsp-mode)
+    (setq-local read-process-output-max (* 1024 1024))
+    (setq-local gcmh-high-cons-threshold (* 2 (default-value 'gcmh-high-cons-threshold)))))
+(add-hook 'lsp-mode-hook #'+lsp-init-optimizations-h)
+
 ;; ;; experimental
 ;; (use-package eglot
 ;;   :custom-face

@@ -103,8 +103,4 @@
   :commands (gcmh-mode)
   :straight (:host github :repo "emacsmirror/gcmh")
   :init
-  (gcmh-mode 1)
-  :config
-  ;; lsp optimizations
-  (setq-default read-process-output-max (* 1024 1024))
-  (setq-default gcmh-high-cons-threshold (* 2 (default-value 'gcmh-high-cons-threshold))))
+  (gcmh-mode 1))
