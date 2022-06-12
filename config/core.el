@@ -100,9 +100,9 @@
 (recentf-mode 1)
 
 ;; font
-(set-face-attribute 'default nil :font "UbuntuMono" :height 160)
-(set-frame-font "UbuntuMono" nil t)
-;; (set-face-attribute 'default nil :font "DejaVuSansMono" :height 135)
-;; (set-frame-font "DejaVuSansMono" nil t)
+;; (set-face-attribute 'default nil :font "UbuntuMono" :height 160)
+;; (set-frame-font "UbuntuMono" nil t)
+(set-face-attribute 'default nil :font "DejaVuSansMono" :height 135)
+(set-frame-font "DejaVuSansMono" nil t)
 ;; (set-face-attribute 'default nil :font "OpenDyslexicMono" :height 120)
 ;; (set-frame-font "OpenDyslexicMono" nil t)
