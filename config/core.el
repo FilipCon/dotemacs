@@ -50,6 +50,7 @@
 (global-hl-line-mode t)                 ; highlight current line
 (global-visual-line-mode nil)           ; disable visual line editting
 (global-auto-revert-mode t)             ; auto refresh buffers
+(global-eldoc-mode t)                   ; echo area doc
 
 ;; show line number in selected modes
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)

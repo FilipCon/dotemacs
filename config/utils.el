@@ -21,13 +21,6 @@
         ("NOTE" . "#66CD00")
         ("DONE" . "#66CD00"))))
 
-;; move buffers
-(use-package buffer-move
-  :bind (("C-c b p" . buf-move-up)
-         ("C-c b n" . buf-move-down)
-         ("C-c b b" . buf-move-left)
-         ("C-c b f" . buf-move-right)))
-
 ;; replacement for kill-ring-save
 (use-package easy-kill
   :config
@@ -53,11 +46,11 @@
   (setq ag-highlight-search t)
   (setq-default ag-ignore-list (append ignored-files ignored-directories)))
 
-;; writable grep
-(use-package wgrep-ag)
+;; ;; writable grep
+;; (use-package wgrep-ag)
 
-;; restart emacs
-(use-package restart-emacs)
+;; ;; restart emacs
+;; (use-package restart-emacs)
 
 ;; show available keybindings
 (use-package which-key

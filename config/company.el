@@ -34,15 +34,6 @@
   :after (company prescient)
   :hook (company-mode . company-prescient-mode))
 
-;; company box
-(use-package company-box
-  :after (company all-the-icons)
-  :hook (company-mode . company-box-mode)
-  :config
-  (setq x-gtk-resize-child-frames 'resize-mode
-        company-box-doc-delay 0
-        company-box-backends-colors nil))
-
 ;;snippets
 (use-package yasnippet
   :config

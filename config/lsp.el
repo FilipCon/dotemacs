@@ -44,7 +44,8 @@
 
 ;; lsp optimizations
 (defun +lsp-init-optimizations-h ()
-  (when (bound-and-true-p lsp-mode)
+  (when (or ; (eglot-managed-p)
+            (bound-and-true-p lsp-mode))
     (setq-local read-process-output-max (* 1024 1024))
     (setq-local gcmh-high-cons-threshold (* 2 (default-value 'gcmh-high-cons-threshold)))))
 (add-hook 'lsp-mode-hook #'+lsp-init-optimizations-h)
@@ -52,14 +53,15 @@
 ;; ;; experimental
 ;; (use-package eglot
 ;;   :custom-face
-;;   (eglot-highlight-symbol-face ((t (:inherit bold :background "DodgerBlue"))))
-;;   (eglot-diagnostic-tag-unnecessary-face ((t (:inherit (flymake-warning shadow)))))
+;;   ;; (eglot-highlight-symbol-face ((t (:inherit bold :background "dim gray"))))
+;;   (eglot-diagnostic-tag-unnecessary-face ((t (:inherit (flymake-warning)))))
 ;;   :bind-keymap ("C-c l" . eglot-mode-map)
 ;;   :bind (("<f6>" . eglot))
 ;;   :bind (:map eglot-mode-map
+;;               ("M-," . xref-find-references)
 ;;               ("C-c l r" . eglot-rename)
 ;;               ("C-c l f" . eglot-format)
-;;               ("C-<return>" . eglot-actions))
+;;               ("C-<return>" . eglot-code-actions))
 ;;   :config
-;;   (setq eglot-sync-connect 1
-;;         eglot-stay-out-of '(eldoc)))
+;;   (setq eglot-stay-out-of '(eldoc))
+;;   (add-hook 'eglot-managed-mode-hook #'+lsp-init-optimizations-h))

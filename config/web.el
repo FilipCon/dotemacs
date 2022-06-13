@@ -69,11 +69,11 @@ Fix for the above hasn't been released as of Emacs 25.2."
 ;; yaml
 (use-package yaml-mode)
 
-;; tf
-(use-package terraform-mode)
+;; ;; tf
+;; (use-package terraform-mode)
 
-;; view log files
-(use-package logview)
+;; ;; view log files
+;; (use-package logview)
 
 ;; (use-package log4j-mode
 ;;   :disabled t
