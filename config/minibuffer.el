@@ -32,7 +32,7 @@
 ;; completion style
 (use-package orderless
   :init
-  (setq completion-styles '(orderless)
+  (setq completion-styles '(orderless partial-completion basic)
         completion-category-defaults nil
         orderless-component-separator "[ -]")
   (defun just-one-face (fn &rest args)

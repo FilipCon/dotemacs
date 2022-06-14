@@ -22,9 +22,6 @@
 (straight-use-package 'use-package)
 (setq straight-use-package-by-default t)
 
-;; configure company backends the Doom way!
-(load (concat (expand-file-name user-emacs-directory) "company-backends.el"))
-
 ;; Load all files from my `~/.emacs.d/config' directory
 ;; It doesn't support nested dirs
 (dolist
@@ -37,11 +34,8 @@
 
 ;; init emacs server
 (require 'server)
-(unless (bound-and-true-p server-process)
+(unless (server-running-p)
   (server-start))
 
-;; Load automatically generated custom garbage
-(setq custom-file
-      (concat (file-name-directory user-init-file) "custom-variables.el"))
-(when (file-exists-p custom-file)
-  (load custom-file))
+;; dispose automatically generated custom garbage
+(setq custom-file (make-temp-file "emacs-custom-"))

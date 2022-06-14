@@ -13,7 +13,7 @@
       reb-re-syntax 'string             ; emacs regex syntax
       save-interprogram-paste-before-kill t ; save existing clipboard to kill ring
       sentence-end-double-space nil         ; single space ends sentence
-      tab-always-indent t                   ; TAB only indents
+      tab-always-indent 'complete           ; TAB indents and if indented then completes
       message-log-max 16384                 ; max message log lines
       undo-no-redo t                        ; don't go through redo retries
       global-auto-revert-non-file-buffers t ; revert other buffers

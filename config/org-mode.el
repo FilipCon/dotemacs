@@ -7,7 +7,6 @@
          ("C-c o c" . org-capture)
          ("C-c o a" . org-agenda))
   :config
-  (set-company-backend! '(org-journal-mode) 'company-capf 'company-dabbrev)
   (require 'ob-clojure)
   (require 'ob-python)
   (require 'org-tempo)

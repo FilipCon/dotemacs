@@ -5,10 +5,7 @@
   :straight (:host github :repo "emacsmirror/cmake-mode"
                    :files (:defaults "*"))
   :mode (("CMakeLists\\.txt\\'" . cmake-mode)
-         ("\\.cmake\\'" . cmake-mode))
-  :config
-  (set-company-backend! 'cmake-mode
-    '(company-cmake company-capf company-yasnippet)))
+         ("\\.cmake\\'" . cmake-mode)))
 
 ;; font lock for cmake
 (use-package cmake-font-lock)

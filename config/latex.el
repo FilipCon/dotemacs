@@ -14,6 +14,7 @@
 
 ;; auctec improvements (eg. math mode)
 (use-package cdlatex
+  :config (unbind-key "TAB" cdlatex-mode-map)
   :hook ((LaTeX-mode . turn-on-cdlatex)
          (latex-mode . turn-on-cdlatex)))
 
@@ -22,16 +23,6 @@
   :init (auctex-latexmk-setup)
   :config
   (setq auctex-latexmk-inherit-TeX-PDF-mode t))
-
-;; completion backends
-(use-package company-math
-  :config
-  (set-company-backend! 'latex-mode '(company-capf
-                                      company-yasnippet
-                                      company-math-symbols-latex
-                                      company-math-symbols-unicode
-                                      company-latex-commands
-                                      company-ispell)))
 
 ;; PDF tools
 (use-package pdf-tools

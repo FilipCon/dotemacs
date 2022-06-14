@@ -9,8 +9,13 @@
           sql-mode css-mode html-mode
           racket-mode
           latex-mode LaTeX-mode tex-mode yatex-mode bibtex-mode) . lsp)
+  :hook (lsp-completion-mode . my/lsp-mode-setup-completion)
   :bind-keymap ("C-c l" . lsp-command-map)
   :bind ("C-<return>" . lsp-execute-code-action)
+  :init
+  (defun my/lsp-mode-setup-completion ()
+    (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
+          '(flex))) ;; Configure flex
   :config
   (setq lsp-lens-enable nil
         lsp-sqls-workspace-config-path nil

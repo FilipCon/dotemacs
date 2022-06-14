@@ -22,17 +22,6 @@
 ;; sass
 (use-package sass-mode)
 
-;; company backends for web-mode/sass
-(use-package company-web
-  :config
-  (set-company-backend! 'sass-mode '(company-capf
-                                     company-yasnippet
-                                     company-css))
-  (set-company-backend! 'web-mode '(company-capf
-                                    company-yasnippet
-                                    company-css
-                                    company-web-html)))
-
 ;; sql
 (use-package sql
   :config

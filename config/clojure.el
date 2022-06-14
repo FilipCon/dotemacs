@@ -11,8 +11,6 @@
                         (remove-hook 'completion-at-point-functions
                                      #'cider-complete-at-point)))
   :config
-  (set-company-backend! '(cider-repl-mode) '(company-capf company-yasnippet))
-  (add-to-list 'company-begin-commands 'cljr-slash)
   (setq cider-auto-select-error-buffer nil
         cider-repl-display-help-banner nil
         nrepl-hide-special-buffers t
@@ -23,14 +21,7 @@
         cider-use-fringe-indicators nil
         cider-use-xref nil
         cider-font-lock-dynamically nil ; use lsp semantic tokens
-        cider-eldoc-display-for-symbol-at-point nil)
-  (defun +kill-company-doc-buffer (orig-fun &rest args)
-    ;; HACK *company-documentation* buffer opens when selecting snippet
-    ;; candidates with company. The buffer is in REPL mode which confuses cider
-    ;; so no other repl can be created
-    (kill-buffer (company-doc-buffer))
-    (apply orig-fun args))
-  (advice-add 'cider--gather-connect-params :around #'+kill-company-doc-buffer))
+        cider-eldoc-display-for-symbol-at-point nil))
 
 ;; clojure mode
 (use-package clojure-mode
