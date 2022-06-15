@@ -9,6 +9,27 @@
       (insert-char ?-))))
 (global-set-key (kbd "<f8>") 'fill-to-end)
 
+(defun duplicate-current-line-or-region (arg)
+  "Duplicates the current line or region ARG times.
+If there's no region, the current line will be duplicated. However, if
+there's a region, all lines that region covers will be duplicated."
+  (interactive "p")
+  (let (beg end (origin (point)))
+    (if (and mark-active (> (point) (mark)))
+        (exchange-point-and-mark))
+    (setq beg (line-beginning-position))
+    (if mark-active
+        (exchange-point-and-mark))
+    (setq end (line-end-position))
+    (let ((region (buffer-substring-no-properties beg end)))
+      (dotimes (i arg)
+        (goto-char end)
+        (newline)
+        (insert region)
+        (setq end (point)))
+      (goto-char (+ origin (* (length region) arg) arg)))))
+(global-set-key (kbd "C-c d") #'duplicate-current-line-or-region)
+
 ;; highlight specific words
 (use-package hl-todo
   :hook ((prog-mode text-mode) . hl-todo-mode)
@@ -21,19 +42,9 @@
         ("NOTE" . "#66CD00")
         ("DONE" . "#66CD00"))))
 
-;; replacement for kill-ring-save
-(use-package easy-kill
-  :config
-  (global-set-key [remap kill-ring-save] 'easy-kill)
-  (global-set-key [remap mark-sexp] 'easy-mark))
-
 ;; easy comment/uncomment
 (use-package evil-nerd-commenter
   :bind ("C-;" . evilnc-comment-or-uncomment-lines))
-
-;; collection of utilities
-(use-package crux
-  :bind (("C-c d" . crux-duplicate-current-line-or-region)))
 
 ;; unfill paragraph
 (use-package unfill
@@ -66,6 +77,29 @@
 (use-package move-text
   :bind(("M-p" . 'move-text-up)
         ("M-n" . 'move-text-down)))
+
+;; sexp editing
+(use-package paredit
+  :bind (("M-[" . paredit-wrap-square)
+         ("M-{" . paredit-wrap-curly)
+         ("C-0" . paredit-forward-slurp-sexp)
+         ("C-9" . paredit-forward-barf-sexp)
+         ("C-M-9" . paredit-backward-slurp-sexp)
+         ("C-M-0" . paredit-backward-barf-sexp)
+         ("M-s" . paredit-splice-sexp)
+         ("C-M-<backspace>" . backward-kill-sexp)
+         ("C-S-p" . paredit-mode))
+  :hook ((text-mode prog-mode markdown-mode LaTeX-mode) . paredit-mode))
+
+;; rainbow-delimiters
+(use-package rainbow-delimiters
+  :config (rainbow-delimiters-mode t)
+  :hook ((prog-mode
+          markdown-mode
+          text-mode
+          conf-mode
+          cider-repl-mode
+          LaTeX-mode) . rainbow-delimiters-mode))
 
 ;; multiple cursors
 (use-package multiple-cursors

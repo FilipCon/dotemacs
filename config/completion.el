@@ -8,7 +8,6 @@
   (corfu-cycle t)
   (corfu-preview-current nil)
   (corfu-quit-no-match nil)
-  (corfu-separator ?-)
   (corfu-quit-at-boundary nil)
   (corfu-auto-delay 0.1)
   (corfu-auto-prefix 1)

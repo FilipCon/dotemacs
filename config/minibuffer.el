@@ -34,11 +34,7 @@
   :init
   (setq completion-styles '(orderless partial-completion basic)
         completion-category-defaults nil
-        orderless-component-separator "[ -]")
-  (defun just-one-face (fn &rest args)
-  (let ((orderless-match-faces [completions-common-part]))
-    (apply fn args)))
-  (advice-add 'company-capf--candidates :around #'just-one-face))
+        completion-category-overrides '((file (styles . (partial-completion))))))
 
 ;; mini-buffer annotations
 (use-package marginalia

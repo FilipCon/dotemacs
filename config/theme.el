@@ -1,6 +1,6 @@
 ;;; -*- lexical-binding: t -*-
 
-;; theme
+;; Prot's themes
 (use-package modus-themes
   :straight (:type built-in)
   :init
