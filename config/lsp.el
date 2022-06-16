@@ -2,7 +2,7 @@
 
 (use-package eglot
   :custom-face
-  ;; (eglot-highlight-symbol-face ((t (:inherit bold :background "dim gray"))))
+  (eglot-highlight-symbol-face ((t (:inherit bold :foreground "white" :background "dodger blue"))))
   (eglot-diagnostic-tag-unnecessary-face ((t (:inherit (flymake-warning)))))
   :bind-keymap ("C-c l" . eglot-mode-map)
   :bind (("<f6>" . eglot))
@@ -12,10 +12,10 @@
               ("C-c l f" . eglot-format)
               ("C-<return>" . eglot-code-actions))
   :config
-  (setq eglot-stay-out-of '(eldoc))
+  (setq eldoc-echo-area-use-multiline-p nil)
   ;; lsp optimizations
-  (defun +lsp-init-optimizations-h ()
+  (defun +lsp-init-optimizations ()
     (when (eglot-managed-p)
       (setq-local read-process-output-max (* 1024 1024))
       (setq-local gcmh-high-cons-threshold (* 2 (default-value 'gcmh-high-cons-threshold)))))
-  (add-hook 'eglot-managed-mode-hook #'+lsp-init-optimizations-h))
+  (add-hook 'eglot-managed-mode-hook #'+lsp-init-optimizations))

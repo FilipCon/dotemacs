@@ -35,12 +35,12 @@ there's a region, all lines that region covers will be duplicated."
   :hook ((prog-mode text-mode) . hl-todo-mode)
   :config
   (setq hl-todo-keyword-faces
-      '(("TODO" . "#FF0000")
-        ("FIXME" . "#FF0000")
-        ("WARNING" . "#ff00ff")
-        ("NEXT" . "#ff00ff")
-        ("NOTE" . "#66CD00")
-        ("DONE" . "#66CD00"))))
+        '(("TODO" . "#FF0000")
+          ("FIXME" . "#FF0000")
+          ("WARNING" . "#ff00ff")
+          ("NEXT" . "#ff00ff")
+          ("NOTE" . "#66CD00")
+          ("DONE" . "#66CD00"))))
 
 ;; easy comment/uncomment
 (use-package evil-nerd-commenter
@@ -56,12 +56,6 @@ there's a region, all lines that region covers will be duplicated."
   (advice-add 'project-find-regexp :override #'ag-project-regexp)
   (setq ag-highlight-search t)
   (setq-default ag-ignore-list (append ignored-files ignored-directories)))
-
-;; ;; writable grep
-;; (use-package wgrep-ag)
-
-;; ;; restart emacs
-;; (use-package restart-emacs)
 
 ;; show available keybindings
 (use-package which-key
@@ -89,7 +83,7 @@ there's a region, all lines that region covers will be duplicated."
          ("M-s" . paredit-splice-sexp)
          ("C-M-<backspace>" . backward-kill-sexp)
          ("C-S-p" . paredit-mode))
-  :hook ((text-mode prog-mode markdown-mode LaTeX-mode) . paredit-mode))
+  :hook ((text-mode prog-mode markdown-mode LaTeX-mode cider-repl-mode) . paredit-mode))
 
 ;; rainbow-delimiters
 (use-package rainbow-delimiters

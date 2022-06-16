@@ -10,3 +10,5 @@
               ("C-p" . vundo-previous)
               ("C-a" . vundo-stem-root)
               ("C-e" . vundo-stem-end)))
+
+(use-package keycast)

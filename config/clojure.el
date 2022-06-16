@@ -15,13 +15,11 @@
         cider-repl-display-help-banner nil
         nrepl-hide-special-buffers t
         cider-repl-history-file "~/.emacs.d/cider-history"
-        cider-repl-history-size 3000
         cider-repl-pop-to-buffer-on-connect 'display-only
         cider-ns-refresh-show-log-buffer t
         cider-use-fringe-indicators nil
-        cider-use-xref nil
-        cider-font-lock-dynamically nil ; use lsp semantic tokens
-        cider-eldoc-display-for-symbol-at-point nil))
+        cider-font-lock-dynamically t
+        cider-use-xref nil))
 
 ;; clojure mode
 (use-package clojure-mode

@@ -8,9 +8,10 @@
               ("C-c C-e" . wdired-change-to-wdired-mode)
               ("f" . dired-create-empty-file))
   :config
-  (setq dired-listing-switches "-aBhl --group-directories-first"
+  (setq dired-listing-switches "-AGFhlv --group-directories-first"
         dired-recursive-copies 'always
-        dired-recursive-deletes 'top
+        dired-recursive-deletes 'always
+        delete-by-moving-to-trash t
         dired-auto-revert-buffer t
         dired-dwim-target t
         dired-create-destination-dirs 'ask))

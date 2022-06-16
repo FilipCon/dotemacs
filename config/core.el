@@ -13,7 +13,7 @@
       reb-re-syntax 'string             ; emacs regex syntax
       save-interprogram-paste-before-kill t ; save existing clipboard to kill ring
       sentence-end-double-space nil         ; single space ends sentence
-      tab-always-indent 'complete           ; TAB indents and if indented then completes
+      tab-always-indent t                   ; TAB only indents
       message-log-max 16384                 ; max message log lines
       undo-no-redo t                        ; don't go through redo retries
       global-auto-revert-non-file-buffers t ; revert other buffers
@@ -36,6 +36,7 @@
 ;; core modes
 (menu-bar-mode -1)                      ; menu-bar is gone
 (tool-bar-mode -1)                      ; tool-bar is gone
+(tooltip-mode -1)                       ; no popups ffs
 (scroll-bar-mode -1)                    ; scroll-bar is gone
 (blink-cursor-mode 0)                   ; stop blinking on me!
 ;; (show-paren-mode t)                     ; highlight matching parens
