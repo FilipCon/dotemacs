@@ -16,6 +16,6 @@
   ;; lsp optimizations
   (defun +lsp-init-optimizations ()
     (when (eglot-managed-p)
-      (setq-local read-process-output-max (* 1024 1024))
-      (setq-local gcmh-high-cons-threshold (* 2 (default-value 'gcmh-high-cons-threshold)))))
+      (setq-local read-process-output-max (* 1024 1024)) ; 1mb
+      (setq-local gc-cons-threshold (* 1024 1024 1024)))) ; 1gb
   (add-hook 'eglot-managed-mode-hook #'+lsp-init-optimizations))

@@ -9,10 +9,3 @@
       load-prefer-newer t          ; prioritize non-byte-compiled source files
       default-input-method nil)
 
-;; globally ignored files and directories
-(defvar ignored-directories
-  '("node_modules" ".shadow-cljs" ".lsp" ".cpcache" ".clj-kondo" "tmp" "build"
-    "target" ".git" "log"))
-
-(defvar ignored-files
-  '("*.elc" "*.pyc" "*.o" "*.so" "*.ipynb" "*.svg"))

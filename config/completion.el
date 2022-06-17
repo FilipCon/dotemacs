@@ -6,7 +6,7 @@
   :custom
   (corfu-cycle t)
   ;; (corfu-quit-no-match nil)
-  ;; (corfu-quit-at-boundary nil)
+  (corfu-quit-at-boundary nil)
   (corfu-auto-prefix 1)
   :bind ("M-RET" . completion-at-point)
   :bind (:map corfu-map
@@ -23,3 +23,11 @@
          ("C-c p i" . cape-ispell)
          ("C-c p l" . cape-line)
          ("C-c p w" . cape-dict)))
+
+;; icons
+(use-package kind-icon
+  :after corfu
+  :custom
+  (kind-icon-default-face 'corfu-default)
+  :config
+  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))

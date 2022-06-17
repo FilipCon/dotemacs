@@ -1,7 +1,7 @@
 ;;; -*- lexical-binding: t -*-
 
 ;; Reset after early-init
-(setq gc-cons-threshold 100000000       ; for safety, gcmh will correct it
+(setq gc-cons-threshold 100000000       ; 100mb
       gc-cons-percentage 0.1)
 
 ;; Straight bootstrap

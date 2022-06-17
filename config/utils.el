@@ -47,15 +47,7 @@ there's a region, all lines that region covers will be duplicated."
   :bind ("C-;" . evilnc-comment-or-uncomment-lines))
 
 ;; unfill paragraph
-(use-package unfill
-  :bind ("C-M-q" . unfill-paragraph))
-
-;; global search tool
-(use-package ag
-  :config
-  (advice-add 'project-find-regexp :override #'ag-project-regexp)
-  (setq ag-highlight-search t)
-  (setq-default ag-ignore-list (append ignored-files ignored-directories)))
+(use-package unfill)
 
 ;; show available keybindings
 (use-package which-key
@@ -87,13 +79,7 @@ there's a region, all lines that region covers will be duplicated."
 
 ;; rainbow-delimiters
 (use-package rainbow-delimiters
-  :config (rainbow-delimiters-mode t)
-  :hook ((prog-mode
-          markdown-mode
-          text-mode
-          conf-mode
-          cider-repl-mode
-          LaTeX-mode) . rainbow-delimiters-mode))
+  :hook ((prog-mode cider-repl-mode LaTeX-mode) . rainbow-delimiters-mode))
 
 ;; multiple cursors
 (use-package multiple-cursors
@@ -105,10 +91,3 @@ there's a region, all lines that region covers will be duplicated."
   :custom
   (mc/always-run-for-all t)
   (mc/always-repeat-command t))
-
-;; sneaky garbage collector
-(use-package gcmh-mode
-  :commands (gcmh-mode)
-  :straight (:host github :repo "emacsmirror/gcmh")
-  :init
-  (gcmh-mode 1))
