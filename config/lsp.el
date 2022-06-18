@@ -12,7 +12,8 @@
               ("C-c l f" . eglot-format)
               ("C-<return>" . eglot-code-actions))
   :config
-  (setq eldoc-echo-area-use-multiline-p nil)
+  (setq eldoc-echo-area-use-multiline-p nil
+        eglot-confirm-server-initiated-edits nil)
   ;; lsp optimizations
   (defun +lsp-init-optimizations ()
     (when (eglot-managed-p)

@@ -66,6 +66,9 @@ there's a region, all lines that region covers will be duplicated."
 
 ;; sexp editing
 (use-package paredit
+  :config
+  (put 'paredit-forward-delete 'delete-selection 'supersede)
+  (put 'paredit-backward-delete 'delete-selection 'supersede)
   :bind (("M-[" . paredit-wrap-square)
          ("M-{" . paredit-wrap-curly)
          ("C-0" . paredit-forward-slurp-sexp)

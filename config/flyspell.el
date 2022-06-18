@@ -10,8 +10,6 @@
 ;; show correction options
 (use-package flyspell-correct
   :after flyspell
-  :hook ((text-mode . flyspell-mode)
-         (prog-mode . flyspell-prog-mode))
   :bind (:map flyspell-mode-map
               ("C-." . flyspell-correct-wrapper))
   :init

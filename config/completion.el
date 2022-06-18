@@ -3,12 +3,12 @@
 (use-package corfu
   :straight (corfu :files (:defaults "extensions/*")
                    :includes (corfu-info corfu-history))
-  :custom
-  (corfu-cycle t)
-  ;; (corfu-quit-no-match nil)
-  (corfu-quit-at-boundary nil)
-  (corfu-auto-prefix 1)
-  :bind ("M-RET" . completion-at-point)
+  :config
+  (setq corfu-cycle t
+        corfu-separator ?-
+        corfu-preview-current nil
+        corfu-quit-at-boundary nil
+        corfu-auto-prefix 1)
   :bind (:map corfu-map
               ("C-n" . corfu-next)
               ("C-p" . corfu-previous))
@@ -24,10 +24,8 @@
          ("C-c p l" . cape-line)
          ("C-c p w" . cape-dict)))
 
-;; icons
+;; margin icons
 (use-package kind-icon
-  :after corfu
-  :custom
-  (kind-icon-default-face 'corfu-default)
   :config
+  (setq kind-icon-default-face 'corfu-default)
   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))

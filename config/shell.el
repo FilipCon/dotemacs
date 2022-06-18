@@ -9,10 +9,3 @@
   (setq exec-path-from-shell-check-startup-files nil)
   (setq exec-path-from-shell-variables
         '("PATH" "MANPATH" "SSH_AUTH_SOCK")))
-
-;; eshell history suggestions
-(use-package esh-autosuggest
-  :hook (eshell-mode . esh-autosuggest-mode))
-
-;; eshell completions
-(use-package pcmpl-args)

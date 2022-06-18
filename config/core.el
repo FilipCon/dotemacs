@@ -13,11 +13,11 @@
       reb-re-syntax 'string             ; emacs regex syntax
       save-interprogram-paste-before-kill t ; save existing clipboard to kill ring
       sentence-end-double-space nil         ; single space ends sentence
-      tab-always-indent t                   ; TAB only indents
-      message-log-max 16384                 ; max message log lines
+      tab-always-indent 'complete           ; TAB indent or complete
+      initial-scratch-message ""            ; empty scratch buffer
       undo-no-redo t                        ; don't go through redo retries
       global-auto-revert-non-file-buffers t ; revert other buffers
-      read-process-output-max (* 64 1024))  ; read bigger chunks from subprocesses
+      initial-major-mode 'fundamental-mode) ; scratch buffer's default mode
 
 (setq enable-local-variables :all)      ; WARNING don't ask me about .dir-locals - risky
 
@@ -39,10 +39,10 @@
 (tooltip-mode -1)                       ; no popups ffs
 (scroll-bar-mode -1)                    ; scroll-bar is gone
 (blink-cursor-mode 0)                   ; stop blinking on me!
-;; (show-paren-mode t)                     ; highlight matching parens
+(show-paren-mode t)                     ; highlight matching parens
 (column-number-mode t)                  ; show column numbers
 (global-subword-mode t)                 ; move cursor within subwords
-(normal-erase-is-backspace-mode t)      ; delete like a normal f**ing person
+(normal-erase-is-backspace-mode t)      ; forward DELETE
 (delete-selection-mode 1)               ; typing erases selection
 (winner-mode t)                         ; retrieve closed windows/buffers
 (save-place-mode t)                     ; save place in files
@@ -103,8 +103,6 @@
 (recentf-mode 1)
 
 ;; font
-;; (set-face-attribute 'default nil :font "UbuntuMono" :height 160)
-;; (set-frame-font "UbuntuMono" nil t)
 (set-face-attribute 'default nil :font "DejaVuSansMono" :height 135)
 (set-frame-font "DejaVuSansMono" nil t)
 ;; (set-face-attribute 'default nil :font "OpenDyslexicMono" :height 120)
