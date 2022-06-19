@@ -34,6 +34,7 @@
   :init
   (setq completion-styles '(orderless partial-completion basic)
         completion-category-defaults nil
+        orderless-component-separator "[ -]"
         completion-category-overrides '((file (styles . (partial-completion))))))
 
 ;; mini-buffer annotations
@@ -44,26 +45,15 @@
 ;; enhanced commands on mini-buffer
 (use-package consult
   :commands (consult-customize)
-  :bind (("C-s" . consult-line)
+  :bind (("M-C-s" . consult-line)
          ("C-x C-r" . consult-recent-file)
-         ("C-x r g" . consult-ripgrep)
-         ([remap switch-to-buffer] . consult-buffer)
-         ([remap switch-to-buffer-other-window] . consult-buffer-other-window)
-         ([remap yank-pop] . consult-yank-pop)
-         ([remap goto-line] . consult-goto-line))
+         ("C-x r g" . consult-ripgrep))
   :config
   (consult-customize
-   consult-ripgrep consult-git-grep consult-grep consult-buffer
-   consult-bookmark consult-recent-file consult-xref
-   consult--source-bookmark
-   :preview-key (kbd "M-."))
-  (setq consult-line-start-from-top t
-        consult-project-root-function
-        (lambda ()
-          (when-let (project (project-current))
-            (car (project-roots project)))))
-  (fset 'multi-occur #'consult-multi-occur))
+   consult-ripgrep consult-buffer
+   consult-recent-file
+   :preview-key (kbd "M-.")))
 
-;; mini-buffer actions
-(use-package embark
-  :bind ("C-c a" . embark-act))
+;; ;; mini-buffer actions
+;; (use-package embark
+;;   :bind ("C-c a" . embark-act))

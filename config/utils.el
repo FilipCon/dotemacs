@@ -30,6 +30,22 @@ there's a region, all lines that region covers will be duplicated."
       (goto-char (+ origin (* (length region) arg) arg)))))
 (global-set-key (kbd "C-c d") #'duplicate-current-line-or-region)
 
+(defun unfill-paragraph ()
+  "Replace newline chars in current paragraph by single spaces.
+This command does the inverse of `fill-paragraph'."
+  (interactive)
+  (let ((fill-column most-positive-fixnum))
+    (call-interactively 'fill-paragraph)))
+
+(defun unfill-region (start end)
+  "Replace newline chars in region from START to END by single spaces.
+This command does the inverse of `fill-region'."
+  (interactive "r")
+  (let ((fill-column most-positive-fixnum))
+    (fill-region start end)))
+
+;; -----------------------------------------------------------------------------
+
 ;; highlight specific words
 (use-package hl-todo
   :hook ((prog-mode text-mode) . hl-todo-mode)
@@ -46,9 +62,6 @@ there's a region, all lines that region covers will be duplicated."
 (use-package evil-nerd-commenter
   :bind ("C-;" . evilnc-comment-or-uncomment-lines))
 
-;; unfill paragraph
-(use-package unfill)
-
 ;; show available keybindings
 (use-package which-key
   :init (which-key-mode 1))
@@ -61,24 +74,38 @@ there's a region, all lines that region covers will be duplicated."
 
 ;; move line/region
 (use-package move-text
-  :bind(("M-p" . 'move-text-up)
-        ("M-n" . 'move-text-down)))
+  :bind (("M-p" . move-text-up)
+         ("M-n" . move-text-down)))
 
 ;; sexp editing
 (use-package paredit
   :config
   (put 'paredit-forward-delete 'delete-selection 'supersede)
   (put 'paredit-backward-delete 'delete-selection 'supersede)
-  :bind (("M-[" . paredit-wrap-square)
-         ("M-{" . paredit-wrap-curly)
-         ("C-0" . paredit-forward-slurp-sexp)
-         ("C-9" . paredit-forward-barf-sexp)
-         ("C-M-9" . paredit-backward-slurp-sexp)
-         ("C-M-0" . paredit-backward-barf-sexp)
-         ("M-s" . paredit-splice-sexp)
-         ("C-M-<backspace>" . backward-kill-sexp)
-         ("C-S-p" . paredit-mode))
-  :hook ((text-mode prog-mode markdown-mode LaTeX-mode cider-repl-mode) . paredit-mode))
+  :bind ("C-S-p" . paredit-mode)
+  :bind (:map paredit-mode-map
+              ("M-[" . paredit-wrap-square)
+              ("M-{" . paredit-wrap-curly)
+              ("C-0" . paredit-forward-slurp-sexp)
+              ("C-9" . paredit-forward-barf-sexp)
+              ("C-M-9" . paredit-backward-slurp-sexp)
+              ("C-M-0" . paredit-backward-barf-sexp))
+  :hook ((prog-mode cider-repl-mode) . paredit-mode))
+
+;; isearch
+(use-package isearch
+  :straight (:type built-in)
+  :bind (:map isearch-mode-map
+              ("C-n" . isearch-repeat-forward)
+              ("C-p" . isearch-repeat-backward))
+  :config
+  (setq search-whitespace-regexp ".*?"
+        isearch-lazy-count t
+        isearch-allow-motion t
+        isearch-wrap-pause 'no
+        isearch-repeat-on-direction-change t
+        isearch-yank-on-move 'shift
+        isearch-allow-scroll 'unlimited))
 
 ;; rainbow-delimiters
 (use-package rainbow-delimiters
@@ -90,7 +117,7 @@ there's a region, all lines that region covers will be duplicated."
          ("C-|" . mc/mark-pop)
          ("C->" . mc/mark-next-like-this)
          ("C-<" . mc/mark-previous-like-this)
-         ("M-C-l" . mc/mark-all-like-this))
+         ("C-c M-m" . mc/mark-all-like-this))
   :custom
   (mc/always-run-for-all t)
   (mc/always-repeat-command t))

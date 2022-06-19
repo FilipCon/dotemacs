@@ -31,4 +31,7 @@
 
 ;; highlight symbols
 (global-set-key (kbd "C-M-;") 'hi-lock-face-symbol-at-point)
-(global-set-key (kbd "C-M-'") (lambda () (interactive )(hi-lock-unface-buffer t)))
+(global-set-key (kbd "C-M-'") (lambda () (interactive ) (hi-lock-unface-buffer t)))
+
+;; kill sexp
+(global-set-key (kbd "C-M-<backspace>") #'backward-kill-sexp)

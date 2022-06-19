@@ -37,9 +37,9 @@
   :custom
   (org-bullets-bullet-list '("◉" "◉" "•" "•")))
 
-;; toc
-(use-package toc-org
-  :hook (org-mode . toc-org-enable))
+;; ;; toc
+;; (use-package toc-org
+;;   :hook (org-mode . toc-org-enable))
 
 ;; timesheets
 (use-package org-ql)

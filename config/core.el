@@ -53,6 +53,7 @@
 (global-auto-revert-mode t)             ; auto refresh buffers
 (global-eldoc-mode t)                   ; echo area doc
 (global-hi-lock-mode t)                 ; highlight symbols
+(electric-pair-mode t)                  ; matching delimiters
 
 ;; show line number in selected modes
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
@@ -98,7 +99,8 @@
       savehist-save-minibuffer-history t
       savehist-additional-variables
       '(kill-ring search-ring regexp-search-ring)
-      recentf-max-saved-items 50)
+      recentf-max-saved-items 100
+      recentf-max-menu-items 100)
 (savehist-mode 1)
 (recentf-mode 1)
 

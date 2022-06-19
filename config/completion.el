@@ -21,11 +21,11 @@
   :bind (("C-c p d" . cape-dabbrev)
          ("C-c p f" . cape-file)
          ("C-c p i" . cape-ispell)
-         ("C-c p l" . cape-line)
          ("C-c p w" . cape-dict)))
 
 ;; margin icons
 (use-package kind-icon
   :config
-  (setq kind-icon-default-face 'corfu-default)
+  (setq kind-icon-default-face 'corfu-default
+        kind-icon-use-icons nil)
   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
