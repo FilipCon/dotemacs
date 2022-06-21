@@ -11,4 +11,6 @@
               ("C-a" . vundo-stem-root)
               ("C-e" . vundo-stem-end)))
 
-(use-package keycast)
+(use-package keycast
+  :config
+  (setq keycast-remove-tail-elements nil))

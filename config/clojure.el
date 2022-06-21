@@ -18,7 +18,7 @@
         cider-repl-pop-to-buffer-on-connect 'display-only
         cider-ns-refresh-show-log-buffer t
         cider-use-fringe-indicators nil
-        cider-font-lock-dynamically t
+        cider-font-lock-dynamically nil
         cider-use-xref nil))
 
 ;; clojure mode

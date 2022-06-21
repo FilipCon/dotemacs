@@ -47,13 +47,14 @@
   :commands (consult-customize)
   :bind (("M-C-s" . consult-line)
          ("C-x C-r" . consult-recent-file)
-         ("C-x r g" . consult-ripgrep))
+         ("C-x r g" . consult-ripgrep)
+         ([remap yank-pop] . consult-yank-pop))
   :config
   (consult-customize
    consult-ripgrep consult-buffer
    consult-recent-file
    :preview-key (kbd "M-.")))
 
-;; ;; mini-buffer actions
-;; (use-package embark
-;;   :bind ("C-c a" . embark-act))
+;; mini-buffer actions
+(use-package embark
+  :bind ("C-," . embark-act))

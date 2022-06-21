@@ -121,3 +121,10 @@ This command does the inverse of `fill-region'."
   :custom
   (mc/always-run-for-all t)
   (mc/always-repeat-command t))
+
+;; sneaky garbage collector
+(use-package gcmh-mode
+  :commands (gcmh-mode)
+  :straight (:host github :repo "emacsmirror/gcmh")
+  :init
+  (gcmh-mode 1))
