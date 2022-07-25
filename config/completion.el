@@ -26,7 +26,8 @@
 
 ;; margin icons
 (use-package kind-icon
+  :custom
+  (kind-icon-default-face 'corfu-default) ; to compute blended backgrounds correctly
   :config
-  (setq kind-icon-default-face 'corfu-default
-        kind-icon-use-icons nil)
+  (setq kind-icon-use-icons nil)
   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
