@@ -9,54 +9,10 @@
       (insert-char ?-))))
 (global-set-key (kbd "<f8>") 'fill-to-end)
 
-(defun duplicate-current-line-or-region (arg)
-  "Duplicates the current line or region ARG times.
-If there's no region, the current line will be duplicated. However, if
-there's a region, all lines that region covers will be duplicated."
-  (interactive "p")
-  (let (beg end (origin (point)))
-    (if (and mark-active (> (point) (mark)))
-        (exchange-point-and-mark))
-    (setq beg (line-beginning-position))
-    (if mark-active
-        (exchange-point-and-mark))
-    (setq end (line-end-position))
-    (let ((region (buffer-substring-no-properties beg end)))
-      (dotimes (i arg)
-        (goto-char end)
-        (newline)
-        (insert region)
-        (setq end (point)))
-      (goto-char (+ origin (* (length region) arg) arg)))))
-(global-set-key (kbd "C-c d") #'duplicate-current-line-or-region)
-
-(defun unfill-paragraph ()
-  "Replace newline chars in current paragraph by single spaces.
-This command does the inverse of `fill-paragraph'."
-  (interactive)
-  (let ((fill-column most-positive-fixnum))
-    (call-interactively 'fill-paragraph)))
-
-(defun unfill-region (start end)
-  "Replace newline chars in region from START to END by single spaces.
-This command does the inverse of `fill-region'."
-  (interactive "r")
-  (let ((fill-column most-positive-fixnum))
-    (fill-region start end)))
-
 ;; -----------------------------------------------------------------------------
 
-;; highlight specific words
-(use-package hl-todo
-  :hook ((prog-mode text-mode) . hl-todo-mode)
-  :config
-  (setq hl-todo-keyword-faces
-        '(("TODO" . "#FF0000")
-          ("FIXME" . "#FF0000")
-          ("WARNING" . "#ff00ff")
-          ("NEXT" . "#ff00ff")
-          ("NOTE" . "#66CD00")
-          ("DONE" . "#66CD00"))))
+;; unfill paragraphs
+(use-package unfill)
 
 ;; easy comment/uncomment
 (use-package evil-nerd-commenter

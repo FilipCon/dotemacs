@@ -14,7 +14,8 @@
         modus-themes-headings '((t . (bold rainbow)))
         modus-themes-scale-headings t
         modus-themes-org-blocks 'gray-background)
-  (load-theme 'modus-operandi t)
+  ;; (load-theme 'modus-operandi t) ; light
+  (load-theme 'modus-vivendi t) ; dark
   :bind ("<f5>" . modus-themes-toggle))
 
 ;; hide minor modes in modeline

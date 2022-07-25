@@ -35,7 +35,8 @@
   (setq completion-styles '(orderless partial-completion basic)
         completion-category-defaults nil
         orderless-component-separator "[ -]"
-        completion-category-overrides '((file (styles . (partial-completion))))))
+        completion-category-overrides '((file (styles . (partial-completion)))
+                                        (eglot (styles . (orderless flex))))))
 
 ;; mini-buffer annotations
 (use-package marginalia

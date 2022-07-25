@@ -8,6 +8,7 @@
         corfu-separator ?-
         corfu-preview-current nil
         corfu-quit-at-boundary nil
+        corfu-quit-no-match nil
         corfu-auto-prefix 1)
   :bind (:map corfu-map
               ("C-n" . corfu-next)

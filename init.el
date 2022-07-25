@@ -22,6 +22,14 @@
 (straight-use-package 'use-package)
 (setq straight-use-package-by-default t)
 
+;; init emacs server
+(require 'server)
+(unless (server-running-p)
+  (server-start))
+
+;; dispose automatically generated custom garbage
+(setq custom-file (make-temp-file "emacs-custom-"))
+
 ;; Load all files from my `~/.emacs.d/config' directory
 ;; It doesn't support nested dirs
 (dolist
@@ -31,11 +39,3 @@
       t
       "^.[^#].+el$"))
   (load-file file))
-
-;; init emacs server
-(require 'server)
-(unless (server-running-p)
-  (server-start))
-
-;; dispose automatically generated custom garbage
-(setq custom-file (make-temp-file "emacs-custom-"))
