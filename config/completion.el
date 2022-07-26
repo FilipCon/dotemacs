@@ -19,7 +19,8 @@
 
 ;; cape extensions
 (use-package cape
-  :bind (("C-c p d" . cape-dabbrev)
+  :bind (("C-c p p" . completion-at-point)
+         ("C-c p d" . cape-dabbrev)
          ("C-c p f" . cape-file)
          ("C-c p i" . cape-ispell)
          ("C-c p w" . cape-dict)))

@@ -14,7 +14,8 @@
   :config
   (setq eldoc-echo-area-use-multiline-p nil
         eglot-events-buffer-size 0
-        ;; eglot-extend-to-xref t
+        eglot-connect-timeout 600
+        eglot-extend-to-xref t
         eglot-confirm-server-initiated-edits nil)
   ;; lsp optimizations
   (defun +lsp-init-optimizations ()
