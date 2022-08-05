@@ -92,13 +92,23 @@ there's a region, all lines that region covers will be duplicated."
 (use-package rainbow-delimiters
   :hook ((prog-mode cider-repl-mode LaTeX-mode) . rainbow-delimiters-mode))
 
+;; highlight symbol
+(use-package highlight-symbol
+  :custom-face
+  (highlight-symbol-face ((t (:inherit bold :foreground "white" :background "dodger blue"))))
+  :hook (prog-mode . highlight-symbol-mode)
+  :config
+  (setq highlight-symbol-idle-delay 0.5
+        highlight-symbol-highlight-single-occurrence nil))
+
 ;; multiple cursors
 (use-package multiple-cursors
   :bind (("M-C->" . mc/edit-lines)
          ("C-|" . mc/mark-pop)
          ("C->" . mc/mark-next-like-this)
          ("C-<" . mc/mark-previous-like-this)
-         ("C-c M-m" . mc/mark-all-like-this))
+         ("C-c M-m" . mc/mark-all-like-this)
+         ("C-c m" . mc/mark-all-like-this-dwim))
   :custom
   (mc/always-run-for-all t)
   (mc/always-repeat-command t))

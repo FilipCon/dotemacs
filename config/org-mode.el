@@ -41,6 +41,16 @@
 ;; (use-package toc-org
 ;;   :hook (org-mode . toc-org-enable))
 
+;; fancy priorities
+(use-package org-fancy-priorities
+  :hook (org-mode . org-fancy-priorities-mode)
+  :config
+  (setq org-fancy-priorities-list '("HIGH" "MID" "LOW" "OPTIONAL")
+        org-priority-faces '((65 :foreground "red")
+                             (66 :foreground "deep sky blue")
+                             (67 :foreground "gold")
+                             (68 :foreground "lime green"))))
+
 ;; timesheets
 (use-package org-ql)
 (use-package org-clock-export

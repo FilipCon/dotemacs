@@ -15,6 +15,7 @@
       sentence-end-double-space nil         ; single space ends sentence
       tab-always-indent 'complete           ; TAB indent or complete
       initial-scratch-message ""            ; empty scratch buffer
+      eldoc-echo-area-use-multiline-p nil   ; no multiline eldoc
       undo-no-redo t                        ; don't go through redo retries
       global-auto-revert-non-file-buffers t ; revert other buffers
       initial-major-mode 'fundamental-mode) ; scratch buffer's default mode

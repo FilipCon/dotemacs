@@ -5,7 +5,7 @@
 (global-set-key (kbd "C--") (lambda () (interactive) (text-scale-decrease 0.5)))
 
 ;; eval elisp buffer
-(define-key emacs-lisp-mode-map (kbd "C-c C-c") 'eval-buffer)
+(define-key emacs-lisp-mode-map (kbd "C-c C-k") 'eval-buffer)
 
 ;; move between recently visited
 (global-set-key (kbd "C-M--") 'previous-buffer)
