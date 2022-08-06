@@ -111,7 +111,7 @@
                     :weight 'medium)
 
 (set-face-attribute 'variable-pitch nil
-                    :font "UbuntuMono Nerd Font 14"
+                    :font "Ubuntu Nerd Font 14"
                     :weight 'medium)
 
 (set-face-attribute 'fixed-pitch nil
