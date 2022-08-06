@@ -105,8 +105,17 @@
 (savehist-mode 1)
 (recentf-mode 1)
 
-;; font
-(set-face-attribute 'default nil :font "DejaVuSansMono" :height 135)
-(set-frame-font "DejaVuSansMono" nil t)
-;; (set-face-attribute 'default nil :font "OpenDyslexicMono" :height 120)
-;; (set-frame-font "OpenDyslexicMono" nil t)
+;; fonts
+(set-face-attribute 'default nil
+                    :font "SauceCodePro Nerd Font 13"
+                    :weight 'medium)
+
+(set-face-attribute 'variable-pitch nil
+                    :font "UbuntuMono Nerd Font 14"
+                    :weight 'medium)
+
+(set-face-attribute 'fixed-pitch nil
+                    :font "SauceCodePro Nerd Font 13"
+                    :weight 'medium)
+;; for emacs client
+(add-to-list 'default-frame-alist '(font . "SauceCodePro Nerd Font 13"))
