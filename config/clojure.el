@@ -14,6 +14,7 @@
         cider-repl-history-file "~/.emacs.d/cider-history"
         cider-repl-pop-to-buffer-on-connect 'display-only
         cider-ns-refresh-show-log-buffer t
+        cider-jack-in-nrepl-middlewares '("cider.nrepl/cider-middleware")
         cider-use-fringe-indicators nil
         cider-font-lock-dynamically nil
         cider-use-xref nil))
@@ -35,13 +36,13 @@
   :hook ((clojure-mode . flymake-kondor-setup)
          (clojure-mode . flymake-mode)))
 
-;; refactor utils
-(use-package clj-refactor
-  :hook (clojure-mode . clj-refactor-mode)
-  :config
-  (cljr-add-keybindings-with-prefix "C-c r")
-  (setq cljr-warn-on-eval nil
-        cljr-magic-requires nil
-        cljr-insert-newline-after-require nil
-        cljr-eagerly-cache-macro-occurrences-on-startup nil
-        cljr-find-usages-ignore-analyzer-errors t))
+;; ;; refactor utils
+;; (use-package clj-refactor
+;;   ;; :hook (clojure-mode . clj-refactor-mode)
+;;   :config
+;;   (cljr-add-keybindings-with-prefix "C-c r")
+;;   (setq cljr-warn-on-eval nil
+;;         cljr-magic-requires nil
+;;         cljr-insert-newline-after-require nil
+;;         cljr-eagerly-cache-macro-occurrences-on-startup nil
+;;         cljr-find-usages-ignore-analyzer-errors t))

@@ -13,6 +13,9 @@
         web-mode-enable-auto-quoting nil
         web-mode-enable-html-entities-fontification t))
 
+;; edit html tags as sexps
+(use-package tagedit)
+
 ;; emmet expansion
 (use-package emmet-mode
   :hook (html-mode web-mode css-mode)

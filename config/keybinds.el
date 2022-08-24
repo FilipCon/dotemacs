@@ -6,6 +6,8 @@
 
 ;; eval elisp buffer
 (define-key emacs-lisp-mode-map (kbd "C-c C-k") 'eval-buffer)
+(define-key emacs-lisp-mode-map (kbd "C-c C-c") 'eval-defun)
+(define-key emacs-lisp-mode-map (kbd "C-c C-e") 'eval-last-sexp)
 
 ;; move between recently visited
 (global-set-key (kbd "C-M--") 'previous-buffer)
@@ -31,7 +33,7 @@
 
 ;; highlight symbols
 (global-set-key (kbd "C-M-;") 'hi-lock-face-symbol-at-point)
-(global-set-key (kbd "C-M-'") (lambda () (interactive ) (hi-lock-unface-buffer t)))
+(global-set-key (kbd "C-M-'") (lambda () (interactive) (hi-lock-unface-buffer t)))
 
 ;; kill sexp
 (global-set-key (kbd "C-M-<backspace>") #'backward-kill-sexp)

@@ -8,10 +8,9 @@
   (setq flyspell-sort-corrections t))
 
 ;; show correction options
+(use-package flyspell-correct-popup)
 (use-package flyspell-correct
-  :after flyspell
   :bind (:map flyspell-mode-map
-              ("C-." . flyspell-correct-wrapper))
+              ("C-." . flyspell-correct-at-point))
   :init
-  (use-package flyspell-correct-popup)
   (unbind-key "C-;" flyspell-mode-map))
