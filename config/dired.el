@@ -11,7 +11,7 @@
   (setq dired-listing-switches "-AGFhlv --group-directories-first"
         dired-recursive-copies 'always
         dired-recursive-deletes 'always
-        delete-by-moving-to-trash t
+        delete-by-moving-to-trash nil
         dired-auto-revert-buffer t
         dired-dwim-target t
         dired-create-destination-dirs 'ask))

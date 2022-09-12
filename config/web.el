@@ -3,7 +3,6 @@
 ;; basic web mode settings
 (use-package web-mode
   :straight t
-  :mode (("\\.html?\\'" . web-mode))
   :config
   (setq web-mode-block-padding 2
         web-mode-code-indent-offset 2
@@ -27,6 +26,7 @@
 
 ;; sql
 (use-package sql
+  :hook (sql-interactive-mode-hook . (lambda () (toggle-truncate-lines t)))
   :config
   (setq sql-postgres-login-params
         '((user :default "postgres")
@@ -66,9 +66,3 @@ Fix for the above hasn't been released as of Emacs 25.2."
 
 ;; ;; view log files
 ;; (use-package logview)
-
-;; (use-package log4j-mode
-;;   :disabled t
-;;   :hook
-;;   ((log4j-mode . view-mode)
-;;    (log4j-mode . read-only-mode)))

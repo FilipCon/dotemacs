@@ -7,7 +7,7 @@
               ("C-c M-." . cider-find-dwim-other-window))
   :bind (:map cider-repl-mode-map
               ("C-c C-o" . cider-repl-clear-buffer))
-  :config
+  :init
   (setq cider-auto-select-error-buffer nil
         cider-repl-display-help-banner nil
         nrepl-hide-special-buffers t
