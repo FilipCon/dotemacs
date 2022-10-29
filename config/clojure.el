@@ -38,11 +38,9 @@
 
 ;; ;; refactor utils
 ;; (use-package clj-refactor
-;;   ;; :hook (clojure-mode . clj-refactor-mode)
 ;;   :config
-;;   (cljr-add-keybindings-with-prefix "C-c r")
 ;;   (setq cljr-warn-on-eval nil
 ;;         cljr-magic-requires nil
-;;         cljr-insert-newline-after-require nil
-;;         cljr-eagerly-cache-macro-occurrences-on-startup nil
+;;         ;; cljr-insert-newline-after-require nil
+;;         ;; cljr-populate-artifact-cache-on-startup nil
 ;;         cljr-find-usages-ignore-analyzer-errors t))

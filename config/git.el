@@ -38,3 +38,6 @@
   (global-set-key (kbd "C-c h o") 'git-gutter:popup-hunk)
   (global-set-key (kbd "C-c h n") 'git-gutter:next-hunk)
   (global-set-key (kbd "C-c h p") 'git-gutter:previous-hunk))
+
+;; browse region at remote repo
+(use-package browse-at-remote)
