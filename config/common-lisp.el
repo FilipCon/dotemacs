@@ -10,11 +10,13 @@
   :bind (:map slime-repl-mode-map
               ("C-c C-q" . slime-repl-quit))
   :config
+  (load (expand-file-name "~/quicklisp/slime-helper.el"))
   (unbind-key "M-n" slime-mode-map)
   (unbind-key "M-p" slime-mode-map)
   (slime-setup '(slime-repl slime-fuzzy))
   (setq common-lisp-style 'modern
         slime-header-line-p nil
         slime-startup-animation nil
+        common-lisp-hyperspec-root (expand-file-name "~/.emacs.d/HyperSpec/")
         slime-net-coding-system 'utf-8-unix
         inferior-lisp-program "sbcl"))

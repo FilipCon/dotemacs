@@ -98,8 +98,7 @@
 (setq history-length 1000
       history-delete-duplicates t
       savehist-save-minibuffer-history t
-      savehist-additional-variables
-      '(kill-ring search-ring regexp-search-ring)
+      savehist-additional-variables '(search-ring regexp-search-ring)
       recentf-max-saved-items 100
       recentf-max-menu-items 100)
 (savehist-mode 1)

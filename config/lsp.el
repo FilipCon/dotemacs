@@ -1,6 +1,7 @@
 ;;; -*- lexical-binding: t -*-
 
 (use-package eglot
+  :straight (:type built-in)
   :custom-face
   (eglot-highlight-symbol-face ((t (:inherit bold :foreground "white" :background "dodger blue"))))
   (eglot-diagnostic-tag-unnecessary-face ((t (:inherit (flymake-warning)))))
@@ -17,12 +18,9 @@
         eglot-extend-to-xref t
         eglot-stay-out-of '(flymake eldoc)
         eglot-confirm-server-initiated-edits nil)
-  (defun +clojure-customizations ()
-    (setq-local cljr-add-ns-to-blank-clj-files nil))
   ;; lsp optimizations
   (defun +lsp-init-optimizations ()
     (when (eglot-managed-p)
       (setq-local read-process-output-max (* 1024 1024))
       (setq-local gcmh-high-cons-threshold (* 2 (default-value 'gcmh-high-cons-threshold)))))
-  (add-hook 'eglot-managed-mode-hook #'+lsp-init-optimizations)
-  (add-hook 'eglot-managed-mode-hook #'+clojure-customizations))
+  (add-hook 'eglot-managed-mode-hook #'+lsp-init-optimizations))

@@ -32,6 +32,12 @@ there's a region, all lines that region covers will be duplicated."
 
 ;; -----------------------------------------------------------------------------
 
+;; tree of changes
+(use-package undo-tree
+  :config
+  (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
+  (global-undo-tree-mode))
+
 ;; highlight specific words
 (use-package hl-todo
   :hook ((prog-mode text-mode) . hl-todo-mode))
@@ -99,7 +105,8 @@ there's a region, all lines that region covers will be duplicated."
   :hook (prog-mode . highlight-symbol-mode)
   :config
   (setq highlight-symbol-idle-delay 0.5
-        highlight-symbol-highlight-single-occurrence nil))
+        highlight-symbol-highlight-single-occurrence nil)
+  :bind ("<f7>" . highlight-symbol-nav-mode))
 
 ;; multiple cursors
 (use-package multiple-cursors

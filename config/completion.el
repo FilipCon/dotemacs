@@ -3,11 +3,13 @@
 (use-package corfu
   :straight (corfu :files (:defaults "extensions/*")
                    :includes (corfu-info corfu-history))
+  :hook (eshell-mode . (lambda () (setq-local corfu-quit-at-boundary t
+                                              corfu-quit-no-match t)))
   :config
   (setq corfu-cycle t
         corfu-separator ?-
         corfu-preview-current nil
-        corfu-quit-at-boundary nil
+        ;; corfu-quit-at-boundary nil
         corfu-quit-no-match nil
         corfu-auto-prefix 1)
   :bind (:map corfu-map
