@@ -1,5 +1,3 @@
-;;; -*- lexical-binding: t -*-
-
 ;; cider
 (use-package cider
   :bind (:map cider-mode-map

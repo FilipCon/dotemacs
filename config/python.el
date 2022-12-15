@@ -1,5 +1,3 @@
-;;; -*- lexical-binding: t -*-
-
 (use-package python
   :bind (:map python-mode-map
               ("C-c M-j" . run-python)) ; "jack-in"

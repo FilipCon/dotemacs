@@ -1,5 +1,3 @@
-;;; -*- lexical-binding: t -*-
-
 ;; latex
 (use-package tex
   :straight auctex

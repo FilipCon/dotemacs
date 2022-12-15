@@ -1,5 +1,3 @@
-;;; -*- lexical-binding: t -*-
-
 (defun fill-to-end ()
   "Fill with `-' until fill column."
   (interactive)

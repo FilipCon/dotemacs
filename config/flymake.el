@@ -1,5 +1,3 @@
-;;; -*- lexical-binding: t -*-
-
 (use-package flymake
   :straight (:type built-in)
   :config

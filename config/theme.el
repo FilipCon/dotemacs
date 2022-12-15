@@ -1,5 +1,3 @@
-;;; -*- lexical-binding: t -*-
-
 ;; Prot's themes
 (use-package modus-themes
   :straight (:type built-in)

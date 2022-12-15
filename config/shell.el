@@ -1,5 +1,3 @@
-;;; -*- lexical-binding: t -*-
-
 (use-package exec-path-from-shell
   :init
   (when (display-graphic-p)

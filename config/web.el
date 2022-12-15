@@ -1,5 +1,3 @@
-;;; -*- lexical-binding: t -*-
-
 ;; basic web mode settings
 (use-package web-mode
   :straight t

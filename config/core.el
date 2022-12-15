@@ -1,5 +1,3 @@
-;;; -*- lexical-binding: t -*-
-
 ;; core settings
 (setq ring-bell-function 'ignore        ; don't beep
       x-gtk-use-system-tooltips nil     ; no gui popups

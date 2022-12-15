@@ -1,5 +1,3 @@
-;;; -*- lexical-binding: t -*-
-
 ;; minibuffer completion system
 (use-package vertico
   :init

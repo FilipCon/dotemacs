@@ -1,5 +1,3 @@
-;;; -*- lexical-binding: t -*-
-
 (use-package slime
   :hook ((lisp-mode . slime-mode))
   :bind (:map slime-mode-map

@@ -1,5 +1,3 @@
-;;; -*- lexical-binding: t -*-
-
 (use-package sql
   :hook (sql-interactive-mode-hook . (lambda () (toggle-truncate-lines t)))
   :config

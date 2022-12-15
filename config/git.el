@@ -1,5 +1,3 @@
-;;; -*- lexical-binding: t -*-
-
 (use-package magit
   :config
   (setq magit-diff-refine-hunk 'all

@@ -1,5 +1,3 @@
-;;; -*- lexical-binding: t -*-
-
 ;; speller
 (use-package flyspell
   :bind (:map flyspell-mode-map

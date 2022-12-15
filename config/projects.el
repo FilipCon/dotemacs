@@ -1,5 +1,3 @@
-;;; -*- lexical-binding: t -*-
-
 ;; globally ignored files and directories
 (defvar ignored-directories
   '("node_modules" ".shadow-cljs" ".lsp" ".cpcache" ".clj-kondo" "tmp" "build"
