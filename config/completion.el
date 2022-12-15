@@ -21,11 +21,11 @@
 
 ;; cape extensions
 (use-package cape
-  :bind (("C-c p p" . completion-at-point)
-         ("C-c p d" . cape-dabbrev)
-         ("C-c p f" . cape-file)
-         ("C-c p i" . cape-ispell)
-         ("C-c p w" . cape-dict)))
+  :bind (("C-c c p" . completion-at-point)
+         ("C-c c d" . cape-dabbrev)
+         ("C-c c f" . cape-file)
+         ("C-c c i" . cape-ispell)
+         ("C-c c w" . cape-dict)))
 
 ;; margin icons
 (use-package kind-icon

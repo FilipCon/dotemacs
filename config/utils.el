@@ -64,6 +64,11 @@ there's a region, all lines that region covers will be duplicated."
   :bind (("M-p" . move-text-up)
          ("M-n" . move-text-down)))
 
+;; search tool
+(use-package deadgrep
+  :config
+  (advice-add 'project-find-regexp :override #'deadgrep))
+
 ;; sexp editing
 (use-package paredit
   :config

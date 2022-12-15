@@ -1,7 +1,6 @@
 ;;; -*- lexical-binding: t -*-
 
 (use-package eglot
-  :straight (:type built-in)
   :custom-face
   (eglot-highlight-symbol-face ((t (:inherit bold :foreground "white" :background "dodger blue"))))
   (eglot-diagnostic-tag-unnecessary-face ((t (:inherit (flymake-warning)))))

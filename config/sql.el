@@ -18,6 +18,12 @@ Fix for the above hasn't been released as of Emacs 25.2."
       (setq-local sql-prompt-cont-regexp "^[[:alnum:](-|_)]*[-(][#>] ")))
   (add-hook 'sql-interactive-mode-hook 'sanityinc/fix-postgres-prompt-regexp))
 
+(use-package sql-indent
+  :config
+  (setq sql-indent-offset 2))
+
+(use-package sqlup-mode)
+
 ;; format sql
 (use-package sqlformat
   :config
