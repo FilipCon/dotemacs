@@ -8,7 +8,10 @@
 
 (use-package project
   :straight (:type built-in)
+  :bind (:map project-prefix-map
+              ("m" . magit-project-status))
   :config
+  (add-to-list 'project-switch-commands '(magit-project-status "Magit") t)
   (setq project-vc-ignores (append ignored-files ignored-directories)))
 
 (use-package ibuffer-project
