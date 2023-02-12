@@ -30,6 +30,9 @@ there's a region, all lines that region covers will be duplicated."
 
 ;; -----------------------------------------------------------------------------
 
+(use-package pomidor
+  :bind (("<f6>" . pomidor)))
+
 ;; tree of changes
 (use-package undo-tree
   :config
