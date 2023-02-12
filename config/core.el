@@ -104,15 +104,15 @@
 
 ;; fonts
 (set-face-attribute 'default nil
-                    :font "SauceCodePro Nerd Font 13"
+                    :font "SourceCodePro 13"
                     :weight 'medium)
 
 (set-face-attribute 'variable-pitch nil
-                    :font "Ubuntu Nerd Font 14"
+                    :font "DejaVuSans 14"
                     :weight 'medium)
 
 (set-face-attribute 'fixed-pitch nil
-                    :font "SauceCodePro Nerd Font 13"
+                    :font "SourceCodePro 13"
                     :weight 'medium)
 ;; for emacs client
-(add-to-list 'default-frame-alist '(font . "SauceCodePro Nerd Font 13"))
+(add-to-list 'default-frame-alist '(font . "SourceCodePro 13"))
