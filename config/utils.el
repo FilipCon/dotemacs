@@ -30,6 +30,7 @@ there's a region, all lines that region covers will be duplicated."
 
 ;; -----------------------------------------------------------------------------
 
+;; pomodoro timer
 (use-package pomidor
   :bind (("<f6>" . pomidor)))
 
