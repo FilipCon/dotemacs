@@ -32,7 +32,14 @@ there's a region, all lines that region covers will be duplicated."
 
 ;; pomodoro timer
 (use-package pomidor
-  :bind (("<f6>" . pomidor)))
+  :bind (("<f6>" . pomidor))
+  :config
+  (setq alert-default-style 'libnotify)
+  (setq pomidor-sound-tick nil
+        pomidor-sound-tack nil
+        pomidor-play-sound-file
+        (lambda (file)
+          (start-process "pomodoro" nil "mplayer" file))))
 
 ;; tree of changes
 (use-package undo-tree
