@@ -30,7 +30,9 @@
   :hook (csv-mode . csv-align-mode))
 
 ;; yaml
-(use-package yaml-mode)
+(use-package yaml-mode
+  :hook ((yaml-mode . highlight-indentation-mode)
+         (yaml-mode . indent-tools-minor-mode)))
 
 ;; tf
 (use-package terraform-mode)

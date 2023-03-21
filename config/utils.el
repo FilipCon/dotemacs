@@ -41,6 +41,9 @@ there's a region, all lines that region covers will be duplicated."
         (lambda (file)
           (start-process "pomodoro" nil "mplayer" file))))
 
+;; indentation tools
+(use-package indent-tools)
+
 ;; tree of changes
 (use-package undo-tree
   :config
