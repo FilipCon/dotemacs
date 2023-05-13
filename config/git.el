@@ -2,8 +2,7 @@
   :config
   (setq magit-diff-refine-hunk 'all
         magit-diff-expansion-threshold 10)
-  :bind (("C-x p m" . magit-status)
-         ("C-c g d" . magit-diff)
+  :bind (("C-c g d" . magit-diff)
          ("C-c g b" . magit-blame-addition)))
 
 ;; ediff config

@@ -8,6 +8,7 @@
 
 (use-package project
   :straight (:type built-in)
+  :bind ("C-x p m" . magit-status)
   :bind (:map project-prefix-map
               ("m" . magit-project-status))
   :config

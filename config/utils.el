@@ -30,25 +30,8 @@ there's a region, all lines that region covers will be duplicated."
 
 ;; -----------------------------------------------------------------------------
 
-;; pomodoro timer
-(use-package pomidor
-  :bind (("<f6>" . pomidor))
-  :config
-  (setq alert-default-style 'libnotify)
-  (setq pomidor-sound-tick nil
-        pomidor-sound-tack nil
-        pomidor-play-sound-file
-        (lambda (file)
-          (start-process "pomodoro" nil "mplayer" file))))
-
 ;; indentation tools
 (use-package indent-tools)
-
-;; tree of changes
-(use-package undo-tree
-  :config
-  (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
-  (global-undo-tree-mode))
 
 ;; highlight specific words
 (use-package hl-todo
