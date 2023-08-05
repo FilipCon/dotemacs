@@ -1,6 +1,7 @@
 ;;; -*- lexical-binding: t -*-
 
 (use-package eglot
+  :straight (:type built-in)
   :bind-keymap ("C-c l" . eglot-mode-map)
   :bind (("<f9>" . eglot)
          ("M-?" . xref-find-references))

@@ -53,6 +53,7 @@
 (global-eldoc-mode t)                   ; echo area doc
 (global-hi-lock-mode t)                 ; highlight symbols
 (electric-pair-mode t)                  ; matching delimiters
+(fringe-mode 0)                         ; disable fringes
 
 ;; show line number in selected modes
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
