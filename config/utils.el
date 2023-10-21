@@ -69,6 +69,7 @@ there's a region, all lines that region covers will be duplicated."
   :config
   (put 'paredit-forward-delete 'delete-selection 'supersede)
   (put 'paredit-backward-delete 'delete-selection 'supersede)
+  (unbind-key "M-?" paredit-mode-map)
   :bind ("C-S-p" . paredit-mode)
   :bind (:map paredit-mode-map
               ("M-[" . paredit-wrap-square)

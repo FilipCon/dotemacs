@@ -38,3 +38,5 @@
 
 ;; browse region at remote repo
 (use-package browse-at-remote)
+
+(use-package dired-git-info)
