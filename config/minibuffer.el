@@ -43,5 +43,4 @@
 
 ;; enhanced commands on mini-buffer
 (use-package consult
-  :commands (consult-customize)
   :bind (("M-C-s" . consult-line)))

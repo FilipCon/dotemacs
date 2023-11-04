@@ -89,11 +89,15 @@ there's a region, all lines that region covers will be duplicated."
   :config
   (setq search-whitespace-regexp ".*?"
         isearch-lazy-count t
+        lazy-count-prefix-format "(%s/%s) "
         isearch-allow-motion t
         isearch-wrap-pause 'no
         isearch-repeat-on-direction-change t
         isearch-yank-on-move 'shift
         isearch-allow-scroll 'unlimited))
+
+;; editable grep buffers
+(use-package wgrep)
 
 ;; rainbow-delimiters
 (use-package rainbow-delimiters
