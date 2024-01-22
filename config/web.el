@@ -1,6 +1,11 @@
 ;; basic web mode settings
 (use-package web-mode
   :straight t
+  :mode (("\\.js$" . web-mode)
+         ("\\.jsx$" . web-mode)
+         ("\\.ts$" . web-mode)
+         ("\\.tsx$" . web-mode)
+         ("\\.html$" . web-mode))
   :config
   (setq web-mode-block-padding 2
         web-mode-code-indent-offset 2

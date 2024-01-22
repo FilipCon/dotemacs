@@ -6,8 +6,8 @@
   :bind (("<f9>" . eglot)
          ("M-?" . xref-find-references))
   :bind (:map eglot-mode-map
-              ("r" . eglot-rename)
-              ("f" . eglot-format)
+              ("C-c l r" . eglot-rename)
+              ("C-c l f" . eglot-format)
               ("C-<return>" . eglot-code-actions))
   :config
   (setq eglot-events-buffer-size 0

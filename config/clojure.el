@@ -13,7 +13,6 @@
         cider-repl-pop-to-buffer-on-connect 'display-only
         cider-ns-refresh-show-log-buffer t
         cider-connection-message-fn nil
-        cider-jack-in-nrepl-middlewares '("cider.nrepl/cider-middleware")
         cider-use-fringe-indicators nil
         cider-font-lock-dynamically nil
         cider-use-xref nil))
