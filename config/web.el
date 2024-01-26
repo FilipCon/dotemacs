@@ -2,10 +2,10 @@
 (use-package web-mode
   :straight t
   :mode (("\\.js$" . web-mode)
-         ("\\.jsx$" . web-mode)
-         ("\\.ts$" . web-mode)
-         ("\\.tsx$" . web-mode)
-         ("\\.html$" . web-mode))
+         ("\\.js?$" . web-mode)
+         ("\\.tsx?" . web-mode)
+         ("\\.html" . web-mode))
+  :hook ((web-mode . flymake-mode))
   :config
   (setq web-mode-block-padding 2
         web-mode-code-indent-offset 2
@@ -13,14 +13,16 @@
         web-mode-css-indent-offset 2
         web-mode-comment-style 2
         web-mode-enable-auto-quoting nil
-        web-mode-enable-html-entities-fontification t))
-
-;; edit html tags as sexps
-(use-package tagedit)
+        web-mode-enable-html-entities-fontification t
+        web-mode-enable-css-colorization t
+        web-mode-enable-auto-pairing t
+        web-mode-enable-comment-keywords t
+        web-mode-enable-current-element-highlight t
+        web-mode-enable-auto-indentation nil))
 
 ;; emmet expansion
 (use-package emmet-mode
-  :hook (html-mode web-mode css-mode)
+  :hook (web-mode . emmet-mode)
   :config
   (setq emmet-move-cursor-between-quotes t))
 
