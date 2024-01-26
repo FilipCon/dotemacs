@@ -3,6 +3,7 @@
   :straight t
   :mode (("\\.js$" . web-mode)
          ("\\.js?$" . web-mode)
+         ("\\.ts?" . web-mode)
          ("\\.tsx?" . web-mode)
          ("\\.html" . web-mode))
   :hook ((web-mode . flymake-mode))
