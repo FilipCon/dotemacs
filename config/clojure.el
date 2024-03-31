@@ -13,6 +13,8 @@
         cider-repl-pop-to-buffer-on-connect 'display-only
         cider-ns-refresh-show-log-buffer t
         cider-connection-message-fn nil
+        cider-nbb-command "npx nbb"
+        cider-jack-in-nrepl-middlewares '("cider.nrepl/cider-middleware")
         cider-use-fringe-indicators nil
         cider-font-lock-dynamically nil
         cider-use-xref nil))
@@ -34,9 +36,9 @@
   :hook ((clojure-mode . flymake-kondor-setup)
          (clojure-mode . flymake-mode)))
 
-;; jet tool
-(use-package jet
-  :straight (:host github :repo "ericdallo/jet.el"))
+;; ;; jet tool
+;; (use-package jet
+;;   :straight (:host github :repo "ericdallo/jet.el"))
 
 ;; ;; refactor utils
 ;; (use-package clj-refactor
