@@ -19,6 +19,7 @@
       initial-major-mode 'fundamental-mode) ; scratch buffer's default mode
 
 (setq enable-local-variables :all)      ; WARNING don't ask me about .dir-locals - risky
+(setq confirm-kill-emacs #'y-or-n-p)    ; don't close accidentally
 
 ;; global defaults
 (setq-default
