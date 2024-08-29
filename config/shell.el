@@ -28,3 +28,31 @@
   :config
   (setq vterm-copy-exclude-prompt t
         vterm-max-scrollback 100000))
+
+;; ;; eat terminal emulator
+
+;; (use-package eat
+;;   :straight
+;;   (:type git
+;;          :host codeberg
+;;          :repo "akib/emacs-eat"
+;;          :files ("*.el" ("term" "term/*.el") "*.texi"
+;;                  "*.ti" ("terminfo/e" "terminfo/e/*")
+;;                  ("terminfo/65" "terminfo/65/*")
+;;                  ("integration" "integration/*")
+;;                  (:exclude ".dir-locals.el" "*-tests.el")))
+;;   :bind (:map project-prefix-map
+;;               ("a" . project-eat))
+;;   :preface
+;;   (defun project-eat ()
+;;     (interactive)
+;;     (defvar eat-buffer-name)
+;;     (let* ((default-directory (project-root (project-current t)))
+;;            (eat-buffer-name (project-prefixed-buffer-name "eat"))
+;;            (buffer (get-buffer eat-buffer-name)))
+;;       (if (and buffer (not current-prefix-arg))
+;;           (pop-to-buffer buffer (bound-and-true-p display-comint-buffer-action))
+;;         (eat))))
+;;   :init
+;;   (add-to-list 'project-switch-commands '(project-eat "Eat") t)
+;;   (add-to-list 'project-kill-buffer-conditions '(major-mode . eat-mode)))

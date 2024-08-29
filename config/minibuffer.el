@@ -44,3 +44,7 @@
 ;; enhanced commands on mini-buffer
 (use-package consult
   :bind (("M-C-s" . consult-line)))
+
+;; ;; mini-buffer actions
+;; (use-package embark
+;;   :bind ("C-," . embark-act))

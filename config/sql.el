@@ -29,6 +29,8 @@ Fix for the above hasn't been released as of Emacs 25.2."
   ;; (setq sqlformat-args '("-s2" "-g"))
   (define-key sql-mode-map (kbd "C-c C-f") 'sqlformat))
 
+(use-package sql-indent)
+
 ;; sql linter (requires sqlfluff on system)
 (use-package flymake-sqlfluff
   :hook ((sql-mode . flymake-sqlfluff-load))

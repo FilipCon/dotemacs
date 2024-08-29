@@ -70,6 +70,7 @@ there's a region, all lines that region covers will be duplicated."
   (put 'paredit-forward-delete 'delete-selection 'supersede)
   (put 'paredit-backward-delete 'delete-selection 'supersede)
   (unbind-key "M-?" paredit-mode-map)
+  (unbind-key "RET" paredit-mode-map)
   :bind ("C-S-p" . paredit-mode)
   :bind (:map paredit-mode-map
               ("M-[" . paredit-wrap-square)
@@ -78,7 +79,7 @@ there's a region, all lines that region covers will be duplicated."
               ("C-9" . paredit-forward-barf-sexp)
               ("C-M-9" . paredit-backward-slurp-sexp)
               ("C-M-0" . paredit-backward-barf-sexp))
-  :hook ((prog-mode cider-repl-mode) . paredit-mode))
+  :hook ((clojure-mode cider-repl-mode lisp-mode emacs-lisp-mode) . paredit-mode))
 
 ;; isearch
 (use-package isearch

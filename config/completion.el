@@ -8,6 +8,8 @@
   (setq corfu-cycle t
         corfu-separator ?-
         corfu-preview-current nil
+        ;; corfu-popupinfo-delay '(0.5 . 0.2)
+        ;; corfu-on-exact-match nil  ; Don't auto expand tempel snippets
         ;; corfu-quit-at-boundary nil
         corfu-quit-no-match nil
         corfu-auto-prefix 1)
@@ -16,6 +18,7 @@
               ("C-p" . corfu-previous))
   :init
   (global-corfu-mode)
+  ;; (corfu-popupinfo-mode) ; Popup completion info
   (corfu-history-mode t))
 
 ;; cape extensions

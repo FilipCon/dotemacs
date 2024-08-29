@@ -12,3 +12,5 @@
               ("C-." . flyspell-correct-at-point))
   :init
   (unbind-key "C-;" flyspell-mode-map))
+
+;; (use-package jinx)
