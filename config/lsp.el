@@ -34,7 +34,7 @@
   :custom
   (lsp-keymap-prefix "C-c l")           ; Prefix for LSP actions
   (lsp-completion-provider :none)       ; Using Corfu as the provider
-  (lsp-diagnostics-provider :flymake)
+  (lsp-diagnostics-provider :flycheck)
   (lsp-session-file (locate-user-emacs-file ".lsp-session"))
   (lsp-log-io nil)                      ; IMPORTANT! Use only for debugging! Drastically affects performance
   (lsp-keep-workspace-alive nil)        ; Close LSP server if all project buffers are closed
@@ -46,14 +46,14 @@
   (lsp-enable-dap-auto-configure t)     ; Debug support
   (lsp-enable-file-watchers nil)
   (lsp-enable-folding nil)              ; I disable folding since I use origami
-  (lsp-enable-imenu t)
+  (lsp-enable-imenu nil)
   (lsp-enable-indentation nil)          ; I use prettier
   (lsp-enable-links nil)                ; No need since we have `browse-url'
   (lsp-enable-on-type-formatting nil)   ; Prettier handles this
   (lsp-enable-suggest-server-download t) ; Useful prompt to download LSP providers
   (lsp-enable-symbol-highlighting t)     ; Shows usages of symbol at point in the current buffer
   (lsp-enable-text-document-color nil)   ; This is Treesitter's job
-
+  (lsp-enable-snippet nil)
   (lsp-ui-sideline-show-hover nil)      ; Sideline used only for diagnostics
   (lsp-ui-sideline-diagnostic-max-lines 20) ; 20 lines since typescript errors can be quite big
   ;; completion
@@ -72,6 +72,7 @@
   (lsp-modeline-workspace-status-enable nil) ; Modeline displays "LSP" when lsp-mode is enabled
   (lsp-signature-doc-lines 1)                ; Don't raise the echo area. It's distracting
   (lsp-ui-doc-use-childframe t)              ; Show docs for symbol at point
+  (lsp-ui-sideline-enable nil)               ; don't diplay errors and hints inline
   (lsp-eldoc-render-all nil)            ; This would be very useful if it would respect `lsp-signature-doc-lines', currently it's distracting
   ;; lens
   (lsp-lens-enable nil)                 ; Optional, I don't need it
@@ -102,8 +103,7 @@
         orig-result)))
 
   :init
-  (setq lsp-use-plists t)
-  ;; Initiate https://github.com/blahgeek/emacs-lsp-booster for performance
+  ;; (setq lsp-use-plists t)
   (advice-add (if (progn (require 'json)
                          (fboundp 'json-parse-buffer))
                   'json-parse-buffer

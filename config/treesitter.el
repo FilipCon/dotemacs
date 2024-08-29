@@ -66,3 +66,29 @@
     (add-to-list 'major-mode-remap-alist mapping))
   :config
   (kf/setup-install-grammars))
+
+(use-package combobulate
+  :after treesit
+  :preface
+  ;; You can customize Combobulate's key prefix here.
+  ;; Note that you may have to restart Emacs for this to take effect!
+  (setq combobulate-key-prefix "C-c o")
+
+  ;; Optional, but recommended.
+  ;;
+  ;; You can manually enable Combobulate with `M-x
+  ;; combobulate-mode'.
+  :hook
+  ((python-ts-mode . combobulate-mode)
+   (js-ts-mode . combobulate-mode)
+   (go-mode . go-ts-mode)
+   (html-ts-mode . combobulate-mode)
+   (css-ts-mode . combobulate-mode)
+   (yaml-ts-mode . combobulate-mode)
+   (typescript-ts-mode . combobulate-mode)
+   (json-ts-mode . combobulate-mode)
+   (tsx-ts-mode . combobulate-mode))
+  ;; Clone Combobulate's source code.
+  :load-path ("/home/filipkon/.emacs.d/combobulate")
+  ;; ((concat (expand-file-name user-emacs-directory) "combobulate"))
+  )

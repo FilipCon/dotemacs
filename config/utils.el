@@ -132,3 +132,5 @@ there's a region, all lines that region covers will be duplicated."
   :straight (:host github :repo "emacsmirror/gcmh")
   :init
   (gcmh-mode 1))
+
+(use-package restart-emacs)
