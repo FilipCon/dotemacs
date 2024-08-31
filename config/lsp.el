@@ -51,14 +51,14 @@
   (lsp-enable-links nil)                ; No need since we have `browse-url'
   (lsp-enable-on-type-formatting nil)   ; Prettier handles this
   (lsp-enable-suggest-server-download t) ; Useful prompt to download LSP providers
-  (lsp-enable-symbol-highlighting t)     ; Shows usages of symbol at point in the current buffer
-  (lsp-enable-text-document-color nil)   ; This is Treesitter's job
+  (lsp-enable-symbol-highlighting nil) ; Shows usages of symbol at point in the current buffer
+  (lsp-enable-text-document-color nil) ; This is Treesitter's job
   (lsp-enable-snippet nil)
   (lsp-ui-sideline-show-hover nil)      ; Sideline used only for diagnostics
   (lsp-ui-sideline-diagnostic-max-lines 20) ; 20 lines since typescript errors can be quite big
   ;; completion
   (lsp-completion-enable t)
-  (lsp-completion-enable-additional-text-edit t) ; Ex: auto-insert an import for a completion candidate
+  (lsp-completion-enable-additional-text-edit nil) ; Ex: auto-insert an import for a completion candidate
   (lsp-enable-snippet t)                         ; Important to provide full JSX completion
   (lsp-completion-show-kind t)                   ; Optional
   ;; headerline
@@ -117,7 +117,7 @@
   (lsp-ui-doc-show
    lsp-ui-doc-glance)
   :bind (:map lsp-mode-map
-              ("C-c C-d C-c" . 'lsp-ui-doc-glance))
+              ("C-c C-d C-d" . 'lsp-ui-doc-glance))
   :after (lsp-mode)
   :config
   (setq lsp-ui-doc-enable t
