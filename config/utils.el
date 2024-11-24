@@ -30,6 +30,15 @@ there's a region, all lines that region covers will be duplicated."
 
 ;; -----------------------------------------------------------------------------
 
+;; tld
+(use-package tldr)
+
+;; jump
+(use-package avy
+  :bind ("M-j" . avy-goto-char-timer)
+  :config
+  (setq avy-timeout-seconds 100000))
+
 ;; indentation tools
 (use-package indent-tools)
 
