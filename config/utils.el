@@ -121,7 +121,9 @@ there's a region, all lines that region covers will be duplicated."
   :config
   (setq highlight-symbol-idle-delay 0.5
         highlight-symbol-highlight-single-occurrence nil)
-  :bind ("<f7>" . highlight-symbol-nav-mode))
+  :bind (("<f7>" . highlight-symbol-nav-mode)
+         ("C-c n" . highlight-symbol-next)
+         ("C-c p" . highlight-symbol-prev)))
 
 ;; multiple cursors
 (use-package multiple-cursors

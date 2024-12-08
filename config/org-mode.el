@@ -1,4 +1,5 @@
 (use-package org
+  :straight (:type built-in)
   :hook ((org-mode . org-indent-mode)
          (org-mode . rainbow-delimiters-mode-disable))
   :bind (("C-c C-x C-k" . org-clock-remove-overlays)

@@ -1,6 +1,7 @@
 ;; font size
 (global-set-key (kbd "C-=") (lambda () (interactive) (text-scale-increase 0.5)))
 (global-set-key (kbd "C--") (lambda () (interactive) (text-scale-decrease 0.5)))
+(global-set-key (kbd "C-M-o") (lambda () (interactive) (text-scale-decrease 0))) ; replaces split-line
 
 ;; eval elisp buffer
 (define-key emacs-lisp-mode-map (kbd "C-c C-k") 'eval-buffer)

@@ -36,6 +36,9 @@
   :hook ((clojure-mode . flymake-kondor-setup)
          (clojure-mode . flymake-mode)))
 
+;; (use-package zprint-mode) ;; uses dynamically linked executable
+(use-package zprint-format)
+
 ;; ;; jet tool
 ;; (use-package jet
 ;;   :straight (:host github :repo "ericdallo/jet.el"))

@@ -17,3 +17,11 @@
   (markdown-asymmetric-header t)
   (markdown-gfm-uppercase-checkbox t)
   (markdown-fontify-code-blocks-natively t))
+
+(use-package mermaid-mode)
+
+;; (use-package impatient-mode)
+
+;; (use-package grip-mode
+;;   ;; :config (setq grip-use-mdopen t) ;; to use `mdopen` instead of `grip`
+;;   :hook ((markdown-mode org-mode) . grip-mode))
