@@ -39,6 +39,10 @@
 ;; (use-package zprint-mode) ;; uses dynamically linked executable
 (use-package zprint-format)
 
+;; jump to definition for re-frame events/subs
+(use-package re-jump
+  :straight (:host github :repo "oliyh/re-jump.el"))
+
 ;; ;; jet tool
 ;; (use-package jet
 ;;   :straight (:host github :repo "ericdallo/jet.el"))
