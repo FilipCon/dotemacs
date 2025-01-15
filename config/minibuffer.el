@@ -45,6 +45,6 @@
 (use-package consult
   :bind (("M-C-s" . consult-line)))
 
-;; ;; mini-buffer actions
-;; (use-package embark
-;;   :bind ("C-," . embark-act))
+;; mini-buffer actions
+(use-package embark
+  :bind ("C-," . embark-act))

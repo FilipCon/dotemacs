@@ -40,3 +40,7 @@
 (use-package browse-at-remote)
 
 (use-package dired-git-info)
+
+;; git history
+(use-package git-timemachine
+  :straight (:host github :repo "emacsmirror/git-timemachine" :branch "master"))
