@@ -1,7 +1,8 @@
 (use-package magit
   :config
   (setq magit-diff-refine-hunk 'all
-        magit-diff-expansion-threshold 10)
+        magit-diff-expansion-threshold 10
+        magit-show-long-lines-warning nil)
   :bind (("C-c g d" . magit-diff)
          ("C-c g b" . magit-blame-addition)))
 

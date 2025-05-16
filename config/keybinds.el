@@ -14,7 +14,7 @@
 
 ;; remap default keys
 (global-set-key (kbd "M-o") 'other-window)
-(global-set-key (kbd "C-x k") 'kill-this-buffer)
+(global-set-key (kbd "C-x k") 'kill-current-buffer)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;; show whitespaces

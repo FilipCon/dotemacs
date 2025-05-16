@@ -31,53 +31,53 @@
          ((tsx-ts-mode
            typescript-ts-mode
            js-ts-mode) . lsp-deferred))
-  :custom
-  (lsp-keymap-prefix "C-c l")           ; Prefix for LSP actions
-  (lsp-completion-provider :none)       ; Using Corfu as the provider
-  (lsp-diagnostics-provider :flycheck)
-  (lsp-session-file (locate-user-emacs-file ".lsp-session"))
-  (lsp-log-io nil)                      ; IMPORTANT! Use only for debugging! Drastically affects performance
-  (lsp-keep-workspace-alive nil)        ; Close LSP server if all project buffers are closed
-  (lsp-idle-delay 0.5)                  ; Debounce timer for `after-change-function'
+  :config
+  (setq lsp-keymap-prefix "C-c l")           ; Prefix for LSP actions
+  (setq lsp-completion-provider :none)       ; Using Corfu as the provider
+  (setq lsp-diagnostics-provider :flycheck)
+  (setq lsp-session-file (locate-user-emacs-file ".lsp-session"))
+  (setq lsp-log-io nil)                      ; IMPORTANT! Use only for debugging! Drastically affects performance
+  (setq lsp-keep-workspace-alive nil)        ; Close LSP server if all project buffers are closed
+  (setq lsp-idle-delay 0.5)                  ; Debounce timer for `after-change-function'
   ;; core
-  (lsp-enable-xref t)                   ; Use xref to find references
-  (lsp-auto-configure t)                ; Used to decide between current active servers
-  (lsp-eldoc-enable-hover t)            ; Display signature information in the echo area
-  (lsp-enable-dap-auto-configure t)     ; Debug support
-  (lsp-enable-file-watchers nil)
-  (lsp-enable-folding nil)              ; I disable folding since I use origami
-  (lsp-enable-imenu nil)
-  (lsp-enable-indentation nil)          ; I use prettier
-  (lsp-enable-links nil)                ; No need since we have `browse-url'
-  (lsp-enable-on-type-formatting nil)   ; Prettier handles this
-  (lsp-enable-suggest-server-download t) ; Useful prompt to download LSP providers
-  (lsp-enable-symbol-highlighting nil) ; Shows usages of symbol at point in the current buffer
-  (lsp-enable-text-document-color nil) ; This is Treesitter's job
-  (lsp-enable-snippet nil)
-  (lsp-ui-sideline-show-hover nil)      ; Sideline used only for diagnostics
-  (lsp-ui-sideline-diagnostic-max-lines 20) ; 20 lines since typescript errors can be quite big
+  (setq lsp-enable-xref t)                   ; Use xref to find references
+  (setq lsp-auto-configure t)                ; Used to decide between current active servers
+  (setq lsp-eldoc-enable-hover t)          ; Display signature information in the echo area
+  (setq lsp-enable-dap-auto-configure t)     ; Debug support
+  (setq lsp-enable-file-watchers nil)
+  (setq lsp-enable-folding nil)              ; I disable folding since I use origami
+  (setq lsp-enable-imenu nil)
+  (setq lsp-enable-indentation nil)          
+  (setq lsp-enable-links nil)                ; No need since we have `browse-url'
+  (setq lsp-enable-on-type-formatting nil)   
+  (setq lsp-enable-suggest-server-download t) ; Useful prompt to download LSP providers
+  (setq lsp-enable-symbol-highlighting nil) ; Shows usages of symbol at point in the current buffer
+  (setq lsp-enable-text-document-color nil) ; This is Treesitter's job
+  (setq lsp-enable-snippet nil)
+  (setq lsp-ui-sideline-show-hover nil)      ; Sideline used only for diagnostics
+  (setq lsp-ui-sideline-diagnostic-max-lines 20) ; 20 lines
   ;; completion
-  (lsp-completion-enable t)
-  (lsp-completion-enable-additional-text-edit nil) ; Ex: auto-insert an import for a completion candidate
-  (lsp-enable-snippet t)                         ; Important to provide full JSX completion
-  (lsp-completion-show-kind t)                   ; Optional
+  (setq lsp-completion-enable t)
+  (setq lsp-completion-enable-additional-text-edit nil) ; Ex: auto-insert an import for a completion candidate
+  (setq lsp-enable-snippet t)                         ; Important to provide full JSX completion
+  (setq lsp-completion-show-kind t)                   ; Optional
   ;; headerline
-  (lsp-headerline-breadcrumb-enable t)  ; Optional, I like the breadcrumbs
-  (lsp-headerline-breadcrumb-enable-diagnostics nil) ; Don't make them red, too noisy
-  (lsp-headerline-breadcrumb-enable-symbol-numbers nil)
-  (lsp-headerline-breadcrumb-icons-enable nil)
+  (setq lsp-headerline-breadcrumb-enable nil)  ; Optional, I don't like the breadcrumbs
+  (setq lsp-headerline-breadcrumb-enable-diagnostics nil) ; Don't make them red, too noisy
+  (setq lsp-headerline-breadcrumb-enable-symbol-numbers nil)
+  (setq lsp-headerline-breadcrumb-icons-enable nil)
   ;; modeline
-  (lsp-modeline-code-actions-enable nil) ; Modeline should be relatively clean
-  (lsp-modeline-diagnostics-enable nil)  ; Already supported through `flycheck'
-  (lsp-modeline-workspace-status-enable nil) ; Modeline displays "LSP" when lsp-mode is enabled
-  (lsp-signature-doc-lines 1)                ; Don't raise the echo area. It's distracting
-  (lsp-ui-doc-use-childframe t)              ; Show docs for symbol at point
-  (lsp-ui-sideline-enable nil)               ; don't diplay errors and hints inline
-  (lsp-eldoc-render-all nil)            ; This would be very useful if it would respect `lsp-signature-doc-lines', currently it's distracting
+  (setq lsp-modeline-code-actions-enable nil) ; Modeline should be relatively clean
+  (setq lsp-modeline-diagnostics-enable nil)  ; Already supported through `flycheck'
+  (setq lsp-modeline-workspace-status-enable t) ; Modeline displays "LSP" when lsp-mode is enabled
+  (setq lsp-signature-doc-lines 1)                ; Don't raise the echo area. It's distracting
+  (setq lsp-ui-doc-use-childframe t)              ; Show docs for symbol at point
+  (setq lsp-ui-sideline-enable nil)               ; don't diplay errors and hints inline
+  (setq lsp-eldoc-render-all nil)            ; This would be very useful if it would respect `lsp-signature-doc-lines', currently it's distracting
   ;; lens
-  (lsp-lens-enable nil)                 ; Optional, I don't need it
+  (setq lsp-lens-enable nil)                 ; Optional, I don't need it
   ;; semantic
-  (lsp-semantic-tokens-enable nil)      ; Related to highlighting, and we defer to treesitter
+  (setq lsp-semantic-tokens-enable nil)      ; Related to highlighting, and we defer to treesitter
 
   :preface
   (defun lsp-booster--advice-json-parse (old-fn &rest args)
@@ -148,6 +148,5 @@
              typescript-ts-mode
              tsx-ts-mode
              js2-mode
-             js-ts-mode
-             clojure-mode))
+             js-ts-mode))
     (add-to-list 'lsp-tailwindcss-major-modes tw-major-mode)))
