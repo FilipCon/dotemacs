@@ -56,43 +56,43 @@
 ;;         ;; cljr-populate-artifact-cache-on-startup nil
 ;;         cljr-find-usages-ignore-analyzer-errors t))
 
-(defun wrap-next-sexp (open close)
-  "Wrap the next `sexp' from point with OPEN and CLOSE strings.
-  The cursor is placed after the opening delimiter."
-  (forward-sexp)
-  (let ((bounds (bounds-of-thing-at-point 'sexp)))
-    (when bounds
-      (goto-char (cdr bounds))
-      (insert close)
-      (goto-char (car bounds))
-      (insert open))))
+;; (defun wrap-next-sexp (open close)
+;;   "Wrap the next `sexp' from point with OPEN and CLOSE strings.
+;;   The cursor is placed after the opening delimiter."
+;;   (forward-sexp)
+;;   (let ((bounds (bounds-of-thing-at-point 'sexp)))
+;;     (when bounds
+;;       (goto-char (cdr bounds))
+;;       (insert close)
+;;       (goto-char (car bounds))
+;;       (insert open))))
 
-(defun wrap-next-sexp-with-do ()
-  "Wrap the next `sexp' with `do' function.
-  The cursor is placed between `do' and `sexp`."
-  (wrap-next-sexp "(do  " ")")
-  (backward-char 1))
+;; (defun wrap-next-sexp-with-do ()
+;;   "Wrap the next `sexp' with `do' function.
+;;   The cursor is placed between `do' and `sexp`."
+;;   (wrap-next-sexp "(do  " ")")
+;;   (backward-char 1))
 
-(defun clj-insert-persist-scope-macro ()
-  (interactive)
-  (insert
-   "(defmacro persist-scope
-              \"Takes local scope vars and defines them in the global scope. Useful for RDD\"
-              []
-              `(do ~@(map (fn [v] `(def ~v ~v))
-                  (keys (cond-> &env (contains? &env :locals) :locals)))))"))
+;; (defun clj-insert-persist-scope-macro ()
+;;   (interactive)
+;;   (insert
+;;    "(defmacro persist-scope
+;;               \"Takes local scope vars and defines them in the global scope. Useful for RDD\"
+;;               []
+;;               `(do ~@(map (fn [v] `(def ~v ~v))
+;;                   (keys (cond-> &env (contains? &env :locals) :locals)))))"))
 
-(defun persist-scope-do ()
-  (interactive)
-  (undo-boundary)
-  (wrap-next-sexp-with-do)
-  (clj-insert-persist-scope-macro)
-  (cider-eval-last-sexp)
-  (backward-sexp)
-  (kill-sexp)
-  ;; If emacs is slow, it will start evaluating function at point
-  ;; before macro is evaluated and deleted.
-  (sleep-for 0 10)
-  (insert "(persist-scope)")
-  (cider-eval-defun-at-point)
-  (undo-tree-undo))
+;; (defun persist-scope-do ()
+;;   (interactive)
+;;   (undo-boundary)
+;;   (wrap-next-sexp-with-do)
+;;   (clj-insert-persist-scope-macro)
+;;   (cider-eval-last-sexp)
+;;   (backward-sexp)
+;;   (kill-sexp)
+;;   ;; If emacs is slow, it will start evaluating function at point
+;;   ;; before macro is evaluated and deleted.
+;;   (sleep-for 0 10)
+;;   (insert "(persist-scope)")
+;;   (cider-eval-defun-at-point)
+;;   (undo-tree-undo))

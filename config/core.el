@@ -62,6 +62,9 @@
 (add-hook 'LaTeX-mode-hook 'display-line-numbers-mode)
 (add-hook 'conf-mode-hook 'display-line-numbers-mode)
 
+;; folding
+(add-hook 'prog-mode-hook 'hs-minor-mode)
+
 ;; Scrolling
 (setq scroll-conservatively 101         ; don't recenter cursor
       scroll-margin 1

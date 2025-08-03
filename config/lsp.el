@@ -30,11 +30,16 @@
          (lsp-mode . lsp-enable-which-key-integration)
          ((tsx-ts-mode
            typescript-ts-mode
-           js-ts-mode) . lsp-deferred))
+           clojure-mode
+           clojurescript-mode
+           clojurec-mode
+           js-ts-mode) . lsp))
+  :bind-keymap ("C-c l" . lsp-command-map)
+  :bind (:map lsp-mode-map
+              ("M-?" . lsp-find-references))
   :config
-  (setq lsp-keymap-prefix "C-c l")           ; Prefix for LSP actions
   (setq lsp-completion-provider :none)       ; Using Corfu as the provider
-  (setq lsp-diagnostics-provider :flycheck)
+  (setq lsp-diagnostics-provider :flymake)
   (setq lsp-session-file (locate-user-emacs-file ".lsp-session"))
   (setq lsp-log-io nil)                      ; IMPORTANT! Use only for debugging! Drastically affects performance
   (setq lsp-keep-workspace-alive nil)        ; Close LSP server if all project buffers are closed
@@ -45,7 +50,7 @@
   (setq lsp-eldoc-enable-hover t)          ; Display signature information in the echo area
   (setq lsp-enable-dap-auto-configure t)     ; Debug support
   (setq lsp-enable-file-watchers nil)
-  (setq lsp-enable-folding nil)              ; I disable folding since I use origami
+  (setq lsp-enable-folding nil)              ; disable folding
   (setq lsp-enable-imenu nil)
   (setq lsp-enable-indentation nil)          
   (setq lsp-enable-links nil)                ; No need since we have `browse-url'
@@ -62,13 +67,13 @@
   (setq lsp-enable-snippet t)                         ; Important to provide full JSX completion
   (setq lsp-completion-show-kind t)                   ; Optional
   ;; headerline
-  (setq lsp-headerline-breadcrumb-enable nil)  ; Optional, I don't like the breadcrumbs
+  (setq lsp-headerline-breadcrumb-enable nil)  ; Optional
   (setq lsp-headerline-breadcrumb-enable-diagnostics nil) ; Don't make them red, too noisy
   (setq lsp-headerline-breadcrumb-enable-symbol-numbers nil)
   (setq lsp-headerline-breadcrumb-icons-enable nil)
   ;; modeline
-  (setq lsp-modeline-code-actions-enable nil) ; Modeline should be relatively clean
-  (setq lsp-modeline-diagnostics-enable nil)  ; Already supported through `flycheck'
+  (setq lsp-modeline-code-actions-enable t)
+  (setq lsp-modeline-diagnostics-enable t)
   (setq lsp-modeline-workspace-status-enable t) ; Modeline displays "LSP" when lsp-mode is enabled
   (setq lsp-signature-doc-lines 1)                ; Don't raise the echo area. It's distracting
   (setq lsp-ui-doc-use-childframe t)              ; Show docs for symbol at point
@@ -116,8 +121,6 @@
   :commands
   (lsp-ui-doc-show
    lsp-ui-doc-glance)
-  :bind (:map lsp-mode-map
-              ("C-c C-d C-d" . 'lsp-ui-doc-glance))
   :after (lsp-mode)
   :config
   (setq lsp-ui-doc-enable t
