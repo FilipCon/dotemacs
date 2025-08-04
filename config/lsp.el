@@ -30,9 +30,9 @@
          (lsp-mode . lsp-enable-which-key-integration)
          ((tsx-ts-mode
            typescript-ts-mode
-           clojure-mode
-           clojurescript-mode
-           clojurec-mode
+           ;; clojure-mode
+           ;; clojurescript-mode
+           ;; clojurec-mode
            js-ts-mode) . lsp))
   :bind-keymap ("C-c l" . lsp-command-map)
   :bind (:map lsp-mode-map
