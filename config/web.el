@@ -40,8 +40,22 @@
 
 ;; yaml
 (use-package yaml-mode
-  :hook ((yaml-mode . highlight-indentation-mode)
-         (yaml-mode . indent-tools-minor-mode)))
+  :hook (
+         ;; (yaml-mode . highlight-indentation-mode)
+         (yaml-mode . indent-tools-minor-mode)
+         ))
 
 ;; multiple major modes
 (use-package mmm-mode)
+
+
+(use-package colorful-mode
+  ;; :diminish
+  ;; :ensure t ; Optional
+  :custom
+  (colorful-use-prefix t)
+  (colorful-only-strings 'only-prog)
+  (css-fontify-colors nil)
+  :config
+  (global-colorful-mode t)
+  (add-to-list 'global-colorful-modes 'helpful-mode))

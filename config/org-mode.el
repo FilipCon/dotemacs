@@ -19,7 +19,7 @@
         org-log-into-drawer t
         org-special-ctrl-a/e t
         org-startup-folded 'showall
-        org-todo-keywords '("TODO" "PROG" "DONE")
+        org-todo-keywords '("TODO" "DONE")
         org-src-fontify-natively t
         org-src-tab-acts-natively t
         org-edit-src-content-indentation 0

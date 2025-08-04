@@ -17,6 +17,9 @@
       '(overlong-summary-line non-empty-second-line))
 (add-hook 'git-commit-mode-hook (lambda () (setq fill-column 72)))
 
+(use-package magit-pretty-graph
+  :straight (:host github :repo "georgek/magit-pretty-graph"))
+
 ;; diffs in margin
 (use-package git-gutter
   :custom-face
