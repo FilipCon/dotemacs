@@ -44,8 +44,7 @@
 ;;   :straight (:host github :repo "oliyh/re-jump.el"))
 
 ;; jet tool
-(use-package jet
-  :straight (:host github :repo "ericdallo/jet.el"))
+(use-package jet)
 
 ;; ;; refactor utils
 ;; (use-package clj-refactor
