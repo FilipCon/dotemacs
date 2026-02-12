@@ -11,7 +11,7 @@
   (setq eglot-events-buffer-size 0
         eglot-connect-timeout 60
         eglot-extend-to-xref t
-        ;; eglot-stay-out-of '(flymake eldoc)
+        ;; eglot-stay-out-of '(flycheck eldoc)
         eglot-confirm-server-initiated-edits nil)
   (add-to-list 'eglot-server-programs
                '(web-mode . ("typescript-language-server" "--stdio")))
@@ -39,7 +39,7 @@
               ("M-?" . lsp-find-references))
   :config
   (setq lsp-completion-provider :none)       ; Using Corfu as the provider
-  (setq lsp-diagnostics-provider :flymake)
+  (setq lsp-diagnostics-provider :flycheck)
   (setq lsp-session-file (locate-user-emacs-file ".lsp-session"))
   (setq lsp-log-io nil)                      ; IMPORTANT! Use only for debugging! Drastically affects performance
   (setq lsp-keep-workspace-alive nil)        ; Close LSP server if all project buffers are closed

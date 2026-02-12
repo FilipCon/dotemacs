@@ -2,7 +2,7 @@
 (use-package web-mode
   :straight t
   :mode (("\\.html" . web-mode))
-  :hook ((web-mode . flymake-mode))
+  :hook ((web-mode . flycheck-mode))
   :config
   (setq web-mode-block-padding 2
         web-mode-code-indent-offset 2

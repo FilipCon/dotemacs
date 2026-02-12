@@ -88,7 +88,7 @@ there's a region, all lines that region covers will be duplicated."
               ("C-9" . paredit-forward-barf-sexp)
               ("C-M-9" . paredit-backward-slurp-sexp)
               ("C-M-0" . paredit-backward-barf-sexp))
-  :hook ((clojure-mode cider-repl-mode lisp-mode emacs-lisp-mode) . paredit-mode))
+  :hook ((clojure-mode cider-repl-mode lisp-mode emacs-lisp-mode lisp-data-mode) . paredit-mode))
 
 ;; isearch
 (use-package isearch

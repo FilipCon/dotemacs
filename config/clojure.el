@@ -25,16 +25,18 @@
          ("\\.repl$" . clojure-mode)
          ("\\.bb$" . clojure-mode))
   :config
-  (setq clojure-align-reader-conditionals t
-        clojure-align-forms-automatically t) ; align s-expressions
+  (setq clojure-align-reader-conditionals nil
+        clojure-align-forms-automatically nil) ; align s-expressions
   ;; (setq clojure-indent-style 'align-arguments)
   :bind (:map clojure-mode-map
               ("C-c C-<SPC>" . clojure-align)))
 
 ;; linting
-(use-package flymake-kondor
-  :hook ((clojure-mode . flymake-kondor-setup)
-         (clojure-mode . flymake-mode)))
+;; (use-package flymake-kondor
+;;   :hook ((clojure-mode . flymake-kondor-setup)
+;;          (clojure-mode . flymake-mode)))
+
+(use-package flycheck-clj-kondo)
 
 ;; (use-package zprint-mode) ;; uses dynamically linked executable
 ;; (use-package zprint-format)

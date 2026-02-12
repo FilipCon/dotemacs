@@ -34,7 +34,7 @@
         git-gutter:modified-sign " "
         git-gutter:added-sign " "
         git-gutter:deleted-sign " ")
-  (add-to-list 'git-gutter:update-hooks 'focus-in-hook)
+  ;; (add-to-list 'git-gutter:update-hooks 'focus-in-hook)
   (global-set-key (kbd "C-c h v") 'git-gutter:revert-hunk)
   (global-set-key (kbd "C-c h o") 'git-gutter:popup-hunk)
   (global-set-key (kbd "C-c h n") 'git-gutter:next-hunk)
